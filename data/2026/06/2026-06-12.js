@@ -34,6 +34,7 @@ window.TIL_FILES["data/2026/06/2026-06-12.js"] = [
     "primary_topic": "cpp",
     "summary": "변수와 데이터 값, 자료형의 관계를 처음 학습했다.",
     "date_start": "2026-06-12",
-    "date_label": "2026-06-12"
+    "date_label": "2026-06-12",
+    "activity": "study"
   }
 ];

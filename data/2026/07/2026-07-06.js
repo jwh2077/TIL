@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/07/2026-07-06.js"] = [
     "id": "20260706-001",
     "date": "2026-07-06",
     "title": "C 배열과 포인터",
-    "project": "Basecamp",
+    "project": "C / C++ 기초 학습",
     "phase": "처음 접함",
     "tags": [
       "C",
@@ -45,6 +45,7 @@ window.TIL_FILES["data/2026/07/2026-07-06.js"] = [
     "primary_topic": "memory",
     "summary": "C 언어의 배열과 배열의 주소 관계, 함수, 포인터를 학습했다.",
     "date_start": "2026-07-06",
-    "date_label": "2026-07-06"
+    "date_label": "2026-07-06",
+    "activity": "study"
   }
 ];

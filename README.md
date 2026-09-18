@@ -1,6 +1,6 @@
 # TIL
 
-FPS Blueprint 기능 기록은 **FirstFPS · 첫 주 Blueprint 프로젝트**로 분류하고 사용자 제공 원본 저장소 `https://github.com/jwh2077/FirstFPS`를 연결했습니다. C++ 기초와 출처를 특정하지 못한 초기 실습 기록은 Basecamp를 유지합니다. 이번 연결은 사용자 확인 기준이며 FirstFPS의 Git 이력이나 Blueprint 실행을 검증했다는 뜻은 아닙니다.
+6월 24일까지는 **Basecamp**로 분류합니다. 이후 FPS Blueprint 기록은 **FirstFPS · 첫 주 Blueprint 프로젝트**, 프로그래밍 기초는 **C / C++ 기초 학습**으로 구분합니다. 기존 FirstFPS 연결은 사용자 제공 저장소 기준이며 Git 이력이나 Blueprint 실행을 검증했다는 뜻은 아닙니다. 프로젝트 버튼은 확인된 가장 이른 기록의 날짜순으로 정렬하고 날짜 없는 단계는 같은 프로젝트의 날짜를 정렬 기준으로 공유합니다. **기초 학습 / 개인 프로젝트 / 팀 프로젝트** 활동 필터는 주제·기간 필터와 함께 사용할 수 있습니다.
 
 ## 정리된 학습 자료
 

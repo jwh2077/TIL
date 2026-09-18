@@ -45,6 +45,7 @@ window.TIL_FILES["data/2026/07/2026-07-16.js"] = [
     "primary_topic": "oop",
     "summary": "함수 템플릿과 템플릿 클래스를 학습했다.",
     "date_start": "2026-07-16",
-    "date_label": "2026-07-16"
+    "date_label": "2026-07-16",
+    "activity": "personal"
   }
 ];

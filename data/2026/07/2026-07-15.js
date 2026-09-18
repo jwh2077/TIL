@@ -44,6 +44,7 @@ window.TIL_FILES["data/2026/07/2026-07-15.js"] = [
     "primary_topic": "oop",
     "summary": "JobSelection 함수가 Player*를 반환하도록 만들고 직업별 파생 객체를 반환하는 구조를 구현했다.",
     "date_start": "2026-07-15",
-    "date_label": "2026-07-15"
+    "date_label": "2026-07-15",
+    "activity": "personal"
   }
 ];

@@ -47,6 +47,7 @@ window.TIL_FILES["data/2026/07/2026-07-31.js"] = [
     "primary_topic": "project",
     "summary": "팀 상점 시스템을 구현하면서 Logger와 Shop, Item을 연결했다.",
     "date_start": "2026-07-31",
-    "date_label": "2026-07-31"
+    "date_label": "2026-07-31",
+    "activity": "team"
   }
 ];

@@ -10,7 +10,7 @@
     ['stl', 'STL · 자료구조', '컨테이너와 자료 저장 방식을 선택하고 적용한 기록입니다.'],
     ['project', '프로젝트 · 협업', '기능 구현, Git과 팀 협업에서 배운 내용을 모았습니다.']
   ];
-  const state = { topic: 'all', project: 'all', month: 'all', sub: 'all' };
+  const state = { topic: 'all', project: 'all', month: 'all', sub: 'all', activity:'all' };
   const subdivisions = {
     unreal: [['ai','AI · 행동 흐름',/AI|몬스터|순찰|시야|추적|Behavior|비헤이비어/i], ['combat','전투 · 스탯',/공격|피해|사망|스탯|DataTable/i], ['parts','아이템 · 파츠',/파츠|아이템|Item|Part/i], ['engine','엔진 · 게임플레이',/.*/]],
     cpp: [['flow','문법 · 제어 흐름',/조건|반복|변수|연산|입출력/], ['function','함수 · 문제 풀이',/함수|문제|알고리즘/], ['practice','기초 실습',/.*/]],
@@ -24,17 +24,24 @@
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const name = id => topics.find(t => t[0] === id)?.[1] || '기타';
   const page = $('#articlePage');
+  $('#projects').previousElementSibling.insertAdjacentHTML('beforebegin','<div class="side-title">활동 구분</div><div id="activities" class="project-list"></div>');
+  const activities={study:'기초 학습',personal:'개인 프로젝트',team:'팀 프로젝트'};
+  const projects=[...new Set(records.map(r=>r.project).filter(Boolean))].sort((a,b)=>{
+    const start=p=>records.filter(r=>r.project===p&&r.date).map(r=>r.date).sort()[0]||'9999';
+    return start(a).localeCompare(start(b))||a.localeCompare(b);
+  });
   const cache = new Map();
   let request = 0;
   function visible() {
-    return records.filter(r => (state.topic === 'all' || r.primary_topic === state.topic) &&
+    return records.filter(r => (state.activity==='all'||r.activity===state.activity) && (state.topic === 'all' || r.primary_topic === state.topic) &&
       (state.project === 'all' || r.project === state.project) && (state.month === 'all' || r.month === state.month) && (state.sub === 'all' || subOf(r) === state.sub))
       .sort((a, b) => !a.date && b.date ? 1 : a.date && !b.date ? -1 :
         ($('#sort').value === 'asc' ? 1 : -1) * String(a.date || '').localeCompare(String(b.date || '')) || a.id.localeCompare(b.id));
   }
   function controls() {
     $('#tabs').innerHTML = topics.map(([id, label]) => `<button class="tab" type="button" data-topic="${id}" role="tab" aria-selected="${state.topic === id}">${label}<span class="tab-count">${records.filter(r => id === 'all' || r.primary_topic === id).length}</span></button>`).join('');
-    $('#projects').innerHTML = ['all', ...new Set(records.map(r => r.project).filter(Boolean))].map(p => `<button class="project" type="button" data-project="${esc(p)}" aria-pressed="${state.project === p}">${esc(p === 'all' ? '모든 프로젝트' : p)}</button>`).join('');
+    $('#activities').innerHTML=[['all','전체 활동'],...Object.entries(activities)].map(([id,label])=>`<button class="project" type="button" data-activity="${id}" aria-pressed="${state.activity===id}">${label}</button>`).join('');
+    $('#projects').innerHTML = ['all', ...projects.filter(p=>state.activity==='all'||records.some(r=>r.project===p&&r.activity===state.activity))].map(p => `<button class="project" type="button" data-project="${esc(p)}" aria-pressed="${state.project === p}">${esc(p === 'all' ? '모든 프로젝트 · 시작순' : p)}</button>`).join('');
     $('#months').innerHTML = ['all', ...new Set(records.map(r => r.month).sort())].map(m => `<button class="project" type="button" data-month="${esc(m)}" aria-pressed="${state.month === m}">${m === 'all' ? '모든 기간' : m === 'undated' ? '날짜 미확인 메모' : m === 'project-period' ? '프로젝트 전체 작업' : esc(m.replace('-', '년 ') + '월')}</button>`).join('');
   }
   function render() {
@@ -106,8 +113,8 @@
       $('#detailContent').innerHTML = `<div class="detail-top"><h2 id="detailTitle">기록을 열지 못했습니다</h2></div><p>${esc(error.message)}</p>${button(meta, '다시 열기')}`;
     }
   }
-  for (const [selector, key] of [['#tabs','topic'], ['#projects','project'], ['#months','month']]) {
-    $(selector).addEventListener('click', e => { const b = e.target.closest(`[data-${key}]`); if (b) { state[key] = b.dataset[key]; if (key === 'topic') state.sub = 'all'; location.hash = 'list'; fromHash(); } });
+  for (const [selector, key] of [['#tabs','topic'], ['#projects','project'], ['#months','month'],['#activities','activity']]) {
+    $(selector).addEventListener('click', e => { const b = e.target.closest(`[data-${key}]`); if (b) { state[key] = b.dataset[key]; if (key === 'topic') state.sub = 'all'; if(key==='activity')state.project='all'; location.hash = 'list'; fromHash(); } });
   }
   $('#subtopics').addEventListener('click', e => { const b = e.target.closest('[data-sub]'); if (b) { state.topic = b.dataset.parent; state.sub = b.dataset.sub; location.hash = 'list'; fromHash(); } });
   $('#nearby').addEventListener('click', e => { const b = e.target.closest('[data-record-id]'); if (b) navigate(b.dataset.recordId); });

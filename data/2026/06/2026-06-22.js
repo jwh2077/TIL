@@ -38,6 +38,7 @@ window.TIL_FILES["data/2026/06/2026-06-22.js"] = [
     "primary_topic": "cpp",
     "summary": "논리 연산자 &&, ||, !와 비교 연산자 ==, !=, >, <, >=, <=를 학습했다.",
     "date_start": "2026-06-22",
-    "date_label": "2026-06-22"
+    "date_label": "2026-06-22",
+    "activity": "study"
   }
 ];

@@ -46,6 +46,7 @@ window.TIL_FILES["data/2026/07/2026-07-29.js"] = [
     "primary_topic": "project",
     "summary": "팀 TextRPG 프로젝트를 시작하면서 Logger, static, map, struct 등의 개념을 실제 프로젝트에서 다루기 시작했다.",
     "date_start": "2026-07-29",
-    "date_label": "2026-07-29"
+    "date_label": "2026-07-29",
+    "activity": "team"
   }
 ];

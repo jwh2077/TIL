@@ -37,6 +37,7 @@ window.TIL_FILES["data/2026/06/2026-06-18.js"] = [
     "primary_topic": "cpp",
     "summary": "C++로 Hello World를 출력하며 기본적인 프로그램 구조를 처음 학습했다.",
     "date_start": "2026-06-18",
-    "date_label": "2026-06-18"
+    "date_label": "2026-06-18",
+    "activity": "study"
   }
 ];

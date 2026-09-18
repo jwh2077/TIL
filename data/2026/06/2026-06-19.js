@@ -39,6 +39,7 @@ window.TIL_FILES["data/2026/06/2026-06-19.js"] = [
     "primary_topic": "cpp",
     "summary": "간단한 입력과 출력 문제를 풀면서 비교 연산자와 논리 연산자를 접했다.",
     "date_start": "2026-06-19",
-    "date_label": "2026-06-19"
+    "date_label": "2026-06-19",
+    "activity": "study"
   }
 ];

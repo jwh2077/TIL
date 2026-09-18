@@ -49,6 +49,7 @@ window.TIL_FILES["data/2026/09/2026-09-02.js"] = [
       "CH3 로컬 저장소 Git 이력",
       "Source/CH3 소스 코드"
     ],
-    "project_part": "CH3"
+    "project_part": "CH3",
+    "activity": "personal"
   }
 ];

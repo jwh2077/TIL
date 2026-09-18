@@ -24,6 +24,7 @@ window.TIL_FILES["data/2026/08/2026-08-10.js"] = [
     ],
     "primary_topic": "unreal",
     "date_start": "2026-08-10",
-    "date_label": "2026-08-10"
+    "date_label": "2026-08-10",
+    "activity": "study"
   }
 ];

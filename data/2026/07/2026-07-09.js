@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/07/2026-07-09.js"] = [
     "id": "20260709-001",
     "date": "2026-07-09",
     "title": "클래스와 객체지향 기초",
-    "project": "Basecamp",
+    "project": "C / C++ 기초 학습",
     "phase": "처음 접함",
     "tags": [
       "C++",
@@ -40,6 +40,7 @@ window.TIL_FILES["data/2026/07/2026-07-09.js"] = [
     "primary_topic": "oop",
     "summary": "C++의 클래스와 접근 제어자, getter/setter, 생성자, 객체 생성 방법을 학습했다.",
     "date_start": "2026-07-09",
-    "date_label": "2026-07-09"
+    "date_label": "2026-07-09",
+    "activity": "study"
   }
 ];

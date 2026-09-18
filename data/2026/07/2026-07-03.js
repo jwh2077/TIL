@@ -43,7 +43,8 @@ window.TIL_FILES["data/2026/07/2026-07-03.js"] = [
         "url": "https://github.com/jwh2077/FirstFPS"
       }
     ],
-    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다."
+    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다.",
+    "activity": "personal"
   },
   {
     "id": "20260703-002",
@@ -87,6 +88,7 @@ window.TIL_FILES["data/2026/07/2026-07-03.js"] = [
         "url": "https://github.com/jwh2077/FirstFPS"
       }
     ],
-    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다."
+    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다.",
+    "activity": "personal"
   }
 ];

@@ -46,6 +46,7 @@ window.TIL_FILES["data/2026/07/2026-07-14.js"] = [
     "primary_topic": "oop",
     "summary": "Player* 포인터를 사용해 직업별 객체를 생성하고 관리하는 구조를 구현했다.",
     "date_start": "2026-07-14",
-    "date_label": "2026-07-14"
+    "date_label": "2026-07-14",
+    "activity": "personal"
   }
 ];

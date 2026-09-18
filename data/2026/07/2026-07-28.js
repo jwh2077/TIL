@@ -40,6 +40,7 @@ window.TIL_FILES["data/2026/07/2026-07-28.js"] = [
     "primary_topic": "stl",
     "summary": "map의 세부적인 사용법을 학습했다.",
     "date_start": "2026-07-28",
-    "date_label": "2026-07-28"
+    "date_label": "2026-07-28",
+    "activity": "personal"
   }
 ];

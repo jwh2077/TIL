@@ -47,6 +47,7 @@ window.TIL_FILES["data/2026/07/2026-07-30.js"] = [
     "primary_topic": "project",
     "summary": "Logger를 singleton/reference 방식으로 접근하고 게임에서 발생하는 전투, 아이템, 재화 등의 데이터를 누적해서 관리하는 통계 시스템을 구현했다.",
     "date_start": "2026-07-30",
-    "date_label": "2026-07-30"
+    "date_label": "2026-07-30",
+    "activity": "team"
   }
 ];

@@ -33,6 +33,7 @@ window.TIL_FILES["data/2026/09/2026-09-15.js"] = [
     ],
     "verification_note": "날짜는 커밋 작성일이며 실제 학습 시작일이나 실행 성공일을 뜻하지 않는다.",
     "date_start": "2026-09-15",
-    "date_label": "2026-09-15"
+    "date_label": "2026-09-15",
+    "activity": "team"
   }
 ];

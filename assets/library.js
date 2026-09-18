@@ -72,7 +72,7 @@
   }
   function route() {
     const library=active();$('#libraryPage').hidden=!library;$('#libraryNav').hidden=!library;
-    for(const selector of ['#tabs','#projects','#months']) {$(selector).hidden=library;$(selector).previousElementSibling.hidden=library;}
+    for(const selector of ['#tabs','#projects','#months','#activities']) {$(selector).hidden=library;$(selector).previousElementSibling.hidden=library;}
     for(const a of $('#archiveModes').querySelectorAll('a')) {if((a.getAttribute('href')==='#library')===library)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}
     if(!library) {++token;return;}
     $('#listPage').hidden=true;$('#articlePage').hidden=true;$('#subnav').hidden=true;$('#articleNav').hidden=true;

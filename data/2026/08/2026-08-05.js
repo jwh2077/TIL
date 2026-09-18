@@ -53,6 +53,7 @@ window.TIL_FILES["data/2026/08/2026-08-05.js"] = [
     "primary_topic": "project",
     "summary": "첫 팀 프로젝트를 마무리하며 Git, 코드 리뷰, Scrum, C++ 코드 작성과 협업 과정에서 경험한 시행착오를 정리했다.",
     "date_start": "2026-08-05",
-    "date_label": "2026-08-05"
+    "date_label": "2026-08-05",
+    "activity": "team"
   }
 ];

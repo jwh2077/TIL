@@ -34,6 +34,7 @@ window.TIL_FILES["data/2026/06/2026-06-17.js"] = [
     "primary_topic": "unreal",
     "summary": "게임을 직접 플레이하고 게임 안에 존재하는 요소와 상황에 따른 플레이어 및 오브젝트의 변화를 관찰했다.",
     "date_start": "2026-06-17",
-    "date_label": "2026-06-17"
+    "date_label": "2026-06-17",
+    "activity": "study"
   }
 ];

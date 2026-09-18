@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/07/2026-07-08.js"] = [
     "id": "20260708-001",
     "date": "2026-07-08",
     "title": "입력 검증과 포인터·참조 실습",
-    "project": "Basecamp",
+    "project": "C / C++ 기초 학습",
     "phase": "따라 해봄",
     "tags": [
       "C++",
@@ -39,6 +39,7 @@ window.TIL_FILES["data/2026/07/2026-07-08.js"] = [
     "primary_topic": "memory",
     "summary": "스탯 포인트를 배분하는 프로그램을 만들면서 cin.fail, clear, ignore를 이용한 입력 검증을 학습했다.",
     "date_start": "2026-07-08",
-    "date_label": "2026-07-08"
+    "date_label": "2026-07-08",
+    "activity": "study"
   }
 ];

@@ -49,6 +49,7 @@ window.TIL_FILES["data/2026/08/2026-08-03.js"] = [
     "primary_topic": "project",
     "summary": "Shop 구조를 수정하고 Item을 별도의 클래스로 분리했다.",
     "date_start": "2026-08-03",
-    "date_label": "2026-08-03"
+    "date_label": "2026-08-03",
+    "activity": "team"
   }
 ];

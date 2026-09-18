@@ -26,6 +26,7 @@ window.TIL_FILES["data/undated/note-tem-014.js"] = [
     "understanding": "학습·설계 메모",
     "verification_note": "학습 날짜가 확인되지 않은 기록이다. 계획과 현재 구현을 구분해 읽는다.",
     "date_start": null,
-    "date_label": "날짜 미확인"
+    "date_label": "날짜 미확인",
+    "activity": "study"
   }
 ];

@@ -36,6 +36,7 @@ window.TIL_FILES["data/2026/06/2026-06-15.js"] = [
     "primary_topic": "unreal",
     "summary": "Unreal Engine에서 기본적인 Blueprint 노드와 기능을 접했다.",
     "date_start": "2026-06-15",
-    "date_label": "2026-06-15"
+    "date_label": "2026-06-15",
+    "activity": "study"
   }
 ];

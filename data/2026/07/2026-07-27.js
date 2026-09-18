@@ -37,6 +37,7 @@ window.TIL_FILES["data/2026/07/2026-07-27.js"] = [
     "primary_topic": "stl",
     "summary": "STL의 기본적인 사용법을 다시 복습했다.",
     "date_start": "2026-07-27",
-    "date_label": "2026-07-27"
+    "date_label": "2026-07-27",
+    "activity": "personal"
   }
 ];

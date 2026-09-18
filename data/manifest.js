@@ -16,7 +16,8 @@ window.TIL_INDEX = {
         "변수",
         "개념정리"
       ],
-      "file": "data/2026/06/2026-06-12.js"
+      "file": "data/2026/06/2026-06-12.js",
+      "activity": "study"
     },
     {
       "id": "20260615-001",
@@ -33,7 +34,8 @@ window.TIL_INDEX = {
         "Blueprint",
         "실습"
       ],
-      "file": "data/2026/06/2026-06-15.js"
+      "file": "data/2026/06/2026-06-15.js",
+      "activity": "study"
     },
     {
       "id": "20260616-001",
@@ -52,7 +54,8 @@ window.TIL_INDEX = {
         "시행착오",
         "디버깅"
       ],
-      "file": "data/2026/06/2026-06-16.js"
+      "file": "data/2026/06/2026-06-16.js",
+      "activity": "study"
     },
     {
       "id": "20260617-001",
@@ -68,7 +71,8 @@ window.TIL_INDEX = {
         "Unreal",
         "개념정리"
       ],
-      "file": "data/2026/06/2026-06-17.js"
+      "file": "data/2026/06/2026-06-17.js",
+      "activity": "study"
     },
     {
       "id": "20260618-001",
@@ -87,7 +91,8 @@ window.TIL_INDEX = {
         "조건문",
         "실습"
       ],
-      "file": "data/2026/06/2026-06-18.js"
+      "file": "data/2026/06/2026-06-18.js",
+      "activity": "study"
     },
     {
       "id": "20260619-001",
@@ -106,7 +111,8 @@ window.TIL_INDEX = {
         "실습",
         "시행착오"
       ],
-      "file": "data/2026/06/2026-06-19.js"
+      "file": "data/2026/06/2026-06-19.js",
+      "activity": "study"
     },
     {
       "id": "20260622-001",
@@ -125,7 +131,8 @@ window.TIL_INDEX = {
         "실습",
         "복습"
       ],
-      "file": "data/2026/06/2026-06-22.js"
+      "file": "data/2026/06/2026-06-22.js",
+      "activity": "study"
     },
     {
       "id": "20260623-001",
@@ -135,7 +142,7 @@ window.TIL_INDEX = {
       "month": "2026-06",
       "title": "E키 문 상호작용 구현 시도",
       "summary": "Fab에서 가져온 맵과 조명을 배치하고 E키를 이용해 문을 여는 상호작용을 시도했다.",
-      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
+      "project": "Basecamp",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
@@ -143,7 +150,8 @@ window.TIL_INDEX = {
         "실습",
         "시행착오"
       ],
-      "file": "data/2026/06/2026-06-23.js"
+      "file": "data/2026/06/2026-06-23.js",
+      "activity": "study"
     },
     {
       "id": "20260624-001",
@@ -153,7 +161,7 @@ window.TIL_INDEX = {
       "month": "2026-06",
       "title": "E키 문 상호작용 완성",
       "summary": "E키를 눌렀을 때 플레이어 주변의 문과 상호작용하여 문을 열고 닫는 기능을 구현했다.",
-      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
+      "project": "Basecamp",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
@@ -161,7 +169,8 @@ window.TIL_INDEX = {
         "실습",
         "디버깅"
       ],
-      "file": "data/2026/06/2026-06-24.js"
+      "file": "data/2026/06/2026-06-24.js",
+      "activity": "study"
     },
     {
       "id": "20260626-001",
@@ -171,7 +180,7 @@ window.TIL_INDEX = {
       "month": "2026-06",
       "title": "C 언어와 Unreal Editor 기초",
       "summary": "C 언어와 프로그래밍 언어의 기본 개념을 공부했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "C",
@@ -179,7 +188,8 @@ window.TIL_INDEX = {
         "개념정리",
         "실습"
       ],
-      "file": "data/2026/06/2026-06-26.js"
+      "file": "data/2026/06/2026-06-26.js",
+      "activity": "personal"
     },
     {
       "id": "20260629-001",
@@ -198,7 +208,8 @@ window.TIL_INDEX = {
         "실습",
         "개념정리"
       ],
-      "file": "data/2026/06/2026-06-29.js"
+      "file": "data/2026/06/2026-06-29.js",
+      "activity": "personal"
     },
     {
       "id": "20260630-001",
@@ -218,7 +229,8 @@ window.TIL_INDEX = {
         "실습",
         "시행착오"
       ],
-      "file": "data/2026/06/2026-06-30.js"
+      "file": "data/2026/06/2026-06-30.js",
+      "activity": "personal"
     },
     {
       "id": "20260701-001",
@@ -237,7 +249,8 @@ window.TIL_INDEX = {
         "함수",
         "실습"
       ],
-      "file": "data/2026/07/2026-07-01.js"
+      "file": "data/2026/07/2026-07-01.js",
+      "activity": "personal"
     },
     {
       "id": "20260703-001",
@@ -254,7 +267,8 @@ window.TIL_INDEX = {
         "Blueprint",
         "실습"
       ],
-      "file": "data/2026/07/2026-07-03.js"
+      "file": "data/2026/07/2026-07-03.js",
+      "activity": "personal"
     },
     {
       "id": "20260703-002",
@@ -271,7 +285,8 @@ window.TIL_INDEX = {
         "Blueprint",
         "실습"
       ],
-      "file": "data/2026/07/2026-07-03.js"
+      "file": "data/2026/07/2026-07-03.js",
+      "activity": "personal"
     },
     {
       "id": "20260706-001",
@@ -281,7 +296,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "C 배열과 포인터",
       "summary": "C 언어의 배열과 배열의 주소 관계, 함수, 포인터를 학습했다.",
-      "project": "Basecamp",
+      "project": "C / C++ 기초 학습",
       "primary_topic": "memory",
       "tags": [
         "C",
@@ -291,7 +306,8 @@ window.TIL_INDEX = {
         "참조",
         "개념정리"
       ],
-      "file": "data/2026/07/2026-07-06.js"
+      "file": "data/2026/07/2026-07-06.js",
+      "activity": "study"
     },
     {
       "id": "20260707-001",
@@ -301,7 +317,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "스탯 배열과 입력 검증",
       "summary": "스탯을 배열로 관리하고 사용자 입력을 검증하는 프로그램을 작성했다.",
-      "project": "Basecamp",
+      "project": "C / C++ 기초 학습",
       "primary_topic": "memory",
       "tags": [
         "C++",
@@ -311,7 +327,8 @@ window.TIL_INDEX = {
         "실습",
         "디버깅"
       ],
-      "file": "data/2026/07/2026-07-07.js"
+      "file": "data/2026/07/2026-07-07.js",
+      "activity": "study"
     },
     {
       "id": "20260708-001",
@@ -321,7 +338,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "입력 검증과 포인터·참조 실습",
       "summary": "스탯 포인트를 배분하는 프로그램을 만들면서 cin.fail, clear, ignore를 이용한 입력 검증을 학습했다.",
-      "project": "Basecamp",
+      "project": "C / C++ 기초 학습",
       "primary_topic": "memory",
       "tags": [
         "C++",
@@ -331,7 +348,8 @@ window.TIL_INDEX = {
         "조건문",
         "실습"
       ],
-      "file": "data/2026/07/2026-07-08.js"
+      "file": "data/2026/07/2026-07-08.js",
+      "activity": "study"
     },
     {
       "id": "20260709-001",
@@ -341,7 +359,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "클래스와 객체지향 기초",
       "summary": "C++의 클래스와 접근 제어자, getter/setter, 생성자, 객체 생성 방법을 학습했다.",
-      "project": "Basecamp",
+      "project": "C / C++ 기초 학습",
       "primary_topic": "oop",
       "tags": [
         "C++",
@@ -349,7 +367,8 @@ window.TIL_INDEX = {
         "객체",
         "개념정리"
       ],
-      "file": "data/2026/07/2026-07-09.js"
+      "file": "data/2026/07/2026-07-09.js",
+      "activity": "study"
     },
     {
       "id": "20260710-001",
@@ -359,7 +378,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "스택·힙과 동적 메모리",
       "summary": "스택과 힙의 차이, new/delete, 댕글링 포인터, 메모리 누수, 스마트 포인터, 얕은 복사와 깊은 복사를 학습했다.",
-      "project": "Basecamp",
+      "project": "C / C++ 기초 학습",
       "primary_topic": "memory",
       "tags": [
         "C++",
@@ -368,7 +387,8 @@ window.TIL_INDEX = {
         "포인터",
         "개념정리"
       ],
-      "file": "data/2026/07/2026-07-10.js"
+      "file": "data/2026/07/2026-07-10.js",
+      "activity": "study"
     },
     {
       "id": "20260712-001",
@@ -388,7 +408,8 @@ window.TIL_INDEX = {
         "템플릿",
         "개념정리"
       ],
-      "file": "data/2026/07/2026-07-12_2026-07-13.js"
+      "file": "data/2026/07/2026-07-12_2026-07-13.js",
+      "activity": "personal"
     },
     {
       "id": "20260714-001",
@@ -409,7 +430,8 @@ window.TIL_INDEX = {
         "실습",
         "프로젝트"
       ],
-      "file": "data/2026/07/2026-07-14.js"
+      "file": "data/2026/07/2026-07-14.js",
+      "activity": "personal"
     },
     {
       "id": "20260715-001",
@@ -430,7 +452,8 @@ window.TIL_INDEX = {
         "실습",
         "프로젝트"
       ],
-      "file": "data/2026/07/2026-07-15.js"
+      "file": "data/2026/07/2026-07-15.js",
+      "activity": "personal"
     },
     {
       "id": "20260716-001",
@@ -450,7 +473,8 @@ window.TIL_INDEX = {
         "자료형",
         "실습"
       ],
-      "file": "data/2026/07/2026-07-16.js"
+      "file": "data/2026/07/2026-07-16.js",
+      "activity": "personal"
     },
     {
       "id": "20260717-001",
@@ -469,7 +493,8 @@ window.TIL_INDEX = {
         "실습",
         "프로젝트"
       ],
-      "file": "data/2026/07/2026-07-17.js"
+      "file": "data/2026/07/2026-07-17.js",
+      "activity": "personal"
     },
     {
       "id": "20260727-001",
@@ -489,7 +514,8 @@ window.TIL_INDEX = {
         "map",
         "복습"
       ],
-      "file": "data/2026/07/2026-07-27.js"
+      "file": "data/2026/07/2026-07-27.js",
+      "activity": "personal"
     },
     {
       "id": "20260728-001",
@@ -509,7 +535,8 @@ window.TIL_INDEX = {
         "실습",
         "프로젝트"
       ],
-      "file": "data/2026/07/2026-07-28.js"
+      "file": "data/2026/07/2026-07-28.js",
+      "activity": "personal"
     },
     {
       "id": "20260729-001",
@@ -529,7 +556,8 @@ window.TIL_INDEX = {
         "구조체",
         "개념정리"
       ],
-      "file": "data/2026/07/2026-07-29.js"
+      "file": "data/2026/07/2026-07-29.js",
+      "activity": "team"
     },
     {
       "id": "20260730-001",
@@ -550,7 +578,8 @@ window.TIL_INDEX = {
         "map",
         "실습"
       ],
-      "file": "data/2026/07/2026-07-30.js"
+      "file": "data/2026/07/2026-07-30.js",
+      "activity": "team"
     },
     {
       "id": "20260731-001",
@@ -572,7 +601,8 @@ window.TIL_INDEX = {
         "프로젝트",
         "협업"
       ],
-      "file": "data/2026/07/2026-07-31.js"
+      "file": "data/2026/07/2026-07-31.js",
+      "activity": "team"
     },
     {
       "id": "20260803-001",
@@ -595,7 +625,8 @@ window.TIL_INDEX = {
         "리팩터링",
         "프로젝트"
       ],
-      "file": "data/2026/08/2026-08-03.js"
+      "file": "data/2026/08/2026-08-03.js",
+      "activity": "team"
     },
     {
       "id": "20260805-001",
@@ -615,7 +646,8 @@ window.TIL_INDEX = {
         "시행착오",
         "복습"
       ],
-      "file": "data/2026/08/2026-08-05.js"
+      "file": "data/2026/08/2026-08-05.js",
+      "activity": "team"
     },
     {
       "id": "20260810-001",
@@ -634,7 +666,8 @@ window.TIL_INDEX = {
         "컴포넌트",
         "개념정리"
       ],
-      "file": "data/2026/08/2026-08-10.js"
+      "file": "data/2026/08/2026-08-10.js",
+      "activity": "study"
     },
     {
       "id": "20260812-001",
@@ -654,7 +687,8 @@ window.TIL_INDEX = {
         "디버깅",
         "개념정리"
       ],
-      "file": "data/2026/08/2026-08-12.js"
+      "file": "data/2026/08/2026-08-12.js",
+      "activity": "study"
     },
     {
       "id": "20260904-priest",
@@ -670,7 +704,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-04.js"
+      "file": "data/2026/09/2026-09-04.js",
+      "activity": "team"
     },
     {
       "id": "20260907-priest",
@@ -686,7 +721,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-07.js"
+      "file": "data/2026/09/2026-09-07.js",
+      "activity": "team"
     },
     {
       "id": "20260908-priest",
@@ -702,7 +738,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-08.js"
+      "file": "data/2026/09/2026-09-08.js",
+      "activity": "team"
     },
     {
       "id": "20260909-priest",
@@ -718,7 +755,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-09.js"
+      "file": "data/2026/09/2026-09-09.js",
+      "activity": "team"
     },
     {
       "id": "20260910-priest",
@@ -734,7 +772,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-10_2026-09-11.js"
+      "file": "data/2026/09/2026-09-10_2026-09-11.js",
+      "activity": "team"
     },
     {
       "id": "20260914-priest",
@@ -750,7 +789,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-14.js"
+      "file": "data/2026/09/2026-09-14.js",
+      "activity": "team"
     },
     {
       "id": "20260915-priest",
@@ -766,7 +806,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-15.js"
+      "file": "data/2026/09/2026-09-15.js",
+      "activity": "team"
     },
     {
       "id": "20260917-priest",
@@ -782,7 +823,8 @@ window.TIL_INDEX = {
         "Unreal",
         "C++"
       ],
-      "file": "data/2026/09/2026-09-17_2026-09-18.js"
+      "file": "data/2026/09/2026-09-17_2026-09-18.js",
+      "activity": "team"
     },
     {
       "id": "20260802-shop",
@@ -798,7 +840,8 @@ window.TIL_INDEX = {
         "C++",
         "상점"
       ],
-      "file": "data/2026/08/2026-08-02.js"
+      "file": "data/2026/08/2026-08-02.js",
+      "activity": "team"
     },
     {
       "id": "note-tem-014",
@@ -811,7 +854,8 @@ window.TIL_INDEX = {
       "project": null,
       "primary_topic": "unreal",
       "tags": [],
-      "file": "data/undated/note-tem-014.js"
+      "file": "data/undated/note-tem-014.js",
+      "activity": "study"
     },
     {
       "id": "note-tem-015",
@@ -824,7 +868,8 @@ window.TIL_INDEX = {
       "project": null,
       "primary_topic": "stl",
       "tags": [],
-      "file": "data/undated/note-tem-015.js"
+      "file": "data/undated/note-tem-015.js",
+      "activity": "study"
     },
     {
       "id": "note-tem-011",
@@ -837,7 +882,8 @@ window.TIL_INDEX = {
       "project": "ProjectPriest",
       "primary_topic": "oop",
       "tags": [],
-      "file": "data/undated/note-tem-011.js"
+      "file": "data/undated/note-tem-011.js",
+      "activity": "team"
     },
     {
       "id": "note-tem-004",
@@ -850,7 +896,8 @@ window.TIL_INDEX = {
       "project": "팀 TextRPG",
       "primary_topic": "project",
       "tags": [],
-      "file": "data/undated/note-tem-004.js"
+      "file": "data/undated/note-tem-004.js",
+      "activity": "team"
     },
     {
       "id": "20260818-ch3",
@@ -868,7 +915,8 @@ window.TIL_INDEX = {
         "개인 프로젝트"
       ],
       "file": "data/2026/08/2026-08-18_2026-08-23.js",
-      "project_part": "CH3"
+      "project_part": "CH3",
+      "activity": "personal"
     },
     {
       "id": "20260825-ch3",
@@ -886,7 +934,8 @@ window.TIL_INDEX = {
         "개인 프로젝트"
       ],
       "file": "data/2026/08/2026-08-25_2026-08-30.js",
-      "project_part": "CH3"
+      "project_part": "CH3",
+      "activity": "personal"
     },
     {
       "id": "20260902-ch3",
@@ -904,7 +953,8 @@ window.TIL_INDEX = {
         "개인 프로젝트"
       ],
       "file": "data/2026/09/2026-09-02.js",
-      "project_part": "CH3"
+      "project_part": "CH3",
+      "activity": "personal"
     },
     {
       "id": "project-ch3-1",
@@ -922,7 +972,8 @@ window.TIL_INDEX = {
         "개인 프로젝트"
       ],
       "file": "data/project-period/ch3-1.js",
-      "project_part": "CH3_1"
+      "project_part": "CH3_1",
+      "activity": "personal"
     },
     {
       "id": "project-ch3-2",
@@ -940,7 +991,8 @@ window.TIL_INDEX = {
         "개인 프로젝트"
       ],
       "file": "data/project-period/ch3-2.js",
-      "project_part": "CH3_2"
+      "project_part": "CH3_2",
+      "activity": "personal"
     }
   ]
 };

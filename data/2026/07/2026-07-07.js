@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/07/2026-07-07.js"] = [
     "id": "20260707-001",
     "date": "2026-07-07",
     "title": "스탯 배열과 입력 검증",
-    "project": "Basecamp",
+    "project": "C / C++ 기초 학습",
     "phase": "따라 해봄",
     "tags": [
       "C++",
@@ -41,6 +41,7 @@ window.TIL_FILES["data/2026/07/2026-07-07.js"] = [
     "primary_topic": "memory",
     "summary": "스탯을 배열로 관리하고 사용자 입력을 검증하는 프로그램을 작성했다.",
     "date_start": "2026-07-07",
-    "date_label": "2026-07-07"
+    "date_label": "2026-07-07",
+    "activity": "study"
   }
 ];

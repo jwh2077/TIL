@@ -38,6 +38,7 @@ window.TIL_FILES["data/2026/07/2026-07-17.js"] = [
     "primary_topic": "stl",
     "summary": "STL의 기본적인 구조와 컨테이너, 알고리즘, 반복자의 개념을 접했다.",
     "date_start": "2026-07-17",
-    "date_label": "2026-07-17"
+    "date_label": "2026-07-17",
+    "activity": "personal"
   }
 ];

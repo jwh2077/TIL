@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/07/2026-07-10.js"] = [
     "id": "20260710-001",
     "date": "2026-07-10",
     "title": "스택·힙과 동적 메모리",
-    "project": "Basecamp",
+    "project": "C / C++ 기초 학습",
     "phase": "부분 이해",
     "tags": [
       "C++",
@@ -46,6 +46,7 @@ window.TIL_FILES["data/2026/07/2026-07-10.js"] = [
     "primary_topic": "memory",
     "summary": "스택과 힙의 차이, new/delete, 댕글링 포인터, 메모리 누수, 스마트 포인터, 얕은 복사와 깊은 복사를 학습했다.",
     "date_start": "2026-07-10",
-    "date_label": "2026-07-10"
+    "date_label": "2026-07-10",
+    "activity": "study"
   }
 ];

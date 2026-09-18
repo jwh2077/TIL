@@ -23,6 +23,7 @@ window.TIL_FILES["data/2026/08/2026-08-02.js"] = [
       }
     ],
     "date_start": "2026-08-02",
-    "date_label": "2026-08-02"
+    "date_label": "2026-08-02",
+    "activity": "team"
   }
 ];

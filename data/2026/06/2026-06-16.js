@@ -39,6 +39,7 @@ window.TIL_FILES["data/2026/06/2026-06-16.js"] = [
     "primary_topic": "unreal",
     "summary": "플랫폼을 생성하고 삭제하는 과정을 구현했다.",
     "date_start": "2026-06-16",
-    "date_label": "2026-06-16"
+    "date_label": "2026-06-16",
+    "activity": "study"
   }
 ];

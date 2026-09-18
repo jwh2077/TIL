@@ -59,6 +59,7 @@ window.TIL_FILES["data/project-period/ch3-1.js"] = [
         "url": "https://github.com/jwh2077/CH3_1/blob/main/Source/CH3_1/Public/UpActor.h"
       }
     ],
-    "project_part": "CH3_1"
+    "project_part": "CH3_1",
+    "activity": "personal"
   }
 ];

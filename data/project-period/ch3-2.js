@@ -66,6 +66,7 @@ window.TIL_FILES["data/project-period/ch3-2.js"] = [
         "url": "https://github.com/jwh2077/CH3_2/blob/main/Source/CH3_2/Private/CH3GameMode.cpp"
       }
     ],
-    "project_part": "CH3_2"
+    "project_part": "CH3_2",
+    "activity": "personal"
   }
 ];

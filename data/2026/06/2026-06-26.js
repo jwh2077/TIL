@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/06/2026-06-26.js"] = [
     "id": "20260626-001",
     "date": "2026-06-26",
     "title": "C 언어와 Unreal Editor 기초",
-    "project": "Basecamp",
+    "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
     "phase": "처음 접함",
     "tags": [
       "C",
@@ -37,6 +37,7 @@ window.TIL_FILES["data/2026/06/2026-06-26.js"] = [
     "primary_topic": "unreal",
     "summary": "C 언어와 프로그래밍 언어의 기본 개념을 공부했다.",
     "date_start": "2026-06-26",
-    "date_label": "2026-06-26"
+    "date_label": "2026-06-26",
+    "activity": "personal"
   }
 ];
