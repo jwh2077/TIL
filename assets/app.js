@@ -35,7 +35,7 @@
   function controls() {
     $('#tabs').innerHTML = topics.map(([id, label]) => `<button class="tab" type="button" data-topic="${id}" role="tab" aria-selected="${state.topic === id}">${label}<span class="tab-count">${records.filter(r => id === 'all' || r.primary_topic === id).length}</span></button>`).join('');
     $('#projects').innerHTML = ['all', ...new Set(records.map(r => r.project).filter(Boolean))].map(p => `<button class="project" type="button" data-project="${esc(p)}" aria-pressed="${state.project === p}">${esc(p === 'all' ? '모든 프로젝트' : p)}</button>`).join('');
-    $('#months').innerHTML = ['all', ...new Set(records.map(r => r.month).sort())].map(m => `<button class="project" type="button" data-month="${esc(m)}" aria-pressed="${state.month === m}">${m === 'all' ? '모든 기간' : m === 'undated' ? '날짜 미확인 메모' : esc(m.replace('-', '년 ') + '월')}</button>`).join('');
+    $('#months').innerHTML = ['all', ...new Set(records.map(r => r.month).sort())].map(m => `<button class="project" type="button" data-month="${esc(m)}" aria-pressed="${state.month === m}">${m === 'all' ? '모든 기간' : m === 'undated' ? '날짜 미확인 메모' : m === 'project-period' ? '프로젝트 전체 작업' : esc(m.replace('-', '년 ') + '월')}</button>`).join('');
   }
   function render() {
     controls();
@@ -46,7 +46,7 @@
     $('#records').innerHTML = shown.map(r => `<article class="record"><button class="record-button" type="button" data-record-id="${esc(r.id)}"><div class="record-meta"><span>${esc(r.date_label)}</span><span class="topic-badge">${esc(name(r.primary_topic))}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><span class="more">기록 열기 →</span></button></article>`).join('') || '<div class="empty">선택한 조건에 맞는 기록이 없습니다.</div>';
   }
   function load(file) {
-    if (!/^data\/(?:\d{4}\/\d{2}|undated)\/[\w-]+\.js$/.test(file)) return Promise.reject(new Error('잘못된 기록 경로'));
+    if (!/^data\/(?:\d{4}\/\d{2}|undated|project-period)\/[\w-]+\.js$/.test(file)) return Promise.reject(new Error('잘못된 기록 경로'));
     if (window.TIL_FILES?.[file]) return Promise.resolve(window.TIL_FILES[file]);
     if (!cache.has(file)) cache.set(file, new Promise((resolve, reject) => {
       const script = document.createElement('script'); script.src = file;

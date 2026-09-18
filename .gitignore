@@ -1,5 +1,6 @@
 # Keep local source material out of the repository.
 /local/
+/*.zip
 
 # Only the published entry page belongs at the repository root.
 /*.html

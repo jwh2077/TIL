@@ -1,8 +1,8 @@
 window.TIL_LIBRARY_INDEX = [
   {
-    "id": "concept-intro",
-    "title": "자료구조",
-    "summary": "자료구조의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "id": "stl-foundation",
+    "title": "자료구조의 기본 · 저장 방식 · STL",
+    "summary": "데이터 저장 방식과 컨테이너·반복자·알고리즘의 관계를 한 번에 복습합니다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -13,12 +13,24 @@ window.TIL_LIBRARY_INDEX = [
       "20260727-001",
       "20260728-001",
       "note-tem-015"
+    ],
+    "topics": [
+      "cpp",
+      "ds",
+      "stl"
+    ],
+    "publication": "reference",
+    "references": [
+      {
+        "label": "관련 Velog · STL과 vector 기초",
+        "url": "https://velog.io/@jwh4410/7.17"
+      }
     ]
   },
   {
-    "id": "concept-memory",
-    "title": "메모리에서의 저장",
-    "summary": "메모리에서의 저장의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "id": "stl-sequence",
+    "title": "순차 컨테이너 · vector / list / deque",
+    "summary": "접근 방식과 삽입·삭제 위치를 기준으로 순차 컨테이너를 비교합니다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -29,12 +41,24 @@ window.TIL_LIBRARY_INDEX = [
       "20260727-001",
       "20260728-001",
       "note-tem-015"
+    ],
+    "topics": [
+      "cpp",
+      "ds",
+      "stl"
+    ],
+    "publication": "reference",
+    "references": [
+      {
+        "label": "관련 Velog · STL vector와 map 복습",
+        "url": "https://velog.io/@jwh4410/7.27"
+      }
     ]
   },
   {
-    "id": "concept-vector",
-    "title": "Vector",
-    "summary": "Vector의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "id": "stl-associative",
+    "title": "연관 컨테이너 · set / map / 해시",
+    "summary": "중복 허용, 정렬 여부와 Key-Value 관계를 기준으로 자료구조를 구분합니다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -45,12 +69,28 @@ window.TIL_LIBRARY_INDEX = [
       "20260727-001",
       "20260728-001",
       "note-tem-015"
+    ],
+    "topics": [
+      "cpp",
+      "ds",
+      "stl"
+    ],
+    "publication": "reference",
+    "references": [
+      {
+        "label": "관련 Velog · STL vector와 map 복습",
+        "url": "https://velog.io/@jwh4410/7.27"
+      },
+      {
+        "label": "관련 Velog · map과 auto, range-for",
+        "url": "https://velog.io/@jwh4410/7.28"
+      }
     ]
   },
   {
-    "id": "concept-list",
-    "title": "List",
-    "summary": "List의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "id": "stl-adaptor",
+    "title": "처리 순서 · stack / queue / heap",
+    "summary": "후입선출, 선입선출과 우선순위 처리의 차이를 예제와 명령어로 확인합니다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -61,12 +101,18 @@ window.TIL_LIBRARY_INDEX = [
       "20260727-001",
       "20260728-001",
       "note-tem-015"
-    ]
+    ],
+    "topics": [
+      "cpp",
+      "ds",
+      "stl"
+    ],
+    "publication": "reference"
   },
   {
-    "id": "concept-forward",
-    "title": "Forward List",
-    "summary": "Forward List의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "id": "stl-algorithm",
+    "title": "문자열 · 알고리즘 · 그래프 · 트리",
+    "summary": "문자열 파싱부터 탐색·정렬과 연결 관계의 표현까지 묶어 읽습니다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -77,12 +123,18 @@ window.TIL_LIBRARY_INDEX = [
       "20260727-001",
       "20260728-001",
       "note-tem-015"
-    ]
+    ],
+    "topics": [
+      "cpp",
+      "ds",
+      "stl"
+    ],
+    "publication": "reference"
   },
   {
-    "id": "concept-set",
-    "title": "Set",
-    "summary": "Set의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "id": "stl-selection",
+    "title": "자료구조 선택 기준",
+    "summary": "필요한 접근·삽입·삭제 작업을 기준으로 컨테이너를 비교합니다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -93,236 +145,18 @@ window.TIL_LIBRARY_INDEX = [
       "20260727-001",
       "20260728-001",
       "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-uset",
-    "title": "Unordered Set",
-    "summary": "Unordered Set의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-mset",
-    "title": "Multiset",
-    "summary": "Multiset의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-map",
-    "title": "Map",
-    "summary": "Map의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-umap",
-    "title": "Unordered Map",
-    "summary": "Unordered Map의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-mmap",
-    "title": "Multimap",
-    "summary": "Multimap의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-stack",
-    "title": "Stack",
-    "summary": "Stack의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-queue",
-    "title": "Queue",
-    "summary": "Queue의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-deque",
-    "title": "Deque",
-    "summary": "Deque의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-pq",
-    "title": "Priority Queue / Heap",
-    "summary": "Priority Queue / Heap의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-string",
-    "title": "String / 파싱",
-    "summary": "String / 파싱의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-algorithm",
-    "title": "STL Algorithm",
-    "summary": "STL Algorithm의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-graph",
-    "title": "Graph",
-    "summary": "Graph의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-tree",
-    "title": "Tree",
-    "summary": "Tree의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-stl",
-    "title": "STL이란?",
-    "summary": "STL이란?의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
+    ],
+    "topics": [
+      "cpp",
+      "ds",
+      "stl"
+    ],
+    "publication": "reference"
   },
   {
     "id": "concept-bigo",
-    "title": "Big-O 표기법",
-    "summary": "Big-O 표기법의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "title": "Big-O · 시간 복잡도",
+    "summary": "입력 크기에 따른 증가 양상을 독립된 개념으로 정리합니다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -333,38 +167,46 @@ window.TIL_LIBRARY_INDEX = [
       "20260727-001",
       "20260728-001",
       "note-tem-015"
-    ]
+    ],
+    "topics": [
+      "ds"
+    ],
+    "publication": "reference"
   },
   {
-    "id": "concept-choice",
-    "title": "자료구조 선택 기준",
-    "summary": "자료구조 선택 기준의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
+    "id": "unreal-containers",
+    "title": "Unreal 자료구조 · TArray / TMap / TSet",
+    "summary": "STL과 용도를 비교하고 Unreal 컨테이너의 기본 사용을 게시용 초안으로 준비합니다.",
     "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
+    "topic": "unreal",
+    "status": "게시 준비 초안 · 예제 실행 확인 필요",
     "source_name": "자료구조.html",
     "source_url": "data/guides/stl-reference.html",
     "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
-    ]
-  },
-  {
-    "id": "concept-unreal",
-    "title": "Unreal Engine 자료구조",
-    "summary": "Unreal Engine 자료구조의 개념과 원본 정리의 설명·예제를 살펴봅니다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260825-ch3",
+      "20260910-priest",
+      "20260917-priest",
+      "note-tem-011"
+    ],
+    "topics": [
+      "unreal",
+      "ds"
+    ],
+    "publication": "draft",
+    "notice": "아직 게시하지 않은 초안입니다. 기존 자료의 비교 표와 Epic 공식 문서를 바탕으로 기본 용도와 예제를 준비했습니다. 프로젝트에서 사용한 경험을 학습 완료로 단정하지 않습니다.",
+    "references": [
+      {
+        "label": "TArray 공식 문서",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/array-containers-in-unreal-engine"
+      },
+      {
+        "label": "TMap 공식 문서",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/map-containers-in-unreal-engine"
+      },
+      {
+        "label": "TSet 공식 문서",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/set-containers-in-unreal-engine"
+      }
     ]
   },
   {
@@ -379,7 +221,12 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260706-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
+    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
+    "topics": [
+      "cpp",
+      "memory"
+    ],
+    "publication": "reference"
   },
   {
     "id": "velog-20260709-001",
@@ -393,7 +240,12 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260709-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
+    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
+    "topics": [
+      "cpp",
+      "oop"
+    ],
+    "publication": "reference"
   },
   {
     "id": "velog-20260710-001",
@@ -407,7 +259,12 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260710-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
+    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
+    "topics": [
+      "cpp",
+      "memory"
+    ],
+    "publication": "reference"
   },
   {
     "id": "velog-20260712-001",
@@ -421,7 +278,12 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260712-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
+    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
+    "topics": [
+      "cpp",
+      "oop"
+    ],
+    "publication": "reference"
   },
   {
     "id": "velog-20260716-001",
@@ -435,49 +297,12 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260716-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
-  },
-  {
-    "id": "velog-20260717-001",
-    "title": "STL과 vector 기초",
-    "summary": "STL의 기본적인 구조와 컨테이너, 알고리즘, 반복자의 개념을 접했다.",
-    "kind": "velog",
-    "topic": "stl",
-    "source_name": "Velog 원문",
-    "source_url": "https://velog.io/@jwh4410/7.17",
-    "status": "개념 중심 발췌 · 원문 링크",
-    "related_ids": [
-      "20260717-001"
+    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
+    "topics": [
+      "cpp",
+      "oop"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
-  },
-  {
-    "id": "velog-20260727-001",
-    "title": "STL vector와 map 복습",
-    "summary": "STL의 기본적인 사용법을 다시 복습했다.",
-    "kind": "velog",
-    "topic": "stl",
-    "source_name": "Velog 원문",
-    "source_url": "https://velog.io/@jwh4410/7.27",
-    "status": "개념 중심 발췌 · 원문 링크",
-    "related_ids": [
-      "20260727-001"
-    ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
-  },
-  {
-    "id": "velog-20260728-001",
-    "title": "map과 auto, range-for",
-    "summary": "map의 세부적인 사용법을 학습했다.",
-    "kind": "velog",
-    "topic": "stl",
-    "source_name": "Velog 원문",
-    "source_url": "https://velog.io/@jwh4410/7.28",
-    "status": "개념 중심 발췌 · 원문 링크",
-    "related_ids": [
-      "20260728-001"
-    ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다."
+    "publication": "reference"
   },
   {
     "id": "velog-20260810-001",
@@ -491,7 +316,11 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260810-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. Velog 원문을 확인해 기존 정리와 대조했습니다."
+    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. Velog 원문을 확인해 기존 정리와 대조했습니다.",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference"
   },
   {
     "id": "file-note-tem-014",
@@ -505,7 +334,11 @@ window.TIL_LIBRARY_INDEX = [
     "notice": "원본의 질문과 설계 고민을 보존한 재구성입니다. 완료된 기능이나 검증된 개념 사전으로 읽지 않습니다.",
     "related_ids": [
       "note-tem-014"
-    ]
+    ],
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference"
   },
   {
     "id": "file-continue",
@@ -519,6 +352,10 @@ window.TIL_LIBRARY_INDEX = [
       "20260618-001",
       "20260619-001",
       "20260622-001"
-    ]
+    ],
+    "topics": [
+      "cpp"
+    ],
+    "publication": "reference"
   }
 ];

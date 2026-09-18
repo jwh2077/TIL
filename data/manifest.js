@@ -827,19 +827,6 @@ window.TIL_INDEX = {
       "file": "data/undated/note-tem-015.js"
     },
     {
-      "id": "note-tem-016",
-      "date": null,
-      "date_end": null,
-      "date_label": "날짜 미확인",
-      "month": "undated",
-      "title": "비행체 회전과 카메라 회전 분리 설계",
-      "summary": "Roll 고정 시 화면 회전 이상을 기록하고 비행체와 카메라의 회전을 분리하는 방향을 고민했다.",
-      "project": null,
-      "primary_topic": "unreal",
-      "tags": [],
-      "file": "data/undated/note-tem-016.js"
-    },
-    {
       "id": "note-tem-011",
       "date": null,
       "date_end": null,
@@ -864,6 +851,91 @@ window.TIL_INDEX = {
       "primary_topic": "project",
       "tags": [],
       "file": "data/undated/note-tem-004.js"
+    },
+    {
+      "id": "20260818-ch3",
+      "date": "2026-08-18",
+      "date_end": "2026-08-23",
+      "date_label": "2026-08-18 ~ 2026-08-23",
+      "month": "2026-08",
+      "title": "CH3 개인 프로젝트 · 입력과 아이템 구조",
+      "summary": "캐릭터 입력과 카메라, 움직이는 액터를 구성한 뒤 공통 아이템과 파생 아이템으로 확장했다.",
+      "project": "CH3 개인 프로젝트",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "개인 프로젝트"
+      ],
+      "file": "data/2026/08/2026-08-18_2026-08-23.js"
+    },
+    {
+      "id": "20260825-ch3",
+      "date": "2026-08-25",
+      "date_end": "2026-08-30",
+      "date_label": "2026-08-25 ~ 2026-08-30",
+      "month": "2026-08",
+      "title": "CH3 개인 프로젝트 · 게임 진행과 HUD 연결",
+      "summary": "아이템 스폰과 체력 처리에 점수·레벨 진행·HUD·메뉴 전환·획득 효과를 연결했다.",
+      "project": "CH3 개인 프로젝트",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "개인 프로젝트"
+      ],
+      "file": "data/2026/08/2026-08-25_2026-08-30.js"
+    },
+    {
+      "id": "20260902-ch3",
+      "date": "2026-09-02",
+      "date_end": null,
+      "date_label": "2026-09-02",
+      "month": "2026-09",
+      "title": "CH3 개인 프로젝트 · 웨이브 확장과 남은 점검",
+      "summary": "레벨 안의 웨이브를 분리하고 시간 종료·코인 수집 종료·HUD 갱신을 연결한 코드를 정리했다.",
+      "project": "CH3 개인 프로젝트",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "개인 프로젝트"
+      ],
+      "file": "data/2026/09/2026-09-02.js"
+    },
+    {
+      "id": "project-ch3-1",
+      "date": null,
+      "date_end": null,
+      "date_label": "CH3_1 프로젝트 전체 작업",
+      "month": "project-period",
+      "title": "CH3_1 · 이동·회전 액터 실습",
+      "summary": "컴포넌트를 구성하고 DeltaTime 기반 이동·회전, 누적 이동량과 방향 전환을 작성했다.",
+      "project": "CH3_1 개인 프로젝트",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "개인 프로젝트"
+      ],
+      "file": "data/project-period/ch3-1.js"
+    },
+    {
+      "id": "project-ch3-2",
+      "date": null,
+      "date_end": null,
+      "date_label": "CH3_2 프로젝트 전체 작업",
+      "month": "project-period",
+      "title": "CH3_2 · Pawn 입력과 드론·카메라 분리",
+      "summary": "직접 이동하는 Pawn에서 카메라 Yaw 기반 드론 이동과 Pitch·Roll 보간으로 확장한 코드를 정리했다.",
+      "project": "CH3_2 개인 프로젝트",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "개인 프로젝트"
+      ],
+      "file": "data/project-period/ch3-2.js"
     }
   ]
 };
