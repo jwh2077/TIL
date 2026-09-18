@@ -1,0 +1,11 @@
+# Keep local source material out of the repository.
+/local/
+
+# Only the published entry page belongs at the repository root.
+/*.html
+!/index.html
+
+# Windows / editor files
+Thumbs.db
+desktop.ini
+.vscode/

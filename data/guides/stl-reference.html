@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>자료구조 / C++ STL 전체 정리</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:#24292f;background:#fff;font-family:Arial,"Noto Sans KR",sans-serif;line-height:1.75}
+.layout{display:flex;max-width:1500px;margin:auto}
+aside{position:sticky;top:0;width:280px;height:100vh;overflow:auto;padding:24px 16px;border-right:1px solid #ddd;background:#fafafa}
+main{width:1050px;max-width:100%;padding:40px 48px 100px}
+nav a{display:block;padding:4px 8px;color:#57606a;text-decoration:none;font-size:14px}
+nav a:hover{background:#eee;color:#0969da}.sub{padding-left:24px!important;font-size:13px!important}
+h1{font-size:30px;margin:62px 0 16px;padding-bottom:9px;border-bottom:1px solid #ddd}
+h1:first-of-type{margin-top:0}h2{font-size:22px;margin-top:30px}h3{font-size:18px;margin-top:22px}
+code{background:#f6f8fa;padding:2px 5px;border-radius:4px;font-family:Consolas,monospace}
+pre{background:#f6f8fa;border:1px solid #ddd;border-radius:7px;padding:15px;overflow:auto}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{border:1px solid #ccc;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f6f8fa}.box{border:1px solid #ddd;border-radius:8px;padding:15px;margin:16px 0}
+blockquote{border-left:4px solid #aaa;background:#f6f8fa;margin:16px 0;padding:8px 15px;color:#57606a}
+.top{position:fixed;right:20px;bottom:20px;background:#24292f;color:#fff;text-decoration:none;padding:6px 10px;border-radius:5px}
+.small{font-size:13px;color:#57606a}
+@media(max-width:850px){aside{display:none}main{padding:24px 18px}}
+</style>
+</head>
+<body id="top"><p style="padding:12px 24px;margin:0;background:#eef5ff"><a href="../../index.html#library">← 정리된 학습 자료로</a> · 기존 자료구조 정리 문서의 공개용 사본</p>
+<div class="layout">
+<aside>
+<h2>자료구조 / STL</h2>
+<nav>
+<a href="#intro">자료구조</a>
+<a href="#memory">메모리에서의 저장</a>
+<a href="#vector">Vector</a><a class="sub" href="#vector-cmd">주요 명령어</a><a class="sub" href="#vector-use">사용 / 예시</a>
+<a href="#list">List</a><a class="sub" href="#list-cmd">주요 명령어</a><a class="sub" href="#list-use">사용 / 예시</a>
+<a href="#forward">Forward List</a><a class="sub" href="#forward-cmd">주요 명령어</a><a class="sub" href="#forward-use">사용 / 예시</a>
+<a href="#set">Set</a><a class="sub" href="#set-cmd">주요 명령어</a><a class="sub" href="#set-use">사용 / 예시</a>
+<a href="#uset">Unordered Set</a><a class="sub" href="#uset-cmd">주요 명령어</a><a class="sub" href="#uset-use">사용 / 예시</a>
+<a href="#mset">Multiset</a><a class="sub" href="#mset-cmd">주요 명령어</a><a class="sub" href="#mset-use">사용 / 예시</a>
+<a href="#map">Map</a><a class="sub" href="#map-cmd">주요 명령어</a><a class="sub" href="#map-use">사용 / 예시</a>
+<a href="#umap">Unordered Map</a><a class="sub" href="#umap-cmd">주요 명령어</a><a class="sub" href="#umap-use">사용 / 예시</a>
+<a href="#mmap">Multimap</a><a class="sub" href="#mmap-cmd">주요 명령어</a><a class="sub" href="#mmap-use">사용 / 예시</a>
+<a href="#stack">Stack</a><a class="sub" href="#stack-cmd">주요 명령어</a><a class="sub" href="#stack-use">사용 / 예시</a>
+<a href="#queue">Queue</a><a class="sub" href="#queue-cmd">주요 명령어</a><a class="sub" href="#queue-use">사용 / 예시</a>
+<a href="#deque">Deque</a><a class="sub" href="#deque-cmd">주요 명령어</a><a class="sub" href="#deque-use">사용 / 예시</a>
+<a href="#pq">Priority Queue / Heap</a><a class="sub" href="#pq-cmd">주요 명령어</a><a class="sub" href="#pq-use">사용 / 예시</a>
+<a href="#string">String / 파싱</a><a class="sub" href="#string-cmd">주요 명령어</a><a class="sub" href="#string-use">사용 / 예시</a>
+<a href="#algorithm">STL Algorithm</a>
+<a class="sub" href="#algorithm-sort">sort</a><a class="sub" href="#algorithm-search">find / reverse</a><a class="sub" href="#algorithm-container">컨테이너별 정렬</a>
+<a href="#graph">Graph</a><a class="sub" href="#graph-list">인접 리스트</a><a class="sub" href="#graph-algo">대표 알고리즘</a>
+<a href="#tree">Tree</a><a class="sub" href="#tree-terms">용어</a><a class="sub" href="#tree-types">종류</a>
+<a href="#stl">STL 구성</a><a class="sub" href="#stl-core">핵심 구성</a>
+<a href="#bigo">Big-O</a><a class="sub" href="#bigo-concept">개념</a>
+<a href="#choice">자료구조 선택 기준</a>
+<a href="#unreal">Unreal Engine</a>
+</nav>
+</aside>
+
+<main>
+<h1 id="intro">자료구조</h1>
+<h2>1. 개념</h2>
+<p>자료구조는 데이터를 <strong>저장, 삽입, 삭제, 접근, 탐색</strong> 등 효율적으로 관리하기 위한 방법이다.</p>
+
+<h1 id="memory">메모리에서의 저장</h1>
+<h2>1. 연속적인 저장</h2>
+<p>데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다.</p>
+<pre>[10][20][30][40]</pre>
+<p>예: 배열, <code>vector</code></p>
+<h2>2. 불연속적인 저장</h2>
+<p>데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다.</p>
+<pre>[10] → [20] → [30]</pre>
+<p>예: <code>list</code>, 연결 기반 Tree</p>
+<blockquote>연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다.</blockquote>
+
+<h1 id="vector">Vector</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>vector</code>는 크기를 변화시켜가며 사용할 수 있는 <strong>동적 배열</strong>이다.</p>
+<ul><li>원소가 연속적인 메모리에 저장된다.</li><li>인덱스로 임의 접근할 수 있다.</li><li>끝에 원소를 추가할 때 평균적으로 O(1)이다.</li><li><code>capacity</code>가 부족하면 더 큰 공간을 확보하고 기존 원소를 이동할 수 있다.</li></ul>
+<h2>2. size / capacity</h2>
+<pre><code>vector&lt;int&gt; vec;
+
+vec.size();       // 현재 원소 개수
+vec.capacity();   // 현재 확보된 공간
+vec.reserve(100); // capacity를 미리 확보</code></pre>
+<table><tr><th>개념</th><th>의미</th></tr>
+<tr><td><code>size</code></td><td>현재 들어 있는 원소의 개수</td></tr>
+<tr><td><code>capacity</code></td><td>현재 확보된 저장 공간의 크기</td></tr>
+<tr><td><code>reserve(n)</code></td><td>capacity를 최소 n까지 확보. size는 변하지 않음</td></tr>
+</table>
+<h2 id="vector-cmd">3. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>push_back()</code></td><td>뒤에 추가</td><td>평균 O(1), 재할당 시 O(n)</td></tr>
+<tr><td><code>emplace_back()</code></td><td>뒤에서 객체를 생성하며 추가</td><td>평균 O(1), 재할당 시 O(n)</td></tr>
+<tr><td><code>pop_back()</code></td><td>마지막 원소 삭제</td><td>O(1)</td></tr>
+<tr><td><code>insert()</code></td><td>특정 위치에 삽입</td><td>O(n)</td></tr>
+<tr><td><code>erase()</code></td><td>특정 위치 삭제</td><td>O(n)</td></tr>
+<tr><td><code>operator[]</code></td><td>인덱스로 접근</td><td>O(1)</td></tr>
+<tr><td><code>at()</code></td><td>인덱스로 접근 + 범위 검사</td><td>O(1)</td></tr>
+<tr><td><code>empty()</code></td><td>비었는지 확인</td><td>O(1)</td></tr>
+<tr><td><code>clear()</code></td><td>모든 원소 삭제</td><td>O(n)</td></tr>
+<tr><td><code>size()</code></td><td>원소 개수</td><td>O(1)</td></tr>
+</table>
+<h2 id="vector-use">4. 장점 / 단점 / 사용하기 좋은 때</h2>
+<ul><li><strong>장점:</strong> 인덱스 접근이 빠르고 캐시 효율이 좋다.</li><li><strong>단점:</strong> 중간 삽입/삭제 시 뒤 원소를 이동해야 한다.</li><li><strong>좋은 경우:</strong> 인덱스 접근이 필요하거나 끝에서 추가/삭제가 많은 경우</li></ul>
+<h2>5. 탐색 / 뒤집기</h2>
+<pre><code>find(vec.begin(), vec.end(), value); // 순차 탐색
+reverse(vec.begin(), vec.end());     // 뒤집기</code></pre>
+<p><code>find()</code>는 O(n), <code>reverse()</code>는 O(n)이다.</p>
+<h2>6. 알고리즘 예시: 그래프</h2>
+<pre><code>vector&lt;vector&lt;int&gt;&gt; graph(4);
+
+graph[0].push_back(1);
+graph[0].push_back(2);</code></pre>
+<p>0번 정점에서 1번과 2번 정점으로 연결된 것을 인접 리스트로 표현한 것이다.</p>
+<blockquote><code>{1, 2}</code>는 주소가 아니라 <strong>연결된 정점의 번호</strong>를 저장한 것이다.</blockquote>
+
+<h1 id="list">List</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>list</code>는 일반적으로 <strong>양방향 연결 리스트</strong>이다.</p>
+<pre>[10] ⇄ [20] ⇄ [30]</pre>
+<ul><li>노드가 메모리상 연속되어 있을 필요가 없다.</li><li>각 노드는 앞/뒤 노드와 연결된다.</li><li>인덱스 임의 접근이 불가능하다.</li><li>위치를 가리키는 iterator를 이미 가지고 있다면 삽입/삭제가 효율적이다.</li></ul>
+<h2 id="list-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>push_back()</code></td><td>뒤 추가</td><td>O(1)</td></tr>
+<tr><td><code>push_front()</code></td><td>앞 추가</td><td>O(1)</td></tr>
+<tr><td><code>pop_back()</code></td><td>뒤 삭제</td><td>O(1)</td></tr>
+<tr><td><code>pop_front()</code></td><td>앞 삭제</td><td>O(1)</td></tr>
+<tr><td><code>insert(it)</code></td><td>iterator 위치에 삽입</td><td>O(1)*</td></tr>
+<tr><td><code>erase(it)</code></td><td>iterator 위치 삭제</td><td>O(1)*</td></tr>
+<tr><td><code>remove(value)</code></td><td>값을 찾아 삭제</td><td>O(n)</td></tr>
+<tr><td><code>find()</code></td><td>순차 탐색</td><td>O(n)</td></tr>
+<tr><td><code>reverse()</code></td><td>뒤집기</td><td>O(n)</td></tr>
+<tr><td><code>sort()</code></td><td>리스트 자체 정렬</td><td>O(n log n)</td></tr>
+</table>
+<p class="small">* 해당 위치의 iterator를 이미 알고 있는 경우. 위치를 찾는 과정은 별도로 O(n)이 걸릴 수 있다.</p>
+<h2 id="list-use">3. 사용하기 좋은 때</h2><p>중간 삽입/삭제가 많고 해당 위치를 iterator로 관리할 수 있으며 인덱스 접근이 중요하지 않을 때</p>
+
+<h1 id="forward">Forward List</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>forward_list</code>는 <strong>단방향 연결 리스트</strong>이다.</p>
+<pre>[10] → [20] → [30]</pre>
+<ul><li>다음 노드 방향으로만 이동한다.</li><li><code>list</code>보다 구조가 단순하다.</li><li>인덱스 접근이 불가능하다.</li></ul>
+<h2 id="forward-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>push_front()</code></td><td>앞 추가</td><td>O(1)</td></tr>
+<tr><td><code>pop_front()</code></td><td>앞 삭제</td><td>O(1)</td></tr>
+<tr><td><code>insert_after()</code></td><td>iterator 뒤에 삽입</td><td>O(1)*</td></tr>
+<tr><td><code>erase_after()</code></td><td>iterator 뒤 원소 삭제</td><td>O(1)*</td></tr>
+<tr><td><code>remove()</code></td><td>값으로 삭제</td><td>O(n)</td></tr>
+<tr><td><code>reverse()</code></td><td>뒤집기</td><td>O(n)</td></tr>
+</table>
+<h2 id="forward-use">3. 사용하기 좋은 때</h2><p>양방향 이동이 필요 없고 앞쪽 또는 특정 노드 뒤에서 삽입/삭제하는 경우</p>
+
+<h1 id="set">Set</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>set</code>은 <strong>중복 없는 값</strong>을 정렬된 상태로 저장한다.</p>
+<ul><li>중복 X</li><li>요소 자체가 Key 역할</li><li>기본적으로 오름차순</li><li>표준에서는 균형 잡힌 트리 계열로 동작하며 대표적으로 Red-Black Tree가 사용된다.</li></ul>
+<h2 id="set-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>insert()</code></td><td>삽입</td><td>O(log n)</td></tr>
+<tr><td><code>emplace()</code></td><td>생성 후 삽입</td><td>O(log n)</td></tr>
+<tr><td><code>erase(key)</code></td><td>Key 삭제</td><td>O(log n)</td></tr>
+<tr><td><code>find()</code></td><td>탐색</td><td>O(log n)</td></tr>
+<tr><td><code>contains()</code></td><td>존재 확인</td><td>O(log n)</td></tr>
+<tr><td><code>lower_bound()</code></td><td>값 이상인 첫 위치</td><td>O(log n)</td></tr>
+<tr><td><code>upper_bound()</code></td><td>값 초과인 첫 위치</td><td>O(log n)</td></tr>
+</table>
+<h2 id="set-use">3. 사용하기 좋은 때</h2><ul><li>중복 제거</li><li>정렬된 상태 유지</li><li>범위 탐색</li></ul>
+<pre><code>set&lt;int&gt; nums;
+set&lt;int, greater&lt;&gt;&gt; descNums;</code></pre>
+
+<h1 id="uset">Unordered Set</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>unordered_set</code>은 <strong>Hash Table</strong>을 이용해 중복 없는 값을 저장한다.</p>
+<ul><li>중복 X</li><li>정렬 X</li><li>평균적으로 빠른 탐색</li></ul>
+<h2 id="uset-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>평균 / 최악</th></tr>
+<tr><td><code>insert()</code></td><td>삽입</td><td>O(1) / O(n)</td></tr>
+<tr><td><code>erase()</code></td><td>삭제</td><td>O(1) / O(n)</td></tr>
+<tr><td><code>find()</code></td><td>탐색</td><td>O(1) / O(n)</td></tr>
+<tr><td><code>contains()</code></td><td>존재 확인</td><td>O(1) / O(n)</td></tr>
+</table>
+<h2 id="uset-use">3. 사용하기 좋은 때</h2><p>정렬이 필요하지 않고 빠른 존재 확인/검색이 중요할 때</p>
+
+<h1 id="mset">Multiset</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>multiset</code>은 <strong>중복을 허용하면서 정렬</strong>된 상태로 저장한다.</p>
+<pre><code>multiset&lt;int&gt; nums;
+nums.insert(10);
+nums.insert(10); // 10이 두 개 존재 가능</code></pre>
+<h2 id="mset-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>insert()</code></td><td>삽입</td><td>O(log n)</td></tr>
+<tr><td><code>erase(iterator)</code></td><td>해당 원소 삭제</td><td>O(1)~</td></tr>
+<tr><td><code>erase(key)</code></td><td>해당 Key의 모든 원소 삭제</td><td>O(log n + k)</td></tr>
+<tr><td><code>count()</code></td><td>특정 값 개수</td><td>O(log n + k)</td></tr>
+<tr><td><code>lower_bound()</code></td><td>값 이상인 첫 위치</td><td>O(log n)</td></tr>
+<tr><td><code>upper_bound()</code></td><td>값 초과인 첫 위치</td><td>O(log n)</td></tr>
+<tr><td><code>equal_range()</code></td><td>같은 값의 범위</td><td>O(log n)</td></tr>
+</table>
+<h2 id="mset-use">3. 사용하기 좋은 때</h2><p>중복을 허용하면서 정렬과 범위 탐색이 필요할 때</p>
+
+<h1 id="map">Map</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>map</code>은 <strong>Key - Value</strong> 쌍을 저장하고 Key 기준으로 정렬한다.</p>
+<ul><li>Key 중복 X</li><li>Key 기준 정렬</li><li>Key로 Value 접근</li><li>균형 트리 계열로 구현된다.</li></ul>
+<h2 id="map-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>map[key]</code></td><td>Key 접근. 없으면 새 원소를 삽입할 수 있음</td><td>O(log n)</td></tr>
+<tr><td><code>at(key)</code></td><td>Key 접근. 없으면 예외</td><td>O(log n)</td></tr>
+<tr><td><code>insert()</code></td><td>삽입</td><td>O(log n)</td></tr>
+<tr><td><code>emplace()</code></td><td>생성 후 삽입</td><td>O(log n)</td></tr>
+<tr><td><code>erase(key)</code></td><td>Key 삭제</td><td>O(log n)</td></tr>
+<tr><td><code>find()</code></td><td>Key 탐색</td><td>O(log n)</td></tr>
+<tr><td><code>contains()</code></td><td>Key 존재 확인</td><td>O(log n)</td></tr>
+</table>
+<h2 id="map-use">3. 사용하기 좋은 때</h2><p>Key와 Value를 묶어 관리하고 Key 기준 정렬이나 탐색이 필요할 때</p>
+<pre><code>map&lt;string, int&gt; data;
+data["HP"] = 100;</code></pre>
+
+<h1 id="umap">Unordered Map</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>unordered_map</code>은 Hash Table 기반의 <strong>Key - Value</strong> 자료구조이다.</p>
+<ul><li>Key 중복 X</li><li>정렬 X</li><li>평균적으로 빠른 Key 검색</li></ul>
+<h2 id="umap-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>평균 / 최악</th></tr>
+<tr><td><code>data[key]</code></td><td>Key 접근 / 없으면 삽입</td><td>O(1) / O(n)</td></tr>
+<tr><td><code>insert()</code></td><td>삽입</td><td>O(1) / O(n)</td></tr>
+<tr><td><code>erase(key)</code></td><td>삭제</td><td>O(1) / O(n)</td></tr>
+<tr><td><code>find()</code></td><td>Key 탐색</td><td>O(1) / O(n)</td></tr>
+<tr><td><code>contains()</code></td><td>존재 확인</td><td>O(1) / O(n)</td></tr>
+</table>
+<h2 id="umap-use">3. 사용하기 좋은 때</h2><p>정렬이 필요하지 않고 Key 검색을 많이 하는 경우</p>
+
+<h1 id="mmap">Multimap</h1>
+<h2>1. 개념 / 구조</h2>
+<p><code>multimap</code>은 하나의 Key에 여러 Value를 저장할 수 있으며 Key 기준으로 정렬한다.</p>
+<pre><code>multimap&lt;string, int&gt; data;
+data.insert({"A", 10});
+data.insert({"A", 20});</code></pre>
+<h2 id="mmap-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>insert()</code></td><td>삽입</td><td>O(log n)</td></tr>
+<tr><td><code>erase(key)</code></td><td>해당 Key의 모든 원소 삭제</td><td>O(log n + k)</td></tr>
+<tr><td><code>find()</code></td><td>Key 탐색</td><td>O(log n)</td></tr>
+<tr><td><code>count()</code></td><td>Key 개수</td><td>O(log n + k)</td></tr>
+<tr><td><code>equal_range()</code></td><td>같은 Key의 범위</td><td>O(log n)</td></tr>
+</table>
+<h2 id="mmap-use">3. 사용하기 좋은 때</h2><p>하나의 Key에 여러 데이터를 연결하면서 Key 정렬이 필요할 때</p>
+<blockquote>Key와 Value를 같이 비교해 정렬하고 싶다면 <code>multiset&lt;pair&lt;...&gt;, 비교함수&gt;</code> 같은 방법도 가능하다. 다만 Key-Value 자체가 목적이라면 <code>map/multimap</code>이 보통 더 자연스럽다.</blockquote>
+
+<h1 id="stack">Stack</h1>
+<h2>1. 개념 / 구조</h2>
+<p><strong>LIFO(Last In, First Out)</strong> — 후입선출</p>
+<pre>TOP
+ ↓
+[30]
+[20]
+[10]</pre>
+<h2 id="stack-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>push()</code></td><td>맨 위에 추가</td><td>O(1)</td></tr>
+<tr><td><code>emplace()</code></td><td>맨 위에서 생성/추가</td><td>O(1)</td></tr>
+<tr><td><code>pop()</code></td><td>맨 위 삭제</td><td>O(1)</td></tr>
+<tr><td><code>top()</code></td><td>맨 위 확인</td><td>O(1)</td></tr>
+<tr><td><code>empty()</code></td><td>비었는지 확인</td><td>O(1)</td></tr>
+</table>
+<h2 id="stack-use">3. 사용하기 좋은 때</h2><ul><li>괄호 짝 검사</li><li>계산기</li><li>DFS</li><li>되돌리기 / Undo</li></ul>
+
+<h1 id="queue">Queue</h1>
+<h2>1. 개념 / 구조</h2>
+<p><strong>FIFO(First In, First Out)</strong> — 선입선출</p>
+<pre>front → [10][20][30] ← back</pre>
+<h2 id="queue-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>push()</code></td><td>뒤에 추가</td><td>O(1)</td></tr>
+<tr><td><code>emplace()</code></td><td>뒤에서 생성/추가</td><td>O(1)</td></tr>
+<tr><td><code>pop()</code></td><td>앞 삭제</td><td>O(1)</td></tr>
+<tr><td><code>front()</code></td><td>앞 확인</td><td>O(1)</td></tr>
+<tr><td><code>back()</code></td><td>뒤 확인</td><td>O(1)</td></tr>
+<tr><td><code>empty()</code></td><td>비었는지 확인</td><td>O(1)</td></tr>
+</table>
+<h2 id="queue-use">3. 사용하기 좋은 때</h2><ul><li>BFS</li><li>대기열</li><li>먼저 들어온 작업부터 처리해야 하는 경우</li></ul>
+
+<h1 id="deque">Deque</h1>
+<h2>1. 개념 / 구조</h2>
+<p><strong>Double Ended Queue</strong> — 양쪽 끝에서 삽입/삭제할 수 있다.</p>
+<pre>앞 ↔ [10][20][30][40] ↔ 뒤</pre>
+<h2 id="deque-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>push_front()</code></td><td>앞 추가</td><td>O(1)</td></tr>
+<tr><td><code>push_back()</code></td><td>뒤 추가</td><td>O(1)</td></tr>
+<tr><td><code>pop_front()</code></td><td>앞 삭제</td><td>O(1)</td></tr>
+<tr><td><code>pop_back()</code></td><td>뒤 삭제</td><td>O(1)</td></tr>
+<tr><td><code>front()</code> / <code>back()</code></td><td>양 끝 확인</td><td>O(1)</td></tr>
+<tr><td><code>operator[]</code></td><td>인덱스 접근</td><td>O(1)</td></tr>
+</table>
+<h2 id="deque-use">3. 장점 / 단점 / 사용하기 좋은 때</h2>
+<ul><li><strong>장점:</strong> 양쪽 끝의 삽입/삭제가 빠르고 인덱스 접근도 가능</li><li><strong>단점:</strong> vector처럼 하나의 연속된 메모리 블록에 저장된다는 보장은 없음</li><li><strong>좋은 경우:</strong> 양쪽에서 데이터를 넣고 빼는 경우, 슬라이딩 윈도우</li></ul>
+
+<h1 id="pq">Priority Queue / Heap</h1>
+<h2>1. 개념 / 구조</h2>
+<p>우선순위가 높은 원소를 먼저 꺼내는 자료구조이다.</p>
+<ul><li><code>priority_queue</code>는 Heap을 사용한다.</li><li>Heap은 완전 이진 트리 형태를 유지한다.</li><li>배열 형태로 효율적으로 표현할 수 있다.</li><li>전체 원소가 정렬되어 있는 것은 아니다.</li></ul>
+<pre><code>priority_queue&lt;int&gt; maxPQ; // 기본: 큰 값 우선
+
+priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; minPQ;
+// 작은 값 우선</code></pre>
+<h2 id="pq-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>
+<tr><td><code>push()</code></td><td>삽입</td><td>O(log n)</td></tr>
+<tr><td><code>emplace()</code></td><td>생성 후 삽입</td><td>O(log n)</td></tr>
+<tr><td><code>pop()</code></td><td>최상위 우선순위 삭제</td><td>O(log n)</td></tr>
+<tr><td><code>top()</code></td><td>최상위 우선순위 확인</td><td>O(1)</td></tr>
+<tr><td><code>empty()</code></td><td>비었는지 확인</td><td>O(1)</td></tr>
+</table>
+<h2 id="pq-use">3. 사용하기 좋은 때</h2><ul><li>최소/최대값을 반복해서 꺼낼 때</li><li>Dijkstra</li><li>우선순위가 있는 작업 처리</li></ul>
+
+<h1 id="string">String / 파싱</h1>
+<h2>1. 개념</h2>
+<p><code>std::string</code>은 문자열을 저장하는 표준 컨테이너이다. 내부적으로 연속적인 문자 저장을 사용하며 인덱스로 접근할 수 있다.</p>
+<h2 id="string-cmd">2. 주요 명령어 + Big-O</h2>
+<table><tr><th>명령어</th><th>기능</th><th>대략적인 Big-O</th></tr>
+<tr><td><code>str[index]</code></td><td>문자 접근</td><td>O(1)</td></tr>
+<tr><td><code>find()</code></td><td>문자열/문자 탐색</td><td>O(n) 수준</td></tr>
+<tr><td><code>substr(pos, count)</code></td><td>부분 문자열 생성</td><td>O(count)</td></tr>
+<tr><td><code>reverse()</code></td><td>문자열 뒤집기</td><td>O(n)</td></tr>
+<tr><td><code>size()</code></td><td>문자열 길이</td><td>O(1)</td></tr>
+</table>
+<h2 id="string-use">3. 파싱</h2>
+<p>문자열을 원하는 단위로 나누어 데이터를 추출하는 작업이다.</p>
+<pre><code>string str = "HP:100";
+
+auto pos = str.find(':');
+string key = str.substr(0, pos);
+string value = str.substr(pos + 1);</code></pre>
+<h2>4. 뒤집기</h2>
+<pre><code>reverse(str.begin(), str.end());</code></pre>
+<blockquote><code>find()</code>는 위치를 반환하며 찾지 못하면 <code>string::npos</code>를 반환한다.</blockquote>
+
+<h1 id="algorithm">STL Algorithm</h1>
+<h2 id="algorithm-sort">1. sort</h2>
+<pre><code>sort(vec.begin(), vec.end()); // 기본 오름차순
+sort(vec.begin(), vec.end(), greater&lt;&gt;()); // 내림차순</code></pre>
+<p>일반적으로 O(n log n)이다.</p>
+<h2 id="algorithm-search">2. find / reverse</h2>
+<pre><code>find(vec.begin(), vec.end(), value); // O(n)
+reverse(vec.begin(), vec.end());     // O(n)</code></pre>
+<h2 id="algorithm-container">3. 컨테이너별 정렬</h2>
+<pre><code>sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우
+
+lst.sort();                   // list는 자체 sort 사용</code></pre>
+<blockquote><code>list</code>는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 <code>std::sort()</code>를 사용할 수 없고, 멤버 함수 <code>list::sort()</code>를 사용한다.</blockquote>
+
+<h1 id="graph">Graph</h1>
+<h2>1. 개념</h2>
+<p>정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다.</p>
+<h2 id="graph-list">2. Vector를 이용한 인접 리스트</h2>
+<pre><code>vector&lt;vector&lt;int&gt;&gt; graph(4);
+
+graph[0].push_back(1);
+graph[0].push_back(2);</code></pre>
+<p>각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다.</p>
+<h2 id="graph-algo">3. 대표 알고리즘</h2>
+<table><tr><th>알고리즘</th><th>주로 사용하는 자료구조</th><th>목적</th></tr>
+<tr><td>BFS</td><td>Queue</td><td>너비 우선 탐색</td></tr>
+<tr><td>DFS</td><td>Stack / 재귀</td><td>깊이 우선 탐색</td></tr>
+<tr><td>Dijkstra</td><td>Priority Queue</td><td>한 시작점에서 최단 거리</td></tr>
+</table>
+
+<h1 id="tree">Tree</h1>
+<h2>1. 개념</h2>
+<p>부모-자식 관계를 가지는 계층적인 자료구조이다.</p>
+<pre>        [1] Root
+       /   \
+     [2]   [3]
+     /
+   [4] Leaf</pre>
+<h2 id="tree-terms">2. 용어</h2>
+<table><tr><th>용어</th><th>의미</th></tr>
+<tr><td>Root</td><td>가장 위의 노드</td></tr>
+<tr><td>Parent</td><td>부모 노드</td></tr>
+<tr><td>Child</td><td>자식 노드</td></tr>
+<tr><td>Leaf</td><td>자식이 없는 노드</td></tr>
+<tr><td>Edge</td><td>노드와 노드를 연결하는 간선</td></tr>
+</table>
+<h2 id="tree-types">3. 종류</h2><ul><li>Binary Tree</li><li>Binary Search Tree</li><li>Heap</li></ul>
+
+<h1 id="stl">STL이란?</h1>
+<h2 id="stl-core">1. 핵심 구성</h2>
+<table><tr><th>구성</th><th>역할</th><th>예시</th></tr>
+<tr><td>Container</td><td>데이터 저장</td><td>vector, list, set, map</td></tr>
+<tr><td>Iterator</td><td>컨테이너의 원소를 가리키고 이동</td><td>begin(), end()</td></tr>
+<tr><td>Algorithm</td><td>정렬/탐색/변경 등의 작업</td><td>sort(), find(), reverse()</td></tr>
+</table>
+<pre><code>vector&lt;int&gt; vec = {3, 1, 2};
+sort(vec.begin(), vec.end());</code></pre>
+
+<h1 id="bigo">Big-O 표기법</h1>
+<h2 id="bigo-concept">1. 개념</h2>
+<p>입력 크기 <code>n</code>이 커질 때 알고리즘의 실행 시간이나 필요한 공간이 어떻게 증가하는지를 나타내는 표기법이다.</p>
+<table><tr><th>표기</th><th>의미</th><th>예시</th></tr>
+<tr><td>O(1)</td><td>입력 크기와 관계없이 일정</td><td>vector 인덱스 접근, stack top</td></tr>
+<tr><td>O(log n)</td><td>범위를 줄여가며 처리</td><td>set/map 탐색</td></tr>
+<tr><td>O(n)</td><td>데이터 수에 비례</td><td>순차 탐색</td></tr>
+<tr><td>O(n log n)</td><td>효율적인 정렬에서 자주 등장</td><td>sort()</td></tr>
+<tr><td>O(n²)</td><td>데이터 수의 제곱에 비례</td><td>중첩 반복문</td></tr>
+</table>
+<blockquote>Big-O는 실제 시간이 몇 초인지가 아니라, 입력 크기가 증가할 때 성능이 증가하는 정도를 표현한다.</blockquote>
+
+<h1 id="choice">자료구조 선택 기준</h1>
+<table><tr><th>필요한 상황</th><th>추천 자료구조</th><th>이유</th></tr>
+<tr><td>인덱스 접근</td><td>vector</td><td>임의 접근 O(1)</td></tr>
+<tr><td>끝에서 추가/삭제</td><td>vector</td><td>평균 O(1)</td></tr>
+<tr><td>양쪽 끝에서 추가/삭제</td><td>deque</td><td>양쪽 O(1)</td></tr>
+<tr><td>중간 삽입/삭제 + 위치 iterator 보유</td><td>list</td><td>연결 변경으로 처리</td></tr>
+<tr><td>중복 없는 정렬 데이터</td><td>set</td><td>정렬 + 중복 X</td></tr>
+<tr><td>중복 없는 빠른 검색</td><td>unordered_set</td><td>Hash Table 평균 O(1)</td></tr>
+<tr><td>Key-Value + 정렬</td><td>map</td><td>Key 기준 정렬</td></tr>
+<tr><td>Key-Value + 빠른 검색</td><td>unordered_map</td><td>Hash Table 평균 O(1)</td></tr>
+<tr><td>Key 중복 + 정렬</td><td>multimap</td><td>같은 Key 여러 개 가능</td></tr>
+<tr><td>후입선출</td><td>stack</td><td>LIFO</td></tr>
+<tr><td>선입선출</td><td>queue</td><td>FIFO</td></tr>
+<tr><td>최소/최대 우선 처리</td><td>priority_queue</td><td>Heap</td></tr>
+</table>
+
+<h1 id="unreal">Unreal Engine 자료구조</h1>
+<table><tr><th>C++ STL</th><th>Unreal</th><th>기본 용도</th></tr>
+<tr><td><code>vector</code></td><td><code>TArray</code></td><td>동적 배열</td></tr>
+<tr><td><code>map</code></td><td><code>TMap</code></td><td>Key - Value</td></tr>
+<tr><td><code>set</code></td><td><code>TSet</code></td><td>중복 없는 집합</td></tr>
+</table>
+<blockquote>Unreal의 컨테이너는 STL과 내부 구현이 완전히 같은 것은 아니지만, 기본적인 용도를 비교하면 이해하기 쉽다.</blockquote>
+
+</main>
+</div>
+<a class="top" href="#top">↑ TOP</a>
+</body>
+</html>
