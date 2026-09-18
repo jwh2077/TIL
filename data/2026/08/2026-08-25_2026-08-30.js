@@ -31,7 +31,7 @@ window.TIL_FILES["data/2026/08/2026-08-25_2026-08-30.js"] = [
     "id": "20260825-ch3",
     "date_start": "2026-08-25",
     "date_label": "2026-08-25 ~ 2026-08-30",
-    "project": "CH3 개인 프로젝트",
+    "project": "챕터 3 개인 프로젝트",
     "primary_topic": "unreal",
     "tags": [
       "Unreal",
@@ -59,6 +59,7 @@ window.TIL_FILES["data/2026/08/2026-08-25_2026-08-30.js"] = [
     "source": [
       "CH3 로컬 저장소 Git 이력",
       "Source/CH3 소스 코드"
-    ]
+    ],
+    "project_part": "CH3"
   }
 ];

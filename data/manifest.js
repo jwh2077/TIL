@@ -135,7 +135,7 @@ window.TIL_INDEX = {
       "month": "2026-06",
       "title": "E키 문 상호작용 구현 시도",
       "summary": "Fab에서 가져온 맵과 조명을 배치하고 E키를 이용해 문을 여는 상호작용을 시도했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
@@ -153,7 +153,7 @@ window.TIL_INDEX = {
       "month": "2026-06",
       "title": "E키 문 상호작용 완성",
       "summary": "E키를 눌렀을 때 플레이어 주변의 문과 상호작용하여 문을 열고 닫는 기능을 구현했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
@@ -189,7 +189,7 @@ window.TIL_INDEX = {
       "month": "2026-06",
       "title": "Enhanced Input과 C 연산자",
       "summary": "Unreal의 Enhanced Input을 이용한 이동, 시점 회전, 조준 입력을 학습하고 C 언어의 연산자와 제어 흐름을 공부했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "C",
@@ -208,7 +208,7 @@ window.TIL_INDEX = {
       "month": "2026-06",
       "title": "FPS 발사 기능과 C 자료형",
       "summary": "FPS 발사 기능을 구현하면서 발사 속도, 사운드, FX, 반동, 카메라 방향을 기준으로 한 발사 등을 학습했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "C",
@@ -228,7 +228,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "HUD와 함수 개념",
       "summary": "Unreal에서 HUD를 만들고 적 감지, 추적, NavMesh, 자폭 등의 기능을 학습했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "C",
@@ -247,7 +247,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "아이템과 게임 진행 기능",
       "summary": "아이템 획득, 탄약, 게임 타이머, 게임 오버, UI 이벤트, 남은 몬스터 수 표시 등의 기능을 학습했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
@@ -264,7 +264,7 @@ window.TIL_INDEX = {
       "month": "2026-07",
       "title": "Actor 배치와 아이템 Spawner",
       "summary": "Actor 배치, Reload 기능, Item Spawner를 학습했다.",
-      "project": "Basecamp",
+      "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
@@ -860,14 +860,15 @@ window.TIL_INDEX = {
       "month": "2026-08",
       "title": "CH3 개인 프로젝트 · 입력과 아이템 구조",
       "summary": "캐릭터 입력과 카메라, 움직이는 액터를 구성한 뒤 공통 아이템과 파생 아이템으로 확장했다.",
-      "project": "CH3 개인 프로젝트",
+      "project": "챕터 3 개인 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/2026/08/2026-08-18_2026-08-23.js"
+      "file": "data/2026/08/2026-08-18_2026-08-23.js",
+      "project_part": "CH3"
     },
     {
       "id": "20260825-ch3",
@@ -877,14 +878,15 @@ window.TIL_INDEX = {
       "month": "2026-08",
       "title": "CH3 개인 프로젝트 · 게임 진행과 HUD 연결",
       "summary": "아이템 스폰과 체력 처리에 점수·레벨 진행·HUD·메뉴 전환·획득 효과를 연결했다.",
-      "project": "CH3 개인 프로젝트",
+      "project": "챕터 3 개인 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/2026/08/2026-08-25_2026-08-30.js"
+      "file": "data/2026/08/2026-08-25_2026-08-30.js",
+      "project_part": "CH3"
     },
     {
       "id": "20260902-ch3",
@@ -894,14 +896,15 @@ window.TIL_INDEX = {
       "month": "2026-09",
       "title": "CH3 개인 프로젝트 · 웨이브 확장과 남은 점검",
       "summary": "레벨 안의 웨이브를 분리하고 시간 종료·코인 수집 종료·HUD 갱신을 연결한 코드를 정리했다.",
-      "project": "CH3 개인 프로젝트",
+      "project": "챕터 3 개인 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/2026/09/2026-09-02.js"
+      "file": "data/2026/09/2026-09-02.js",
+      "project_part": "CH3"
     },
     {
       "id": "project-ch3-1",
@@ -911,14 +914,15 @@ window.TIL_INDEX = {
       "month": "project-period",
       "title": "CH3_1 · 이동·회전 액터 실습",
       "summary": "컴포넌트를 구성하고 DeltaTime 기반 이동·회전, 누적 이동량과 방향 전환을 작성했다.",
-      "project": "CH3_1 개인 프로젝트",
+      "project": "챕터 3 개인 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/project-period/ch3-1.js"
+      "file": "data/project-period/ch3-1.js",
+      "project_part": "CH3_1"
     },
     {
       "id": "project-ch3-2",
@@ -928,14 +932,15 @@ window.TIL_INDEX = {
       "month": "project-period",
       "title": "CH3_2 · Pawn 입력과 드론·카메라 분리",
       "summary": "직접 이동하는 Pawn에서 카메라 Yaw 기반 드론 이동과 Pitch·Roll 보간으로 확장한 코드를 정리했다.",
-      "project": "CH3_2 개인 프로젝트",
+      "project": "챕터 3 개인 프로젝트",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/project-period/ch3-2.js"
+      "file": "data/project-period/ch3-2.js",
+      "project_part": "CH3_2"
     }
   ]
 };

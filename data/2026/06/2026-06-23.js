@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/06/2026-06-23.js"] = [
     "id": "20260623-001",
     "date": "2026-06-23",
     "title": "E키 문 상호작용 구현 시도",
-    "project": "Basecamp",
+    "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
     "phase": "시행착오",
     "tags": [
       "Unreal",
@@ -34,13 +34,21 @@ window.TIL_FILES["data/2026/06/2026-06-23.js"] = [
     "later_connection": "6월 24일 도움을 받아 E키 입력과 상호작용을 실제로 연결했다.",
     "next_learning": "캐릭터 입력과 오브젝트 상호작용 연결",
     "velog": null,
-    "repository": null,
+    "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
-      "Velog 학습 기록"
+      "Velog 학습 기록",
+      "사용자 확인: 첫 주 Blueprint 프로젝트는 FirstFPS"
     ],
     "primary_topic": "unreal",
     "summary": "Fab에서 가져온 맵과 조명을 배치하고 E키를 이용해 문을 여는 상호작용을 시도했다.",
     "date_start": "2026-06-23",
-    "date_label": "2026-06-23"
+    "date_label": "2026-06-23",
+    "references": [
+      {
+        "label": "FirstFPS 원본 저장소",
+        "url": "https://github.com/jwh2077/FirstFPS"
+      }
+    ],
+    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다."
   }
 ];

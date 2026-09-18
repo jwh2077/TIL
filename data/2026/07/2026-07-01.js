@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/07/2026-07-01.js"] = [
     "id": "20260701-001",
     "date": "2026-07-01",
     "title": "HUD와 함수 개념",
-    "project": "Basecamp",
+    "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
     "phase": "처음 접함",
     "tags": [
       "C",
@@ -34,13 +34,21 @@ window.TIL_FILES["data/2026/07/2026-07-01.js"] = [
     "later_connection": "이후 TextRPG에서 여러 기능을 함수로 분리하면서 함수의 필요성을 직접 경험했다.",
     "next_learning": "아이템, 탄약, UI 이벤트 등 게임 기능 확장",
     "velog": "https://velog.io/@jwh4410/7.1",
-    "repository": null,
+    "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
-      "Velog"
+      "Velog",
+      "사용자 확인: 첫 주 Blueprint 프로젝트는 FirstFPS"
     ],
     "primary_topic": "unreal",
     "summary": "Unreal에서 HUD를 만들고 적 감지, 추적, NavMesh, 자폭 등의 기능을 학습했다.",
     "date_start": "2026-07-01",
-    "date_label": "2026-07-01"
+    "date_label": "2026-07-01",
+    "references": [
+      {
+        "label": "FirstFPS 원본 저장소",
+        "url": "https://github.com/jwh2077/FirstFPS"
+      }
+    ],
+    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다."
   }
 ];

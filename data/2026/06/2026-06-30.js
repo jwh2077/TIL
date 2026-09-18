@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/06/2026-06-30.js"] = [
     "id": "20260630-001",
     "date": "2026-06-30",
     "title": "FPS 발사 기능과 C 자료형",
-    "project": "Basecamp",
+    "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
     "phase": "따라 해봄",
     "tags": [
       "C",
@@ -36,13 +36,21 @@ window.TIL_FILES["data/2026/06/2026-06-30.js"] = [
     "later_connection": "이후 Unreal C++에서 Collision과 객체 간 상호작용을 다룰 때 다시 연결되었다.",
     "next_learning": "HUD와 함수 개념",
     "velog": "https://velog.io/@jwh4410/6.30",
-    "repository": null,
+    "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
-      "Velog"
+      "Velog",
+      "사용자 확인: 첫 주 Blueprint 프로젝트는 FirstFPS"
     ],
     "primary_topic": "unreal",
     "summary": "FPS 발사 기능을 구현하면서 발사 속도, 사운드, FX, 반동, 카메라 방향을 기준으로 한 발사 등을 학습했다.",
     "date_start": "2026-06-30",
-    "date_label": "2026-06-30"
+    "date_label": "2026-06-30",
+    "references": [
+      {
+        "label": "FirstFPS 원본 저장소",
+        "url": "https://github.com/jwh2077/FirstFPS"
+      }
+    ],
+    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다."
   }
 ];

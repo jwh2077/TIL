@@ -4,7 +4,7 @@ window.TIL_FILES["data/2026/06/2026-06-29.js"] = [
     "id": "20260629-001",
     "date": "2026-06-29",
     "title": "Enhanced Input과 C 연산자",
-    "project": "Basecamp",
+    "project": "FirstFPS · 첫 주 Blueprint 프로젝트",
     "phase": "따라 해봄",
     "tags": [
       "C",
@@ -35,13 +35,21 @@ window.TIL_FILES["data/2026/06/2026-06-29.js"] = [
     "later_connection": "이후 Unreal C++에서 입력과 컴포넌트 구조를 이해할 때 다시 연결되었다.",
     "next_learning": "FPS 발사 기능과 C 자료형 및 입출력",
     "velog": "https://velog.io/@jwh4410/6.29",
-    "repository": null,
+    "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
-      "Velog"
+      "Velog",
+      "사용자 확인: 첫 주 Blueprint 프로젝트는 FirstFPS"
     ],
     "primary_topic": "unreal",
     "summary": "Unreal의 Enhanced Input을 이용한 이동, 시점 회전, 조준 입력을 학습하고 C 언어의 연산자와 제어 흐름을 공부했다.",
     "date_start": "2026-06-29",
-    "date_label": "2026-06-29"
+    "date_label": "2026-06-29",
+    "references": [
+      {
+        "label": "FirstFPS 원본 저장소",
+        "url": "https://github.com/jwh2077/FirstFPS"
+      }
+    ],
+    "repository_verification": "사용자가 제공한 저장소 연결 정보 기준. 로컬 FirstFPS 경로를 현재 읽을 수 없어 Git 이력과 Blueprint 노드·실행 결과는 대조하지 않았다."
   }
 ];

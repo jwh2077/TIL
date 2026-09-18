@@ -2,7 +2,7 @@ window.TIL_FILES = window.TIL_FILES || {};
 window.TIL_FILES["data/project-period/ch3-2.js"] = [
   {
     "id": "project-ch3-2",
-    "project": "CH3_2 개인 프로젝트",
+    "project": "챕터 3 개인 프로젝트",
     "title": "CH3_2 · Pawn 입력과 드론·카메라 분리",
     "summary": "직접 이동하는 Pawn에서 카메라 Yaw 기반 드론 이동과 Pitch·Roll 보간으로 확장한 코드를 정리했다.",
     "study_content": "CH3Pawn은 입력값으로 로컬 이동과 회전을 적용한다. Drone은 3축 입력을 받아 카메라의 Yaw를 기준으로 수평 이동 방향을 계산하고 수직 입력을 더한다. 기체의 Pitch·Roll과 카메라 시점을 나누는 구성이며, 기존 비행체 회전 메모와 함께 프로젝트 전체 기록으로 묶었다.",
@@ -65,6 +65,7 @@ window.TIL_FILES["data/project-period/ch3-2.js"] = [
         "label": "원본 코드 · CH3GameMode.cpp",
         "url": "https://github.com/jwh2077/CH3_2/blob/main/Source/CH3_2/Private/CH3GameMode.cpp"
       }
-    ]
+    ],
+    "project_part": "CH3_2"
   }
 ];

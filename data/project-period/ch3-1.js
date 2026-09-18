@@ -2,7 +2,7 @@ window.TIL_FILES = window.TIL_FILES || {};
 window.TIL_FILES["data/project-period/ch3-1.js"] = [
   {
     "id": "project-ch3-1",
-    "project": "CH3_1 개인 프로젝트",
+    "project": "챕터 3 개인 프로젝트",
     "title": "CH3_1 · 이동·회전 액터 실습",
     "summary": "컴포넌트를 구성하고 DeltaTime 기반 이동·회전, 누적 이동량과 방향 전환을 작성했다.",
     "study_content": "MovingActor와 UpActor를 AActor에서 파생해 SceneRoot와 StaticMeshComp를 구성했다. 이동 액터는 X축 왕복 이동을, 회전 액터는 로컬 회전을 수행하도록 작성했다. 이번 기록은 ZIP에 포함된 프로젝트 전체 코드를 기준으로 정리한 것이며 개별 학습 날짜는 확인되지 않았다.",
@@ -58,6 +58,7 @@ window.TIL_FILES["data/project-period/ch3-1.js"] = [
         "label": "원본 코드 · UpActor.h",
         "url": "https://github.com/jwh2077/CH3_1/blob/main/Source/CH3_1/Public/UpActor.h"
       }
-    ]
+    ],
+    "project_part": "CH3_1"
   }
 ];
