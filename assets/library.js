@@ -3,6 +3,11 @@
   const materials = window.TIL_LIBRARY_INDEX || [];
   const $ = s => document.querySelector(s);
   const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const personal = value => String(value ?? '')
+    .replaceAll('학습했다', '공부했다')
+    .replaceAll('정리했다', '정리해봤다')
+    .replaceAll('확인했다', '확인해봤다')
+    .replaceAll('사용했다', '써봤다');
   const kinds = {file:'정리 문서',velog:'Velog 정리',note:'정리 중인 노트'};
   const topics = {cpp:'C / C++',unreal:'Unreal',ds:'자료구조',stl:'STL',oop:'객체지향 · 설계',memory:'포인터 · 메모리'};
   const state = {kind:'all',fields:[],publication:'all',query:''};
@@ -28,13 +33,13 @@
   }
   function list() {
     controls(); $('#materialOutline').hidden = true;
-    $('#libraryPage').innerHTML = `<header><div class="eyebrow">Study Library</div><h1>정리된<br>학습 자료</h1><p class="intro">개념·문법·원리를 다시 찾아보는 자료실입니다. 기능 완성, 프로젝트 진행과 시행착오는 날짜별 기록에 남기고 여기에는 개념 정리만 모았습니다.</p><div class="stats">${Object.entries(kinds).map(([id,label])=>`<span class="stat">${label} <strong>${materials.filter(r=>r.kind===id).length}</strong>개</span>`).join('')}</div><label for="librarySearch" class="side-title" style="display:block;margin-left:0">자료 검색</label><input id="librarySearch" class="library-search" type="search" placeholder="예: 배열, Big-O, 매크로" value="${esc(state.query)}"></header><p id="libraryCount" class="count"></p><div id="libraryCards" class="library-grid"></div>`;
+    $('#libraryPage').innerHTML = `<header><div class="eyebrow">Study Library</div><h1>다시 보는<br>공부 메모</h1><p class="intro">공부하다가 다시 찾아봤던 개념과 문법을 한곳에 모았습니다. 프로젝트에서 직접 써본 내용은 관련 기록으로 같이 연결해뒀습니다.</p><div class="stats">${Object.entries(kinds).map(([id,label])=>`<span class="stat">${label} <strong>${materials.filter(r=>r.kind===id).length}</strong>개</span>`).join('')}</div><label for="librarySearch" class="side-title" style="display:block;margin-left:0">자료 검색</label><input id="librarySearch" class="library-search" type="search" placeholder="예: 배열, Big-O, 매크로" value="${esc(state.query)}"></header><p id="libraryCount" class="count"></p><div id="libraryCards" class="library-grid"></div>`;
     cards();
     $('#librarySearch').addEventListener('input',e=>{state.query=e.target.value;cards();});
   }
   function cards() {
     const shown=results(); $('#libraryCount').textContent=`${shown.length}개 자료 · 날짜별 기록과 별도 분류`;
-    $('#libraryCards').innerHTML=shown.map(r=>`<article class="record"><button type="button" class="record-button" data-material="${esc(r.id)}"><div class="record-meta"><span class="topic-badge">${esc(kinds[r.kind])}</span><span>${esc(classification(r))}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><p class="library-notice">${esc(r.status)}</p><span class="more">정리 읽기 →</span></button></article>`).join('')||'<div class="empty">조건에 맞는 자료가 없습니다.</div>';
+    $('#libraryCards').innerHTML=shown.map(r=>`<article class="record"><button type="button" class="record-button" data-material="${esc(r.id)}"><div class="record-meta"><span class="topic-badge">${esc(kinds[r.kind])}</span><span>${esc(classification(r))}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(personal(r.summary))}</p><p class="library-notice">${esc(r.status)}</p><span class="more">메모 보기 →</span></button></article>`).join('')||'<div class="empty">조건에 맞는 자료가 없습니다.</div>';
   }
   function load() {
     if(window.TIL_LIBRARY) return Promise.resolve(window.TIL_LIBRARY);
@@ -62,7 +67,7 @@
     $('#libraryPage').innerHTML='<p>정리 자료를 여는 중…</p>';
     try {
       const r=(await load()).find(r=>r.id===id);if(stamp!==token||!active())return;if(!r)throw new Error('자료를 찾을 수 없습니다.');
-      $('#libraryPage').innerHTML=`<button type="button" class="related-button" data-library-back>← 자료 목록으로</button><header><div class="record-meta">${esc(kinds[r.kind])} · ${esc(classification(r))}</div><h1 id="materialTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p><p class="library-notice">출처: ${esc(r.source_name)}<br>${esc(r.status)}</p>${r.notice?`<p class="core library-notice">${esc(r.notice)}</p>`:''}<div class="material-links">${sourceLink(r)}</div></header>${r.sections.map((s,i)=>`<section id="material-section-${i}" class="material-section"><h2>${esc(s.title)}</h2>${s.html||''}${s.text?`<p style="white-space:pre-line">${esc(s.text)}</p>`:''}${s.code?`<pre><code>${esc(s.code)}</code></pre>`:''}${s.items?`<ul>${s.items.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:''}</section>`).join('')}<section class="related"><h3>관련 실습 기록</h3><div class="related-list">${(r.related_ids||[]).map(id=>window.TIL_INDEX.records.find(x=>x.id===id)).filter(Boolean).slice(0,6).map(x=>`<a class="related-button" href="#record=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div></section>`;
+      $('#libraryPage').innerHTML=`<button type="button" class="related-button" data-library-back>← 자료 목록으로</button><header><div class="record-meta">${esc(kinds[r.kind])} · ${esc(classification(r))}</div><h1 id="materialTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1><p class="intro">${esc(personal(r.summary))}</p><p class="library-notice">출처: ${esc(r.source_name)}<br>${esc(r.status)}</p>${r.notice?`<p class="core library-notice">${esc(personal(r.notice))}</p>`:''}<div class="material-links">${sourceLink(r)}</div></header>${r.sections.map((s,i)=>`<section id="material-section-${i}" class="material-section"><h2>${esc(s.title)}</h2>${s.html||''}${s.text?`<p style="white-space:pre-line">${esc(personal(s.text))}</p>`:''}${s.code?`<pre><code>${esc(s.code)}</code></pre>`:''}${s.items?`<ul>${s.items.map(v=>`<li>${esc(personal(v))}</li>`).join('')}</ul>`:''}</section>`).join('')}<section class="related"><h3>같이 보면 좋은 실습 기록</h3><div class="related-list">${(r.related_ids||[]).map(id=>window.TIL_INDEX.records.find(x=>x.id===id)).filter(Boolean).slice(0,6).map(x=>`<a class="related-button" href="#record=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div></section>`;
       $('#materialSections').innerHTML=r.sections.map((s,i)=>`<button type="button" class="project" data-material-section="material-section-${i}">${esc(s.title)}</button>`).join('');
       window.scrollTo({top:0});$('#materialTitle').setAttribute('tabindex','-1');$('#materialTitle').focus();
     } catch(error) {

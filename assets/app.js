@@ -22,6 +22,20 @@
   const subOf = r => (subdivisions[r.primary_topic] || []).find(s => s[2].test([r.title, ...(r.tags || [])].join(' ')))?.[0];
   const $ = s => document.querySelector(s);
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const personal = value => String(value ?? '')
+    .replaceAll('학습하면서', '직접 해보면서')
+    .replaceAll('학습하고', '공부하고')
+    .replaceAll('학습했다', '공부했다')
+    .replaceAll('접했다', '처음 써봤다')
+    .replaceAll('따라 구현했다', '따라 만들어봤다')
+    .replaceAll('구현해보았다', '직접 만들어봤다')
+    .replaceAll('구현했다', '직접 만들었다')
+    .replaceAll('확인했다', '확인해봤다')
+    .replaceAll('검토했다', '비교해봤다')
+    .replaceAll('정리했다', '정리해봤다')
+    .replaceAll('적용했다', '적용해봤다')
+    .replaceAll('정확히 이해하지 못했다', '이 부분은 아직 정확히 이해가 안 됐다')
+    .replaceAll('명확하게 이해하지 못했다', '이 부분은 아직 확실하게 이해가 안 됐다');
   const name = id => topics.find(t => t[0] === id)?.[1] || '기타';
   const page = $('#articlePage');
   $('#projects').previousElementSibling.insertAdjacentHTML('beforebegin','<div class="side-title">활동 구분</div><div id="activities" class="project-list"></div>');
@@ -50,7 +64,7 @@
     const topic = topics.find(t => t[0] === state.topic);
     $('#topicTitle').textContent = topic[1]; $('#topicDescription').textContent = topic[2];
     const shown = visible(); $('#count').textContent = `${shown.length}개 기록`;
-    $('#records').innerHTML = shown.map(r => `<article class="record"><button class="record-button" type="button" data-record-id="${esc(r.id)}"><div class="record-meta"><span>${esc(r.date_label)}</span><span class="topic-badge">${esc(name(r.primary_topic))}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><span class="more">기록 열기 →</span></button></article>`).join('') || '<div class="empty">선택한 조건에 맞는 기록이 없습니다.</div>';
+    $('#records').innerHTML = shown.map(r => `<article class="record"><button class="record-button" type="button" data-record-id="${esc(r.id)}"><div class="record-meta"><span>${esc(r.date_label)}</span><span class="topic-badge">${esc(name(r.primary_topic))}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(personal(r.summary))}</p><span class="more">기록 열기 →</span></button></article>`).join('') || '<div class="empty">선택한 조건에 맞는 기록이 없습니다.</div>';
   }
   function load(file) {
     if (!/^data\/(?:\d{4}\/\d{2}|undated|project-period)\/[\w-]+\.js$/.test(file)) return Promise.reject(new Error('잘못된 기록 경로'));
@@ -63,8 +77,19 @@
     }));
     return cache.get(file);
   }
-  const block = (label, value) => value ? `<section class="section"><h3>${label}</h3><p>${esc(value)}</p></section>` : '';
-  const list = (label, values) => Array.isArray(values) && values.length ? `<section class="section"><h3>${label}</h3><ul>${values.map(v => `<li>${esc(v)}</li>`).join('')}</ul></section>` : '';
+  const block = (label, value) => value ? `<section class="section"><h3>${label}</h3><p>${esc(personal(value))}</p></section>` : '';
+  const list = (label, values) => Array.isArray(values) && values.length ? `<section class="section"><h3>${label}</h3><ul>${values.map(v => `<li>${esc(personal(v))}</li>`).join('')}</ul></section>` : '';
+  function gallery(images) {
+    if (!Array.isArray(images) || !images.length) return '';
+    const items = images.map(item => {
+      try {
+        const url = new URL(item.url);
+        if (url.protocol !== 'https:' || url.hostname !== 'velog.velcdn.com') return '';
+        return `<figure class="til-shot"><a href="${esc(url.href)}" target="_blank" rel="noopener noreferrer"><img src="${esc(url.href)}" alt="${esc(item.alt || item.caption || '작업 화면')}" loading="lazy"></a>${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`;
+      } catch { return ''; }
+    }).join('');
+    return items ? `<section class="section"><h3>직접 만든 화면</h3><div class="til-gallery">${items}</div></section>` : '';
+  }
   function link(label, url) {
     try { const u = new URL(url); return ['https:', 'http:'].includes(u.protocol) ? `<a class="source" href="${esc(u.href)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>` : ''; } catch { return ''; }
   }
@@ -106,7 +131,7 @@
       const related = records.filter(x => x.id !== id && x.primary_topic === meta.primary_topic)
         .sort((a,b) => Math.abs(Date.parse(a.date) - Date.parse(meta.date)) - Math.abs(Date.parse(b.date) - Date.parse(meta.date))).slice(0,3);
       const sources = (r.references || []).map(x => link(x.label || x.title || '참고 기록', x.url)).join('<br>');
-      $('#detailContent').innerHTML = `<div class="detail-top"><div><div class="record-meta">${esc(meta.date_label)} · ${esc(name(meta.primary_topic))}</div><h2 id="detailTitle" class="detail-title">${esc(r.title)}</h2></div></div><p class="detail-label">${esc(r.project || '개인 학습')} · ${esc(r.understanding || r.phase || '')}${r.date_basis ? '<br>날짜 기준: ' + esc(r.date_basis) : ''}</p><section class="core"><h3>핵심 내용</h3><p>${esc(r.study_content)}</p></section>${block('학습 과정', r.learning_process)}${block('실제 적용', r.application)}${block('결과와 확인 범위', r.result)}<details class="extra"><summary>질문·시행착오·참고 자료</summary><div class="extra-body">${list('질문', r.questions)}${list('시행착오·어려움', r.mistakes_or_difficulties)}${block('이후 연결', r.later_connection)}${block('다음 학습', r.next_learning)}${sources}${link('Velog 원문', r.velog)}</div></details><section class="related"><h3>현재 목록에서 이어 읽기</h3><div class="related-list">${button(sequence[at-1], '← 이전 기록')}${button(sequence[at+1], '다음 기록 →')}</div></section><section class="related"><h3>같은 주제로 연결하기</h3><div class="related-list">${related.map(x => button(x)).join('')}</div></section>`;
+      $('#detailContent').innerHTML = `<div class="detail-top"><div><div class="record-meta">${esc(meta.date_label)} · ${esc(name(meta.primary_topic))}</div><h2 id="detailTitle" class="detail-title">${esc(r.title)}</h2></div></div><p class="detail-label">${esc(r.project || '개인 학습')} · ${esc(r.understanding || r.phase || '')}${r.date_basis ? '<br>날짜 기준: ' + esc(r.date_basis) : ''}</p><section class="core"><h3>이날 한 것</h3><p>${esc(personal(r.study_content))}</p></section>${block('작업하면서 해본 것', r.learning_process)}${gallery(r.images)}${block('직접 적용한 부분', r.application)}${block('결과', r.result)}<details class="extra"><summary>막힌 부분과 참고한 것</summary><div class="extra-body">${list('그때 궁금했던 것', r.questions)}${list('헷갈리거나 막힌 부분', r.mistakes_or_difficulties)}${block('나중에 다시 연결된 부분', r.later_connection)}${block('다음에 이어서 볼 것', r.next_learning)}${sources}${link('Velog 원문', r.velog)}</div></details><section class="related"><h3>앞뒤 기록</h3><div class="related-list">${button(sequence[at-1], '← 이전 기록')}${button(sequence[at+1], '다음 기록 →')}</div></section><section class="related"><h3>비슷한 내용</h3><div class="related-list">${related.map(x => button(x)).join('')}</div></section>`;
       buildSections(); window.scrollTo({ top: 0 }); $('#detailTitle').setAttribute('tabindex', '-1'); $('#detailTitle').focus();
     } catch (error) {
       if (token !== request || page.hidden) return;

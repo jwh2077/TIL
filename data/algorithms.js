@@ -4,27 +4,28 @@ window.TIL_ALGORITHMS = [
     "title": "1차원 → 2차원 배열",
     "group": "array",
     "url": "https://leetcode.com/problems/convert-1d-array-into-2d-array/",
-    "status": "수정 중",
+    "status": "통과 확인",
     "problem": "순서를 유지해 m행 n열 배열을 만든다. 불가능하면 빈 배열을 반환한다.",
     "date": "2026-08-17",
     "summary": "1차원 배열의 순서를 유지하면서 행과 열의 위치를 직접 계산해 2차원 배열로 옮겼다.",
     "question": "처음에는 비어 있는 2차원 vector에 A[M]이나 A[M, N]처럼 바로 접근하려 했다. 2차원 배열의 크기를 언제 만들고, 행과 열을 어떤 문법으로 선택해야 하는지가 핵심이었다.",
     "attempt": "원소를 읽는 순서대로 num을 증가시키는 생각은 그대로 유지했다. 먼저 m × n 크기의 결과 배열을 만든 다음, 바깥 반복문을 행 M, 안쪽 반복문을 열 N으로 두고 A[M][N]에 original[num]을 넣었다.",
-    "turning": "가장 먼저 고친 부분은 저장 공간이었다. vector<vector<int>> A(m, vector<int>(n))로 크기를 만든 뒤에야 A[M][N] 접근이 유효해진다. 또 원소 수가 m*n과 다를 때 {0}을 반환하면 빈 배열이 아니라 0 하나를 가진 배열이 되므로 {}를 반환해야 한다.",
+    "turning": "제출 내역을 다시 확인하니 이 코드는 107개 테스트를 모두 통과했다. 특히 불가능할 때 반환한 vector<vector<int>>{ 0 }도 이 제출에서는 빈 바깥 vector로 해석되어 통과했다. 다만 의도를 바로 드러내려면 return {}가 더 읽기 쉽다.",
     "learned": [
       "2차원 vector는 행의 수와 각 행의 열 수를 먼저 만들 수 있다.",
       "A[M][N]에서 첫 인덱스는 행, 두 번째 인덱스는 열이다.",
       "불가능한 경우의 반환 형태까지 문제 조건과 정확히 맞아야 한다."
     ],
-    "code_title": "정리한 풀이",
-    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {\n        if (original.size() != m * n) return {};\n\n        vector<vector<int>> result(m, vector<int>(n));\n        int index = 0;\n\n        for (int row = 0; row < m; row++) {\n            for (int col = 0; col < n; col++) {\n                result[row][col] = original[index++];\n            }\n        }\n        return result;\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) \n    {\n        if(original.size() != m * n)\n        return vector<vector<int>>{ 0 };\n        vector<vector<int>>A(m, vector<int>(n));\n        int num = 0;\n        for(int M = 0; M < m; M++)\n        {\n            for(int N = 0; N < n; N++)\n            {\n                A[M][N] = original[num];\n                num++;\n            }\n        }\n        return A;\n    }\n};",
+    "verification": "LeetCode Accepted · 107 / 107"
   },
   {
     "id": "lc-566",
     "title": "행렬 재구성",
     "group": "array",
     "url": "https://leetcode.com/problems/reshape-the-matrix/",
-    "status": "채점 미확인",
+    "status": "통과 확인",
     "problem": "행 우선 순서를 유지하며 행렬 크기를 바꾼다.",
     "date": "2026-08-17",
     "summary": "행렬을 한 줄로 읽은 뒤 새로운 행과 열에 다시 배치하면서 1차원 인덱스와 2차원 좌표의 관계를 익혔다.",
@@ -36,15 +37,16 @@ window.TIL_ALGORITHMS = [
       "1차원 인덱스 i는 [i/열 수][i%열 수]로 바꿀 수 있다.",
       "좌표 공식의 나누는 수는 배열마다 그 배열의 열 수다."
     ],
-    "code_title": "좌표 변환으로 정리한 풀이",
-    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c) {\n        int rows = mat.size();\n        int cols = mat[0].size();\n        if (rows * cols != r * c) return mat;\n\n        vector<vector<int>> result(r, vector<int>(c));\n        for (int index = 0; index < rows * cols; index++) {\n            result[index / c][index % c] = mat[index / cols][index % cols];\n        }\n        return result;\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c) {\n        int X = mat.size();\n        int Y = mat[0].size();\n        vector<vector<int>> A(r,vector<int>(c));\n        vector<int>B(X * Y);\n        int num = 0;\n        if (X * Y != r * c)\n        {\n            return mat;\n        }\n        for(int x = 0; x < X; x++)\n            for(int y = 0; y < Y; y++) B[num++] = mat[x][y];\n        num = 0;\n        for(int x = 0; x < r; x++)\n            for(int y = 0; y < c; y++) A[x][y] = B[num++];\n        return A;\n    }\n};",
+    "verification": "LeetCode Accepted · 57 / 57"
   },
   {
     "id": "lc-867",
     "title": "행렬 전치",
     "group": "array",
     "url": "https://leetcode.com/problems/transpose-matrix/",
-    "status": "수정 중",
+    "status": "통과 확인",
     "problem": "행과 열을 서로 바꾼다.",
     "date": "2026-08-17",
     "summary": "행과 열을 맞바꾸는 전치 연산을 통해 행 개수와 마지막 인덱스를 구분했다.",
@@ -56,15 +58,16 @@ window.TIL_ALGORITHMS = [
       "전치 후 결과 크기는 cols × rows다.",
       "좌표를 바꿀 때 결과와 원본의 인덱스 순서를 함께 적으면 혼동이 줄어든다."
     ],
-    "code_title": "오류를 고친 풀이",
-    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> transpose(vector<vector<int>>& matrix) {\n        int rows = matrix.size();\n        int cols = matrix[0].size();\n        vector<vector<int>> result(cols, vector<int>(rows));\n\n        for (int row = 0; row < rows; row++) {\n            for (int col = 0; col < cols; col++) {\n                result[col][row] = matrix[row][col];\n            }\n        }\n        return result;\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> transpose(vector<vector<int>>& matrix) {\n        int X = matrix.size();\n        int Y = matrix[0].size();\n        vector<vector<int>>A(Y,vector<int>(X));\n        for(int x = 0; x < Y; x++)\n            for(int y = 0; y < X; y++) A[x][y] = matrix[y][x];\n        return A;\n    }\n};",
+    "verification": "LeetCode Accepted · 36 / 36"
   },
   {
     "id": "lc-59",
     "title": "나선형 행렬 II",
     "group": "array",
     "url": "https://leetcode.com/problems/spiral-matrix-ii/",
-    "status": "결과 공유",
+    "status": "통과 확인",
     "problem": "1부터 n²까지 시계 방향 나선으로 채운다.",
     "date": "2026-08-17",
     "summary": "위·아래·왼쪽·오른쪽 경계를 줄여 가며 나선형으로 행렬을 채웠다.",
@@ -76,8 +79,9 @@ window.TIL_ALGORITHMS = [
       "각 방향을 처리한 직후 해당 경계를 한 칸 줄인다.",
       "반복문의 시작·종료 조건을 작은 n으로 직접 추적하면 중복 접근을 확인할 수 있다."
     ],
-    "code_title": "제출한 경계 축소 풀이",
-    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> generateMatrix(int n) {\n        vector<vector<int>> matrix(n, vector<int>(n));\n        int number = 1;\n        int top = 0, bottom = n - 1;\n        int left = 0, right = n - 1;\n\n        while (number <= n * n) {\n            for (int col = left; col <= right; col++) matrix[top][col] = number++;\n            top++;\n            for (int row = top; row <= bottom; row++) matrix[row][right] = number++;\n            right--;\n            for (int col = right; col >= left; col--) matrix[bottom][col] = number++;\n            bottom--;\n            for (int row = bottom; row >= top; row--) matrix[row][left] = number++;\n            left++;\n        }\n        return matrix;\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    vector<vector<int>> generateMatrix(int n) {\n        vector<vector<int>>A(n,vector<int>(n));\n        int num = 1;\n        int ux = 0, dx = n - 1, uy = n - 1, dy = 0;\n        while(n*n >= num)\n        {\n            for(int i = dy; i <= uy;i++) A[ux][i] = num++;\n            ux++;\n            for(int i = ux; i <= dx;i++) A[i][uy] = num++;\n            uy--;\n            for(int i = uy; i >= dy;i--) A[dx][i] = num++;\n            dx--;\n            for(int i = dx; i >= ux;i--) A[i][dy] = num++;\n            dy++;\n        }\n        return A;\n    }\n};",
+    "verification": "LeetCode Accepted · 20 / 20"
   },
   {
     "id": "lc-48",
@@ -104,20 +108,21 @@ window.TIL_ALGORITHMS = [
     "title": "단일값 이진 트리",
     "group": "tree",
     "url": "https://leetcode.com/problems/univalued-binary-tree/",
-    "status": "채점 미확인",
+    "status": "통과 확인",
     "problem": "트리 모든 노드의 값이 같은지 확인한다.",
     "date": "2026-09-14",
     "summary": "한쪽 경로만 따라가던 순회를 재귀로 바꾸며 모든 서브트리를 확인하는 방법을 익혔다.",
     "question": "처음 코드는 왼쪽 끝까지 내려간 다음 일부 오른쪽 자식만 검사했다. 이 방식으로는 오른쪽 서브트리 안쪽의 노드를 빠뜨릴 수 있었다.",
     "attempt": "재귀 함수 tree가 자식 값을 반환하고 부모 값과 비교하도록 바꿨다. 불일치가 나오면 멤버 변수 A를 false로 바꾸고 이후 호출을 빠르게 종료하려 했다.",
-    "turning": "모든 노드가 루트와 같은지를 묻는 문제이므로 비교 기준을 루트 값 하나로 고정하면 더 단순하다. 현재 노드가 없으면 성공, 값이 기준과 다르면 실패, 그 외에는 왼쪽과 오른쪽 결과를 모두 확인한다.",
+    "turning": "제출한 코드는 자식 호출이 돌려준 값과 현재 노드 값을 비교하고, 한 번이라도 다르면 멤버 변수 A를 false로 바꾼다. 실제 제출은 72개 테스트를 모두 통과했다. 공유 상태 없이 bool을 재귀 반환하는 방식도 가능하지만, 여기에는 당시 통과한 코드를 그대로 남겼다.",
     "learned": [
       "트리는 한 방향만 따라가면 다른 서브트리를 놓친다.",
       "재귀 함수의 반환값 자체로 실패를 부모까지 전달할 수 있다.",
       "공유 상태 A 없이도 &&의 단락 평가로 불필요한 탐색을 멈출 수 있다."
     ],
-    "code_title": "재귀 반환값으로 정리한 풀이",
-    "solution_code": "class Solution {\npublic:\n    bool check(TreeNode* node, int value) {\n        if (node == nullptr) return true;\n        if (node->val != value) return false;\n        return check(node->left, value) && check(node->right, value);\n    }\n\n    bool isUnivalTree(TreeNode* root) {\n        return check(root, root->val);\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    bool A = true;\n    bool isUnivalTree(TreeNode* root) \n    {\n        A = true;\n        tree(root);\n        return A;\n    }\n    int tree (TreeNode* root)\n    {\n        if (!A){ return 0;}\n        if(root->left != nullptr && tree(root->left) != root-> val) A = false;\n        if(root->right != nullptr && tree(root->right)!= root-> val) A = false;\n        return root-> val;\n    }\n};",
+    "verification": "LeetCode Accepted · 72 / 72"
   },
   {
     "id": "lc-100",
@@ -144,27 +149,28 @@ window.TIL_ALGORITHMS = [
     "title": "게임 맵 최단거리",
     "group": "tree",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/1844",
-    "status": "미완성",
+    "status": "통과 확인",
     "problem": "네 방향 이동으로 목표까지 최소 칸 수를 구한다. 도달 불가면 -1이다.",
     "date": "2026-09-18",
     "summary": "분기마다 모든 경우를 만들려던 생각에서, 가까운 칸부터 확인하는 BFS가 최단거리를 보장하는 이유를 연결했다.",
-    "question": "처음에는 갈 수 있는 분기를 저장하고 모든 경우를 탐색한 뒤 가장 작은 값을 고르려고 했다. 상하좌우 배열까지 만들었지만 현재 좌표 갱신, 범위 검사, 방문 처리가 빠져 있었다.",
-    "attempt": "목표 좌표를 maps.size()-1과 maps[0].size()-1로 잡은 것은 맞았다. 반면 while(X == x && Y == y)는 시작 시 목표가 아니므로 바로 종료되고, maps[x + SearchX][y + SearchY]에는 방향 인덱스 i도 필요하다.",
-    "turning": "이 기록에서는 풀이를 완성하지 않았다. 다음 단계는 좌표와 거리를 queue에 넣고, 시작점부터 같은 거리의 칸을 차례로 방문하는 것이다. 방문한 칸은 다시 넣지 않아야 분기가 합쳐져도 중복 탐색하지 않는다.",
+    "question": "갈 수 있는 모든 분기를 저장해야 한다는 생각은 있었지만, 거리 순서와 방문 처리를 한 구조 안에서 어떻게 관리할지가 막혔다.",
+    "attempt": "queue에 시작 좌표를 넣고 한 레벨의 원소 수만큼 처리한 뒤 count를 증가시켰다. 네 방향 배열로 이웃을 만들고, 방문한 칸은 -1로 바꿔 다시 큐에 들어오지 않게 했다.",
+    "turning": "제출 내역에서 이 BFS 코드가 100점을 받은 것을 확인했다. 큐의 한 묶음이 같은 거리의 좌표들이므로 묶음을 모두 처리한 뒤 count를 올리면 별도 거리 배열 없이 최단 칸 수를 셀 수 있다.",
     "learned": [
       "배열 경계 안인지 확인한 뒤 maps에 접근해야 한다.",
       "최단거리 문제에서 BFS는 거리 1, 거리 2 순서로 칸을 처리한다.",
       "미완성 코드의 문법 문제와 알고리즘 선택 문제를 따로 고친다."
     ],
-    "code_title": "당시 도달한 탐색 골격",
-    "solution_code": "int dx[4] {0, 1, 0, -1};\nint dy[4] {1, 0, -1, 0};\n\n// 다음 단계\n// 1. queue에 {0, 0}을 넣는다.\n// 2. 네 방향의 nx, ny가 범위 안이고 아직 방문하지 않았는지 확인한다.\n// 3. maps[nx][ny]에 현재 거리 + 1을 기록한다.\n// 4. 목표 칸의 값 또는 -1을 반환한다."
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include<vector>\n#include<queue>\nusing namespace std;\n\nint solution(vector<vector<int> > maps)\n{\n    int count = 1;\n    queue<pair<int,int>>my;\n    my.push({0,0}); \n    maps[0][0] = -1;\n    int X = maps.size() - 1;\n    int Y = maps[0].size() - 1;\n    int SearchX[4]{0,1,0,-1};\n    int SearchY[4]{1,0,-1,0};\n    while(!my.empty())\n    {\n        int num = my.size();\n        for(int j = 0; j < num; j++)\n        {\n            int x = my.front().first;\n            int y = my.front().second;\n            if(X == x && Y == y) return count;\n            my.pop();\n            for(int i = 0; i < 4; i++)\n            {\n                if (x + SearchX[i] < 0 || y + SearchY[i] < 0){}\n                else if(x + SearchX[i] > X || y + SearchY[i] > Y){}\n                else if(maps[x + SearchX[i]][y + SearchY[i]] == 1)\n                {\n                    maps[x + SearchX[i]][y + SearchY[i]] = -1;\n                    my.push({x + SearchX[i],y + SearchY[i]});\n                }\n            }\n        }\n        count++;\n    }\n    return -1;\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "pg-132267",
     "title": "콜라 문제",
     "group": "simulation",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/132267",
-    "status": "채점 미확인",
+    "status": "통과 확인",
     "problem": "빈 병을 교환하며 받은 병의 총수를 구한다.",
     "date": "2026-09-11",
     "summary": "한 번의 교환에서 받은 병, 남은 병, 누적 결과를 분리해 반복 상태를 정리했다.",
@@ -176,15 +182,16 @@ window.TIL_ALGORITHMS = [
       "몫은 교환 횟수, 나머지는 교환 후 남은 병을 뜻한다.",
       "경계값 my==a를 손으로 확인하면 >와 >=를 구분할 수 있다."
     ],
-    "code_title": "상태를 정리한 풀이",
-    "solution_code": "int solution(int a, int b, int n) {\n    int answer = 0;\n    int bottles = n;\n\n    while (bottles >= a) {\n        int received = (bottles / a) * b;\n        bottles = bottles % a + received;\n        answer += received;\n    }\n    return answer;\n}"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nint solution(int a, int b, int n) {\n    int answer = 0, cola = 0, my = n;\n    while(my >= a)\n    {\n        cola = (my / a) * b;\n        my = my % a + cola;\n        answer += cola;\n    }\n    return answer;\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "pg-42626",
     "title": "더 맵게",
     "group": "queue",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42626",
-    "status": "수정 중",
+    "status": "통과 확인",
     "problem": "가장 작은 두 값을 섞어 모든 값이 K 이상이 되는 최소 횟수를 구한다.",
     "date": "2026-09-11",
     "summary": "최솟값 두 개를 반복해서 꺼내기 위해 최소 힙을 사용하고 종료 조건을 다듬었다.",
@@ -196,28 +203,30 @@ window.TIL_ALGORITHMS = [
       "전체가 조건을 만족하는지는 최소값 하나만 확인하면 된다.",
       "top을 호출하기 전 컨테이너가 비어 있지 않은지 보장해야 한다."
     ],
-    "code_title": "종료 조건을 고친 풀이",
-    "solution_code": "int solution(vector<int> scoville, int K) {\n    priority_queue<int, vector<int>, greater<int>> heap(scoville.begin(), scoville.end());\n    int count = 0;\n\n    while (!heap.empty() && heap.top() < K) {\n        if (heap.size() < 2) return -1;\n        int first = heap.top(); heap.pop();\n        int second = heap.top(); heap.pop();\n        heap.push(first + second * 2);\n        count++;\n    }\n    return count;\n}"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <vector>\n#include <queue>\nusing namespace std;\nint solution(vector<int> scoville, int K) {\n    int answer = 0;\n    priority_queue<int, vector<int>, greater<int>>sco;\n    for(int value : scoville) sco.push(value);\n    while(sco.top() < K)\n    {\n        if(sco.size() < 2) return -1;\n        int num = sco.top(); sco.pop();\n        num += sco.top() * 2; sco.pop();\n        sco.push(num);\n        answer++;\n    }\n    return answer;\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "pg-42586",
     "title": "기능개발",
     "group": "queue",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42586",
-    "status": "수정 중",
+    "status": "통과 확인",
     "problem": "작업 순서대로 완료된 기능을 묶어 배포한다.",
     "date": "2026-09-10",
     "summary": "작업 진행과 배포 묶음을 같은 반복문에서 처리하면서 생기는 0개 배포 문제를 확인했다.",
     "question": "앞 작업이 끝나야 뒤 작업도 배포할 수 있으므로, 현재 num부터 연속으로 100 이상인 작업 수를 세려 했다.",
     "attempt": "완료된 수 count를 세어 결과에 넣고 num을 옮긴 뒤, 현재 작업이 끝날 때까지 남은 작업의 진행도를 하루씩 증가시켰다.",
-    "turning": "현재 작업이 아직 100 미만인 상태에서 count를 먼저 넣으면 결과에 0이 생긴다. 먼저 현재 배포 기준 작업이 완료될 때까지 날짜를 진행하고, 그 다음 연속 완료된 기능을 세어 결과에 넣어야 한다. 이 기록에서는 그 순서 변경 전까지 작성했다.",
+    "turning": "실제 제출은 100점을 받았다. 다만 두 while 조건에서 배열 접근이 범위 검사보다 먼저 평가된다. C++의 단락 평가를 안전하게 쓰려면 num + count < size와 num < size를 각각 앞에 두는 편이 좋다. 통과 사실과 별개로 다음 리팩터링 때 고칠 부분이다.",
     "learned": [
       "문제의 시간 흐름과 결과를 기록하는 시점을 분리한다.",
       "배포 묶음에는 항상 하나 이상의 기능이 있어야 한다.",
       "진행도를 매일 갱신하는 방식은 이해하기 쉽지만 완료일을 계산하는 방식도 비교할 수 있다."
     ],
-    "code_title": "수정해야 할 반복 순서",
-    "solution_code": "// 1. progresses[num]이 100이 될 때까지 남은 작업을 진행한다.\n// 2. num부터 연속으로 완료된 작업의 수 count를 센다.\n// 3. count를 결과에 넣고 num += count 한다.\n//\n// 기존 코드에서는 1번보다 2번을 먼저 실행해\n// 완료된 작업이 없을 때도 0을 push할 수 있었다."
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nvector<int> solution(vector<int> progresses, vector<int> speeds) \n{\n    vector<int> A;\n    int num = 0, size = progresses.size(), count = 0;\n    while(num <= size - 1)\n    {\n        if(progresses[num] >= 100)\n        {\n            count = 0;\n            while(progresses[num + count] >= 100 && num + count < size) count++;\n            A.push_back(count);\n            num += count;\n        }\n        while(progresses[num] < 100 && num < size)\n        {\n            for(int i = num; i < size; i++) progresses[i] += speeds[i];\n        }\n    }\n    return A;\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "pg-12921",
@@ -244,7 +253,7 @@ window.TIL_ALGORITHMS = [
     "title": "Stone Game IV · 승패 DP",
     "group": "dp",
     "url": "https://leetcode.com/problems/stone-game-iv/",
-    "status": "미완성",
+    "status": "통과 확인",
     "problem": "제곱수만큼 돌을 제거하는 게임의 선공 승패를 구한다.",
     "date": "2026-09-10",
     "summary": "현재 상태에서 상대를 패배 상태로 보낼 수 있는지를 기준으로 승패 DP를 이해했다.",
@@ -256,15 +265,16 @@ window.TIL_ALGORITHMS = [
       "선택 후 상대에게 패배 상태를 넘길 수 있으면 현재는 승리 상태다.",
       "작은 인덱스부터 채우면 필요한 이전 결과가 이미 계산되어 있다."
     ],
-    "code_title": "전이식을 반영한 풀이",
-    "solution_code": "class Solution {\npublic:\n    bool winnerSquareGame(int n) {\n        vector<bool> dp(n + 1, false);\n\n        for (int stones = 1; stones <= n; stones++) {\n            for (int take = 1; take * take <= stones; take++) {\n                if (!dp[stones - take * take]) {\n                    dp[stones] = true;\n                    break;\n                }\n            }\n        }\n        return dp[n];\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    bool winnerSquareGame(int n) \n    {\n        vector<bool> dp(1 + n, false);\n        for (int i = 1 ; i <= n; i++)\n        {\n            for(int j = 1 ; j * j <= i; j++)\n            {\n                if(!dp[i - j * j])\n                {\n                    dp[i] = true;\n                    break;\n                }\n            }\n        }\n        return dp[n];\n    }\n};",
+    "verification": "LeetCode Accepted · 72 / 72"
   },
   {
     "id": "pg-68644",
     "title": "두 개 뽑아서 더하기",
     "group": "math",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/68644",
-    "status": "수정 중",
+    "status": "통과 확인",
     "problem": "서로 다른 인덱스의 두 수 합을 중복 없이 오름차순으로 반환한다.",
     "date": "2026-09-08",
     "summary": "중복 합은 set으로 제거했지만 같은 원소를 두 번 선택하지 않도록 반복 시작점을 조정했다.",
@@ -276,55 +286,58 @@ window.TIL_ALGORITHMS = [
       "두 원소 조합은 두 번째 반복을 i+1에서 시작한다.",
       "set은 삽입하면서 중복 제거와 정렬을 함께 수행한다."
     ],
-    "code_title": "인덱스 범위를 고친 풀이",
-    "solution_code": "vector<int> solution(vector<int> numbers) {\n    set<int> sums;\n\n    for (int i = 0; i < numbers.size(); i++) {\n        for (int j = i + 1; j < numbers.size(); j++) {\n            sums.insert(numbers[i] + numbers[j]);\n        }\n    }\n\n    return vector<int>(sums.begin(), sums.end());\n}"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <vector>\n#include <set>\nusing namespace std;\nvector<int> solution(vector<int> numbers) {\n    set<int> A;\n    for(int i = 0 ; i < numbers.size(); i++)\n        for(int b = i + 1; b < numbers.size(); b++) A.insert(numbers[i] + numbers[b]);\n    vector<int> answer(A.begin(), A.end());\n    return answer;\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "lc-88",
     "title": "정렬된 배열 병합",
     "group": "array",
     "url": "https://leetcode.com/problems/merge-sorted-array/",
-    "status": "수정 중",
+    "status": "통과 확인",
     "problem": "두 정렬 배열을 nums1에 오름차순으로 합친다.",
     "date": "2026-09-08",
     "summary": "두 정렬 배열을 뒤에서부터 채우며 아직 읽지 않은 nums1 값을 덮어쓰지 않는 방법을 익혔다.",
     "question": "처음에는 nums2를 nums1 뒤에 붙이고 sort하려 했다. 한 번의 순회로 끝내려면 이미 확보된 nums1의 뒤 공간을 어떻게 사용할지가 핵심이었다.",
     "attempt": "m과 n을 각각 마지막 유효 인덱스로 줄이고, nums1의 맨 뒤부터 두 배열의 큰 값을 넣으려 했다. 한쪽 인덱스가 -1이 된 뒤에도 접근하면서 런타임 오류가 생겼다.",
-    "turning": "nums2에 남은 값이 있을 동안만 반복하면 된다. nums1이 소진됐거나 nums2의 값이 더 크면 nums2에서 가져오고, 아니면 nums1 값을 뒤로 옮긴다. nums2가 먼저 소진되면 nums1의 남은 값은 이미 제자리에 있다.",
+    "turning": "문제의 최적 해법은 뒤에서부터 두 배열을 합치는 O(m+n) 방식이지만, 실제 통과 제출은 nums2를 nums1의 빈 구간에 복사한 뒤 전체를 정렬했다. 우선 정확하게 통과한 코드를 기록하고, 다음 복습에서 제자리 병합으로 개선할 지점을 남겼다.",
     "learned": [
       "m과 n은 개수이고 마지막 인덱스는 각각 m-1, n-1이다.",
       "뒤에서 채우면 nums1의 아직 읽지 않은 값을 덮지 않는다.",
       "각 포인터는 한 번씩만 줄어들므로 전체 반복은 O(m+n)이다."
     ],
-    "code_title": "뒤에서 병합하는 풀이",
-    "solution_code": "class Solution {\npublic:\n    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {\n        int first = m - 1;\n        int second = n - 1;\n        int write = m + n - 1;\n\n        while (second >= 0) {\n            if (first >= 0 && nums1[first] > nums2[second]) {\n                nums1[write--] = nums1[first--];\n            } else {\n                nums1[write--] = nums2[second--];\n            }\n        }\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) \n    {\n        for(int i = m; i < m + n; i++) nums1[i] = nums2[i - m];\n        sort(nums1.begin(),nums1.end());\n    }\n};",
+    "verification": "LeetCode Accepted · 63 / 63"
   },
   {
     "id": "lc-1347",
     "title": "두 문자열의 아나그램 만들기",
     "group": "string",
     "url": "https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/",
-    "status": "결과 공유 · 수정 중",
+    "status": "통과 확인",
     "problem": "t의 문자를 교체해 s와 같은 문자 빈도를 만드는 최소 횟수를 구한다.",
     "date": "2026-09-07",
     "summary": "문자별 개수 차이를 map에 누적하고 필요한 교체 수가 어느 방향의 차이인지 구분했다.",
     "question": "s의 문자는 +1, t의 문자는 -1로 기록하면 같은 문자는 0이 된다. 이후 pair의 값에 어떻게 접근하고 어떤 부호를 더해야 하는지를 확인했다.",
     "attempt": "unordered_map<char,int>를 순회하며 음수에는 !A.second 또는 -A.second를 적용하고 양수도 더하려 했다. 논리 부정 !는 절댓값이 아니라 0 또는 1을 만든다.",
-    "turning": "t를 바꿔 s로 만드는 횟수는 s에 부족한 문자 수, 즉 양수인 차이만 더하면 된다. 양수와 음수의 절댓값을 모두 더하면 같은 차이를 두 번 세게 된다. 당시 Runtime 수치는 한 제출 결과일 뿐 후속 코드의 정답 여부와 섞지 않았다.",
+    "turning": "제출 내역에서는 63개 테스트를 모두 통과했다. !A.second는 절댓값이 아니라 논리 부정이라 음수일 때 0이 된다. 이 문제는 두 문자열 길이가 같아서 양수 차이의 합만 세어도 필요한 교체 횟수가 되기 때문에 결과가 맞았다. 의도를 명확히 하려면 A.second > 0일 때만 더하는 편이 좋다.",
     "learned": [
       "range-for에서 map 원소는 key와 value를 가진 pair다.",
       "!value는 부호 전환이 아니라 논리값 변환이다.",
       "빈도 차이의 어느 방향을 합산할지 문제의 변환 방향으로 결정한다."
     ],
-    "code_title": "빈도 차이로 정리한 풀이",
-    "solution_code": "class Solution {\npublic:\n    int minSteps(string s, string t) {\n        unordered_map<char, int> count;\n\n        for (int i = 0; i < s.size(); i++) {\n            count[s[i]]++;\n            count[t[i]]--;\n        }\n\n        int steps = 0;\n        for (const auto& entry : count) {\n            if (entry.second > 0) steps += entry.second;\n        }\n        return steps;\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    int minSteps(string s, string t)\n    {\n        unordered_map<char,int>sum;        \n        for(int i = 0 ; i < s.size(); i++)\n        {\n            sum[s[i]]++;\n            sum[t[i]]--;\n        }\n        int num = 0;\n        for(auto A : sum)\n        {\n            if(0 > A.second) num += !A.second;\n            else num += A.second;\n        }\n        return num;\n    }\n};",
+    "verification": "LeetCode Accepted · 63 / 63"
   },
   {
     "id": "pg-181932",
     "title": "코드 처리하기",
     "group": "string",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/181932",
-    "status": "채점 미확인",
+    "status": "통과 확인",
     "problem": "문자 1에서 mode를 바꾸고 해당 인덱스의 문자를 모은다.",
     "date": "2026-09-04",
     "summary": "문자 1을 만날 때 mode를 전환하고 인덱스의 홀짝에 따라 문자를 선택했다.",
@@ -336,15 +349,16 @@ window.TIL_ALGORITHMS = [
       "문자 리터럴은 작은따옴표를 사용한다.",
       "주 반복이 끝난 뒤 빈 결과 같은 출력 예외를 처리한다."
     ],
-    "code_title": "상태 전환 풀이",
-    "solution_code": "string solution(string code) {\n    bool mode = false;\n    string result;\n\n    for (int i = 0; i < code.size(); i++) {\n        if (code[i] == '1') {\n            mode = !mode;\n        } else if ((!mode && i % 2 == 0) || (mode && i % 2 == 1)) {\n            result += code[i];\n        }\n    }\n\n    return result.empty() ? \"EMPTY\" : result;\n}"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <string>\nusing namespace std;\nstring solution(string code)\n{\n    bool mode = false;\n    string answer = \"\";\n    for(int i = 0; i < code.size(); i++)\n    {\n        if(code[i] != '1')\n        {\n            if(mode == false && i % 2 == 0) answer += code[i];\n            else if(mode == true && i % 2 != 0) answer += code[i];\n        }\n        else mode = !mode;\n    }\n    if(answer.size() == 0) answer = \"EMPTY\";\n    return answer;\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "lc-1603",
     "title": "주차 시스템 설계",
     "group": "simulation",
     "url": "https://leetcode.com/problems/design-parking-system/",
-    "status": "결과 공유",
+    "status": "통과 확인",
     "problem": "차량 종류별 남은 공간과 주차 가능 여부를 관리한다.",
     "date": "2026-09-04",
     "summary": "차량 종류를 배열 인덱스로 바꾸어 남은 주차 공간을 객체 상태로 관리했다.",
@@ -356,15 +370,16 @@ window.TIL_ALGORITHMS = [
       "문제의 carType 1~3은 배열 인덱스 0~2로 바꾼다.",
       "생성자 초기화 목록으로 멤버의 초기 상태를 만든다."
     ],
-    "code_title": "멤버 상태로 정리한 풀이",
-    "solution_code": "class ParkingSystem {\n    vector<int> spaces;\n\npublic:\n    ParkingSystem(int big, int medium, int small)\n        : spaces{big, medium, small} {}\n\n    bool addCar(int carType) {\n        int index = carType - 1;\n        if (spaces[index] == 0) return false;\n        spaces[index]--;\n        return true;\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class ParkingSystem {\npublic:\n    int A[3];\n    ParkingSystem(int big, int medium, int small) \n    {\n        A[0] = big; A[1] = medium; A[2] = small;\n    }\n    bool addCar(int carType) \n    {\n        if(A[carType - 1] >= 1)\n        {\n            A[carType - 1]--;\n            return true;\n        }\n        return false;\n    }\n};",
+    "verification": "LeetCode Accepted · 102 / 102"
   },
   {
     "id": "lc-121",
     "title": "주식 한 번 거래의 최대 이익",
     "group": "greedy",
     "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-    "status": "결과 공유",
+    "status": "통과 확인",
     "problem": "한 번 사고 이후 팔아 얻는 최대 이익을 구한다.",
     "date": "2026-09-03",
     "summary": "오른쪽에서 순회하며 미래의 최고 가격을 유지해 한 번의 거래에서 얻는 최대 이익을 구했다.",
@@ -376,35 +391,37 @@ window.TIL_ALGORITHMS = [
       "한 번 거래이므로 차익을 누적하지 않고 최댓값만 저장한다.",
       "실행 시간 표시의 작은 차이보다 O(n), O(1) 구조가 더 안정적인 판단 기준이다."
     ],
-    "code_title": "역방향 한 번 순회 풀이",
-    "solution_code": "class Solution {\npublic:\n    int maxProfit(vector<int>& prices) {\n        int highestFuturePrice = 0;\n        int bestProfit = 0;\n\n        for (int i = prices.size() - 1; i >= 0; i--) {\n            highestFuturePrice = max(highestFuturePrice, prices[i]);\n            bestProfit = max(bestProfit, highestFuturePrice - prices[i]);\n        }\n        return bestProfit;\n    }\n};"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    int maxProfit(vector<int>& prices) \n    {\n        int topprices = 0;\n        int profit = 0;\n        for(int i = prices.size() - 1; i >= 0; i--)\n        {\n            topprices = max(topprices, prices[i]);\n            profit = max(profit, topprices - prices[i]);\n        }\n        return profit;\n    }\n};",
+    "verification": "LeetCode Accepted · 213 / 213"
   },
   {
     "id": "pg-12953",
     "title": "N개의 최소공배수",
     "group": "math",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12953",
-    "status": "채점 미확인",
+    "status": "통과 확인",
     "problem": "모든 수의 공통 배수 중 가장 작은 값을 구한다.",
     "date": "2026-09-02",
     "summary": "모든 수의 배수를 직접 증가시키는 접근으로 최소공배수를 찾으려 했고 반복 비용을 확인했다.",
     "question": "각 원소를 자기 자신의 배수로 늘리면 결국 같은 값에서 만난다는 생각으로 현재 최댓값까지 작은 값을 증가시키려 했다.",
     "attempt": "원본 값을 temp에 보존하고 arr의 각 값을 top 이상이 될 때까지 temp[i]만큼 더했다. 모든 값이 같은지 확인하는 함수를 따로 만들었다.",
-    "turning": "이 접근은 동작 방향을 이해하기 쉽지만 수가 커질수록 같은 덧셈을 많이 반복한다. 두 수의 최소공배수는 a/gcd(a,b)*b이고, 배열을 앞에서부터 현재 최소공배수와 다음 수로 합치면 반복 덧셈 없이 구할 수 있다. 이 코드는 당시 접근에서 이어지는 개선안이다.",
+    "turning": "모든 수의 배수를 조금씩 올려 같은 값에 도달시키는 코드가 실제로 100점을 받았다. 유클리드 호제법으로 두 수씩 최소공배수를 누적하면 훨씬 빠르지만, 이 기록에는 통과한 탐색 방식과 개선 방향을 함께 남겼다.",
     "learned": [
       "최대값에서 만난다는 직관은 배수 탐색으로 구현할 수 있다.",
       "반복 횟수가 커지는 지점을 찾으면 수학적 연산으로 바꿀 수 있다.",
       "곱셈 전에 gcd로 나누면 중간 값이 커지는 위험을 줄인다."
     ],
-    "code_title": "반복 탐색을 줄인 풀이",
-    "solution_code": "int gcd(int a, int b) {\n    while (b != 0) {\n        int rest = a % b;\n        a = b;\n        b = rest;\n    }\n    return a;\n}\n\nint solution(vector<int> arr) {\n    int lcm = arr[0];\n    for (int i = 1; i < arr.size(); i++) {\n        lcm = lcm / gcd(lcm, arr[i]) * arr[i];\n    }\n    return lcm;\n}"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nbool 이름뭐하지(vector<int> arr)\n{\n    for(int i = 0 ; i < arr.size(); i++)\n        if(arr[0] != arr[i]) return false;\n    return true;\n}\nint solution(vector<int> arr) \n{\n    int top = 0;\n    vector<int>temp(arr);\n    while(true)\n    {\n        for(int i = 0; i < arr.size(); i++)\n        {\n            while(arr[i] < top) arr[i] += temp[i];\n            if(top < arr[i]) top = arr[i];\n        }\n        if(이름뭐하지(arr)) return arr[0];\n    }\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "pg-42587",
     "title": "프로세스",
     "group": "queue",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42587",
-    "status": "채점 미확인",
+    "status": "통과 확인",
     "problem": "우선순위와 대기 순서에 따른 목표의 실행 순서를 구한다.",
     "date": "2026-09-02",
     "summary": "대기 순서를 위한 queue와 최고 우선순위를 위한 priority_queue를 함께 사용했다.",
@@ -416,8 +433,9 @@ window.TIL_ALGORITHMS = [
       "같은 데이터를 두 자료구조에 둘 때 제거 시점을 함께 맞춘다.",
       "pair에 원래 인덱스를 보존하면 재배치 후에도 대상을 찾을 수 있다."
     ],
-    "code_title": "두 큐를 결합한 풀이",
-    "solution_code": "int solution(vector<int> priorities, int location) {\n    queue<pair<int, int>> waiting;\n    priority_queue<int> highest;\n\n    for (int i = 0; i < priorities.size(); i++) {\n        waiting.push({priorities[i], i});\n        highest.push(priorities[i]);\n    }\n\n    int order = 0;\n    while (!waiting.empty()) {\n        auto current = waiting.front();\n        waiting.pop();\n\n        if (current.first < highest.top()) {\n            waiting.push(current);\n            continue;\n        }\n\n        highest.pop();\n        order++;\n        if (current.second == location) return order;\n    }\n    return order;\n}"
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <string>\n#include <vector>\n#include <queue>\nusing namespace std;\nint solution(vector<int> priorities, int location) \n{\n    int answer = 0;\n    queue<pair<int,int>>pro;\n    priority_queue<int> pq;\n    for(int i = 0; i < priorities.size(); i++)\n    {\n        pro.push({priorities[i], i});\n        pq.push(priorities[i]);\n    }\n    while(true)\n    {\n        if(pro.front().first >= pq.top())\n        {\n            answer++;\n            if(pro.front().second == location) return answer;\n            pro.pop(); pq.pop();\n        }\n        else { pro.push(pro.front()); pro.pop(); }\n    }\n}",
+    "verification": "프로그래머스 정답 · 100 / 100"
   },
   {
     "id": "swea-1859",
@@ -478,5 +496,194 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "위치만 저장하는 한 번 순회 풀이",
     "solution_code": "class Solution {\npublic:\n    vector<int> nodesBetweenCriticalPoints(ListNode* head) {\n        int first = -1, previous = -1;\n        int minDistance = INT_MAX, index = 1;\n        ListNode* prev = head;\n        ListNode* current = head->next;\n\n        while (current->next != nullptr) {\n            bool critical =\n                (prev->val < current->val && current->val > current->next->val) ||\n                (prev->val > current->val && current->val < current->next->val);\n\n            if (critical) {\n                if (first == -1) first = index;\n                if (previous != -1) minDistance = min(minDistance, index - previous);\n                previous = index;\n            }\n            prev = current;\n            current = current->next;\n            index++;\n        }\n\n        if (first == previous) return {-1, -1};\n        return {minDistance, previous - first};\n    }\n};"
+  },
+  {
+    "id": "lc-26",
+    "title": "정렬 배열에서 중복 제거",
+    "group": "array",
+    "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
+    "status": "통과 확인",
+    "date": "2026-09-01",
+    "verification": "LeetCode Accepted · 362 / 362",
+    "problem": "정렬된 배열을 제자리에서 수정해 서로 다른 값만 앞부분에 남기고 그 개수를 반환한다.",
+    "summary": "값의 범위와 정렬 상태를 이용해 같은 값의 두 번째 원소부터 erase로 제거했다.",
+    "question": "중복을 지운 직후 vector의 뒤 원소들이 앞으로 당겨질 때 반복 인덱스를 어떻게 유지할지가 핵심이었다.",
+    "attempt": "문제의 값 범위 -100부터 100까지 차례로 확인했다. 각 값의 첫 등장은 남기고 이후 같은 값은 erase한 뒤 index를 하나 줄여 당겨진 원소를 다시 검사했다.",
+    "turning": "362개 테스트를 통과했다. erase는 뒤 원소를 이동시키므로 최악의 경우 비용이 크다. 정렬 배열에서는 읽기·쓰기 인덱스 두 개로 O(n)에 덮어쓰는 방식이 다음 개선점이다.",
+    "learned": [
+      "erase 뒤에는 현재 인덱스에 새 원소가 들어온다.",
+      "정렬 상태는 같은 값이 모여 있다는 보장이다.",
+      "통과 코드와 더 나은 시간 복잡도를 구분해 기록한다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    int removeDuplicates(vector<int>& nums) {\n        for(int i = -100; i <= 100;i++) {\n            bool era = false;\n            for(int index = 0; index < nums.size();index++) {\n                if(!era && nums[index] == i) era = true;\n                else if(era && nums[index] == i) { nums.erase(nums.begin() + index); index--; }\n            }\n        }\n        return nums.size();\n    }\n};"
+  },
+  {
+    "id": "lc-27",
+    "title": "특정 값 제거",
+    "group": "array",
+    "url": "https://leetcode.com/problems/remove-element/",
+    "status": "통과 확인",
+    "date": "2026-09-01",
+    "verification": "LeetCode Accepted · 116 / 116",
+    "problem": "배열에서 val과 같은 원소를 제자리에서 제거하고 남은 원소 수를 반환한다.",
+    "summary": "순회 중 목표 값을 만나면 erase하고 인덱스를 되돌려 연속된 목표 값도 놓치지 않았다.",
+    "question": "erase 뒤에 다음 원소가 현재 자리로 이동하므로 일반적인 i++ 순회만으로는 연속된 값을 건너뛸 수 있었다.",
+    "attempt": "nums[i]가 val이면 그 위치를 지운 다음 i--를 수행했다. for문의 i++와 합쳐져 같은 인덱스를 다시 확인한다.",
+    "turning": "116개 테스트를 통과했다. 정답 순서가 중요하지 않거나 덮어쓰기가 가능하므로 쓰기 인덱스를 쓰면 erase의 반복 이동 비용을 없앨 수 있다.",
+    "learned": [
+      "vector::erase는 원소 수와 인덱스를 함께 바꾼다.",
+      "연속 삭제에서는 당겨진 원소를 다시 확인해야 한다.",
+      "제자리 문제에서는 덮어쓰기 방식도 검토한다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    int removeElement(vector<int>& nums, int val) {\n        for(int i = 0; i < nums.size(); i++) {\n            if (nums[i] == val) { nums.erase(nums.begin()+i); i--; }\n        }\n        return nums.size();\n    }\n};"
+  },
+  {
+    "id": "lc-58",
+    "title": "마지막 단어의 길이",
+    "group": "string",
+    "url": "https://leetcode.com/problems/length-of-last-word/",
+    "status": "통과 확인",
+    "date": "2026-08-25",
+    "verification": "LeetCode Accepted · 60 / 60",
+    "problem": "문자열 끝의 공백을 무시하고 마지막 단어의 길이를 반환한다.",
+    "summary": "공백 뒤 새 단어가 시작되면 길이를 1로 초기화하고, 같은 단어가 이어지면 길이를 증가시켰다.",
+    "question": "문자열 끝에 공백이 있어도 마지막으로 읽은 단어 길이를 유지해야 했다.",
+    "attempt": "isAfterSpace로 직전 문자가 공백이었는지 기록했다. 공백 다음의 첫 글자에서는 answer를 1로 다시 시작했다.",
+    "turning": "60개 테스트를 통과했다. 뒤에서부터 공백을 건너뛴 뒤 단어만 세는 방식도 가능하지만, 제출 코드는 한 번의 정방향 순회로 상태를 관리했다.",
+    "learned": [
+      "공백 자체에서는 마지막 유효 길이를 지우지 않는다.",
+      "새 단어의 첫 글자에서 길이를 초기화한다.",
+      "문자열 문제는 직전 상태 하나로 풀리는 경우가 많다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    int lengthOfLastWord(string s) {\n        int answer{};\n        bool isAfterSpace{};\n        for (char c : s) {\n            if (c == ' ') isAfterSpace = true;\n            else {\n                if (isAfterSpace) answer = 1;\n                else answer += 1;\n                isAfterSpace = false;\n            }\n        }\n        return answer;\n    }\n};"
+  },
+  {
+    "id": "lc-38",
+    "title": "Count and Say",
+    "group": "string",
+    "url": "https://leetcode.com/problems/count-and-say/",
+    "status": "통과 확인",
+    "date": "2026-08-21",
+    "verification": "LeetCode Accepted · 30 / 30",
+    "problem": "이전 문자열에서 연속한 같은 숫자의 개수와 숫자를 읽어 다음 문자열을 만든다.",
+    "summary": "현재 문자를 기준으로 연속 개수를 세고 문자가 바뀌는 순간 결과 문자열에 묶음을 기록했다.",
+    "question": "마지막 묶음은 다음 문자를 만나지 않으므로 반복문 안의 변경 처리만으로는 결과에 추가되지 않았다.",
+    "attempt": "A를 현재 수열, B를 다음 수열로 두었다. C에는 현재 숫자, D에는 연속 개수를 저장하고 문자가 바뀔 때 D와 C를 붙였다.",
+    "turning": "반복문이 끝난 뒤 마지막 D와 C를 한 번 더 추가해 누락을 해결했고 30개 테스트를 통과했다.",
+    "learned": [
+      "그룹화 순회에서는 마지막 그룹을 별도로 마감한다.",
+      "현재 결과와 다음 결과를 다른 문자열로 둔다.",
+      "n번째 수열은 n-1번 변환해서 만든다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    string countAndSay(int n) {\n        string A = \"1\", B;\n        char C;\n        int D = 0;\n        for(int a = 1; a < n; a++) {\n            B = \"\"; C = A[0]; D = 0;\n            for(int b = 0; b < A.size(); b++) {\n                if(C != A[b]) { B += to_string(D); B += C; D = 0; }\n                C = A[b]; D++;\n            }\n            B += to_string(D); B += C; A = B;\n        }\n        return A;\n    }\n};"
+  },
+  {
+    "id": "lc-25",
+    "title": "k개 그룹으로 연결 리스트 뒤집기",
+    "group": "tree",
+    "url": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+    "status": "통과 확인",
+    "date": "2026-08-20",
+    "verification": "LeetCode Accepted · 62 / 62",
+    "problem": "연결 리스트를 k개씩 묶어 각 묶음의 순서를 뒤집고 남는 노드는 유지한다.",
+    "summary": "노드 연결을 바꾸는 대신 k의 배수 구간 값을 배열에 저장한 뒤 역순으로 다시 써서 통과했다.",
+    "question": "포인터 연결을 직접 뒤집는 과정이 복잡해 먼저 값만 바꾸는 방식으로 문제의 그룹 규칙을 구현했다.",
+    "attempt": "리스트 길이에서 완전한 그룹 수를 구하고, 그 구간의 값을 vector에 저장했다. 각 그룹마다 뒤에서 앞으로 값을 읽어 노드에 덮어썼다.",
+    "turning": "62개 테스트를 통과했다. 일반적인 해법은 노드 연결 자체를 뒤집지만, 이 제출은 값 교환이 허용된 채점에서 통과한 구현이다. 다음 복습에서는 포인터만 바꾸는 풀이를 연습할 수 있다.",
+    "learned": [
+      "size/k로 완전한 그룹 수를 구할 수 있다.",
+      "나머지 노드는 건드리지 않는다.",
+      "값 변경과 노드 연결 변경은 서로 다른 풀이 방식이다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "class Solution {\npublic:\n    ListNode* reverseKGroup(ListNode* head, int k) {\n        ListNode* B = head;\n        int size = getsize(head), re = size / k;\n        vector<int>A(re * k, 0);\n        for(int b = 0; b < re * k; b++) { A[b] = B->val; B = B->next; }\n        B = head;\n        for (int a = 0; re > a; a++)\n            for(int c = k - 1; c >= 0; c--) { B->val = A[a * k + c]; B = B->next; }\n        return head;\n    }\n    int getsize(ListNode* head) {\n        int num = 0;\n        while(head != nullptr) { head = head->next; num++; }\n        return num;\n    }\n};"
+  },
+  {
+    "id": "pg-250125",
+    "title": "이웃한 칸",
+    "group": "array",
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/250125",
+    "status": "통과 확인",
+    "date": "2026-09-17",
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "problem": "선택한 칸의 상하좌우 중 같은 색인 칸의 수를 센다.",
+    "summary": "방향 배열로 네 이웃을 만들고 행과 열 범위를 차례로 확인한 뒤 색을 비교했다.",
+    "question": "네 방향을 각각 작성하면 중복이 많아지고 가장자리에서 배열 밖을 읽기 쉽다.",
+    "attempt": "dh와 dw를 같은 인덱스의 방향 쌍으로 두었다. h_check와 w_check가 모두 0 이상 n 미만일 때만 board에 접근했다.",
+    "turning": "경계 검사를 배열 접근보다 먼저 수행한 코드가 100점을 받았다. 방향 배열은 이후 BFS와 DFS에서도 그대로 재사용할 수 있는 패턴이다.",
+    "learned": [
+      "방향 벡터는 행 변화량과 열 변화량을 쌍으로 쓴다.",
+      "범위 검사 뒤에만 배열에 접근한다.",
+      "정사각형 보드에서는 두 축 모두 같은 n을 쓸 수 있다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nint solution(vector<vector<string>> board, int h, int w) {\n    int n = board.size(), count = 0;\n    int dh[4] = {0, 1, -1, 0};\n    int dw[4] = {1, 0, 0, -1};\n    for(int i = 0; i <= 3; i++) {\n        int h_check = h + dh[i], w_check = w + dw[i];\n        if(h_check >= 0 && h_check < n && w_check >= 0 && w_check < n)\n            if(board[h][w] == board[h_check][w_check]) count++;\n    }\n    return count;\n}"
+  },
+  {
+    "id": "pg-138476",
+    "title": "귤 고르기",
+    "group": "greedy",
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/138476",
+    "status": "통과 확인",
+    "date": "2026-09-07",
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "problem": "k개의 귤을 고를 때 포함되는 크기 종류 수의 최솟값을 구한다.",
+    "summary": "크기별 개수를 센 뒤 개수가 많은 종류부터 선택하는 그리디 방식으로 풀었다.",
+    "question": "어떤 크기부터 선택해야 종류 수가 가장 적어지는지를 수량 기준으로 바꿔 생각해야 했다.",
+    "attempt": "unordered_map으로 크기별 빈도를 세고 각 빈도를 최대 힙에 넣었다. 가장 큰 빈도부터 k에서 빼며 선택한 종류 수를 증가시켰다.",
+    "turning": "한 종류에서 가능한 한 많이 고를수록 남은 k를 가장 크게 줄일 수 있다. 이 선택을 반복한 코드가 100점을 받았다.",
+    "learned": [
+      "최소 종류 수는 빈도가 큰 종류부터 선택하면 된다.",
+      "원래 값보다 빈도만 필요하면 힙에는 개수만 넣어도 된다.",
+      "k가 0 이하가 되는 순간 필요한 선택이 끝난다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <vector>\n#include <unordered_map>\n#include <queue>\nusing namespace std;\nint solution(int k, vector<int> tangerine) {\n    unordered_map<int, int> data;\n    for(auto A : tangerine) data[A]++;\n    priority_queue<int> num;\n    for(auto A : data) num.push(A.second);\n    int answer = 0;\n    while(k > 0) { k -= num.top(); num.pop(); answer++; }\n    return answer;\n}"
+  },
+  {
+    "id": "pg-134240",
+    "title": "푸드 파이트 대회",
+    "group": "simulation",
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/134240",
+    "status": "통과 확인",
+    "date": "2026-09-10",
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "problem": "양쪽 선수가 같은 음식 순서와 양을 먹도록 가운데 물 0을 둔 문자열을 만든다.",
+    "summary": "deque 중앙에 0을 두고 같은 음식 번호를 앞뒤에 하나씩 추가해 대칭을 만들었다.",
+    "question": "각 음식은 두 선수에게 같은 수만큼 나눠야 하므로 홀수 하나는 사용할 수 없다.",
+    "attempt": "큰 음식 번호부터 내려오며 food[i]가 2 이상인 동안 push_front와 push_back으로 같은 번호를 넣었다.",
+    "turning": "앞과 뒤에 동시에 추가하면 별도의 역순 문자열 없이 대칭을 만들 수 있다. 이 구현은 100점을 받았다.",
+    "learned": [
+      "한 쌍마다 음식 수를 2 줄인다.",
+      "deque는 양끝 삽입이 모두 필요할 때 편하다.",
+      "가운데 물을 먼저 넣으면 대칭 구조가 단순해진다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <string>\n#include <vector>\n#include <deque>\nusing namespace std;\nstring solution(vector<int> food) {\n    deque<int>A(1, 0);\n    for (int i = food.size() - 1; i >= 1; i--)\n        while (food[i] >= 2) { A.push_back(i); A.push_front(i); food[i] -= 2; }\n    string answer = \"\";\n    for (int value : A) answer += to_string(value);\n    return answer;\n}"
+  },
+  {
+    "id": "pg-133502",
+    "title": "햄버거 만들기",
+    "group": "simulation",
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/133502",
+    "status": "통과 확인",
+    "date": "2026-07-24",
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "problem": "재료 배열에서 1-2-3-1 순서가 생길 때마다 제거해 만들 수 있는 햄버거 수를 센다.",
+    "summary": "패턴을 찾으면 네 재료를 지우고 인덱스를 뒤로 돌려 제거로 새로 맞닿은 구간을 다시 확인했다.",
+    "question": "한 묶음을 지우면 앞뒤 재료가 붙으면서 이전에는 없던 새 패턴이 생길 수 있었다.",
+    "attempt": "현재 위치부터 네 값이 1,2,3,1인지 검사하고 erase로 제거했다. 이후 i를 네 칸 뒤로 보내 주변을 다시 검사했다.",
+    "turning": "여러 번의 오답 뒤 이 제출이 100점을 받았다. 다만 i+3을 읽기 전에 남은 길이를 확인하지 않아 C++에서는 배열 밖 접근 위험이 있다. stack 역할의 vector 뒤 네 원소만 확인하는 방식이 더 안전하고 빠르다.",
+    "learned": [
+      "삭제 뒤 새 경계에서 패턴이 다시 생길 수 있다.",
+      "인덱스를 읽기 전에 i+3이 범위 안인지 확인해야 한다.",
+      "연속 패턴 제거는 스택으로 O(n)에 처리할 수 있다."
+    ],
+    "code_title": "통과 제출을 바탕으로 정리한 코드",
+    "solution_code": "#include <vector>\nusing namespace std;\nint solution(vector<int> ingredient) {\n    int answer = 0;\n    for (int i = 0; ingredient.size() > i; i++) {\n        if (ingredient[i] == 1 && ingredient[i + 3] == 1 &&\n            ingredient[i + 1] == 2 && ingredient[i + 2] == 3) {\n            ingredient.erase(ingredient.begin() + i, ingredient.begin() + i + 4);\n            i -= 4;\n            if (i < 0) i = -1;\n            answer++;\n        }\n    }\n    return answer;\n}"
   }
 ];
