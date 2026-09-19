@@ -124,7 +124,7 @@
   $('#detailContent').addEventListener('click', e => { const b = e.target.closest('[data-record-id]'); if (b) navigate(b.dataset.recordId); });
   $('#backToList').addEventListener('click', () => { location.hash = 'list'; });
   function fromHash() {
-    if (location.hash === '#library' || location.hash.startsWith('#material=')) {
+    if (location.hash === '#library' || location.hash.startsWith('#material=') || location.hash === '#algorithms' || location.hash.startsWith('#algorithm=')) {
       ++request; page.hidden = true; $('#listPage').hidden = true;
       $('#articleNav').hidden = true; $('#subnav').hidden = true; return;
     }

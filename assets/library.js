@@ -71,9 +71,9 @@
     }
   }
   function route() {
-    const library=active();$('#libraryPage').hidden=!library;$('#libraryNav').hidden=!library;
-    for(const selector of ['#tabs','#projects','#months','#activities']) {$(selector).hidden=library;$(selector).previousElementSibling.hidden=library;}
-    for(const a of $('#archiveModes').querySelectorAll('a')) {if((a.getAttribute('href')==='#library')===library)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}
+    const library=active(), algorithms=location.hash==='#algorithms'||location.hash.startsWith('#algorithm=');$('#libraryPage').hidden=!library;$('#libraryNav').hidden=!library;
+    for(const selector of ['#tabs','#projects','#months','#activities']) {$(selector).hidden=library||algorithms;$(selector).previousElementSibling.hidden=library||algorithms;}
+    for(const a of $('#archiveModes').querySelectorAll('a')) {const selected=library?'#library':algorithms?'#algorithms':'#list';if(a.getAttribute('href')===selected)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}
     if(!library) {++token;return;}
     $('#listPage').hidden=true;$('#articlePage').hidden=true;$('#subnav').hidden=true;$('#articleNav').hidden=true;
     if(location.hash.startsWith('#material=')) {try {open(decodeURIComponent(location.hash.slice(10)));}catch {location.hash='library';}}
