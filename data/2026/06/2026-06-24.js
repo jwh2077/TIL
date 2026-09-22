@@ -18,10 +18,7 @@ window.TIL_FILES["data/2026/06/2026-06-24.js"] = [
     "mistakes_or_difficulties": [
       "전날에는 문 Blueprint만 보고 있어서 E키 입력을 어디서 받아야 하는지 몰랐다. 입력은 캐릭터가 받고, 문은 상호작용 함수만 실행하게 나눠야 했다."
     ],
-    "application": "플레이어가 문 가까이에 있을 때만 E키로 문을 열고 닫게 연결했다.",
-    "result": "전날 막혔던 입력 연결을 해결했고, 범위 밖에서는 작동하지 않는 것도 확인했다.",
     "code_reference": null,
-    "understanding": "협업 기반 구현",
     "related_topics": [
       "Input",
       "Box Overlap",
@@ -29,8 +26,6 @@ window.TIL_FILES["data/2026/06/2026-06-24.js"] = [
       "Rotation",
       "Interaction"
     ],
-    "later_connection": "이후 Unreal에서 입력과 상호작용 기능을 구현할 때 기본적인 흐름을 이해하는 데 연결되었다.",
-    "next_learning": "C++ 프로그래밍과 Unreal의 기본 구조를 본격적으로 학습",
     "images": [
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/1d1bc582-4f71-42ad-9481-6e5c6dbd4600/image.png",
@@ -42,7 +37,7 @@ window.TIL_FILES["data/2026/06/2026-06-24.js"] = [
       },
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/b3505c0d-b910-49b2-861b-a9d1802d52ba/image.png",
-        "caption": "E키 입력에서 문을 참조하고 상호작용 함수를 실행한 흐름"
+        "caption": "문 상호작용을 만들던 레벨 화면"
       }
     ],
     "velog": "https://velog.io/@jwh4410/6.24",
@@ -51,7 +46,7 @@ window.TIL_FILES["data/2026/06/2026-06-24.js"] = [
       "Velog"
     ],
     "primary_topic": "unreal",
-    "summary": "전날 못 끝낸 E키 문 상호작용을 캐릭터 입력과 문 함수로 나눠서 완성했다.",
+    "summary": "전날 못 끝냈던 E키 문 상호작용을 다시 잡았다.",
     "date_start": "2026-06-24",
     "date_label": "2026-06-24",
     "references": [],

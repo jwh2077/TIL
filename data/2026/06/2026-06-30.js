@@ -21,10 +21,7 @@ window.TIL_FILES["data/2026/06/2026-06-30.js"] = [
       "Collision과 Hit 옵션이 많아서 처음에는 왜 레이저가 적을 통과하는지 찾기 어려웠다. 필요한 충돌 설정을 하나씩 바꾸면서 확인했다.",
       "C 자료형은 종류가 많아 정수와 실수의 정확한 크기까지는 아직 헷갈렸다."
     ],
-    "application": "마우스를 누르는 동안 일정 간격으로 발사하고, 카메라 정면의 적을 맞히면 피격 효과가 나오게 했다.",
-    "result": "발사 입력부터 충돌 지점 처리까지 이어지는 전체 Blueprint 흐름을 완성했다.",
     "code_reference": null,
-    "understanding": "예제 기반 실습",
     "related_topics": [
       "Collision",
       "Hit",
@@ -33,16 +30,14 @@ window.TIL_FILES["data/2026/06/2026-06-30.js"] = [
       "정수",
       "실수"
     ],
-    "later_connection": "이후 Unreal C++에서 Collision과 객체 간 상호작용을 다룰 때 다시 연결되었다.",
-    "next_learning": "HUD와 함수 개념",
     "images": [
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/18b521a5-3495-4cbb-8aab-a3152c5676b8/image.png",
-        "caption": "IA_Fire 입력으로 발사 상태를 바꾸는 부분"
+        "caption": "IA_Fire에 마우스 왼쪽 버튼을 연결한 설정"
       },
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/b00fb4cc-b22c-43fc-aa08-42c00428ecaa/image.png",
-        "caption": "카메라 위치와 방향으로 Line Trace 시작점과 끝점을 만든 Blueprint"
+        "caption": "발사 함수에서 사운드와 총구 효과를 실행한 부분"
       },
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/2d911772-8d8e-4e36-a7ab-f003f1307dd7/image.png",
@@ -56,7 +51,7 @@ window.TIL_FILES["data/2026/06/2026-06-30.js"] = [
       "사용자 확인: 첫 주 Blueprint 프로젝트는 FirstFPS"
     ],
     "primary_topic": "unreal",
-    "summary": "발사 입력, 연사 간격, 반동, Line Trace와 피격 효과를 연결해서 FPS 총 발사 흐름을 만들었다.",
+    "summary": "IA_Fire 입력부터 사운드, 총구 효과, 랜덤 반동, Line Trace까지 한 번에 붙여서 FPS 발사 기능을 만들었다.",
     "date_start": "2026-06-30",
     "date_label": "2026-06-30",
     "references": [

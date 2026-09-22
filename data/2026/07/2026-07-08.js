@@ -14,14 +14,9 @@ window.TIL_FILES["data/2026/07/2026-07-08.js"] = [
       "조건문",
       "실습"
     ],
-    "study_content": "스탯 포인트를 배분하는 프로그램을 만들면서 cin.fail, clear, ignore를 이용한 입력 검증을 학습했다. 함수와 포인터, 참조를 함께 사용했다.",
-    "learning_process": "사용자의 잘못된 입력을 검사하고 입력 스트림을 초기화한 뒤 다시 입력받도록 구현했다. 스탯 배분 기능을 함수로 나누고 포인터와 참조를 사용했다.",
-    "questions": [],
-    "mistakes_or_difficulties": [],
-    "application": "스탯 배분 프로그램에 입력 검증과 함수, 포인터·참조를 적용했다.",
-    "result": "입력 오류를 처리하는 기본적인 방법과 포인터·참조의 사용을 실습했다.",
+    "study_content": "스탯 50포인트를 나눠 넣는 프로그램에서 입력을 검사하는 부분을 ValidateInput 함수로 뺐다.",
+    "learning_process": "숫자 대신 문자가 들어오면 cin.fail()로 검사했다. clear()로 오류 상태를 지우고 ignore()로 남은 입력을 버린 뒤 다시 받았다. 남은 포인트가 부족한 입력도 되돌렸다. 포인터로 값을 읽는 방법과 참조가 변수의 별명처럼 동작한다는 내용도 같이 적었다.",
     "code_reference": null,
-    "understanding": "핵심 흐름 이해",
     "related_topics": [
       "cin.fail",
       "clear",
@@ -29,15 +24,13 @@ window.TIL_FILES["data/2026/07/2026-07-08.js"] = [
       "포인터",
       "참조"
     ],
-    "later_connection": "이후 TextRPG에서 사용자 입력 검증과 함수 분리에 활용되었다.",
-    "next_learning": "클래스와 객체",
     "velog": "https://velog.io/@jwh4410/7.8",
     "repository": null,
     "source": [
       "Velog"
     ],
     "primary_topic": "memory",
-    "summary": "스탯 포인트를 배분하는 프로그램을 만들면서 cin.fail, clear, ignore를 이용한 입력 검증을 학습했다.",
+    "summary": "스탯 50포인트를 나눠 넣는 프로그램에서 입력을 검사하는 부분을 ValidateInput 함수로 뺐다.",
     "date_start": "2026-07-08",
     "date_label": "2026-07-08",
     "activity": "study"

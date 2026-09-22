@@ -13,11 +13,9 @@ window.TIL_FILES["data/2026/08/2026-08-10.js"] = [
       "컴포넌트",
       "개념정리"
     ],
-    "summary": "AItem 헤더의 선언, 컴포넌트 구성, Actor 생명주기 함수를 정리했다.",
-    "study_content": "Unreal Engine C++에서 AItem 클래스를 만들며 헤더 파일이 클래스의 변수와 함수를 선언하는 역할을 한다는 점을 정리했다. AItem은 AActor를 상속하고, SceneRoot와 StaticMeshComp를 컴포넌트로 선언했다.",
-    "learning_process": "Item.h의 include, 로그 카테고리 선언, UCLASS와 GENERATED_BODY, 컴포넌트 변수 및 생명주기 함수 선언을 순서대로 살펴보며 각 요소의 역할을 정리했다.",
-    "application": "AItem 헤더에 SceneRoot와 StaticMeshComp를 선언하고, PostInitializeComponents, BeginPlay, Destroyed, EndPlay 오버라이드 선언을 포함한 클래스 구조를 작성했다.",
-    "understanding": "클래스 선언과 구현의 역할 분담을 이해하며 Unreal C++ 코드 구조를 익혀가는 단계였다.",
+    "summary": "AActor를 상속받는 AItem 클래스를 만들고 Item.h에 변수와 함수를 선언했다.",
+    "study_content": "AActor를 상속받는 AItem 클래스를 만들고 Item.h에 변수와 함수를 선언했다. SceneRoot를 기준점으로 두고 StaticMeshComp를 연결했다.",
+    "learning_process": "UCLASS, GENERATED_BODY와 include를 살펴봤다. BeginPlay 같은 함수는 헤더에 선언하고 cpp에서 내용을 작성한다.",
     "velog": "https://velog.io/@jwh4410/Unreal-C",
     "source": [
       "Velog: Unreal C++ (2026-08-10)"

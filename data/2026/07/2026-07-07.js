@@ -14,32 +14,22 @@ window.TIL_FILES["data/2026/07/2026-07-07.js"] = [
       "실습",
       "디버깅"
     ],
-    "study_content": "스탯을 배열로 관리하고 사용자 입력을 검증하는 프로그램을 작성했다. 포인터도 직접 실험했다.",
-    "learning_process": "배열을 이용해 여러 스탯을 관리하고 입력값에 따라 처리하는 코드를 작성했다. 포인터 사용 과정에서 발생하는 문제도 직접 확인했다.",
-    "questions": [],
-    "mistakes_or_difficulties": [
-      "캐릭터 입력 처리 과정에서 문제가 발생했다.",
-      "포인터 사용에 대한 이해가 충분하지 않은 상태에서 실습했다."
-    ],
-    "application": "스탯 배열과 사용자 입력 처리 프로그램에 배열과 포인터를 적용했다.",
-    "result": "배열과 포인터를 실제 프로그램에 적용해보았다.",
+    "study_content": "HP, MP, 공격력, 방어력을 배열에 넣고 하나씩 입력받았다. 0 이하이면 다시 입력받게 했는데 문자를 넣으면 정상 동작하지 않았다.",
+    "learning_process": "따로 배열 이름과 첫 원소의 주소가 같은 곳을 가리키는지도 비교해봤다.",
     "code_reference": null,
-    "understanding": "예제 기반 실습",
     "related_topics": [
       "스탯",
       "배열",
       "포인터",
       "입력 검증"
     ],
-    "later_connection": "개인 TextRPG에서 캐릭터 스탯을 관리하는 코드로 연결되었다.",
-    "next_learning": "cin.fail을 이용한 입력 검증과 함수 분리",
     "velog": "https://velog.io/@jwh4410/7.7",
     "repository": null,
     "source": [
       "Velog"
     ],
     "primary_topic": "memory",
-    "summary": "스탯을 배열로 관리하고 사용자 입력을 검증하는 프로그램을 작성했다.",
+    "summary": "HP, MP, 공격력, 방어력을 배열에 넣고 하나씩 입력받았다.",
     "date_start": "2026-07-07",
     "date_label": "2026-07-07",
     "activity": "study"

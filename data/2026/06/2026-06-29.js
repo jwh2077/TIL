@@ -21,10 +21,7 @@ window.TIL_FILES["data/2026/06/2026-06-29.js"] = [
     "mistakes_or_difficulties": [
       "처음에는 IA와 IMC를 왜 나눠 쓰는지 헷갈렸다. 일단 IA는 입력값의 형태, IMC는 실제 키 연결을 맡는다고 정리했다."
     ],
-    "application": "WASD 이동과 마우스 시점 회전, 조준 상태 전환을 한 캐릭터 Blueprint에 연결했다.",
-    "result": "입력값이 어느 노드를 거쳐 이동과 시점에 들어가는지 화면을 보면서 따라갈 수 있게 됐다.",
     "code_reference": null,
-    "understanding": "핵심 흐름 이해",
     "related_topics": [
       "Input Action",
       "Input Mapping Context",
@@ -32,24 +29,22 @@ window.TIL_FILES["data/2026/06/2026-06-29.js"] = [
       "Pitch",
       "Roll"
     ],
-    "later_connection": "이후 Unreal C++에서 입력과 컴포넌트 구조를 이해할 때 다시 연결되었다.",
-    "next_learning": "FPS 발사 기능과 C 자료형 및 입출력",
     "images": [
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/4f5f3d10-9306-4aef-b4ad-15a6de13d70f/image.png",
-        "caption": "Move와 Look은 Axis2D, Aim은 Bool로 만든 Input Action"
+        "caption": "Input Mapping Context에 Move, Look, Aim을 등록한 목록"
       },
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/3cd8ddc2-c065-41a5-bab3-b0e139263c34/image.png",
-        "caption": "키 입력과 축 반전을 지정한 Input Mapping Context"
+        "caption": "S키의 입력 축과 방향을 바꾼 Swizzle과 Negate 설정"
       },
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/fc6edc56-a3a9-4af5-adb3-1bae1d11a8f8/image.png",
-        "caption": "입력된 X·Y 값으로 이동 방향을 계산한 Blueprint"
+        "caption": "Look 입력의 X·Y 값을 Yaw·Pitch 회전에 연결한 Blueprint"
       },
       {
         "url": "https://velog.velcdn.com/images/jwh4410/post/ecd5e220-7920-484e-b4c4-ff7988c6c73b/image.png",
-        "caption": "Started 입력마다 IsAiming 값을 반전시킨 조준 처리"
+        "caption": "카메라가 Pawn의 회전을 따르도록 켠 Use Pawn Control Rotation"
       }
     ],
     "velog": "https://velog.io/@jwh4410/6.29",
@@ -59,7 +54,7 @@ window.TIL_FILES["data/2026/06/2026-06-29.js"] = [
       "사용자 확인: 첫 주 Blueprint 프로젝트는 FirstFPS"
     ],
     "primary_topic": "unreal",
-    "summary": "Enhanced Input에서 이동·시점·조준 입력을 나눠 만들고 캐릭터 Blueprint에 연결했다.",
+    "summary": "Enhanced Input으로 이동, 시점 회전, 조준을 붙여봤다.",
     "date_start": "2026-06-29",
     "date_label": "2026-06-29",
     "references": [

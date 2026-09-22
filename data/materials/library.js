@@ -2,7 +2,7 @@ window.TIL_LIBRARY = [
   {
     "id": "stl-foundation",
     "title": "자료구조의 기본 · 저장 방식 · STL",
-    "summary": "데이터 저장 방식과 컨테이너·반복자·알고리즘의 관계를 한 번에 복습합니다.",
+    "summary": "데이터를 저장하는 방식과 STL의 컨테이너, 반복자, 알고리즘.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -43,8 +43,8 @@ window.TIL_LIBRARY = [
   },
   {
     "id": "stl-sequence",
-    "title": "순차 컨테이너 · vector / list / deque",
-    "summary": "접근 방식과 삽입·삭제 위치를 기준으로 순차 컨테이너를 비교합니다.",
+    "title": "vector / list / deque",
+    "summary": "vector, list, deque에서 값을 읽고 추가하거나 지우는 방법.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -89,8 +89,8 @@ window.TIL_LIBRARY = [
   },
   {
     "id": "stl-associative",
-    "title": "연관 컨테이너 · set / map / 해시",
-    "summary": "중복 허용, 정렬 여부와 Key-Value 관계를 기준으로 자료구조를 구분합니다.",
+    "title": "set / map · 중복과 정렬",
+    "summary": "set과 map의 중복 처리, 정렬 순서, key로 값 찾기.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -147,8 +147,8 @@ window.TIL_LIBRARY = [
   },
   {
     "id": "stl-adaptor",
-    "title": "처리 순서 · stack / queue / heap",
-    "summary": "후입선출, 선입선출과 우선순위 처리의 차이를 예제와 명령어로 확인합니다.",
+    "title": "stack / queue / priority_queue",
+    "summary": "stack은 마지막 값부터, queue는 처음 값부터 꺼낸다.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -184,7 +184,7 @@ window.TIL_LIBRARY = [
   {
     "id": "stl-algorithm",
     "title": "문자열 · 알고리즘 · 그래프 · 트리",
-    "summary": "문자열 파싱부터 탐색·정렬과 연결 관계의 표현까지 묶어 읽습니다.",
+    "summary": "문자열 나누기, 정렬과 탐색, 그래프와 트리 메모.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -224,7 +224,7 @@ window.TIL_LIBRARY = [
   {
     "id": "stl-selection",
     "title": "자료구조 선택 기준",
-    "summary": "필요한 접근·삽입·삭제 작업을 기준으로 컨테이너를 비교합니다.",
+    "summary": "인덱스로 읽을지, 중간에서 지울지에 따라 골라보기.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -252,7 +252,7 @@ window.TIL_LIBRARY = [
   {
     "id": "concept-bigo",
     "title": "Big-O · 시간 복잡도",
-    "summary": "입력 크기에 따른 증가 양상을 독립된 개념으로 정리합니다.",
+    "summary": "데이터가 많아질 때 처리할 일이 얼마나 늘어나는지.",
     "kind": "file",
     "topic": "stl",
     "status": "개념 정리 · 기존 문서에서 분리",
@@ -278,7 +278,7 @@ window.TIL_LIBRARY = [
   {
     "id": "unreal-containers",
     "title": "Unreal 자료구조 · TArray / TMap / TSet",
-    "summary": "STL과 용도를 비교하고 Unreal 컨테이너의 기본 사용을 게시용 초안으로 준비합니다.",
+    "summary": "TArray, TMap, TSet의 용도와 기본 예제. 아직 실행 전인 초안.",
     "kind": "file",
     "topic": "unreal",
     "status": "게시 준비 초안 · 예제 실행 확인 필요",
@@ -290,21 +290,20 @@ window.TIL_LIBRARY = [
         "html": "\n<table><tr><th>C++ STL</th><th>Unreal</th><th>기본 용도</th></tr>\n<tr><td><code>vector</code></td><td><code>TArray</code></td><td>동적 배열</td></tr>\n<tr><td><code>map</code></td><td><code>TMap</code></td><td>Key - Value</td></tr>\n<tr><td><code>set</code></td><td><code>TSet</code></td><td>중복 없는 집합</td></tr>\n</table>\n<blockquote>Unreal의 컨테이너는 STL과 내부 구현이 완전히 같은 것은 아니지만, 기본적인 용도를 비교하면 이해하기 쉽다.</blockquote>\n\n"
       },
       {
-        "title": "기본 용도와 비교의 한계",
-        "text": "TArray는 같은 타입의 원소 목록, TMap은 Key-Value 쌍, TSet은 중복 없는 값의 집합을 다룰 때 살펴볼 컨테이너입니다. STL과의 비교는 용도를 이해하기 위한 출발점이며 내부 구현과 정렬 규칙까지 같다는 뜻은 아닙니다."
+        "title": "STL과 비교하기",
+        "text": "TArray는 같은 타입의 값 목록, TMap은 key와 value, TSet은 중복 없는 값을 담는다. vector, map, set과 용도는 비교할 수 있지만 정렬 순서나 내부 구조까지 같은 것은 아니다."
       },
       {
         "title": "기본 문법 예제 · 실행 전",
         "code": "TArray<int32> Scores;\nScores.Add(10);\nScores.Add(20);\n\nTMap<FName, int32> Stats;\nStats.Add(FName(TEXT(\"Damage\")), 10);\nif (const int32* Damage = Stats.Find(FName(TEXT(\"Damage\"))))\n{\n    // *Damage로 저장된 값 확인\n}\n\nTSet<int32> UniqueIds;\nUniqueIds.Add(1);\nUniqueIds.Add(1); // 같은 값 중복 추가를 비교할 예제"
       },
       {
-        "title": "게시 전에 확인할 것",
+        "title": "실행 전에 남은 것",
         "items": [
-          "사용 중인 Unreal 버전에서 예제 컴파일·실행 확인",
-          "TArray의 Num, 인덱스 유효성 및 추가·삭제 동작 확인",
-          "TMap의 Find 반환값과 키가 없는 경우 확인",
-          "TSet의 중복 처리 및 순회 순서 가정 점검",
-          "프로젝트 실제 사용 예제는 확인 후 별도 연결"
+          "사용 중인 Unreal 버전에서 예제 컴파일하기",
+          "TArray의 Num과 인덱스 범위 살펴보기",
+          "TMap에서 없는 key를 Find했을 때 반환값 살펴보기",
+          "TSet에 같은 값을 두 번 넣어보기"
         ]
       }
     ],
@@ -319,7 +318,7 @@ window.TIL_LIBRARY = [
       "ds"
     ],
     "publication": "draft",
-    "notice": "아직 게시하지 않은 초안입니다. 기존 자료의 비교 표와 Epic 공식 문서를 바탕으로 기본 용도와 예제를 준비했습니다. 프로젝트에서 사용한 경험을 학습 완료로 단정하지 않습니다.",
+    "notice": "아직 Velog에 올리지 않은 초안이다. 아래 예제는 Unreal에서 컴파일하거나 실행해보지 않았다.",
     "references": [
       {
         "label": "TArray 공식 문서",
@@ -338,7 +337,7 @@ window.TIL_LIBRARY = [
   {
     "id": "velog-20260706-001",
     "title": "C 배열과 포인터",
-    "summary": "C 언어의 배열과 배열의 주소 관계, 함수, 포인터를 학습했다.",
+    "summary": "배열 인덱스, 변수의 값과 주소, 포인터로 값 읽기.",
     "kind": "velog",
     "topic": "memory",
     "source_name": "Velog 원문",
@@ -346,20 +345,18 @@ window.TIL_LIBRARY = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "다루는 개념",
-        "text": "C 언어의 배열과 배열의 주소 관계, 함수, 포인터를 학습했다. C++의 cin, cout, getline도 함께 학습했다."
+        "title": "값과 주소",
+        "text": "a는 변수의 값, &a는 그 변수가 있는 주소다. 포인터 p에는 주소를 넣고 *p로 그곳의 값을 읽는다.",
+        "code": "int a = 10;\nint* p = &a;\n// p: a의 주소, &p: p 자체의 주소, *p: a의 값"
       },
       {
-        "title": "개념을 확인할 질문",
-        "items": [
-          "포인터는 왜 필요한가?"
-        ]
+        "title": "배열의 위치",
+        "text": "int a[5]는 int 다섯 개를 담는 배열이다. 첫 값은 a[0], 마지막 값은 a[4]로 읽는다. &a[1]과 a + 1은 같은 원소를 가리킨다."
       }
     ],
     "related_ids": [
       "20260706-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
     "topics": [
       "cpp",
       "memory"
@@ -369,7 +366,7 @@ window.TIL_LIBRARY = [
   {
     "id": "velog-20260709-001",
     "title": "클래스와 객체지향 기초",
-    "summary": "C++의 클래스와 접근 제어자, getter/setter, 생성자, 객체 생성 방법을 학습했다.",
+    "summary": "멤버 변수와 함수, 접근 제어, getter/setter와 생성자.",
     "kind": "velog",
     "topic": "oop",
     "source_name": "Velog 원문",
@@ -377,20 +374,17 @@ window.TIL_LIBRARY = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "다루는 개념",
-        "text": "C++의 클래스와 접근 제어자, getter/setter, 생성자, 객체 생성 방법을 학습했다."
+        "title": "class 안에 묶기",
+        "text": "관련된 변수와 함수를 하나로 묶는다. public은 밖에서도 접근할 수 있고 private은 클래스 안에서 사용한다. protected는 자식 클래스에서도 접근할 수 있다."
       },
       {
-        "title": "개념을 확인할 질문",
-        "items": [
-          "객체지향과 클래스가 왜 필요한가?"
-        ]
+        "title": "getter / setter와 생성자",
+        "text": "private 변수는 함수로 읽거나 바꾸도록 할 수 있다. 생성자는 클래스와 이름이 같고, 객체를 만들 때 멤버 값을 준비한다."
       }
     ],
     "related_ids": [
       "20260709-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
     "topics": [
       "cpp",
       "oop"
@@ -400,7 +394,7 @@ window.TIL_LIBRARY = [
   {
     "id": "velog-20260710-001",
     "title": "스택·힙과 동적 메모리",
-    "summary": "스택과 힙의 차이, new/delete, 댕글링 포인터, 메모리 누수, 스마트 포인터, 얕은 복사와 깊은 복사를 학습했다.",
+    "summary": "메모리 할당과 해제, 주소 복사와 데이터 복사의 차이.",
     "kind": "velog",
     "topic": "memory",
     "source_name": "Velog 원문",
@@ -408,21 +402,21 @@ window.TIL_LIBRARY = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "다루는 개념",
-        "text": "스택과 힙의 차이, new/delete, 댕글링 포인터, 메모리 누수, 스마트 포인터, 얕은 복사와 깊은 복사를 학습했다."
+        "title": "new / delete",
+        "text": "new로 만든 메모리는 delete로 해제한다. 해제한 주소를 계속 가리키는 것이 댕글링 포인터이고, 쓰지 않는 메모리를 해제하지 않고 남겨두는 것이 메모리 누수다."
       },
       {
-        "title": "개념을 확인할 질문",
-        "items": [
-          "스마트 포인터는 왜 필요한가?",
-          "얕은 복사와 깊은 복사는 무엇이 다른가?"
-        ]
+        "title": "주소만 복사하는 것과 데이터를 복사하는 것",
+        "text": "얕은 복사는 포인터의 주소를 복사해서 같은 곳을 가리킨다. 깊은 복사는 데이터를 다른 공간에 복사한다. 원본 메모리의 해제와 복사한 쪽의 관계가 헷갈렸던 부분이다."
+      },
+      {
+        "title": "스마트 포인터",
+        "text": "unique_ptr, shared_ptr, weak_ptr도 원문에 정리했다. 소유권과 참조 수 설명은 적었지만 당시에는 제대로 이해하지 못했다."
       }
     ],
     "related_ids": [
       "20260710-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
     "topics": [
       "cpp",
       "memory"
@@ -432,7 +426,7 @@ window.TIL_LIBRARY = [
   {
     "id": "velog-20260712-001",
     "title": "함수 오버로딩과 타입 변환",
-    "summary": "함수 오버로딩과 타입 변환의 종류를 학습했다.",
+    "summary": "같은 이름의 함수를 나누는 방법과 타입 변환에서 남은 질문.",
     "kind": "velog",
     "topic": "oop",
     "source_name": "Velog 원문",
@@ -440,20 +434,17 @@ window.TIL_LIBRARY = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "다루는 개념",
-        "text": "함수 오버로딩과 타입 변환의 종류를 학습했다. 정확한 타입 일치, 타입 승격, 표준 변환, 사용자 정의 변환을 정리하고 함수 템플릿을 접했다."
+        "title": "같은 이름의 함수",
+        "text": "매개변수의 타입이나 개수가 다르면 같은 이름의 함수를 나눠 만들 수 있다. 반환 타입만 바꾸는 것으로는 구분할 수 없다."
       },
       {
-        "title": "개념을 확인할 질문",
-        "items": [
-          "int에서 double로 변환될 때 왜 특정 변환 분류에 들어가지 않는가?"
-        ]
+        "title": "아직 헷갈리는 변환",
+        "text": "정확한 타입 일치, 승격, 표준 변환, 사용자 정의 변환 순서로 적었다. char나 short에서 int, float에서 double로 바뀌는 것은 승격인데 int에서 double은 왜 표준 변환인지 질문이 남았다."
       }
     ],
     "related_ids": [
       "20260712-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
     "topics": [
       "cpp",
       "oop"
@@ -463,7 +454,7 @@ window.TIL_LIBRARY = [
   {
     "id": "velog-20260716-001",
     "title": "함수 템플릿과 템플릿 클래스",
-    "summary": "함수 템플릿과 템플릿 클래스를 학습했다.",
+    "summary": "T로 타입을 바꿔 쓰는 함수와 Array 클래스 예제.",
     "kind": "velog",
     "topic": "oop",
     "source_name": "Velog 원문",
@@ -471,25 +462,18 @@ window.TIL_LIBRARY = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "다루는 개념",
-        "text": "함수 템플릿과 템플릿 클래스를 학습했다. 하나의 함수나 클래스가 여러 자료형에서 동작하도록 만드는 방법을 접했다."
+        "title": "값 교환 함수",
+        "text": "T에 타입을 넣어 같은 함수를 쓴다. T&로 받으면 함수 안에서 원래 변수의 값을 바꿀 수 있다. 아래는 원문에 있는 값 교환 부분이다.",
+        "code": "template <typename T>\nvoid swapValuse(T& a, T& b) {\n    T temp = a;\n    a = b;\n    b = temp;\n}"
       },
       {
-        "title": "문법·코드 키워드",
-        "text": "template <typename T> void printarr(); / template <typename T> void swapValuse(T& a, T& b); / template <typename T> class Array"
-      },
-      {
-        "title": "개념을 확인할 질문",
-        "items": [
-          "auto와 템플릿은 어떤 차이가 있는가?",
-          "템플릿을 사용할 때 왜 자료형을 지정해야 하는가?"
-        ]
+        "title": "Array 객체 만들기",
+        "text": "Array 클래스에 T data[100]을 두었다. 원문에는 Array(int)arr로 적었는데 객체 선언은 Array<int> arr처럼 꺾쇠를 쓴다. auto와 템플릿에서 타입을 정하는 방식은 더 헷갈렸던 부분이다."
       }
     ],
     "related_ids": [
       "20260716-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. 기존 저장 내용을 사용했으며 원문 전체를 이번에 재검증하지 않았습니다.",
     "topics": [
       "cpp",
       "oop"
@@ -499,7 +483,7 @@ window.TIL_LIBRARY = [
   {
     "id": "velog-20260810-001",
     "title": "Unreal C++ AItem 헤더 구조",
-    "summary": "AItem 헤더의 선언, 컴포넌트 구성, Actor 생명주기 함수를 정리했다.",
+    "summary": "Item.h에 선언한 변수와 함수, SceneRoot와 메시 연결.",
     "kind": "velog",
     "topic": "unreal",
     "source_name": "Velog 원문",
@@ -507,14 +491,22 @@ window.TIL_LIBRARY = [
     "status": "원문 확인 · 핵심 재구성",
     "sections": [
       {
-        "title": "다루는 개념",
-        "text": "Unreal Engine C++에서 AItem 클래스를 만들며 헤더 파일이 클래스의 변수와 함수를 선언하는 역할을 한다는 점을 정리했다. AItem은 AActor를 상속하고, SceneRoot와 StaticMeshComp를 컴포넌트로 선언했다."
+        "title": "Item.h",
+        "text": "AItem은 AActor를 상속받는다. 헤더에는 클래스가 가진 변수와 함수를 선언하고 cpp에 동작을 작성한다. Item.generated.h는 include 목록 마지막에 둔다."
+      },
+      {
+        "title": "컴포넌트 연결",
+        "text": "SceneRoot를 루트로 두고 StaticMeshComp를 그 아래에 붙인다. 기준점과 화면에 보이는 메시를 나눈 구조다.",
+        "code": "SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT(\"SceneRoot\"));\nSetRootComponent(SceneRoot);\nStaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT(\"StaticMesh\"));\nStaticMeshComp->SetupAttachment(SceneRoot);"
+      },
+      {
+        "title": "Actor 함수",
+        "text": "PostInitializeComponents, BeginPlay, Destroyed, EndPlay를 헤더에 선언했다. 각 시점에 할 일은 cpp에서 작성한다."
       }
     ],
     "related_ids": [
       "20260810-001"
     ],
-    "notice": "구현 과정과 회고는 관련 실습 기록에 남기고 개념 부분만 발췌했습니다. Velog 원문을 확인해 기존 정리와 대조했습니다.",
     "topics": [
       "unreal"
     ],
@@ -522,33 +514,22 @@ window.TIL_LIBRARY = [
   },
   {
     "id": "file-note-tem-014",
-    "title": "Unreal 수업 노트 · 빌드와 리플렉션의 연결",
-    "summary": "UBT·UHT·매크로·GC 수업 메모의 학습 범위와 남은 질문을 구분합니다.",
+    "title": "Unreal 수업 메모 · 빌드와 매크로",
+    "summary": "Build.cs, UBT·UHT, UPROPERTY와 GC를 보면서 남은 질문.",
     "kind": "note",
     "topic": "unreal",
     "project": null,
     "source_name": "CH3 첫 라이브 정리.txt / CH3 분반수업.txt",
     "status": "정리 중인 노트 · 확정 개념과 구분",
-    "notice": "원본의 질문과 설계 고민을 보존한 재구성입니다. 완료된 기능이나 검증된 개념 사전으로 읽지 않습니다.",
+    "notice": "날짜가 없는 수업 메모다. 아래 내용은 아직 남아 있는 질문이다.",
     "sections": [
       {
-        "title": "메모에 남긴 학습 범위",
-        "text": "폴더·include 경로와 Build.cs, 매크로, UHT, 리플렉션, GC와 UPROPERTY의 관계를 라이브 학습 메모로 남겼다. 분반수업 메모에는 프로퍼티 지정자, 참조 추적, 포인터 유효성과 스마트 포인터에 관한 질문이 이어진다."
+        "title": "빌드와 매크로",
+        "text": "include 경로와 Build.cs를 보고 UBT, UHT, UCLASS, UPROPERTY를 적었다. 매크로와 함수가 처리되는 시점은 어떻게 다를까?"
       },
       {
-        "title": "생각을 정리한 과정",
-        "text": "매크로와 함수의 동작 시점, 리플렉션의 의미와 참조 추적을 이해하려 했으며 일부 설명에 물음표와 이해 확인 질문이 남아 있다. 프로퍼티 지정자가 에디터 노출과 GC 참조 추적에 관여하는 흐름을 정리했다. 리플렉션에 등록되지 않은 포인터와 IsValid의 관계, 스마트 포인터의 유효성 확인에 대한 설명도 기록했다."
-      },
-      {
-        "title": "아직 확인할 내용",
-        "items": [
-          "날짜 확인",
-          "원문의 부정확하거나 단순화된 표현을 현재 개념 정리의 정답으로 옮기지 않음",
-          "수업 날짜 확인",
-          "스마트 포인터 종류가 특정되지 않아 참조 유지·유효성·GC 설명을 현재 개념 정리에 쓰기 전 검증 필요",
-          "IsValid에 대한 원문 설명을 포인터 전반에 일반화하지 않음",
-          "CDO 개념을 배웠다고 용어 목록만으로 확장하지 않음"
-        ]
+        "title": "리플렉션과 GC",
+        "text": "UPROPERTY로 등록한 값은 에디터 노출과 GC에 어떻게 연결될까? IsValid로 어디까지 확인할 수 있을까? 스마트 포인터와 UObject의 메모리 관리가 어떻게 다른지도 아직 헷갈린다."
       }
     ],
     "related_ids": [
@@ -562,27 +543,23 @@ window.TIL_LIBRARY = [
   {
     "id": "file-continue",
     "title": "C++ 실습 노트 · continue와 주석",
-    "summary": "직접 작성한 반복문 예제와 문서화 주석 메모를 분리해 읽습니다.",
+    "summary": "continue를 만나면 어떤 출력문을 건너뛰는지 써본 코드.",
     "kind": "note",
     "topic": "cpp",
     "source_name": "26.08.24.txt",
     "status": "원본 예제 보존 · 질문 별도 표시",
     "sections": [
       {
-        "title": "실습의 목적",
-        "text": "continue를 검색한 뒤, 반복문 안에서 출력 흐름이 달라지는지 직접 코드를 작성해 확인하려고 한 기록입니다."
+        "title": "continue 써보기",
+        "text": "짝수일 때 continue를 만나면 뒤의 출력문을 건너뛰는지 보려고 코드를 썼다."
       },
       {
         "title": "직접 작성한 예제",
         "code": "int main()\r\n{\r\n\tfor (int i = 0; i < 10; i++)\r\n\t{\r\n\t\tstd::cout << \"강아지\\n\";\r\n\t\tif (i % 2 == 0)\r\n\t\t{\r\n\t\t\tstd::cout << i <<std::endl;\r\n\t\t\tcontinue;\r\n\t\t}\r\n\t\tstd::cout << \"고양이\\n\";\r\n\t}\r\n}"
       },
       {
-        "title": "예제에서 다시 볼 지점",
-        "text": "짝수 조건을 만났을 때 continue 다음의 출력문에 도달하는지, 다음 반복에서는 어떤 출력부터 다시 시작하는지 순서대로 추적합니다."
-      },
-      {
         "title": "주석 메모",
-        "text": "원본에는 //, /* */와 /// 형태를 비교하고 @param 및 XML 형태의 문서화 주석을 기록했습니다. 도구별 문서 추출과 표시 방식에 관한 설명은 별도 확인이 필요한 메모로 남깁니다."
+        "text": "//, /* */, /// 형태와 @param, XML 형태의 주석을 같이 적었다. 도구에서 어떻게 표시되는지는 아직 확인하지 않았다."
       }
     ],
     "related_ids": [
