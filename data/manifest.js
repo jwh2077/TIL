@@ -827,6 +827,26 @@ window.TIL_INDEX = {
       "activity": "team"
     },
     {
+      "id": "20260921-priest",
+      "date": "2026-09-21",
+      "date_end": "2026-09-23",
+      "date_label": "2026-09-21 ~ 2026-09-23",
+      "month": "2026-09",
+      "title": "파츠 참조와 근접 공격 연결",
+      "summary": "GameInstance에서 파츠 객체를 찾는 흐름을 다시 보고, 몬스터의 공격 범위와 Anim Notify에서 피해를 주는 코드를 연결했다.",
+      "project": "ProjectPriest",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "Blueprint",
+        "AI",
+        "디버깅"
+      ],
+      "file": "data/2026/09/2026-09-21_2026-09-23.js",
+      "activity": "team"
+    },
+    {
       "id": "20260802-shop",
       "date": "2026-08-02",
       "date_end": null,

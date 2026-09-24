@@ -6,15 +6,16 @@ window.TIL_ALGORITHMS = [
     "url": "https://leetcode.com/problems/convert-1d-array-into-2d-array/",
     "status": "통과 확인",
     "problem": "순서를 유지해 m행 n열 배열을 만든다. 불가능하면 빈 배열을 반환한다.",
-    "date": "2026-08-17",
+    "date": "2026-08-14",
     "summary": "1차원 배열의 순서를 유지하면서 행과 열의 위치를 직접 계산해 2차원 배열로 옮겼다.",
     "question": "빈 2차원 vector에 A[M]이나 A[M, N]으로 바로 값을 넣으려 했다. 먼저 크기를 만들어야 했고 행과 열도 따로 골라야 했다.",
-    "attempt": "원소를 읽는 순서대로 num을 증가시키는 생각은 그대로 유지했다. 먼저 m × n 크기의 결과 배열을 만든 다음, 바깥 반복문을 행 M, 안쪽 반복문을 열 N으로 두고 A[M][N]에 original[num]을 넣었다.",
+    "attempt": "original.size()가 m*n과 같은지 먼저 검사했다. 같으면 m행 n열 배열을 만들고, num을 하나씩 늘리면서 A[M][N]에 original[num]을 넣었다.",
     "turning": "불가능한 경우에는 빈 배열을 반환한다. 제출 코드의 vector<vector<int>>{ 0 }도 빈 바깥 vector가 되지만 return {}라고 적으면 뜻이 더 바로 보인다.",
     "learned": [
       "2차원 vector는 행의 수와 각 행의 열 수를 먼저 만들 수 있다.",
       "A[M][N]에서 첫 인덱스는 행, 두 번째 인덱스는 열이다.",
-      "불가능한 경우의 반환 형태까지 문제 조건과 정확히 맞아야 한다."
+      "불가능한 경우의 반환 형태까지 문제 조건과 정확히 맞아야 한다.",
+      "학습일은 8월 14일이고, 코드를 질문한 대화는 8월 17일에 남아 있다."
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) \n    {\n        if(original.size() != m * n)\n        return vector<vector<int>>{ 0 };\n        vector<vector<int>>A(m, vector<int>(n));\n        int num = 0;\n        for(int M = 0; M < m; M++)\n        {\n            for(int N = 0; N < n; N++)\n            {\n                A[M][N] = original[num];\n                num++;\n            }\n        }\n        return A;\n    }\n};",
@@ -74,9 +75,9 @@ window.TIL_ALGORITHMS = [
     "problem": "1부터 n²까지 시계 방향 나선으로 채운다.",
     "date": "2026-08-17",
     "summary": "위·아래·왼쪽·오른쪽 경계를 줄여 가며 나선형으로 행렬을 채웠다.",
-    "question": "한 번의 중첩 반복문으로는 오른쪽, 아래, 왼쪽, 위로 방향이 계속 바뀌는 이동을 표현하기 어려웠다. 대신 아직 채우지 않은 사각형의 네 경계를 변수로 두었다.",
+    "question": "처음부터 ux/dx/uy/dy를 두고 네 방향을 따로 채우려 했다. 그런데 n-uy, n-dx로 좌표를 다시 계산하면서 배열 범위를 벗어났고, while 조건도 여러 번 바꿨다.",
     "attempt": "ux와 dx를 위·아래 행, dy와 uy를 왼쪽·오른쪽 열로 사용했다. 위쪽 행을 오른쪽으로 채운 뒤 ux를 늘리고, 오른쪽 열을 아래로 채운 뒤 uy를 줄이는 식으로 한 겹씩 안쪽으로 이동했다.",
-    "turning": "처음에는 n-uy, n-dx처럼 좌표를 다시 계산했지만 경계 변수 자체가 이미 접근할 좌표라는 점을 확인했다. 홀수 크기의 마지막 한 칸에서는 첫 번째 for가 값을 넣고, 뒤집힌 범위의 나머지 for는 조건에서 자연스럽게 종료된다.",
+    "turning": "배열에 접근할 때 경계 변수 자체를 쓰도록 고쳤다. while(ux == dx), while(ux != dx)로 반복을 끝내려던 부분도 num을 기준으로 바꿨다. 1부터 n*n까지 채우고 멈추도록 하니 마지막 한 칸도 처리할 수 있었다.",
     "learned": [
       "방향 이동 문제는 현재 위치보다 유효한 경계를 관리하는 편이 단순할 수 있다.",
       "각 방향을 처리한 직후 해당 경계를 한 칸 줄인다.",
@@ -84,7 +85,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> generateMatrix(int n) {\n        vector<vector<int>>A(n,vector<int>(n));\n        int num = 1;\n        int ux = 0, dx = n - 1, uy = n - 1, dy = 0;\n        while(n*n >= num)\n        {\n            for(int i = dy; i <= uy;i++) A[ux][i] = num++;\n            ux++;\n            for(int i = ux; i <= dx;i++) A[i][uy] = num++;\n            uy--;\n            for(int i = uy; i >= dy;i--) A[dx][i] = num++;\n            dx--;\n            for(int i = dx; i >= ux;i--) A[i][dy] = num++;\n            dy++;\n        }\n        return A;\n    }\n};",
-    "verification": "LeetCode Accepted · 20 / 20",
+    "verification": "LeetCode Accepted · 20 / 20 · 당시 결과: Runtime 0 ms / Beats 100.00%",
     "submission_url": "https://leetcode.com/submissions/detail/2109446133/"
   },
   {
@@ -114,8 +115,8 @@ window.TIL_ALGORITHMS = [
     "problem": "트리 모든 노드의 값이 같은지 확인한다.",
     "date": "2026-09-14",
     "summary": "왼쪽만 따라가면 놓치는 노드가 있어 양쪽 자식을 재귀로 돌았다.",
-    "question": "처음 코드는 왼쪽 끝까지 내려간 다음 일부 오른쪽 자식만 검사했다. 이 방식으로는 오른쪽 서브트리 안쪽의 노드를 빠뜨릴 수 있었다.",
-    "attempt": "재귀 함수 tree가 자식 값을 반환하고 부모 값과 비교하도록 바꿨다. 불일치가 나오면 멤버 변수 A를 false로 바꾸고 이후 호출을 빠르게 종료하려 했다.",
+    "question": "8월 17일에는 왼쪽 끝까지 내려간 다음 일부 오른쪽 자식만 검사하는 코드를 적었다. 이 방식으로는 오른쪽 가지 안쪽의 노드를 놓칠 수 있었다. 이때 DFS/BFS가 뭔지도 물었다.",
+    "attempt": "9월 14일에는 재귀 함수 tree가 자식 값을 반환하고 부모 값과 비교하도록 바꿨다. 불일치가 나오면 멤버 변수 A를 false로 바꾸고 이후 호출을 빠르게 종료하려 했다.",
     "turning": "자식 함수가 반환한 값과 현재 노드 값을 비교한다. 한 번이라도 다르면 멤버 변수 A를 false로 두는 방식으로 통과했다.",
     "learned": [
       "한쪽 끝만 내려가면 반대쪽 가지의 노드를 놓친다.",
@@ -444,20 +445,22 @@ window.TIL_ALGORITHMS = [
     "title": "백만 장자 프로젝트",
     "group": "greedy",
     "url": "https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5LrsUaDxcDFAXc",
-    "status": "채점 미확인",
+    "status": "통과 확인",
     "problem": "하루 구매 제한 아래 여러 날 거래의 최대 이익을 구한다.",
     "date": "2026-09-02",
-    "summary": "미래의 최고 판매가를 뒤에서 갱신하며 매일 살지 말지를 한 번의 순회로 결정했다.",
-    "question": "앞에서 볼 때는 현재보다 비싼 날이 뒤에 있는지 계속 찾아야 했다. 남은 값 중 가장 비싼 날을 매번 검색하면 반복이 겹친다.",
-    "attempt": "가격을 모두 저장한 뒤 마지막 날부터 앞으로 이동했다. 현재 가격이 지금까지 본 최고 가격보다 크면 최고 가격을 갱신하고, 작으면 최고 가격과의 차이를 이익에 더했다.",
-    "turning": "뒤에서 순회하면 maxPrice는 현재 날 이후의 최고 판매가라는 의미를 유지한다. 이 문제는 하루마다 하나씩 살 수 있으므로 주식 한 번 거래 문제와 달리 가능한 차익을 모두 누적한다. 합은 int를 넘을 수 있어 long long이 필요하고 total/totoal 오타도 통일해야 한다.",
+    "summary": "뒤에서부터 가격을 보며 Maxprice를 바꿨다. 합을 int로 저장한 제출은 실패했고, long long으로 바꾼 뒤 통과했다.",
+    "question": "9월 1일에 문제를 보고 앞에서부터 가격을 비교했다. 뒤에 더 비싼 날이 있는지 찾다가, 거꾸로 보면 어떨지 설명을 들었다. maxPrice도 계속 바꿔야 하는지 물었다.",
+    "attempt": "9월 2일 새벽에는 마지막 날부터 앞으로 돌면서 가격을 비교하는 코드를 적었다. 더 비싼 가격을 만나면 Maxprice를 바꾸고, 더 싸면 그 차이를 합에 더했다. 작성 중에는 total과 totoal을 섞어 쓴 오타도 있었다.",
+    "turning": "9월 2일 04:55 제출은 Fail이었다. 합을 담는 totoal의 자료형을 int에서 long long으로 바꿨고, 04:56 제출은 Pass였다. 두 제출에서 달라진 코드는 이 자료형뿐이었다. 가격을 여러 날 더하면 합이 int 범위를 넘을 수 있었다.",
     "learned": [
-      "미래 최댓값을 반복 검색하는 대신 역순으로 한 번 갱신한다.",
-      "비슷한 가격 문제라도 거래 횟수 조건에 따라 최대값 저장과 이익 누적이 달라진다.",
-      "자료형과 변수 이름도 채점 결과를 바꾸는 구현 조건이다."
+      "Maxprice는 뒤에서부터 본 가격 중 가장 큰 값으로 두면 된다.",
+      "하루 가격은 int에 들어가도 여러 날의 이익을 더한 합은 long long이 필요했다.",
+      "통과한 제출에 있던 변수 이름 totoal과 쓰지 않은 my, index, n도 그대로 남겼다.",
+      "원문 문제의 제출이력에서 My제출을 선택하면 9월 2일의 두 제출을 볼 수 있다. 로그인이 필요하다."
     ],
-    "code_title": "역순 누적 풀이",
-    "solution_code": "long long profit = 0;\nint maxPrice = 0;\n\nfor (int i = prices.size() - 1; i >= 0; i--) {\n    if (prices[i] > maxPrice) {\n        maxPrice = prices[i];\n    } else {\n        profit += maxPrice - prices[i];\n    }\n}"
+    "code_title": "통과한 제출 코드",
+    "solution_code": "#include<iostream>\n#include <vector>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin >> T;\n    for (test_case = 1; test_case <= T; ++test_case)\n    {\n        int c;\n        long long totoal = 0;\n        int Maxprice = 0;\n\n        cin >> c;\n\n        vector<int> market(c);\n        vector<int> my(c);\n\n        for (int i = 0; i < c; i++)\n        {\n            cin >> market[i];\n        }\n\n        int index = 0;\n        int n = 0;\n\n        for (int i = c - 1; i >= 0; i--)\n        {\n            if (Maxprice < market[i])\n            {\n                Maxprice = market[i];\n            }\n            else\n            {\n                totoal += Maxprice - market[i];\n            }\n        }\n        cout << \"#\" << test_case << \" \" << totoal << endl;\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
+    "verification": "SWEA Pass · 제출 2026-09-02 04:56 · 834 ms / 13,728 KB"
   },
   {
     "id": "swea-16910",
@@ -487,7 +490,7 @@ window.TIL_ALGORITHMS = [
     "status": "수정 중",
     "problem": "앞뒤 값보다 모두 크거나 모두 작은 노드(임계점)를 찾고 그 사이의 최소·최대 거리를 구한다.",
     "date": "2026-09-01",
-    "summary": "연결 리스트에서 이전·현재·다음 값을 비교해 임계점의 위치와 거리 계산을 분리했다.",
+    "summary": "이전·현재·다음 값을 비교해 임계점을 찾고, 첫 임계점과 다음 임계점 사이의 거리를 구하려 했다. 통과 여부는 확인되지 않았다.",
     "question": "처음에는 임계점 노드 자체를 first와 last에 저장하고 다시 순회해 거리를 세려 했다. 위치와 거리 변수가 섞이면서 최소 거리의 기준이 불분명해졌다.",
     "attempt": "findpoint에서 지역 최솟값·최댓값을 판정하고 num, num2를 증가시키려 했다. 벡터 초기화 문법과 nullptr 접근을 수정했지만 num2 증가와 첫 임계점 처리, p의 유효성 검사가 남았다.",
     "turning": "첫 번째 위치와 직전 위치를 숫자로 저장하면 다시 노드를 따라가지 않아도 거리를 구할 수 있다. 아래 코드는 두 번 돌던 시도 뒤에 정리한 참고 풀이이며 통과 제출은 확인되지 않았다.",
@@ -679,5 +682,71 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <vector>\nusing namespace std;\nint solution(vector<int> ingredient) {\n    int answer = 0;\n    for (int i = 0; ingredient.size() > i; i++) {\n        if (ingredient[i] == 1 && ingredient[i + 3] == 1 &&\n            ingredient[i + 1] == 2 && ingredient[i + 2] == 3) {\n            ingredient.erase(ingredient.begin() + i, ingredient.begin() + i + 4);\n            i -= 4;\n            if (i < 0) i = -1;\n            answer++;\n        }\n    }\n    return answer;\n}"
+  },
+  {
+    "id": "pg-12977",
+    "title": "소수 만들기",
+    "group": "bruteforce",
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12977",
+    "status": "수정 중",
+    "date": "2026-09-21",
+    "problem": "서로 다른 세 수를 골라 더했을 때 합이 소수가 되는 조합의 수를 센다.",
+    "summary": "세 인덱스를 겹치지 않게 고르는 반복문을 만들고, 합의 중복이 아니라 조합의 수를 세어야 한다는 점을 확인했다.",
+    "question": "같은 합이 여러 번 나오면 한 번만 세야 하는지 고민해 set을 생각했다. 소수 판별에서는 홀수와 소수를 섞어 생각했고, 약수 하나를 검사할 때마다 answer를 늘리기도 했다.",
+    "attempt": "a < b < c가 되도록 중첩 반복문을 만들었다. 각 합은 소수라고 가정한 뒤 약수를 찾으면 false로 바꾸고, 끝까지 약수가 없을 때만 answer를 한 번 늘리는 형태로 바꿨다.",
+    "turning": "문제가 세 수의 합 종류가 아니라 세 수를 고르는 방법의 수를 요구하므로 같은 합도 다른 조합이면 따로 센다. 소수 판별도 '어떤 수로 안 나누어진다'가 아니라 '약수가 하나라도 나오면 실패'로 뒤집어 보았다.",
+    "learned": [
+      "a < b < c로 순회하면 같은 세 원소를 순서만 바꿔 다시 세지 않는다.",
+      "같은 합이 나와도 선택한 인덱스 조합이 다르면 각각 센다.",
+      "answer는 약수 검사 횟수가 아니라 소수인 조합의 수라서 판별이 끝난 뒤 증가해야 한다.",
+      "마지막 코드에는 반복문 변수 b와 bool b가 겹치고 짝수 판별이 빠진 문제가 남아 있다."
+    ],
+    "code_title": "마지막으로 남긴 수정 중 코드",
+    "solution_code": "#include <vector>\n#include <iostream>\nusing namespace std;\n\nint solution(vector<int> nums) {\n    int answer = 0;\n    for(int a = 0; a < nums.size(); a++) {\n        for(int b = a + 1; b < nums.size(); b++) {\n            for(int c = b + 1; c < nums.size(); c++) {\n                int num = nums[a] + nums[b] + nums[c];\n                bool b = true;\n                for(int i = 3; i < num; i += 2) {\n                    if(num % i == 0) {\n                        b = false;\n                        break;\n                    }\n                }\n                if(b) answer++;\n            }\n        }\n    }\n    return answer;\n}",
+    "verification": "실제 제출 및 통과 여부 미확인 · 마지막 코드에 수정할 부분이 남아 있음"
+  },
+  {
+    "id": "pg-12945",
+    "title": "피보나치 수",
+    "group": "dp",
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12945",
+    "status": "제출 미확인",
+    "date": "2026-09-22",
+    "problem": "n번째 피보나치 수를 1234567로 나눈 나머지를 반환한다.",
+    "summary": "F(n)까지 저장하려고 vector 크기를 n+1로 고치고, 값이 커진 뒤가 아니라 더할 때마다 나머지를 저장했다.",
+    "question": "vector<int> Fibonacci(n)으로 F(n)에 접근했고 실패 원인을 오버플로우로만 생각했다. 더 큰 자료형을 쓰거나 마지막에만 나머지를 구하는 방법도 시도했다.",
+    "attempt": "F(0)과 F(1)을 먼저 넣고 2부터 n까지 앞의 두 값을 더했다. 배열 범위를 맞춘 뒤 각 계산에 % 1234567을 적용했다.",
+    "turning": "n칸 배열의 마지막 인덱스는 n-1이라 F(n)을 저장하려면 n+1칸이 필요했다. 또한 큰 피보나치 수를 만든 뒤 나누면 이미 오버플로우가 나므로 중간 계산마다 나머지를 남겼다.",
+    "learned": [
+      "F(0)부터 F(n)까지 저장하려면 vector 크기는 n+1이다.",
+      "(a+b)%m은 ((a%m)+(b%m))%m과 같아서 계산 중간에 나머지를 구할 수 있다.",
+      "마지막 코드의 로직은 정리됐지만 실제 채점 결과는 대화에서 확인되지 않았다."
+    ],
+    "code_title": "대화에서 마지막으로 정리한 코드",
+    "solution_code": "#include <vector>\nusing namespace std;\n\nint solution(int n) {\n    vector<int> Fibonacci(n + 1);\n    Fibonacci[0] = 0;\n    Fibonacci[1] = 1;\n    for(int i = 2; i <= n; i++) {\n        Fibonacci[i] = (Fibonacci[i - 1] + Fibonacci[i - 2]) % 1234567;\n    }\n    return Fibonacci[n];\n}",
+    "verification": "대화에서 로직 확인 · 실제 프로그래머스 제출 결과 미확인"
+  },
+  {
+    "id": "swea-6019",
+    "title": "기차 사이의 파리",
+    "group": "math",
+    "url": "https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWajaTmaZw4DFAWM",
+    "status": "통과 확인",
+    "date": "2026-09-23",
+    "problem": "서로 다가오는 두 기차가 충돌할 때까지 일정한 속력으로 왕복하는 파리의 이동 거리를 구한다.",
+    "summary": "파리의 왕복을 하나씩 계산하지 않고 두 기차가 충돌할 때까지의 시간에 파리 속력을 곱했다. 출력 정밀도를 지정한 여섯 번째 제출에서 통과했다.",
+    "question": "샘플에서는 200이 나왔지만 08:29부터 08:42까지 다섯 번의 제출이 오답이었다. B 변수에 기차 B의 속력을 넣은 뒤 다시 파리 속력을 덮어써도 되는지와 실수 출력 방식을 확인했다.",
+    "attempt": "D/(A+B)*F 공식을 사용했다. 처음에는 float를 썼고 출력 형식을 빠뜨렸다. setprecision을 쓰면서 <iomanip>을 넣지 않아 컴파일 오류도 겪었다. D를 double로 바꾸고 테스트 케이스별 줄바꿈과 # 번호를 출력했지만 08:42 제출까지는 Fail이었다.",
+    "turning": "두 기차 사이 거리는 매시간 A+B만큼 줄어들어 충돌 시간은 D/(A+B)가 된다. 계산식은 그대로 둔 채 <iomanip>을 추가하고 fixed와 setprecision(10)으로 출력한 08:44 제출이 Pass를 받았다.",
+    "learned": [
+      "반복되는 왕복을 직접 더하지 않고 전체 이동 시간을 먼저 구할 수 있다.",
+      "정수와 실수가 섞인 나눗셈에서는 어느 피연산자가 실수인지 확인한다.",
+      "setprecision을 쓰려면 <iomanip>이 필요하다.",
+      "실수 답은 계산 자료형뿐 아니라 문제에서 요구하는 오차 범위에 맞춰 출력 정밀도도 확인해야 한다."
+    ],
+    "code_title": "통과한 제출 코드",
+    "solution_code": "#include<iostream>\n#include <iomanip>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin >> T;\n    for(test_case = 1; test_case <= T; ++test_case)\n    {\n        double D;\n        cin >> D;\n        int A;\n        cin >> A;\n        int B;\n        cin >> B;\n        A += B;\n        cin >> B;\n        D = D / A;\n        D *= B;\n        cout << \"#\" << test_case << \" \" << fixed << setprecision(10) << D << endl;\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
+    "verification": "SWEA Pass · 제출 2026-09-23 08:44 · 512 ms / 5,832 KB",
+    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AWajaTmaZw4DFAWM"
   }
 ];
