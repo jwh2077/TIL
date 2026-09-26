@@ -847,6 +847,34 @@ window.TIL_INDEX = {
       "activity": "team"
     },
     {
+      "id": "20260924-priest-concepts",
+      "date": "2026-09-24",
+      "date_end": null,
+      "date_label": "2026-09-24",
+      "month": "2026-09",
+      "title": "Behavior Tree 구성요소 역할 나누기",
+      "summary": "Behavior Tree 안의 Composite, Task, Decorator, Service를 나누고 AI Perception과 Blackboard가 연결되는 위치를 정리했다.",
+      "project": "ProjectPriest",
+      "primary_topic": "unreal",
+      "tags": ["Unreal", "AI", "Behavior Tree", "Blackboard", "개념정리"],
+      "file": "data/2026/09/2026-09-24_2026-09-25.js",
+      "activity": "team"
+    },
+    {
+      "id": "20260925-priest-ai",
+      "date": "2026-09-25",
+      "date_end": null,
+      "date_label": "2026-09-25",
+      "month": "2026-09",
+      "title": "감지 상실 처리와 근접 공격 판정 점검",
+      "summary": "시야가 끊겼을 때 Player를 바로 지우는 흐름을 다시 보고, 간헐적으로 빠지는 근접 공격 판정은 Collision의 높이와 실제 Overlap을 확인했다.",
+      "project": "ProjectPriest",
+      "primary_topic": "unreal",
+      "tags": ["Unreal", "C++", "AI Perception", "Collision", "디버깅"],
+      "file": "data/2026/09/2026-09-24_2026-09-25.js",
+      "activity": "team"
+    },
+    {
       "id": "20260802-shop",
       "date": "2026-08-02",
       "date_end": null,
