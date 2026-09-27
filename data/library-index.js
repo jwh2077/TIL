@@ -351,5 +351,51 @@ window.TIL_LIBRARY_INDEX = [
       "cpp"
     ],
     "publication": "reference"
+  },
+  {
+    "id": "project-priest-ai-notes",
+    "title": "AI와 Behavior Tree의 역할 나누기",
+    "summary": "감지, 상태 저장, 행동 실행을 나눠 보고 Selector·Sequence·Task·Decorator·Service의 역할을 정리했다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "로컬 개념 문서에서 정리",
+    "source_name": "ProjectPriest_Unreal_AI_BT_Notes.html",
+    "source_url": "",
+    "project": "ProjectPriest",
+    "notice": "개념을 정리한 문서다. 이후 구현과 디버깅 결과는 아래 관련 실습에서 따로 본다.",
+    "related_ids": [
+      "20260924-priest-concepts",
+      "20260907-priest",
+      "20260910-priest",
+      "20260925-priest-ai"
+    ],
+    "references": []
+  },
+  {
+    "id": "project-priest-oop-notes",
+    "title": "상속·Component·Interface와 객체의 역할",
+    "summary": "무엇의 한 종류인지, 무엇을 가지고 있는지, 무엇을 할 수 있는지를 나누고 객체가 맡을 기능을 정리했다.",
+    "kind": "note",
+    "topic": "oop",
+    "topics": [
+      "unreal",
+      "oop"
+    ],
+    "publication": "reference",
+    "status": "로컬 개념 문서에서 정리",
+    "source_name": "ProjectPriest_Unreal_OOP_Concepts.html",
+    "source_url": "",
+    "project": "ProjectPriest",
+    "notice": "원문에 나온 개념과 설명용 예시를 정리했다. 예시의 모든 구조가 프로젝트에 적용됐다는 뜻은 아니다.",
+    "related_ids": [
+      "20260924-priest-concepts",
+      "note-tem-011",
+      "20260715-001"
+    ],
+    "references": []
   }
 ];

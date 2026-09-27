@@ -1,5 +1,6 @@
 # Keep local source material out of the repository.
 /local/
+/00 시작하기/
 /개인 메모/
 /*.zip
 

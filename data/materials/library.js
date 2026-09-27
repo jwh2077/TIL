@@ -200,8 +200,8 @@ window.TIL_LIBRARY = [
         "html": "\n<h2>1. sort</h2>\n<pre><code>sort(vec.begin(), vec.end()); // 기본 오름차순\nsort(vec.begin(), vec.end(), greater&lt;&gt;()); // 내림차순</code></pre>\n<p>일반적으로 O(n log n)이다.</p>\n<h2>2. find / reverse</h2>\n<pre><code>find(vec.begin(), vec.end(), value); // O(n)\nreverse(vec.begin(), vec.end());     // O(n)</code></pre>\n<h2>3. 컨테이너별 정렬</h2>\n<pre><code>sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우\n\nlst.sort();                   // list는 자체 sort 사용</code></pre>\n<blockquote><code>list</code>는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 <code>std::sort()</code>를 사용할 수 없고, 멤버 함수 <code>list::sort()</code>를 사용한다.</blockquote>\n\n"
       },
       {
-      "title": "Graph",
-      "text": "DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다.",
+        "title": "Graph",
+        "text": "DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다.",
         "html": "\n<h2>1. 개념</h2>\n<p>정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다.</p>\n<h2>2. Vector를 이용한 인접 리스트</h2>\n<pre><code>vector&lt;vector&lt;int&gt;&gt; graph(4);\n\ngraph[0].push_back(1);\ngraph[0].push_back(2);</code></pre>\n<p>각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다.</p>\n<h2>3. 대표 알고리즘</h2>\n<table><tr><th>알고리즘</th><th>주로 사용하는 자료구조</th><th>목적</th></tr>\n<tr><td>BFS</td><td>Queue</td><td>너비 우선 탐색</td></tr>\n<tr><td>DFS</td><td>Stack / 재귀</td><td>깊이 우선 탐색</td></tr>\n<tr><td>Dijkstra</td><td>Priority Queue</td><td>한 시작점에서 최단 거리</td></tr>\n</table>\n\n"
       },
       {
@@ -572,5 +572,123 @@ window.TIL_LIBRARY = [
       "cpp"
     ],
     "publication": "reference"
+  },
+  {
+    "id": "project-priest-ai-notes",
+    "title": "AI와 Behavior Tree의 역할 나누기",
+    "summary": "감지, 상태 저장, 행동 실행을 나눠 보고 Selector·Sequence·Task·Decorator·Service의 역할을 정리했다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "로컬 개념 문서에서 정리",
+    "source_name": "ProjectPriest_Unreal_AI_BT_Notes.html",
+    "source_url": "",
+    "project": "ProjectPriest",
+    "notice": "개념을 정리한 문서다. 이후 구현과 디버깅 결과는 아래 관련 실습에서 따로 본다.",
+    "sections": [
+      {
+        "title": "감지와 행동을 나눠 보기",
+        "text": "AI Perception은 주변을 감지하고, Blackboard는 판단에 쓸 상태를 보관한다. Behavior Tree는 그 상태를 보고 어떤 행동을 할지 정한다. AI Perception과 Blackboard를 모두 Behavior Tree 안의 노드로 묶지 않고 역할을 나눠 봤다."
+      },
+      {
+        "title": "AIController와 Blackboard",
+        "text": "Enemy Character가 실제 몸체라면 AIController는 그 캐릭터의 AI 제어를 맡는다. 감지한 내용을 Blackboard에 연결하고 Behavior Tree를 실행하는 지점으로 볼 수 있다. 원문에서는 Player를 현재 목표, PlayerVector를 목표 위치, IsCombat을 전투 상태로 나눴다. Blackboard가 직접 이동하거나 공격하는 것은 아니다."
+      },
+      {
+        "title": "Selector와 Sequence",
+        "items": [
+          "Sequence는 자식 노드를 순서대로 실행한다. 중간에 하나라도 실패하면 전체 흐름도 실패한다. 플레이어 확인 → 바라보기 → 공격처럼 이어지는 행동을 묶는다.",
+          "Selector는 자식 노드를 순서대로 시도하다가 하나가 성공하면 성공한다. 공격할 수 있으면 공격하고, 아니면 추적하고, 그것도 안 되면 순찰하는 식으로 볼 수 있다."
+        ]
+      },
+      {
+        "title": "Task·Decorator·Service",
+        "items": [
+          "Task: 실제로 할 행동. 이동하거나 공격하고, 순찰 위치를 정하는 부분이다.",
+          "Decorator: 지금 이 Branch를 실행해도 되는지 조건을 검사한다.",
+          "Service: 연결된 Branch가 활성화된 동안 일정 주기로 상태를 확인하거나 Blackboard 값을 바꾼다."
+        ]
+      },
+      {
+        "title": "이동과 공격 시점",
+        "text": "Blackboard에 목표 Actor나 위치를 두고 Move To로 이동을 요청한다. 이동할 수 있는 영역은 NavMesh로 잡는다. 근접 공격은 공격 시작과 실제 피해를 주는 시점을 나눠 봤다. Montage의 타격 프레임에서 Anim Notify를 호출하고, Player가 있는지 확인한 뒤 ApplyDamage로 이어지는 흐름이다."
+      },
+      {
+        "title": "개념 정리와 이후 작업",
+        "text": "이 문서에서 다룬 기본 흐름은 순찰 → 감지 → 추적 → 공격이다. 수색이나 감지 상실 처리가 어디까지 적용됐는지는 이 개념 문서만으로 정하지 않는다. 9월 25일의 감지 상실·공격 판정 기록과 함께 보면 당시 고민과 이후 점검을 구분할 수 있다."
+      }
+    ],
+    "related_ids": [
+      "20260924-priest-concepts",
+      "20260907-priest",
+      "20260910-priest",
+      "20260925-priest-ai"
+    ],
+    "references": []
+  },
+  {
+    "id": "project-priest-oop-notes",
+    "title": "상속·Component·Interface와 객체의 역할",
+    "summary": "무엇의 한 종류인지, 무엇을 가지고 있는지, 무엇을 할 수 있는지를 나누고 객체가 맡을 기능을 정리했다.",
+    "kind": "note",
+    "topic": "oop",
+    "topics": [
+      "unreal",
+      "oop"
+    ],
+    "publication": "reference",
+    "status": "로컬 개념 문서에서 정리",
+    "source_name": "ProjectPriest_Unreal_OOP_Concepts.html",
+    "source_url": "",
+    "project": "ProjectPriest",
+    "notice": "원문에 나온 개념과 설명용 예시를 정리했다. 예시의 모든 구조가 프로젝트에 적용됐다는 뜻은 아니다.",
+    "sections": [
+      {
+        "title": "함수와 객체가 맡는 일",
+        "text": "함수는 무엇을 하는지, 객체는 무엇을 책임지는지로 나눠 봤다. HealthComponent 안의 TakeDamage, Heal, IsDead는 함수는 달라도 모두 체력 관리에 속한다. 여기에 재장전이나 인벤토리 정렬까지 들어가면 맡는 일이 섞이기 시작한다."
+      },
+      {
+        "title": "is-a / has-a / can-do",
+        "items": [
+          "is-a: 이것의 한 종류라는 관계다. Rifle은 Weapon의 한 종류라고 보고 상속으로 표현한다.",
+          "has-a: 무엇을 가지고 있다는 관계다. Character가 HealthComponent를 가지거나 Weapon이 파츠를 가지는 경우다. 다만 가지고 있다는 설계와 실제 포인터가 항상 유효하다는 것은 별개다.",
+          "can-do: 무엇을 할 수 있다는 약속이다. 종류가 달라도 Interact 같은 요청을 받을 수 있게 Interface로 표현한다. 실제 동작은 각 객체가 정한다."
+        ]
+      },
+      {
+        "title": "Class와 Instance",
+        "text": "Class는 상태와 기능을 묶는 틀이고, Instance는 그 클래스로부터 만들어진 객체라는 점을 강조한 말이다. 원문의 클래스 예시는 이 관계를 설명하기 위한 예시다."
+      },
+      {
+        "title": "Component와 Interface를 같이 보기",
+        "text": "Component는 기능을 실제로 맡는 부품으로 보고, Interface는 외부에서 어떤 요청을 할 수 있는지 정하는 약속으로 봤다. 외부에서는 Enemy에 피해를 요청하고, 내부에서는 HealthComponent가 체력 처리를 맡는 식으로 역할을 나눌 수 있다."
+      },
+      {
+        "title": "SRP와 OCP",
+        "text": "단일 책임 원칙(SRP)은 함수 하나만 두라는 뜻이 아니라 같은 책임에 속한 기능을 함께 두자는 쪽으로 이해했다. 개방-폐쇄 원칙(OCP)은 새 무기마다 기존 분기를 늘리기보다 Weapon의 Attack을 각 무기가 자기 방식으로 처리하게 하는 예시로 봤다. 기존 코드를 절대 수정하지 말라는 뜻은 아니다."
+      },
+      {
+        "title": "내부 처리와 이벤트 알림",
+        "text": "외부에서는 TakeDamage만 호출하고 내부의 방어력 계산, 체력 감소, 사망 판정을 몰라도 되게 나누는 예시를 봤다. Delegate는 이벤트를 받을 대상을 연결하고, Broadcast는 등록된 대상들에게 이벤트가 생겼음을 알린다. Weapon이 탄약 변경을 알리면 HUD 등이 자기 처리를 맡는 식이다."
+      },
+      {
+        "title": "MVC로 나눠 보기",
+        "items": [
+          "View: 정보를 보여주고 입력을 받는다.",
+          "Controller: 입력을 해석해서 알맞은 곳에 요청을 전달한다.",
+          "Model: 데이터와 규칙을 가지고 실제 변경을 처리한다."
+        ],
+        "text": "인벤토리 화면과 장착 요청, 장착 가능 여부 검사와 데이터 변경을 나눠 보는 설명이다. 이 정리만으로 프로젝트 전체가 MVC로 구현됐다고 보지는 않는다."
+      }
+    ],
+    "related_ids": [
+      "20260924-priest-concepts",
+      "note-tem-011",
+      "20260715-001"
+    ],
+    "references": []
   }
 ];
