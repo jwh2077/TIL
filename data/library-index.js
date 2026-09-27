@@ -355,7 +355,7 @@ window.TIL_LIBRARY_INDEX = [
   {
     "id": "project-priest-ai-notes",
     "title": "AI와 Behavior Tree의 역할 나누기",
-    "summary": "감지, 상태 저장, 행동 실행을 나눠 보고 Selector·Sequence·Task·Decorator·Service의 역할을 정리했다.",
+    "summary": "감지, Blackboard에 저장할 값, Behavior Tree에서 실행할 행동을 나눠 봤다.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -378,7 +378,7 @@ window.TIL_LIBRARY_INDEX = [
   {
     "id": "project-priest-oop-notes",
     "title": "상속·Component·Interface와 객체의 역할",
-    "summary": "무엇의 한 종류인지, 무엇을 가지고 있는지, 무엇을 할 수 있는지를 나누고 객체가 맡을 기능을 정리했다.",
+    "summary": "상속, Component, Interface를 언제 쓸지 예시로 나눠 봤다.",
     "kind": "note",
     "topic": "oop",
     "topics": [
@@ -390,7 +390,7 @@ window.TIL_LIBRARY_INDEX = [
     "source_name": "ProjectPriest_Unreal_OOP_Concepts.html",
     "source_url": "",
     "project": "ProjectPriest",
-    "notice": "원문에 나온 개념과 설명용 예시를 정리했다. 예시의 모든 구조가 프로젝트에 적용됐다는 뜻은 아니다.",
+    "notice": "개념을 이해하려고 적은 예시다. 전부 프로젝트에 적용한 구조는 아니다.",
     "related_ids": [
       "20260924-priest-concepts",
       "note-tem-011",

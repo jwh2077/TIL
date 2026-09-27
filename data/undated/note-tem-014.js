@@ -2,7 +2,7 @@ window.TIL_FILES = window.TIL_FILES || {};
 window.TIL_FILES["data/undated/note-tem-014.js"] = [
   {
     "id": "note-tem-014",
-    "date": null,
+    "date": "2026-08-10",
     "project": null,
     "topic": "Unreal·C++ 기초",
     "title": "Unreal 빌드와 매크로 수업 메모",
@@ -23,9 +23,12 @@ window.TIL_FILES["data/undated/note-tem-014.js"] = [
       "CDO 개념을 배웠다고 용어 목록만으로 확장하지 않음"
     ],
     "primary_topic": "unreal",
-    "verification_note": "학습 날짜가 확인되지 않은 기록이다. 계획과 현재 구현을 구분해 읽는다.",
-    "date_start": null,
-    "date_label": "날짜 미확인",
-    "activity": "study"
+    "verification_note": "CH3 수업 메모라서 Unreal C++ 수업이 남아 있는 8월 10일부터 챕터 3 작업이 남아 있는 9월 2일까지의 기록에 묶었다. 수업을 들은 날이나 메모를 쓴 날을 확인한 것은 아니다.",
+    "date_start": "2026-08-10",
+    "date_label": "2026-08-10 ~ 2026-09-02 · 관련 수업·프로젝트 기간",
+    "activity": "study",
+    "date_end": "2026-09-02",
+    "date_basis": "원본 이름 CH3 첫 라이브 정리.txt·CH3 분반수업.txt. 20260810-001 및 20260902-ch3와 같은 수업·프로젝트 구간에 배치. 정확한 작성일 미확인.",
+    "notice": "CH3 수업 메모라서 Unreal C++ 수업이 남아 있는 8월 10일부터 챕터 3 작업이 남아 있는 9월 2일까지의 기록에 묶었다. 수업을 들은 날이나 메모를 쓴 날을 확인한 것은 아니다."
   }
 ];

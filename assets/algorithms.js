@@ -3,7 +3,7 @@
   const records = window.TIL_ALGORITHMS || [];
   const $ = selector => document.querySelector(selector);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const groups = {array:'배열 · 좌표 변환',tree:'트리 · 경로 탐색',queue:'큐 · 우선순위',string:'문자열 · 빈도',simulation:'상태 · 시뮬레이션',math:'수학 · 완전 탐색',greedy:'가격 · 역방향 탐색',dp:'동적 계획법'};
+  const groups = {array:'배열 · 좌표 변환',tree:'트리 · 경로 탐색',queue:'큐 · 우선순위',string:'문자열 · 빈도',simulation:'상태 · 시뮬레이션',math:'수학 · 완전 탐색',greedy:'가격 · 역방향 탐색',dp:'동적 계획법',bruteforce:'완전 탐색'};
   const state = {group:'all', status:'all', query:''};
   const style = document.createElement('style');
   style.textContent = '#algorithmCards .record{overflow:hidden;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease} #algorithmCards .record-button{border-radius:0}';

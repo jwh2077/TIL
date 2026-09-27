@@ -2,7 +2,7 @@ window.TIL_FILES = window.TIL_FILES || {};
 window.TIL_FILES["data/undated/note-tem-015.js"] = [
   {
     "id": "note-tem-015",
-    "date": null,
+    "date": "2026-07-17",
     "project": null,
     "topic": "STL·자료구조",
     "title": "컨테이너와 탐색·정렬·Big-O 학습 메모",
@@ -18,9 +18,12 @@ window.TIL_FILES["data/undated/note-tem-015.js"] = [
       "공부했다는 사실을 알고리즘 직접 구현이나 문제 해결 성공으로 확대하지 않음"
     ],
     "primary_topic": "stl",
-    "verification_note": "학습 날짜가 확인되지 않은 기록이다. 계획과 현재 구현을 구분해 읽는다.",
-    "date_start": null,
-    "date_label": "날짜 미확인",
-    "activity": "study"
+    "verification_note": "vector와 map을 다룬 7월 17일~28일 기록 옆에 묶었다. 메모 작성일은 모르며, 함께 적어둔 Unreal 컨테이너와 그래프 개념까지 이 기간에 배웠다고 확정한 것은 아니다.",
+    "date_start": "2026-07-17",
+    "date_label": "2026-07-17 ~ 2026-07-28 · 관련 자료구조 공부 기간",
+    "activity": "study",
+    "date_end": "2026-07-28",
+    "date_basis": "20260717-001·20260727-001·20260728-001과 컨테이너 내용이 겹쳐 함께 배치. 원문 작성일·추가 개념 학습일을 뜻하지 않음.",
+    "notice": "vector와 map을 다룬 7월 17일~28일 기록 옆에 묶었다. 메모 작성일은 모르며, 함께 적어둔 Unreal 컨테이너와 그래프 개념까지 이 기간에 배웠다고 확정한 것은 아니다."
   }
 ];

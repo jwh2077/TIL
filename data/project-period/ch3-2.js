@@ -23,10 +23,10 @@ window.TIL_FILES["data/project-period/ch3-2.js"] = [
       "CH3GameMode.cpp"
     ],
     "repo": "CH3_2",
-    "date": null,
-    "date_end": null,
-    "date_label": "CH3_2 프로젝트 전체 작업",
-    "date_basis": "프로젝트 전체 기준 · ZIP에 Git 이력 없음 · 세부 날짜 추정하지 않음",
+    "date": "2026-08-10",
+    "date_end": "2026-09-02",
+    "date_label": "2026-08-10 ~ 2026-09-02 · 관련 프로젝트 기간",
+    "date_basis": "20260810-001~20260902-ch3 관련 수업·챕터 3 기록에 배치. CH3_2 ZIP의 작성일·학습일을 추정한 값이 아님.",
     "primary_topic": "unreal",
     "tags": [
       "Unreal",
@@ -65,6 +65,6 @@ window.TIL_FILES["data/project-period/ch3-2.js"] = [
     ],
     "project_part": "CH3_2",
     "activity": "personal",
-    "notice": "프로젝트 전체 코드 기준이다. 작업 날짜와 실행 결과는 확인되지 않았다."
+    "notice": "Unreal C++ 수업과 챕터 3 기록이 있는 8월 10일~9월 2일 구간에 묶었다. ZIP에는 Git 이력이 없어 CH3_2를 작업한 정확한 날짜는 모른다."
   }
 ];

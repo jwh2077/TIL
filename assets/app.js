@@ -31,6 +31,15 @@
     return start(a).localeCompare(start(b))||a.localeCompare(b);
   });
   const cache = new Map();
+  const availableDates = [...new Set(records.filter(r => r.date).flatMap(r => {
+    const days = [], end = r.date_end || r.date;
+    for (let day = r.date; day <= end;) {
+      days.push(day);
+      const next = new Date(day + 'T00:00:00Z'); next.setUTCDate(next.getUTCDate() + 1);
+      day = next.toISOString().slice(0, 10);
+    }
+    return days;
+  }))].sort();
   let request = 0;
   function matchesDate(r) {
     if (state.dateKind !== 'all' && r.month !== state.dateKind) return false;
@@ -147,13 +156,39 @@
     state.from = $('#dateFrom').value;
     state.to = $('#dateTo').value;
     state.dateKind = $('#dateKind').value;
-    const withoutDates = state.dateKind !== 'all';
-    $('#dateFrom').disabled = $('#dateTo').disabled = withoutDates;
-    if (withoutDates) { state.from = state.to = ''; $('#dateFrom').value = $('#dateTo').value = ''; }
     const invalid = state.from && state.to && state.from > state.to;
-    $('#dateMessage').textContent = invalid ? '시작일을 종료일보다 앞선 날짜로 골라주세요.' : state.from || state.to ? '선택한 기간과 겹치는 기록입니다. 날짜가 없는 메모는 제외됩니다.' : '';
+    $('#dateMessage').textContent = invalid ? '시작일을 종료일보다 앞선 날짜로 골라주세요.' : state.from || state.to ? `선택한 기간: ${state.from || '처음부터'} ~ ${state.to || '마지막까지'}. 이 기간과 겹치는 글과 기간 메모를 보여줍니다.` : '전체 기간을 보고 있습니다. 기간 메모의 날짜는 정확한 작성일이 아닌 배치 기준입니다.';
     $('#dateFrom').setAttribute('aria-invalid', String(Boolean(invalid)));
+    $('#dateTo').setAttribute('aria-invalid', String(Boolean(invalid)));
+    dateOptions();
     render();
+  }
+  function dateOptions() {
+    for (const [selector, value, placeholder, blocked] of [
+      ['#dateFrom', state.from, '처음부터', day => state.to && day > state.to],
+      ['#dateTo', state.to, '마지막까지', day => state.from && day < state.from]
+    ]) {
+      const year = value.slice(0, 4), month = value.slice(5, 7);
+      const years = [...new Set(availableDates.map(day => day.slice(0, 4)))];
+      const months = [...new Set(availableDates.filter(day => day.startsWith(year + '-')).map(day => day.slice(5, 7)))];
+      $(selector + 'Year').innerHTML = `<option value="">${placeholder}</option>` + years.map(y => `<option value="${y}">${y}년</option>`).join('');
+      $(selector + 'Year').value = year;
+      $(selector + 'Month').innerHTML = '<option value="">월</option>' + months.map(m => `<option value="${m}">${Number(m)}월</option>`).join('');
+      $(selector + 'Month').value = month;
+      $(selector + 'Month').disabled = !year;
+      $(selector).innerHTML = '<option value="">일</option>' + availableDates.filter(day => day.startsWith(`${year}-${month}-`)).map(day => `<option value="${day}" ${blocked(day) ? 'disabled' : ''}>${Number(day.slice(8))}일</option>`).join('');
+      $(selector).value = value;
+      $(selector).disabled = !month;
+    }
+  }
+  for (const [selector, key] of [['#dateFrom', 'from'], ['#dateTo', 'to']]) {
+    for (const part of ['Year', 'Month']) $(selector + part).addEventListener('change', () => {
+      const year = $(selector + 'Year').value;
+      const month = part === 'Month' ? $(selector + 'Month').value : '';
+      const candidates = year ? availableDates.filter(day => day.startsWith(year + (month ? '-' + month : '-'))) : [];
+      state[key] = (key === 'from' ? candidates[0] : candidates.at(-1)) || '';
+      dateOptions(); dateChange();
+    });
   }
   for (const selector of ['#dateFrom', '#dateTo', '#dateKind']) $(selector).addEventListener('change', dateChange);
   $('#resetDates').addEventListener('click', () => {
@@ -178,10 +213,9 @@
   }
   window.addEventListener('hashchange', fromHash);
   $('#total').textContent = records.length; $('#topicTotal').textContent = topics.length - 1;
-  const dates = records.filter(r => r.date).flatMap(r => [r.date, r.date_end || r.date]).sort();
-  $('#dateFrom').min = $('#dateTo').min = dates[0] || '';
-  $('#dateFrom').max = $('#dateTo').max = dates.at(-1) || '';
-  $('#dateCoverage').textContent = `기록이 있는 기간 ${dates[0] || '—'} ~ ${dates.at(-1) || '—'}`;
+  dateOptions();
+  $('#dateCoverage').textContent = `기록이 있는 기간 ${availableDates[0] || '—'} ~ ${availableDates.at(-1) || '—'} · 기록과 겹치는 날짜만 고를 수 있습니다.`;
+  $('#dateMessage').textContent = '전체 기간을 보고 있습니다. 기간 메모의 날짜는 정확한 작성일이 아닌 배치 기준입니다.';
   if (window.matchMedia) {
     const compact = window.matchMedia('(max-width:850px)');
     const resize = () => { $('#sidebarFilters').open = !compact.matches; };

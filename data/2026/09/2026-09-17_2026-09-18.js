@@ -12,7 +12,7 @@ window.TIL_FILES["data/2026/09/2026-09-17_2026-09-18.js"] = [
     "date_basis": "Git 커밋 작성일",
     "date": "2026-09-17",
     "date_end": "2026-09-18",
-    "title": "파츠 DataTable과 GameInstance 기반 보관 구조",
+    "title": "파츠 정보를 DataTable과 GameInstance에 보관",
     "summary": "기존 Attachment 구조를 정리하고 PartData, PartInstance, PartManager와 파츠 DataTable을 추가했다.",
     "study_content": "기존 Attachment 구조를 정리하고 PartData, PartInstance, PartManager와 파츠 DataTable을 추가했다. 다음 날에는 GameInstance와 WeaponItem 쪽 연결을 이어갔다.",
     "learning_process": "인벤토리가 보유, 장착, 슬롯 검사와 스탯 적용까지 모두 맡지 않게 역할을 나누려고 했다. PartManager는 슬롯별 파츠 교체와 제거, 기본 무기 스탯에 대한 배율 계산을 맡겼다. 총열은 피해량, 확장 탄창은 탄창 용량을 바꾸는 범위부터 잡았다.",

@@ -4,14 +4,20 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
     "id": "20260924-priest-concepts",
     "project": "ProjectPriest",
     "primary_topic": "unreal",
-    "tags": ["Unreal", "AI", "Behavior Tree", "Blackboard", "개념정리"],
+    "tags": [
+      "Unreal",
+      "AI",
+      "Behavior Tree",
+      "Blackboard",
+      "개념정리"
+    ],
     "phase": "개념 정리",
     "date_basis": "원문 대화 시각 · 한국 시간",
     "date": "2026-09-24",
     "date_end": null,
     "title": "Behavior Tree 구성요소 역할 나누기",
     "summary": "Behavior Tree 안의 Composite, Task, Decorator, Service를 나누고 AI Perception과 Blackboard가 연결되는 위치를 정리했다.",
-    "study_content": "AI 정리를 객체지향 개념과 별도 파일로 나누면서 Behavior Tree 자체의 구성요소를 다시 봤다. Composite의 Selector와 Sequence가 흐름을 만들고, Decorator는 실행 조건을 검사하며, Service는 활성화된 Branch의 상태를 주기적으로 갱신하고, Task가 실제 행동을 수행한다.",
+    "study_content": "AI 메모와 객체지향 메모를 따로 정리하면서 Behavior Tree의 각 부분이 하는 일을 다시 봤다. Selector와 Sequence는 다음에 실행할 노드를 고르고, Decorator는 실행 조건을 검사한다. Service는 활성화된 Branch에서 상태를 주기적으로 확인하고, Task는 이동이나 공격 같은 행동을 맡는다.",
     "learning_process": "처음 만든 정리에서는 AIController, AI Perception, Blackboard, NavMesh와 Behavior Tree 내부 요소가 한데 묶여 있었다. Behavior Tree와 Blackboard의 관계를 따로 두고, AI Perception은 외부 상황을 감지해 AIController 등을 통해 Blackboard를 갱신하는 쪽으로 구분했다. 이미 옆에 목차가 있는데 본문에 목차를 또 넣은 부분과 마크다운 흔적, 깊게 파지 않은 리팩토링 기준도 덜어냈다.",
     "questions": [
       "Behavior Tree 안에서 Selector와 Sequence는 어떤 순서로 자식 노드를 실행하는가?",
@@ -38,7 +44,13 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
     "id": "20260925-priest-ai",
     "project": "ProjectPriest",
     "primary_topic": "unreal",
-    "tags": ["Unreal", "C++", "AI Perception", "Collision", "디버깅"],
+    "tags": [
+      "Unreal",
+      "C++",
+      "AI Perception",
+      "Collision",
+      "디버깅"
+    ],
     "phase": "설계 점검 · 디버깅",
     "date_basis": "원문 대화 시각 · 한국 시간",
     "date": "2026-09-25",
@@ -60,7 +72,9 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
     ],
     "references": [],
     "repository": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project",
-    "source": ["ChatGPT 대화 · ProjectPriest · 2026-09-25"],
+    "source": [
+      "ChatGPT 대화 · ProjectPriest · 2026-09-25"
+    ],
     "verification_note": "대화에서 확인한 증상과 코드 점검 흐름을 바탕으로 적었다. Damage Sense와 감지 상태 분리의 실제 구현, Collision 문제의 최종 해결은 확인되지 않았다.",
     "date_start": "2026-09-25",
     "date_label": "2026-09-25",

@@ -11,7 +11,7 @@ window.TIL_FILES["data/2026/09/2026-09-08.js"] = [
     "phase": "직접 구현",
     "date_basis": "Git 커밋 작성일",
     "date": "2026-09-08",
-    "title": "순찰 위치 탐색과 시각 기반 플레이어 감지",
+    "title": "순찰 위치 찾기와 시야로 플레이어 감지",
     "summary": "랜덤 순찰 위치를 찾는 Task를 추가했다.",
     "study_content": "랜덤 순찰 위치를 찾는 Task를 추가했다. 플레이어 감지는 거리 검사에서 AI Perception의 시각 감지로 바꿨다.",
     "learning_process": "시각 설정을 넣고 감지 이벤트에서 플레이어 참조를 갱신하도록 작성했다.",
