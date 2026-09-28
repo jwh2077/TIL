@@ -246,7 +246,8 @@ window.TIL_ALGORITHMS = [
       "정확성 실패와 시간 초과는 원인과 해결 방법이 다르다."
     ],
     "code_title": "참고 예제 · 배수를 지우는 방식",
-    "solution_code": "int solution(int n) {\n    vector<bool> isPrime(n + 1, true);\n    isPrime[0] = isPrime[1] = false;\n\n    for (int i = 2; i * i <= n; i++) {\n        if (!isPrime[i]) continue;\n        for (int multiple = i * i; multiple <= n; multiple += i) {\n            isPrime[multiple] = false;\n        }\n    }\n\n    return count(isPrime.begin(), isPrime.end(), true);\n}"
+    "solution_code": "int solution(int n) {\n    vector<bool> isPrime(n + 1, true);\n    isPrime[0] = isPrime[1] = false;\n\n    for (int i = 2; i * i <= n; i++) {\n        if (!isPrime[i]) continue;\n        for (int multiple = i * i; multiple <= n; multiple += i) {\n            isPrime[multiple] = false;\n        }\n    }\n\n    return count(isPrime.begin(), isPrime.end(), true);\n}",
+    "verification": "프로그래머스 오답 · 68.8 / 100 · 최근 제출 2026-09-10 20:38:25 · 로그인된 제출 내역 확인"
   },
   {
     "id": "lc-1510",
@@ -691,7 +692,7 @@ window.TIL_ALGORITHMS = [
     "title": "소수 만들기",
     "group": "bruteforce",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12977",
-    "status": "수정 중",
+    "status": "통과 확인",
     "date": "2026-09-21",
     "problem": "서로 다른 세 수를 골라 더했을 때 합이 소수가 되는 조합의 수를 센다.",
     "summary": "서로 다른 세 인덱스를 고르는 반복문을 만들었다. 합이 같아도 고른 조합이 다르면 따로 세어야 했다.",
@@ -702,18 +703,18 @@ window.TIL_ALGORITHMS = [
       "a < b < c로 순회하면 같은 세 원소를 순서만 바꿔 다시 세지 않는다.",
       "같은 합이 나와도 선택한 인덱스 조합이 다르면 각각 센다.",
       "answer는 약수 검사 횟수가 아니라 소수인 조합의 수라서 판별이 끝난 뒤 증가해야 한다.",
-      "마지막 코드에는 반복문 변수 b와 bool b가 겹치고 짝수 판별이 빠진 문제가 남아 있다."
+      "대화 중에는 bool b로 반복문 변수 이름을 가리고 2의 배수를 검사하지 않는 코드가 있었다. 통과 제출에서는 bool s로 구분하고 2부터 약수를 검사했다."
     ],
-    "code_title": "마지막으로 남긴 수정 중 코드",
-    "solution_code": "#include <vector>\n#include <iostream>\nusing namespace std;\n\nint solution(vector<int> nums) {\n    int answer = 0;\n    for(int a = 0; a < nums.size(); a++) {\n        for(int b = a + 1; b < nums.size(); b++) {\n            for(int c = b + 1; c < nums.size(); c++) {\n                int num = nums[a] + nums[b] + nums[c];\n                bool b = true;\n                for(int i = 3; i < num; i += 2) {\n                    if(num % i == 0) {\n                        b = false;\n                        break;\n                    }\n                }\n                if(b) answer++;\n            }\n        }\n    }\n    return answer;\n}",
-    "verification": "실제 제출 및 통과 여부 미확인 · 마지막 코드에 수정할 부분이 남아 있음"
+    "code_title": "통과한 제출 코드",
+    "solution_code": "#include <vector>\n#include <iostream>\nusing namespace std;\n\nint solution(vector<int> nums) {\n    int answer = 0;\n    for(int a = 0; a < nums.size(); a++ )\n    {\n        for(int b = a + 1; b < nums.size(); b++)\n        {\n            for(int c = b + 1; c < nums.size(); c++)\n            {\n                int num = nums[a] + nums[b] + nums[c];\n                bool s = true;\n                for(int i = 2; i < num; i++ )\n                {\n                    if(num % i == 0)\n                    {\n                        s = false;\n                        break;\n                    }\n                }\n                if(s)\n                {\n                    answer++;\n                }\n            }\n        }\n    }\n    \n\n    return answer;\n}",
+    "verification": "프로그래머스 정답 · 100 / 100 · 제출 2026-09-21 09:59:16 · 로그인된 제출 내역에서 코드 확인"
   },
   {
     "id": "pg-12945",
     "title": "피보나치 수",
     "group": "dp",
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12945",
-    "status": "제출 미확인",
+    "status": "통과 확인",
     "date": "2026-09-22",
     "problem": "n번째 피보나치 수를 1234567로 나눈 나머지를 반환한다.",
     "summary": "F(n)까지 저장하려고 vector 크기를 n+1로 고치고, 값이 커진 뒤가 아니라 더할 때마다 나머지를 저장했다.",
@@ -723,11 +724,11 @@ window.TIL_ALGORITHMS = [
     "learned": [
       "F(0)부터 F(n)까지 저장하려면 vector 크기는 n+1이다.",
       "(a+b)%m은 ((a%m)+(b%m))%m과 같아서 계산 중간에 나머지를 구할 수 있다.",
-      "마지막 코드의 로직은 정리됐지만 실제 채점 결과는 대화에서 확인되지 않았다."
+      "제출 내역에는 28.6점, 42.9점 이후 100점이 남아 있다. 통과 코드는 vector<long long>(n + 1)에 매 단계 나머지를 저장한다."
     ],
-    "code_title": "대화에서 마지막으로 정리한 코드",
-    "solution_code": "#include <vector>\nusing namespace std;\n\nint solution(int n) {\n    vector<int> Fibonacci(n + 1);\n    Fibonacci[0] = 0;\n    Fibonacci[1] = 1;\n    for(int i = 2; i <= n; i++) {\n        Fibonacci[i] = (Fibonacci[i - 1] + Fibonacci[i - 2]) % 1234567;\n    }\n    return Fibonacci[n];\n}",
-    "verification": "대화에서 로직 확인 · 실제 프로그래머스 제출 결과 미확인"
+    "code_title": "통과한 제출 코드",
+    "solution_code": "#include <vector>\n\nusing namespace std;\n\nint solution(int n) {\n    int answer = 0;\n    vector<long long> Fibonacci(n + 1);\n    Fibonacci[0] = 0;\n    Fibonacci[1] = 1;\n    for(int i = 2; i <= n; i++)\n    {\n        Fibonacci[i] = (Fibonacci[i - 1] + Fibonacci[i - 2]) % 1234567;\n    }\n    if(n <= 2)\n    {\n        return Fibonacci[n] % 1234567;\n    }\n    return Fibonacci[n];\n}",
+    "verification": "프로그래머스 정답 · 100 / 100 · 제출 2026-09-22 08:34:08 · 로그인된 제출 내역에서 코드 확인"
   },
   {
     "id": "swea-6019",
@@ -751,5 +752,28 @@ window.TIL_ALGORITHMS = [
     "solution_code": "#include<iostream>\n#include <iomanip>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin >> T;\n    for(test_case = 1; test_case <= T; ++test_case)\n    {\n        double D;\n        cin >> D;\n        int A;\n        cin >> A;\n        int B;\n        cin >> B;\n        A += B;\n        cin >> B;\n        D = D / A;\n        D *= B;\n        cout << \"#\" << test_case << \" \" << fixed << setprecision(10) << D << endl;\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
     "verification": "SWEA Pass · 제출 2026-09-23 08:44 · 512 ms / 5,832 KB",
     "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AWajaTmaZw4DFAWM"
+  },
+  {
+    "id": "swea-2005",
+    "title": "파스칼의 삼각형",
+    "group": "implementation",
+    "url": "https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5P0-h6Ak4DFAUq",
+    "status": "통과 확인",
+    "date": "2026-09-28",
+    "problem": "첫 줄부터 N번째 줄까지 파스칼의 삼각형을 출력한다.",
+    "summary": "첫 행을 {1}로 만든 뒤, 이전 행의 인접한 두 값을 더해 가운데를 채우고 양끝에 1을 놓았다.",
+    "question": "2차원 vector에서 A.push_back(vector<int>{1})과 A[i].push_back(1)의 차이가 헷갈렸다. 값이 있는지 if로 확인하려다 존재하지 않는 인덱스에 먼저 접근해 Segmentation fault도 발생했다.",
+    "attempt": "처음에는 반복마다 새 행을 두 번 추가해 i와 실제 행 위치가 어긋났다. A[i-1][j+1]을 검사하는 코드도 이전 행의 범위를 벗어났다. 첫 행은 반복문 밖에서 만들고, 새 행은 {1}로 한 번만 추가한 뒤 현재 행에는 계산값과 마지막 1을 넣는 형태로 바꿨다.",
+    "turning": "가운데 값은 j가 1부터 i-1까지일 때만 만들면 A[i-1][j-1]과 A[i-1][j]가 모두 존재한다. 그래서 인덱스의 값으로 존재 여부를 검사하지 않고 반복 범위로 유효한 위치만 접근했다.",
+    "learned": [
+      "A.push_back(vector<int>{1})은 2차원 vector에 새 행을 만든다.",
+      "A[i].push_back(value)는 이미 존재하는 i번째 행에 값을 추가한다.",
+      "if(A[index])는 인덱스 존재 여부 검사가 아니라 접근한 값이 0인지 확인하는 코드다.",
+      "각 행의 가운데는 이전 행의 [j-1]과 [j]를 더해서 만들 수 있다."
+    ],
+    "code_title": "통과한 제출 코드",
+    "solution_code": "#include<iostream>\n#include<vector>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin>>T;\n    int N;\n    for(test_case = 1; test_case <= T; ++test_case)\n    {\n        cout << \"#\" << test_case << endl;\n        cin >> N;\n        vector<vector<int>>A;\n        A.push_back(vector<int>{ 1 });\n        for(int i = 1; i < N; i++)\n        {\n            A.push_back(vector<int>{ 1 });\n            for(int j = 1; j < i; j++)\n            {\n                int num = 0;\n                num += A[i - 1][ j - 1] ;\n                num += A[i - 1][ j ];\n                A[i].push_back(num);\n            }\n            A[i].push_back( 1 );\n        }\n        for(int i = 0; i < A.size(); i++)\n        {\n            for(int j = 0; j < A[i].size(); j++)\n            {\n                cout << A[i][j] << \" \" ;\n            }\n            cout << endl;\n        }\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
+    "verification": "SWEA Pass · 제출 2026-09-28 09:25 · 7 ms / 5,844 KB · My제출에서 코드와 결과 확인",
+    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AV5P0-h6Ak4DFAUq"
   }
 ];

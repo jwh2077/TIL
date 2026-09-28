@@ -1,6 +1,24 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20260928-priest",
+      "date": "2026-09-28",
+      "date_end": null,
+      "date_label": "2026-09-28",
+      "month": "2026-09",
+      "title": "플레이 영상 준비와 에셋 되돌리기 오류",
+      "summary": "플레이 영상에서 보여줄 수류탄 조작을 Q키로 정정하고 컷 편집 방법을 찾아봤다. 에셋을 되돌리는 중에는 Git 오류가 났다.",
+      "project": "ProjectPriest",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "Git",
+        "시연 영상"
+      ],
+      "file": "data/2026/09/2026-09-28.js",
+      "activity": "team"
+    },
+    {
       "id": "20260612-001",
       "date": "2026-06-12",
       "date_end": null,

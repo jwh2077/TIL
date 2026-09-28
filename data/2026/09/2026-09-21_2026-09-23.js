@@ -31,13 +31,27 @@ window.TIL_FILES["data/2026/09/2026-09-21_2026-09-23.js"] = [
       "공격 범위에서 저장한 Player 포인터의 수명과 TObjectPtr·약한 참조의 차이가 섞였다.",
       "블랙보드 초기값을 각 AIController에서 반복해서 넣지 않을 방법을 고민했지만 최종 적용 결과는 대화에서 확인되지 않았다."
     ],
-    "references": [],
+    "references": [
+      {
+        "label": "살펴본 파츠 참조 코드 · 9/18 · 28ed0df",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/28ed0df309400625c8f283a35869a91849e727cf"
+      },
+      {
+        "label": "변경 코드 · 공격 거리 계산 · 9/23 · a7f51b2",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/a7f51b2630d16d9be176f5eeec10441c473745ad"
+      },
+      {
+        "label": "변경 코드 · 공격 범위 Overlap과 피해 적용 · 9/23 · 49c42fc",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/49c42fc0c144d3b137fc0b3e9e2c8b169d462c8d"
+      }
+    ],
     "repository": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project",
     "source": [
       "ChatGPT 대화 · 언리얼 개념 정리 · 2026-09-21~2026-09-23",
-      "ChatGPT 대화 · ProjectPriest · 2026-09-23"
+      "ChatGPT 대화 · ProjectPriest · 2026-09-23",
+      "jwh2077 작성자 Git diff · 28ed0df, a7f51b2, 49c42fc"
     ],
-    "verification_note": "대화에 남은 코드와 오류를 바탕으로 적었다. 몬스터 피해 적용과 블랙보드 초기화의 최종 실행 결과는 확인되지 않았다.",
+    "verification_note": "대화에 남은 코드와 오류를 바탕으로 적고 관련 Git diff를 대조했다. 파츠 참조 코드는 9/18 커밋이며 이 글의 대화 날짜와 구분한다. 몬스터 피해 적용과 블랙보드 초기화의 최종 실행 결과는 확인되지 않았다.",
     "date_start": "2026-09-21",
     "date_label": "2026-09-21 ~ 2026-09-23",
     "activity": "team",

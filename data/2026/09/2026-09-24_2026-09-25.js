@@ -70,15 +70,25 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
       "눈으로 Box에 걸쳐 보이는 것과 실제 Player Capsule이 Overlap 상태인 것은 다를 수 있었다.",
       "Box 높이를 키운 뒤 피해가 더 잘 들어왔지만 최종 원인과 수정 완료 여부는 대화에서 확인되지 않았다."
     ],
-    "references": [],
+    "references": [
+      {
+        "label": "점검한 공격 코드 · 9/23 · 49c42fc",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/49c42fc0c144d3b137fc0b3e9e2c8b169d462c8d"
+      },
+      {
+        "label": "이후 공격 범위 에셋 변경 · 9/28 · 6f40359",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/6f40359179126e90655ef8a201a21d9799513170"
+      }
+    ],
     "repository": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project",
     "source": [
-      "ChatGPT 대화 · ProjectPriest · 2026-09-25"
+      "ChatGPT 대화 · ProjectPriest · 2026-09-25",
+      "jwh2077 작성자 Git diff · 49c42fc / 이후 BP_Whisper 에셋 변경 · 6f40359"
     ],
     "verification_note": "대화에서 확인한 증상과 코드 점검 흐름을 바탕으로 적었다. Damage Sense와 감지 상태 분리의 실제 구현, Collision 문제의 최종 해결은 확인되지 않았다.",
     "date_start": "2026-09-25",
     "date_label": "2026-09-25",
     "activity": "team",
-    "notice": "설계 제안과 실제 적용 결과를 구분했다. 완료가 확인되지 않은 기능은 구현 완료로 표시하지 않았다."
+    "notice": "설계 제안과 실제 적용 결과를 구분했다. 9/28 공격 범위 수정 커밋은 이후 변경으로 연결했다. BP_Whisper 에셋 변경은 확인했지만 내부 수치와 최종 해결 여부는 확인되지 않았다."
   }
 ];

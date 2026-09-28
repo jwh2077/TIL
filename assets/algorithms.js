@@ -3,8 +3,9 @@
   const records = window.TIL_ALGORITHMS || [];
   const $ = selector => document.querySelector(selector);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const groups = {array:'배열 · 좌표 변환',tree:'트리 · 경로 탐색',queue:'큐 · 우선순위',string:'문자열 · 빈도',simulation:'상태 · 시뮬레이션',math:'수학 · 완전 탐색',greedy:'가격 · 역방향 탐색',dp:'동적 계획법',bruteforce:'완전 탐색'};
+  const groups = {array:'배열 · 좌표 변환',tree:'트리 · 경로 탐색',queue:'큐 · 우선순위',string:'문자열 · 빈도',simulation:'상태 · 시뮬레이션',math:'수학 · 완전 탐색',greedy:'가격 · 역방향 탐색',dp:'동적 계획법',bruteforce:'완전 탐색',implementation:'구현'};
   const state = {group:'all', status:'all', query:''};
+  const dateLabel = r => r.date ? `풀이 기록: ${r.date}` : '풀이 날짜 미확인';
   const style = document.createElement('style');
   style.textContent = '#algorithmCards .record{overflow:hidden;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease} #algorithmCards .record-button{border-radius:0}';
   document.head.append(style);
@@ -19,11 +20,11 @@
   }
   function results() {
     const q=state.query.trim().toLocaleLowerCase();
-    return records.filter(r=>(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.title,r.summary,r.problem,r.question,r.attempt,r.turning,...(r.learned||[]),groups[r.group]].join(' ').toLocaleLowerCase().includes(q));
+    return records.filter(r=>(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.date,r.title,r.summary,r.problem,r.question,r.attempt,r.turning,...(r.learned||[]),groups[r.group]].join(' ').toLocaleLowerCase().includes(q));
   }
   function cards() {
     const shown=results();$('#algorithmCount').textContent=`${shown.length}개 문제`;
-    $('#algorithmCards').innerHTML=shown.map(r=>`<article class="record"><button type="button" class="record-button" data-algorithm="${esc(r.id)}"><div class="record-meta"><span class="topic-badge">${esc(groups[r.group])}</span><span>${esc(r.status)}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><span class="more">풀이 보기 →</span></button><div class="material-links" style="margin:0;padding:0 23px 20px">${link(r)}</div></article>`).join('')||'<p class="empty">조건에 맞는 문제가 없습니다.</p>';
+    $('#algorithmCards').innerHTML=shown.map(r=>`<article class="record"><button type="button" class="record-button" data-algorithm="${esc(r.id)}"><div class="record-meta"><span>${esc(dateLabel(r))}</span><span class="topic-badge">${esc(groups[r.group])}</span><span>${esc(r.status)}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><span class="more">풀이 보기 →</span></button><div class="material-links" style="margin:0;padding:0 23px 20px">${link(r)}</div></article>`).join('')||'<p class="empty">조건에 맞는 문제가 없습니다.</p>';
   }
   function list() {
     $('#algorithmOutline').hidden=true;
@@ -41,7 +42,7 @@
     ];
     const submission=r.submission_url ? `<a class="source" href="${esc(r.submission_url)}" target="_blank" rel="noopener noreferrer">제출 내역 ↗</a>` : '';
     const evidence=r.verification?`<p class="library-notice">${esc(r.verification)}</p>`:'';
-    $('#algorithmPage').innerHTML=`<a class="related-button" href="#algorithms">← 문제 목록으로</a><header><div class="record-meta">${esc(r.date)} · ${esc(groups[r.group])} · ${esc(r.status)}</div><h1 id="algorithmTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1>${evidence}<div class="material-links">${link(r)}${submission}</div></header>${sections.map(([id,title,body])=>`<section id="algorithm-${id}" class="material-section"><h2>${esc(title)}</h2>${body}</section>`).join('')}<section class="related"><h3>비슷한 문제</h3><div class="related-list">${records.filter(x=>x.id!==id&&x.group===r.group).map(x=>`<a class="related-button" href="#algorithm=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div><p><a class="source" href="#library">정리 자료 →</a></p></section>`;
+    $('#algorithmPage').innerHTML=`<a class="related-button" href="#algorithms">← 문제 목록으로</a><header><div class="record-meta">${esc(dateLabel(r))} · ${esc(groups[r.group])} · ${esc(r.status)}</div><h1 id="algorithmTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1>${evidence}<div class="material-links">${link(r)}${submission}</div></header>${sections.map(([id,title,body])=>`<section id="algorithm-${id}" class="material-section"><h2>${esc(title)}</h2>${body}</section>`).join('')}<section class="related"><h3>비슷한 문제</h3><div class="related-list">${records.filter(x=>x.id!==id&&x.group===r.group).map(x=>`<a class="related-button" href="#algorithm=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div><p><a class="source" href="#library">정리 자료 →</a></p></section>`;
     $('#algorithmSections').innerHTML=sections.map(([id,title])=>`<button type="button" class="project" data-algorithm-section="algorithm-${id}">${title}</button>`).join('');
     window.scrollTo({top:0});$('#algorithmTitle').setAttribute('tabindex','-1');$('#algorithmTitle').focus();
   }
