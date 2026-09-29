@@ -29,7 +29,7 @@ window.TIL_FILES["data/2026/09/2026-09-21_2026-09-23.js"] = [
       "Text와 Name 타입이 달라 Blueprint에서 원하는 핀과 Promote to Variable이 바로 보이지 않았다.",
       "위젯을 다시 실행할 때 SObjectWidget이 가비지 컬렉션 중 파괴됐다는 Ensure가 발생했다.",
       "공격 범위에서 저장한 Player 포인터의 수명과 TObjectPtr·약한 참조의 차이가 섞였다.",
-      "블랙보드 초기값을 각 AIController에서 반복해서 넣지 않을 방법을 고민했지만 최종 적용 결과는 대화에서 확인되지 않았다."
+      "블랙보드 초기값을 각 AIController에서 반복해서 넣지 않을 방법을 고민했다."
     ],
     "references": [
       {

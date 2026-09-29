@@ -26,7 +26,7 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
     ],
     "mistakes_or_difficulties": [
       "처음 정리에서는 Behavior Tree 내부 구성요소와 외부 AI 시스템의 역할이 섞였다.",
-      "실제로 깊게 다루지 않은 개념까지 넣으면서 나중에 TIL 근거로 쓰기 어려운 내용이 늘었다."
+      "깊게 다루지 않은 개념까지 한꺼번에 넣으니 직접 써본 부분과 아직 헷갈리는 부분이 섞였다."
     ],
     "references": [],
     "repository": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project",
@@ -58,7 +58,7 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
     "title": "감지 상실 처리와 근접 공격 판정 점검",
     "summary": "시야가 끊겼을 때 Player를 바로 지우는 흐름을 다시 보고, 간헐적으로 빠지는 근접 공격 판정은 Collision의 높이와 실제 Overlap을 확인했다.",
     "study_content": "AI Perception에서 플레이어를 놓치자마자 Player를 nullptr로 바꾸면 공격과 전투가 바로 끊겼다. Player, 지금 보이는지 여부, 마지막 위치를 나누고 기존 PlayerVector 주변 3회 수색이 끝난 뒤 전투를 종료하는 방향을 정리했다. 피격 방향을 보는 기능에는 Sight와 Damage Sense의 역할을 나누는 방법도 살펴봤다. 근접 공격은 Begin/End Overlap과 Anim Notify의 ApplyDamage 흐름에 로그를 넣어 어느 단계에서 끊기는지 확인했고, AttackCollision Box의 높이를 키우자 피해가 조금 더 안정적으로 들어왔다.",
-    "learning_process": "처음에는 감지를 놓치면 Player와 전투 상태를 바로 지우는 흐름을 유지한 채 지연만 넣을지 고민했다. 하지만 Player가 있다는 것과 현재 보인다는 것을 분리하고, 마지막 PlayerVector를 기존 수색에 넘기는 편이 현재 구조와 더 맞았다. Damage Sense는 피격 위치를 PlayerVector에 넣고 수색 카운터를 초기화하는 방식까지 이야기했지만 실제 적용 결과는 확인되지 않았다. 공격 판정은 Player 포인터부터 의심했지만 Box 높이를 키웠을 때 달라져 Player Capsule과 AttackCollision의 Z축 겹침도 함께 보게 됐다.",
+    "learning_process": "처음에는 감지를 놓치면 Player와 전투 상태를 바로 지우는 흐름을 유지한 채 지연만 넣을지 고민했다. 하지만 Player가 있다는 것과 현재 보인다는 것을 분리하고, 마지막 PlayerVector를 기존 수색에 넘기는 편이 현재 구조와 더 맞았다. Damage Sense는 피격 위치를 PlayerVector에 넣고 수색 카운터를 초기화하는 방식까지 이야기했다. 공격 판정은 Player 포인터부터 의심했지만 Box 높이를 키웠을 때 달라져 Player Capsule과 AttackCollision의 Z축 겹침도 함께 보게 됐다.",
     "questions": [
       "플레이어가 시야에서 사라졌을 때 전투를 바로 끝내지 않고 기존 수색으로 어떻게 넘길 것인가?",
       "Damage Sense로 피격 방향을 얻되 Sight에서 실제로 발견한 상태와 어떻게 구분할 것인가?",
@@ -68,7 +68,7 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
       "감지 실패와 전투 종료를 같은 사건으로 처리해 공격 중 잠깐 시야가 끊겨도 몬스터가 바로 떠났다.",
       "여러 Player Component가 Overlap한다면 일부 Component의 EndOverlap에서 Player를 너무 일찍 지울 가능성이 남아 있었다.",
       "눈으로 Box에 걸쳐 보이는 것과 실제 Player Capsule이 Overlap 상태인 것은 다를 수 있었다.",
-      "Box 높이를 키운 뒤 피해가 더 잘 들어왔지만 최종 원인과 수정 완료 여부는 대화에서 확인되지 않았다."
+      "Box 높이를 키우자 피해는 더 잘 들어왔다. 다만 높이만으로 원인을 정하기는 어려웠다."
     ],
     "references": [
       {

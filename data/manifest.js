@@ -6,13 +6,12 @@ window.TIL_INDEX = {
       "date_end": null,
       "date_label": "2026-09-28",
       "month": "2026-09",
-      "title": "플레이 영상 정리와 에셋 되돌리기 오류",
-      "summary": "플레이 영상에 일반 전투와 인벤토리 화면, 구역 이동과 보스전이 담겼다. 에셋을 되돌리는 중 발생한 Git 오류는 따로 남겼다.",
+      "title": "플레이 영상 정리",
+      "summary": "플레이 영상에 일반 전투와 인벤토리 화면, 구역 이동과 보스전이 담겼다.",
       "project": "ProjectPriest",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
-        "Git",
         "시연 영상"
       ],
       "file": "data/2026/09/2026-09-28.js",

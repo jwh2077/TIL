@@ -382,7 +382,7 @@ window.TIL_LIBRARY_INDEX = [
     "source_name": "ProjectPriest_Unreal_AI_BT_Notes.html",
     "source_url": "",
     "project": "ProjectPriest",
-    "notice": "개념 문서에 실제 공격 코드와 플레이 영상에서 확인할 수 있는 범위를 덧붙였다. 영상 원본은 Project (1).mp4이며 로컬에 보관한다. 실행 화면과 개별 버그의 해결 여부는 구분한다.",
+    "notice": "원본: ProjectPriest_Unreal_AI_BT_Notes.html, Project (1).mp4 (로컬 보관). 공격 판정과 감지 상실 처리의 최종 해결 여부는 미확인.",
     "related_ids": [
       "20260924-priest-concepts",
       "20260907-priest",

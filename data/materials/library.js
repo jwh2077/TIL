@@ -616,7 +616,7 @@ window.TIL_LIBRARY = [
     "source_name": "ProjectPriest_Unreal_AI_BT_Notes.html",
     "source_url": "",
     "project": "ProjectPriest",
-    "notice": "개념 문서에 실제 공격 코드와 플레이 영상에서 확인할 수 있는 범위를 덧붙였다. 영상 원본은 Project (1).mp4이며 로컬에 보관한다. 실행 화면과 개별 버그의 해결 여부는 구분한다.",
+    "notice": "원본: ProjectPriest_Unreal_AI_BT_Notes.html, Project (1).mp4 (로컬 보관). 공격 판정과 감지 상실 처리의 최종 해결 여부는 미확인.",
     "sections": [
       {
         "title": "감지와 행동을 나눠 보기",
@@ -624,7 +624,7 @@ window.TIL_LIBRARY = [
       },
       {
         "title": "AIController와 Blackboard",
-        "text": "Enemy Character가 실제 몸체라면 AIController는 그 캐릭터의 AI 제어를 맡는다. 감지한 내용을 Blackboard에 연결하고 Behavior Tree를 실행하는 지점으로 볼 수 있다. 원문에서는 Player를 현재 목표, PlayerVector를 목표 위치, IsCombat을 전투 상태로 나눴다. Blackboard가 직접 이동하거나 공격하는 것은 아니다."
+        "text": "Enemy Character가 실제 몸체라면 AIController는 그 캐릭터의 AI 제어를 맡는다. 감지한 내용을 Blackboard에 넣고 Behavior Tree를 실행하는 흐름으로 나눠 봤다. Player는 현재 목표, PlayerVector는 목표 위치, IsCombat은 전투 상태로 두었다. Blackboard가 직접 이동하거나 공격하는 것은 아니다."
       },
       {
         "title": "Selector와 Sequence",
@@ -647,15 +647,15 @@ window.TIL_LIBRARY = [
       },
       {
         "title": "개념 정리와 이후 작업",
-        "text": "이 문서에서 다룬 기본 흐름은 순찰 → 감지 → 추적 → 공격이다. 수색이나 감지 상실 처리가 어디까지 적용됐는지는 이 개념 문서만으로 정하지 않는다. 9월 25일의 감지 상실·공격 판정 기록과 함께 보면 당시 고민과 이후 점검을 구분할 수 있다."
+        "text": "우선 순찰 → 감지 → 추적 → 공격으로 기본 흐름을 나눴다. 이후에는 플레이어를 놓쳤을 때 바로 전투를 끝낼지, 마지막 위치를 수색할지 고민했다. 이 부분은 9/25 작업 기록에 따로 적었다."
       },
       {
         "title": "공격 범위와 피해를 주는 시점",
         "text": "9/23 변경 코드에서는 손에 붙인 Sphere 대신 AttackCollision Box를 두었다. BeginOverlap에서 Player를 기억하고 EndOverlap에서 비운다. 실제 피해는 OnNotifyApplyDamage에서 Player가 있을 때 준다. 범위 안에 있다는 것과 공격 애니메이션의 타격 시점은 따로 처리하는 흐름이다."
       },
       {
-        "title": "플레이 화면과 코드에서 알 수 있는 것",
-        "text": "Project (1).mp4에는 일반 적과 보스의 전투, 체력·탄약·남은 적 수 표시가 나온다. 다만 화면만으로 어느 Task나 감지 설정이 실행됐는지 알 수는 없다. 9/25에 점검한 감지 상실 처리와 간헐적인 공격 판정 문제도 영상에 전투가 나온다는 이유로 해결됐다고 보지는 않는다. 영상은 로컬 원본으로 보관했다."
+        "title": "플레이 영상",
+        "text": "남겨둔 Project (1).mp4에는 일반 적과 보스의 전투가 나온다. 전투 중에는 체력과 탄약, 남은 적 수가 표시된다. 감지 상실 처리와 간헐적으로 빠지던 공격 판정은 9/25 기록에 남겨뒀다."
       }
     ],
     "related_ids": [

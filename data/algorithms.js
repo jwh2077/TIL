@@ -138,13 +138,14 @@ window.TIL_ALGORITHMS = [
     "summary": "자식 노드에서 구한 결과를 반환하지 않아 오답이 났다. 재귀 호출의 반환값을 다시 봤다.",
     "question": "한 번 false가 나오면 더 비교하지 않게 만들고 싶어서 bool A를 재귀 전체에서 공유하려 했다. 하지만 자식 Tree가 false를 반환해도 그 값을 받지 않았고 함수 끝의 true가 결과를 덮었다.",
     "attempt": "A를 값이 아닌 bool&로 바꾸고 자식 구조가 다른 경우를 먼저 검사했다. 그래도 isSameTree에서 A = Tree(...)를 수행하면 마지막 return true가 공유된 false를 다시 true로 바꿀 수 있었다.",
-    "turning": "자식 호출의 결과를 바로 반환하는 방식으로 다시 정리했다. 둘 다 nullptr이면 true, 한쪽만 nullptr이면 false다. 현재 값과 왼쪽·오른쪽 결과가 모두 같아야 true가 된다. 아래 수정안의 통과 여부는 확인되지 않았다.",
+    "turning": "자식 호출의 결과를 바로 반환하는 방식으로 다시 정리했다. 둘 다 nullptr이면 true, 한쪽만 nullptr이면 false다. 현재 값과 왼쪽·오른쪽 결과가 모두 같아야 true가 된다.",
     "learned": [
       "자식 함수의 false를 받지 않으면 끝의 true가 반환된다.",
       "포인터로 값을 읽기 전에 nullptr인지 검사해야 한다."
     ],
     "code_title": "오답 원인을 반영한 풀이",
-    "solution_code": "class Solution {\npublic:\n    bool isSameTree(TreeNode* p, TreeNode* q) {\n        if (p == nullptr && q == nullptr) return true;\n        if (p == nullptr || q == nullptr) return false;\n\n        return p->val == q->val\n            && isSameTree(p->left, q->left)\n            && isSameTree(p->right, q->right);\n    }\n};"
+    "solution_code": "class Solution {\npublic:\n    bool isSameTree(TreeNode* p, TreeNode* q) {\n        if (p == nullptr && q == nullptr) return true;\n        if (p == nullptr || q == nullptr) return false;\n\n        return p->val == q->val\n            && isSameTree(p->left, q->left)\n            && isSameTree(p->right, q->right);\n    }\n};",
+    "verification": "아래 코드는 수정안 · 통과 제출 미확인"
   },
   {
     "id": "pg-1844",
@@ -497,7 +498,7 @@ window.TIL_ALGORITHMS = [
     "summary": "이전·현재·다음 값을 비교해 임계점을 찾고 거리를 구하려 했다. 본인 제출 목록의 마지막 결과는 Runtime Error였다.",
     "question": "처음에는 임계점 노드 자체를 first와 last에 저장하고 다시 순회해 거리를 세려 했다. 위치와 거리 변수가 섞이면서 최소 거리의 기준이 불분명해졌다.",
     "attempt": "findpoint에서 지역 최솟값·최댓값을 판정하고 num, num2를 증가시키려 했다. 벡터 초기화 문법과 nullptr 접근을 수정했지만 num2 증가와 첫 임계점 처리, p의 유효성 검사가 남았다.",
-    "turning": "첫 번째 위치와 직전 위치를 숫자로 저장하면 다시 노드를 따라가지 않아도 거리를 구할 수 있다. 아래 코드는 두 번 돌던 시도 뒤에 정리한 참고 풀이이며 통과 제출은 확인되지 않았다.",
+    "turning": "첫 번째 위치와 직전 위치를 숫자로 저장하는 방법도 정리해 봤다. 이렇게 하면 거리를 구하려고 노드를 다시 따라가지 않아도 된다. 아래에는 이 방식의 참고 예제를 남겼다.",
     "learned": [
       "임계점은 이전과 다음 노드가 모두 있는 현재 노드만 될 수 있다.",
       "최소 거리는 연속한 임계점 사이, 최대 거리는 첫 임계점과 마지막 임계점 사이에서 나온다.",
@@ -505,7 +506,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "참고 예제 · 위치로 거리 계산",
     "solution_code": "class Solution {\npublic:\n    vector<int> nodesBetweenCriticalPoints(ListNode* head) {\n        int first = -1, previous = -1;\n        int minDistance = INT_MAX, index = 1;\n        ListNode* prev = head;\n        ListNode* current = head->next;\n\n        while (current->next != nullptr) {\n            bool critical =\n                (prev->val < current->val && current->val > current->next->val) ||\n                (prev->val > current->val && current->val < current->next->val);\n\n            if (critical) {\n                if (first == -1) first = index;\n                if (previous != -1) minDistance = min(minDistance, index - previous);\n                previous = index;\n            }\n            prev = current;\n            current = current->next;\n            index++;\n        }\n\n        if (first == previous) return {-1, -1};\n        return {minDistance, previous - first};\n    }\n};",
-    "verification": "LeetCode Practice History · 최근 제출 9월 1일 · Runtime Error · 제출 20회 · 2026-09-29 목록 확인, 통과 제출은 확인되지 않음"
+    "verification": "LeetCode Practice History · 최근 제출 9월 1일 · Runtime Error · 제출 20회 · 2026-09-29 목록 확인, 통과 제출은 확인되지 않음 · 아래 코드는 실제 제출이 아닌 참고 예제"
   },
   {
     "id": "lc-26",
@@ -786,16 +787,16 @@ window.TIL_ALGORITHMS = [
     "date": "2026-08-27",
     "problem": "두 사람이 배열 양끝에서 수를 하나씩 골라 점수를 더한다. 둘 다 최선으로 선택할 때 먼저 고른 사람의 점수가 같거나 더 큰지 구한다.",
     "summary": "양끝 값을 비교해 큰 수를 번갈아 더했지만 [1,5,233,7]에서 오답이 났다.",
-    "question": "WinA와 winB에 각자 고른 수를 더하고, i와 index로 남은 구간을 줄이려 했다.",
-    "attempt": "앞뒤 값을 비교해 고른 쪽의 위치를 움직였다. 제출 목록에는 Compile Error와 Wrong Answer가 남아 있고, 마지막 제출은 67개 중 1개만 통과했다.",
-    "turning": "[1,5,233,7]에서 false를 반환했지만 정답은 true였다. 당장 큰 수를 고르는 방식으로는 상대의 다음 선택까지 반영하지 못한다. 마지막 코드에는 nums[index - i]로 비교하는 부분도 남아 있다. 이후 수정이나 통과 제출은 확인되지 않았다.",
+    "question": "양끝의 수 중 큰 값을 고르고 WinA와 winB에 번갈아 더하는 코드로 풀어봤다. i와 index를 움직여 남은 구간을 줄였다.",
+    "attempt": "앞뒤 값을 비교해 고른 쪽의 위치를 움직였다. 컴파일 오류를 고친 뒤에도 오답이 났다. 마지막 제출은 67개 중 1개만 통과했다.",
+    "turning": "[1,5,233,7]에서는 false가 나왔지만 기대값은 true였다. 큰 값을 번갈아 고르는 코드로는 이 예제를 통과하지 못했다.",
     "learned": [
-      "기록 날짜는 제출 상세 화면에 표시된 2026-08-27을 기준으로 남겼다. 별도의 학습 시작일은 확인되지 않았다.",
-      "지금 고를 수 있는 큰 수와 마지막에 이기는 선택은 다를 수 있다. 이 설명은 오답 코드를 대조한 내용이며 당시 정답 풀이를 완성했다는 뜻은 아니다."
+      "WinA와 winB에 각각 고른 수를 더하고 마지막에 두 점수를 비교했다.",
+      "앞쪽 위치는 i를 늘리고, 뒤쪽 위치는 index를 줄여 옮겼다."
     ],
     "code_title": "마지막 제출 코드 · Wrong Answer",
     "solution_code": "class Solution {\npublic:\n    bool predictTheWinner(vector<int>& nums) {\n        int WinA = 0;\n        int winB = 0;\n        int index = nums.size() - 1;\n        int i = 0;\n        while(true)\n        {\n\n            if(nums[i] >= nums[index - i])\n            {\n                WinA += nums[i];\n                i++;\n            }\n            else\n            {\n                WinA += nums[index];\n                index--;\n            }\n            if(nums[i] >= nums[index])\n            {\n                winB += nums[i];\n                i++;\n            }\n            else\n            {\n                winB += nums[index];\n                index--;\n            }\n            if(i >= index)\n            {\n                if(WinA >= winB){return true;}\n                else{return false;}\n            }\n        }\n\n    }\n};",
-    "verification": "LeetCode Wrong Answer · 1 / 67 · 제출 화면 2026-08-27 21:02 · 로그인된 본인 제출 코드 확인",
+    "verification": "LeetCode Wrong Answer · 1 / 67 · 제출 화면 2026-08-27 21:02 · 로그인된 본인 제출 코드 확인 · 기록 날짜는 제출 표시일 기준, 학습 시작일 미확인 · 통과 제출 없음",
     "submission_url": "https://leetcode.com/problems/predict-the-winner/submissions/2121862138"
   },
   {
@@ -809,14 +810,14 @@ window.TIL_ALGORITHMS = [
     "summary": "x차이 / y차이를 비교하고, 수직선과 수평선은 좌표 차이가 0인지 따로 검사했다.",
     "question": "coordinates가 2차원 vector라서 구조부터 확인했다. coordinates[i][0]은 i번째 점의 x, coordinates[i][1]은 y였다.",
     "attempt": "첫 두 점의 x차이 / y차이를 r에 넣고, 이후에는 이전 점과 현재 점의 값이 같은지 비교했다. 처음에는 float에 저장하면 실수 나눗셈이 될 줄 알았지만 정수끼리 먼저 계산됐다. 그래서 나누기 전에 분자를 float로 바꿨다.\n\n수직선과 수평선일 때 r = 1을 넣어보기도 했다. 하지만 나머지 점들도 같은 선 위에 있는지는 별도로 검사해야 했다. 좌표 차이를 1과 비교하던 부분도 같은 좌표의 차이는 0이므로 고쳤다.",
-    "turning": "첫 두 점의 x 차이가 0이면 나머지 x좌표를, y 차이가 0이면 나머지 y좌표를 확인했다. 그 외에는 r을 비교했다. 결과는 Accepted, 83/83, Runtime 0 ms였다.\n\n코드는 당시 제출 형태로 남겼다. r 계산이 수평선 분기보다 앞에 있어 y 차이가 0이어도 먼저 나누며, float를 정확히 같은지 비교하는 방식도 그대로다. 이 두 부분을 이후에 수정한 기록은 없다.",
+    "turning": "첫 두 점의 x 차이가 0이면 나머지 x좌표를, y 차이가 0이면 나머지 y좌표를 확인했다. 그 외에는 r을 비교했다. 이렇게 나눠서 제출하니 83개 테스트를 통과했고 Runtime은 0 ms가 나왔다.",
     "learned": [
       "바깥 인덱스는 점 번호이고, 안쪽 인덱스는 x와 y를 고른다.",
       "float r = 1 / 2는 정수 나눗셈이 먼저 된다. 실수 계산을 하려면 나누기 전에 형변환한다.",
       "수직선은 x좌표가 같고, 수평선은 y좌표가 같다."
     ],
-    "code_title": "사용자가 제공한 완료 코드 · C++",
+    "code_title": "완료 코드 · C++",
     "solution_code": "class Solution {\npublic:\n    bool checkStraightLine(vector<vector<int>>& coordinates) \n    {\n        float r = (float)(coordinates[0][0] - coordinates[1][0]) / (coordinates[0][1] - coordinates[1][1]);\n\n        if (0 == coordinates[0][0] - coordinates[1][0])\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (0 != coordinates[i-1][0] - coordinates[i][0])\n                {\n                    return false;\n                }\n            }\n        }\n        else if (0 == coordinates[0][1] - coordinates[1][1])\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (0 != coordinates[i-1][1] - coordinates[i][1])\n                {\n                    return false;\n                }\n            }\n        }\n        else\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (r != (float)(coordinates[i-1][0] - coordinates[i][0]) / (coordinates[i-1][1] - coordinates[i][1]))\n                {\n                    return false;\n                }\n            }\n        }\n\n        return true;\n    }\n};",
-    "verification": "사용자 제공 결과: LeetCode Accepted · 83 / 83 · Runtime 0 ms · 학습일 2026-09-29 · 제출 상세 링크와 제출 시각은 미확인"
+    "verification": "사용자 제공 결과: LeetCode Accepted · 83 / 83 · Runtime 0 ms · 학습일 2026-09-29 · 제출 상세 링크와 제출 시각은 미확인 · 제공된 코드 유지: r 계산이 수평선 분기보다 앞에 있고 float를 직접 비교함"
   }
 ];
