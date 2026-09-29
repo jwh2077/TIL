@@ -19,7 +19,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) \n    {\n        if(original.size() != m * n)\n        return vector<vector<int>>{ 0 };\n        vector<vector<int>>A(m, vector<int>(n));\n        int num = 0;\n        for(int M = 0; M < m; M++)\n        {\n            for(int N = 0; N < n; N++)\n            {\n                A[M][N] = original[num];\n                num++;\n            }\n        }\n        return A;\n    }\n};",
-    "verification": "LeetCode Accepted · 107 / 107",
+    "verification": "LeetCode Accepted · 107 / 107 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-17 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2109169458/"
   },
   {
@@ -41,7 +41,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> matrixReshape(vector<vector<int>>& mat, int r, int c) {\n        int X = mat.size();\n        int Y = mat[0].size();\n        vector<vector<int>> A(r,vector<int>(c));\n        vector<int>B(X * Y);\n        int num = 0;\n        if (X * Y != r * c)\n        {\n            return mat;\n        }\n        for(int x = 0; x < X; x++)\n            for(int y = 0; y < Y; y++) B[num++] = mat[x][y];\n        num = 0;\n        for(int x = 0; x < r; x++)\n            for(int y = 0; y < c; y++) A[x][y] = B[num++];\n        return A;\n    }\n};",
-    "verification": "LeetCode Accepted · 57 / 57",
+    "verification": "LeetCode Accepted · 57 / 57 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-17 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2109243993/"
   },
   {
@@ -63,7 +63,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> transpose(vector<vector<int>>& matrix) {\n        int X = matrix.size();\n        int Y = matrix[0].size();\n        vector<vector<int>>A(Y,vector<int>(X));\n        for(int x = 0; x < Y; x++)\n            for(int y = 0; y < X; y++) A[x][y] = matrix[y][x];\n        return A;\n    }\n};",
-    "verification": "LeetCode Accepted · 36 / 36",
+    "verification": "LeetCode Accepted · 36 / 36 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-17 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2109291619/"
   },
   {
@@ -85,7 +85,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> generateMatrix(int n) {\n        vector<vector<int>>A(n,vector<int>(n));\n        int num = 1;\n        int ux = 0, dx = n - 1, uy = n - 1, dy = 0;\n        while(n*n >= num)\n        {\n            for(int i = dy; i <= uy;i++) A[ux][i] = num++;\n            ux++;\n            for(int i = ux; i <= dx;i++) A[i][uy] = num++;\n            uy--;\n            for(int i = uy; i >= dy;i--) A[dx][i] = num++;\n            dx--;\n            for(int i = dx; i >= ux;i--) A[i][dy] = num++;\n            dy++;\n        }\n        return A;\n    }\n};",
-    "verification": "LeetCode Accepted · 20 / 20 · 당시 결과: Runtime 0 ms / Beats 100.00%",
+    "verification": "LeetCode Accepted · 20 / 20 · 당시 결과: Runtime 0 ms / Beats 100.00% · 9/29 본인 제출 목록의 마지막 결과: 2026-08-17 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2109446133/"
   },
   {
@@ -124,7 +124,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    bool A = true;\n    bool isUnivalTree(TreeNode* root) \n    {\n        A = true;\n        tree(root);\n        return A;\n    }\n    int tree (TreeNode* root)\n    {\n        if (!A){ return 0;}\n        if(root->left != nullptr && tree(root->left) != root-> val) A = false;\n        if(root->right != nullptr && tree(root->right)!= root-> val) A = false;\n        return root-> val;\n    }\n};",
-    "verification": "LeetCode Accepted · 72 / 72",
+    "verification": "LeetCode Accepted · 72 / 72 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-14 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2141062788/"
   },
   {
@@ -268,7 +268,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    bool winnerSquareGame(int n) \n    {\n        vector<bool> dp(1 + n, false);\n        for (int i = 1 ; i <= n; i++)\n        {\n            for(int j = 1 ; j * j <= i; j++)\n            {\n                if(!dp[i - j * j])\n                {\n                    dp[i] = true;\n                    break;\n                }\n            }\n        }\n        return dp[n];\n    }\n};",
-    "verification": "LeetCode Accepted · 72 / 72",
+    "verification": "LeetCode Accepted · 72 / 72 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-10 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2136668367/"
   },
   {
@@ -310,7 +310,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) \n    {\n        for(int i = m; i < m + n; i++) nums1[i] = nums2[i - m];\n        sort(nums1.begin(),nums1.end());\n    }\n};",
-    "verification": "LeetCode Accepted · 63 / 63",
+    "verification": "LeetCode Accepted · 63 / 63 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-08 Runtime Error (사이트 표시일, 학습일과 구분) · 위 통과 근거와 마지막 제출 결과는 서로 다른 제출",
     "submission_url": "https://leetcode.com/submissions/detail/2134457404/"
   },
   {
@@ -332,7 +332,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    int minSteps(string s, string t)\n    {\n        unordered_map<char,int>sum;        \n        for(int i = 0 ; i < s.size(); i++)\n        {\n            sum[s[i]]++;\n            sum[t[i]]--;\n        }\n        int num = 0;\n        for(auto A : sum)\n        {\n            if(0 > A.second) num += !A.second;\n            else num += A.second;\n        }\n        return num;\n    }\n};",
-    "verification": "LeetCode Accepted · 63 / 63",
+    "verification": "LeetCode Accepted · 63 / 63 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-07 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2133362982/"
   },
   {
@@ -375,7 +375,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class ParkingSystem {\npublic:\n    int A[3];\n    ParkingSystem(int big, int medium, int small) \n    {\n        A[0] = big; A[1] = medium; A[2] = small;\n    }\n    bool addCar(int carType) \n    {\n        if(A[carType - 1] >= 1)\n        {\n            A[carType - 1]--;\n            return true;\n        }\n        return false;\n    }\n};",
-    "verification": "LeetCode Accepted · 102 / 102",
+    "verification": "LeetCode Accepted · 102 / 102 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-04 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2130652933/"
   },
   {
@@ -397,7 +397,7 @@ window.TIL_ALGORITHMS = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    int maxProfit(vector<int>& prices) \n    {\n        int topprices = 0;\n        int profit = 0;\n        for(int i = prices.size() - 1; i >= 0; i--)\n        {\n            topprices = max(topprices, prices[i]);\n            profit = max(profit, topprices - prices[i]);\n        }\n        return profit;\n    }\n};",
-    "verification": "LeetCode Accepted · 213 / 213",
+    "verification": "LeetCode Accepted · 213 / 213 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-03 Accepted (사이트 표시일, 학습일과 구분)",
     "submission_url": "https://leetcode.com/submissions/detail/2129035853/"
   },
   {
@@ -494,7 +494,7 @@ window.TIL_ALGORITHMS = [
     "status": "수정 중",
     "problem": "앞뒤 값보다 모두 크거나 모두 작은 노드(임계점)를 찾고 그 사이의 최소·최대 거리를 구한다.",
     "date": "2026-09-01",
-    "summary": "이전·현재·다음 값을 비교해 임계점을 찾고, 첫 임계점과 다음 임계점 사이의 거리를 구하려 했다. 통과 여부는 확인되지 않았다.",
+    "summary": "이전·현재·다음 값을 비교해 임계점을 찾고 거리를 구하려 했다. 본인 제출 목록의 마지막 결과는 Runtime Error였다.",
     "question": "처음에는 임계점 노드 자체를 first와 last에 저장하고 다시 순회해 거리를 세려 했다. 위치와 거리 변수가 섞이면서 최소 거리의 기준이 불분명해졌다.",
     "attempt": "findpoint에서 지역 최솟값·최댓값을 판정하고 num, num2를 증가시키려 했다. 벡터 초기화 문법과 nullptr 접근을 수정했지만 num2 증가와 첫 임계점 처리, p의 유효성 검사가 남았다.",
     "turning": "첫 번째 위치와 직전 위치를 숫자로 저장하면 다시 노드를 따라가지 않아도 거리를 구할 수 있다. 아래 코드는 두 번 돌던 시도 뒤에 정리한 참고 풀이이며 통과 제출은 확인되지 않았다.",
@@ -504,7 +504,8 @@ window.TIL_ALGORITHMS = [
       "노드 자체보다 순회 인덱스를 저장하면 거리 계산이 직접적이다."
     ],
     "code_title": "참고 예제 · 위치로 거리 계산",
-    "solution_code": "class Solution {\npublic:\n    vector<int> nodesBetweenCriticalPoints(ListNode* head) {\n        int first = -1, previous = -1;\n        int minDistance = INT_MAX, index = 1;\n        ListNode* prev = head;\n        ListNode* current = head->next;\n\n        while (current->next != nullptr) {\n            bool critical =\n                (prev->val < current->val && current->val > current->next->val) ||\n                (prev->val > current->val && current->val < current->next->val);\n\n            if (critical) {\n                if (first == -1) first = index;\n                if (previous != -1) minDistance = min(minDistance, index - previous);\n                previous = index;\n            }\n            prev = current;\n            current = current->next;\n            index++;\n        }\n\n        if (first == previous) return {-1, -1};\n        return {minDistance, previous - first};\n    }\n};"
+    "solution_code": "class Solution {\npublic:\n    vector<int> nodesBetweenCriticalPoints(ListNode* head) {\n        int first = -1, previous = -1;\n        int minDistance = INT_MAX, index = 1;\n        ListNode* prev = head;\n        ListNode* current = head->next;\n\n        while (current->next != nullptr) {\n            bool critical =\n                (prev->val < current->val && current->val > current->next->val) ||\n                (prev->val > current->val && current->val < current->next->val);\n\n            if (critical) {\n                if (first == -1) first = index;\n                if (previous != -1) minDistance = min(minDistance, index - previous);\n                previous = index;\n            }\n            prev = current;\n            current = current->next;\n            index++;\n        }\n\n        if (first == previous) return {-1, -1};\n        return {minDistance, previous - first};\n    }\n};",
+    "verification": "LeetCode Practice History · 최근 제출 9월 1일 · Runtime Error · 제출 20회 · 2026-09-29 목록 확인, 통과 제출은 확인되지 않음"
   },
   {
     "id": "lc-26",
@@ -513,7 +514,7 @@ window.TIL_ALGORITHMS = [
     "url": "https://leetcode.com/problems/remove-duplicates-from-sorted-array/",
     "status": "통과 확인",
     "date": "2026-09-01",
-    "verification": "LeetCode Accepted · 362 / 362",
+    "verification": "LeetCode Accepted · 362 / 362 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-31 Accepted (사이트 표시일, 학습일과 구분)",
     "problem": "정렬된 배열을 제자리에서 수정해 서로 다른 값만 앞부분에 남기고 그 개수를 반환한다.",
     "summary": "값의 범위와 정렬 상태를 이용해 같은 값의 두 번째 원소부터 erase로 제거했다.",
     "question": "",
@@ -534,7 +535,7 @@ window.TIL_ALGORITHMS = [
     "url": "https://leetcode.com/problems/remove-element/",
     "status": "통과 확인",
     "date": "2026-09-01",
-    "verification": "LeetCode Accepted · 116 / 116",
+    "verification": "LeetCode Accepted · 116 / 116 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-31 Accepted (사이트 표시일, 학습일과 구분)",
     "problem": "배열에서 val과 같은 원소를 제자리에서 제거하고 남은 원소 수를 반환한다.",
     "summary": "순회 중 목표 값을 만나면 erase하고 인덱스를 되돌려 연속된 목표 값도 놓치지 않았다.",
     "question": "",
@@ -556,7 +557,7 @@ window.TIL_ALGORITHMS = [
     "url": "https://leetcode.com/problems/length-of-last-word/",
     "status": "통과 확인",
     "date": "2026-08-25",
-    "verification": "LeetCode Accepted · 60 / 60",
+    "verification": "LeetCode Accepted · 60 / 60 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-24 Accepted (사이트 표시일, 학습일과 구분)",
     "problem": "문자열 끝의 공백을 무시하고 마지막 단어의 길이를 반환한다.",
     "summary": "공백 뒤 새 단어가 시작되면 길이를 1로 초기화하고, 같은 단어가 이어지면 길이를 증가시켰다.",
     "question": "",
@@ -576,7 +577,7 @@ window.TIL_ALGORITHMS = [
     "url": "https://leetcode.com/problems/count-and-say/",
     "status": "통과 확인",
     "date": "2026-08-21",
-    "verification": "LeetCode Accepted · 30 / 30",
+    "verification": "LeetCode Accepted · 30 / 30 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-20 Wrong Answer (사이트 표시일, 학습일과 구분) · 위 통과 근거와 마지막 제출 결과는 서로 다른 제출",
     "problem": "이전 문자열에서 연속한 같은 숫자의 개수와 숫자를 읽어 다음 문자열을 만든다.",
     "summary": "현재 문자를 기준으로 연속 개수를 세고 문자가 바뀌는 순간 결과 문자열에 묶음을 기록했다.",
     "question": "",
@@ -596,7 +597,7 @@ window.TIL_ALGORITHMS = [
     "url": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
     "status": "통과 확인",
     "date": "2026-08-20",
-    "verification": "LeetCode Accepted · 62 / 62",
+    "verification": "LeetCode Accepted · 62 / 62 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-19 Wrong Answer (사이트 표시일, 학습일과 구분) · 위 통과 근거와 마지막 제출 결과는 서로 다른 제출",
     "problem": "연결 리스트를 k개씩 묶어 각 묶음의 순서를 뒤집고 남는 노드는 유지한다.",
     "summary": "노드 연결을 바꾸는 대신 k의 배수 구간 값을 배열에 저장한 뒤 역순으로 다시 써서 통과했다.",
     "question": "",
@@ -775,5 +776,47 @@ window.TIL_ALGORITHMS = [
     "solution_code": "#include<iostream>\n#include<vector>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin>>T;\n    int N;\n    for(test_case = 1; test_case <= T; ++test_case)\n    {\n        cout << \"#\" << test_case << endl;\n        cin >> N;\n        vector<vector<int>>A;\n        A.push_back(vector<int>{ 1 });\n        for(int i = 1; i < N; i++)\n        {\n            A.push_back(vector<int>{ 1 });\n            for(int j = 1; j < i; j++)\n            {\n                int num = 0;\n                num += A[i - 1][ j - 1] ;\n                num += A[i - 1][ j ];\n                A[i].push_back(num);\n            }\n            A[i].push_back( 1 );\n        }\n        for(int i = 0; i < A.size(); i++)\n        {\n            for(int j = 0; j < A[i].size(); j++)\n            {\n                cout << A[i][j] << \" \" ;\n            }\n            cout << endl;\n        }\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
     "verification": "SWEA Pass · 제출 2026-09-28 09:25 · 7 ms / 5,844 KB · My제출에서 코드와 결과 확인",
     "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AV5P0-h6Ak4DFAUq"
+  },
+  {
+    "id": "lc-486",
+    "title": "양끝의 수를 골라 승자 예측하기",
+    "group": "array",
+    "url": "https://leetcode.com/problems/predict-the-winner/",
+    "status": "오답 · 수정 중",
+    "date": "2026-08-27",
+    "problem": "두 사람이 배열 양끝에서 수를 하나씩 골라 점수를 더한다. 둘 다 최선으로 선택할 때 먼저 고른 사람의 점수가 같거나 더 큰지 구한다.",
+    "summary": "양끝 값을 비교해 큰 수를 번갈아 더했지만 [1,5,233,7]에서 오답이 났다.",
+    "question": "WinA와 winB에 각자 고른 수를 더하고, i와 index로 남은 구간을 줄이려 했다.",
+    "attempt": "앞뒤 값을 비교해 고른 쪽의 위치를 움직였다. 제출 목록에는 Compile Error와 Wrong Answer가 남아 있고, 마지막 제출은 67개 중 1개만 통과했다.",
+    "turning": "[1,5,233,7]에서 false를 반환했지만 정답은 true였다. 당장 큰 수를 고르는 방식으로는 상대의 다음 선택까지 반영하지 못한다. 마지막 코드에는 nums[index - i]로 비교하는 부분도 남아 있다. 이후 수정이나 통과 제출은 확인되지 않았다.",
+    "learned": [
+      "기록 날짜는 제출 상세 화면에 표시된 2026-08-27을 기준으로 남겼다. 별도의 학습 시작일은 확인되지 않았다.",
+      "지금 고를 수 있는 큰 수와 마지막에 이기는 선택은 다를 수 있다. 이 설명은 오답 코드를 대조한 내용이며 당시 정답 풀이를 완성했다는 뜻은 아니다."
+    ],
+    "code_title": "마지막 제출 코드 · Wrong Answer",
+    "solution_code": "class Solution {\npublic:\n    bool predictTheWinner(vector<int>& nums) {\n        int WinA = 0;\n        int winB = 0;\n        int index = nums.size() - 1;\n        int i = 0;\n        while(true)\n        {\n\n            if(nums[i] >= nums[index - i])\n            {\n                WinA += nums[i];\n                i++;\n            }\n            else\n            {\n                WinA += nums[index];\n                index--;\n            }\n            if(nums[i] >= nums[index])\n            {\n                winB += nums[i];\n                i++;\n            }\n            else\n            {\n                winB += nums[index];\n                index--;\n            }\n            if(i >= index)\n            {\n                if(WinA >= winB){return true;}\n                else{return false;}\n            }\n        }\n\n    }\n};",
+    "verification": "LeetCode Wrong Answer · 1 / 67 · 제출 화면 2026-08-27 21:02 · 로그인된 본인 제출 코드 확인",
+    "submission_url": "https://leetcode.com/problems/predict-the-winner/submissions/2121862138"
+  },
+  {
+    "id": "lc-1232",
+    "title": "좌표가 한 직선 위에 있는지 확인",
+    "group": "array",
+    "url": "https://leetcode.com/problems/check-if-it-is-a-straight-line/description/",
+    "status": "통과 확인",
+    "date": "2026-09-29",
+    "problem": "여러 좌표가 모두 하나의 직선 위에 있는지 확인한다.",
+    "summary": "x차이 / y차이를 비교하고, 수직선과 수평선은 좌표 차이가 0인지 따로 검사했다.",
+    "question": "coordinates가 2차원 vector라서 구조부터 확인했다. coordinates[i][0]은 i번째 점의 x, coordinates[i][1]은 y였다.",
+    "attempt": "첫 두 점의 x차이 / y차이를 r에 넣고, 이후에는 이전 점과 현재 점의 값이 같은지 비교했다. 처음에는 float에 저장하면 실수 나눗셈이 될 줄 알았지만 정수끼리 먼저 계산됐다. 그래서 나누기 전에 분자를 float로 바꿨다.\n\n수직선과 수평선일 때 r = 1을 넣어보기도 했다. 하지만 나머지 점들도 같은 선 위에 있는지는 별도로 검사해야 했다. 좌표 차이를 1과 비교하던 부분도 같은 좌표의 차이는 0이므로 고쳤다.",
+    "turning": "첫 두 점의 x 차이가 0이면 나머지 x좌표를, y 차이가 0이면 나머지 y좌표를 확인했다. 그 외에는 r을 비교했다. 결과는 Accepted, 83/83, Runtime 0 ms였다.\n\n코드는 당시 제출 형태로 남겼다. r 계산이 수평선 분기보다 앞에 있어 y 차이가 0이어도 먼저 나누며, float를 정확히 같은지 비교하는 방식도 그대로다. 이 두 부분을 이후에 수정한 기록은 없다.",
+    "learned": [
+      "바깥 인덱스는 점 번호이고, 안쪽 인덱스는 x와 y를 고른다.",
+      "float r = 1 / 2는 정수 나눗셈이 먼저 된다. 실수 계산을 하려면 나누기 전에 형변환한다.",
+      "수직선은 x좌표가 같고, 수평선은 y좌표가 같다."
+    ],
+    "code_title": "사용자가 제공한 완료 코드 · C++",
+    "solution_code": "class Solution {\npublic:\n    bool checkStraightLine(vector<vector<int>>& coordinates) \n    {\n        float r = (float)(coordinates[0][0] - coordinates[1][0]) / (coordinates[0][1] - coordinates[1][1]);\n\n        if (0 == coordinates[0][0] - coordinates[1][0])\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (0 != coordinates[i-1][0] - coordinates[i][0])\n                {\n                    return false;\n                }\n            }\n        }\n        else if (0 == coordinates[0][1] - coordinates[1][1])\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (0 != coordinates[i-1][1] - coordinates[i][1])\n                {\n                    return false;\n                }\n            }\n        }\n        else\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (r != (float)(coordinates[i-1][0] - coordinates[i][0]) / (coordinates[i-1][1] - coordinates[i][1]))\n                {\n                    return false;\n                }\n            }\n        }\n\n        return true;\n    }\n};",
+    "verification": "사용자 제공 결과: LeetCode Accepted · 83 / 83 · Runtime 0 ms · 학습일 2026-09-29 · 제출 상세 링크와 제출 시각은 미확인"
   }
 ];

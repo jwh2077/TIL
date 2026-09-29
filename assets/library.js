@@ -50,7 +50,11 @@
     const links=[];
     if(r.kind==='file' && r.source_url==='data/guides/stl-reference.html') links.push(`<a class="source" href="${r.source_url}">원본 자료구조 문서 보기 →</a>`);
     for(const ref of [...(r.references||[]),...(r.kind==='velog'?[{label:'Velog 원문 보기',url:r.source_url}]:[])]) {
-      try {const u=new URL(ref.url);if(u.protocol==='https:'&&['velog.io','dev.epicgames.com'].includes(u.hostname))links.push(`<a class="source" href="${esc(u.href)}" target="_blank" rel="noopener noreferrer">${esc(ref.label)} ↗</a>`);}catch{}
+      if(/^#algorithm=[a-z0-9-]+$/.test(ref.url)) {
+        links.push(`<a class="source" href="${esc(ref.url)}">${esc(ref.label)} →</a>`);
+        continue;
+      }
+      try {const u=new URL(ref.url);if(u.protocol==='https:'&&['velog.io','dev.epicgames.com','github.com','swexpertacademy.com','school.programmers.co.kr'].includes(u.hostname))links.push(`<a class="source" href="${esc(u.href)}" target="_blank" rel="noopener noreferrer">${esc(ref.label)} ↗</a>`);}catch{}
     }
     return links.join('');
   }

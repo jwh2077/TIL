@@ -66,6 +66,19 @@ window.TIL_LIBRARY = [
       {
         "title": "Deque",
         "html": "\n<h2>1. 개념 / 구조</h2>\n<p><strong>Double Ended Queue</strong> — 양쪽 끝에서 삽입/삭제할 수 있다.</p>\n<pre>앞 ↔ [10][20][30][40] ↔ 뒤</pre>\n<h2>2. 주요 명령어 + Big-O</h2>\n<table><tr><th>명령어</th><th>기능</th><th>Big-O</th></tr>\n<tr><td><code>push_front()</code></td><td>앞 추가</td><td>O(1)</td></tr>\n<tr><td><code>push_back()</code></td><td>뒤 추가</td><td>O(1)</td></tr>\n<tr><td><code>pop_front()</code></td><td>앞 삭제</td><td>O(1)</td></tr>\n<tr><td><code>pop_back()</code></td><td>뒤 삭제</td><td>O(1)</td></tr>\n<tr><td><code>front()</code> / <code>back()</code></td><td>양 끝 확인</td><td>O(1)</td></tr>\n<tr><td><code>operator[]</code></td><td>인덱스 접근</td><td>O(1)</td></tr>\n</table>\n<h2>3. 장점 / 단점 / 사용하기 좋은 때</h2>\n<ul><li><strong>장점:</strong> 양쪽 끝의 삽입/삭제가 빠르고 인덱스 접근도 가능</li><li><strong>단점:</strong> vector처럼 하나의 연속된 메모리 블록에 저장된다는 보장은 없음</li><li><strong>좋은 경우:</strong> 양쪽에서 데이터를 넣고 빼는 경우, 슬라이딩 윈도우</li></ul>\n\n"
+      },
+      {
+        "title": "2차원 vector에 행을 넣는 것과 값을 넣는 것",
+        "text": "파스칼의 삼각형을 풀 때 A.push_back(vector<int>{1})과 A[i].push_back(1)이 헷갈렸다. 앞의 코드는 바깥 vector에 새 행을 추가하고, 뒤의 코드는 이미 있는 i번째 행에 값을 추가한다. 이전 행의 [j-1]과 [j]를 더할 때는 두 인덱스가 모두 존재하는 범위만 반복했다.",
+        "code": "vector<vector<int>> A;\nA.push_back(vector<int>{1}); // 첫 행 추가\nA[0].push_back(1);           // 첫 행에 값 추가",
+        "items": [
+          "A[i]에 접근하기 전에 i번째 행이 있어야 한다.",
+          "if로 값을 검사하더라도 없는 인덱스에 먼저 접근하면 범위 검사가 되지 않는다."
+        ]
+      },
+      {
+        "title": "F(n)을 저장하려면 n+1칸",
+        "text": "피보나치 수에서는 F(0)부터 F(n)까지 저장하므로 vector 크기를 n+1로 잡았다. n칸만 만들면 마지막 인덱스는 n-1이다. 자료형을 키우는 것과 배열 범위를 맞추는 것은 다른 문제였다."
       }
     ],
     "related_ids": [
@@ -84,6 +97,22 @@ window.TIL_LIBRARY = [
       {
         "label": "관련 Velog · STL vector와 map 복습",
         "url": "https://velog.io/@jwh4410/7.27"
+      },
+      {
+        "label": "파스칼의 삼각형 · 내 풀이",
+        "url": "#algorithm=swea-2005"
+      },
+      {
+        "label": "피보나치 수 · 내 풀이",
+        "url": "#algorithm=pg-12945"
+      },
+      {
+        "label": "SWEA 파스칼의 삼각형 원문",
+        "url": "https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5P0-h6Ak4DFAUq"
+      },
+      {
+        "label": "프로그래머스 피보나치 수 원문",
+        "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12945"
       }
     ]
   },
@@ -587,7 +616,7 @@ window.TIL_LIBRARY = [
     "source_name": "ProjectPriest_Unreal_AI_BT_Notes.html",
     "source_url": "",
     "project": "ProjectPriest",
-    "notice": "개념을 정리한 문서다. 이후 구현과 디버깅 결과는 아래 관련 실습에서 따로 본다.",
+    "notice": "개념 문서에 실제 공격 코드와 플레이 영상에서 확인할 수 있는 범위를 덧붙였다. 영상 원본은 Project (1).mp4이며 로컬에 보관한다. 실행 화면과 개별 버그의 해결 여부는 구분한다.",
     "sections": [
       {
         "title": "감지와 행동을 나눠 보기",
@@ -619,15 +648,33 @@ window.TIL_LIBRARY = [
       {
         "title": "개념 정리와 이후 작업",
         "text": "이 문서에서 다룬 기본 흐름은 순찰 → 감지 → 추적 → 공격이다. 수색이나 감지 상실 처리가 어디까지 적용됐는지는 이 개념 문서만으로 정하지 않는다. 9월 25일의 감지 상실·공격 판정 기록과 함께 보면 당시 고민과 이후 점검을 구분할 수 있다."
+      },
+      {
+        "title": "공격 범위와 피해를 주는 시점",
+        "text": "9/23 변경 코드에서는 손에 붙인 Sphere 대신 AttackCollision Box를 두었다. BeginOverlap에서 Player를 기억하고 EndOverlap에서 비운다. 실제 피해는 OnNotifyApplyDamage에서 Player가 있을 때 준다. 범위 안에 있다는 것과 공격 애니메이션의 타격 시점은 따로 처리하는 흐름이다."
+      },
+      {
+        "title": "플레이 화면과 코드에서 알 수 있는 것",
+        "text": "Project (1).mp4에는 일반 적과 보스의 전투, 체력·탄약·남은 적 수 표시가 나온다. 다만 화면만으로 어느 Task나 감지 설정이 실행됐는지 알 수는 없다. 9/25에 점검한 감지 상실 처리와 간헐적인 공격 판정 문제도 영상에 전투가 나온다는 이유로 해결됐다고 보지는 않는다. 영상은 로컬 원본으로 보관했다."
       }
     ],
     "related_ids": [
       "20260924-priest-concepts",
       "20260907-priest",
       "20260910-priest",
-      "20260925-priest-ai"
+      "20260925-priest-ai",
+      "20260928-priest"
     ],
-    "references": []
+    "references": [
+      {
+        "label": "공격 범위와 Notify 피해 적용 · 49c42fc",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/49c42fc0c144d3b137fc0b3e9e2c8b169d462c8d"
+      },
+      {
+        "label": "이후 공격 범위 에셋 변경 · 6f40359",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/6f40359179126e90655ef8a201a21d9799513170"
+      }
+    ]
   },
   {
     "id": "project-priest-oop-notes",

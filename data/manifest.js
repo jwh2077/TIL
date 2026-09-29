@@ -6,8 +6,8 @@ window.TIL_INDEX = {
       "date_end": null,
       "date_label": "2026-09-28",
       "month": "2026-09",
-      "title": "플레이 영상 준비와 에셋 되돌리기 오류",
-      "summary": "플레이 영상에서 보여줄 수류탄 조작을 Q키로 정정하고 컷 편집 방법을 찾아봤다. 에셋을 되돌리는 중에는 Git 오류가 났다.",
+      "title": "플레이 영상 정리와 에셋 되돌리기 오류",
+      "summary": "플레이 영상에 일반 전투와 인벤토리 화면, 구역 이동과 보스전이 담겼다. 에셋을 되돌리는 중 발생한 Git 오류는 따로 남겼다.",
       "project": "ProjectPriest",
       "primary_topic": "unreal",
       "tags": [

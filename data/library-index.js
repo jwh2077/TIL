@@ -52,6 +52,22 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "관련 Velog · STL vector와 map 복습",
         "url": "https://velog.io/@jwh4410/7.27"
+      },
+      {
+        "label": "파스칼의 삼각형 · 내 풀이",
+        "url": "#algorithm=swea-2005"
+      },
+      {
+        "label": "피보나치 수 · 내 풀이",
+        "url": "#algorithm=pg-12945"
+      },
+      {
+        "label": "SWEA 파스칼의 삼각형 원문",
+        "url": "https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5P0-h6Ak4DFAUq"
+      },
+      {
+        "label": "프로그래머스 피보나치 수 원문",
+        "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12945"
       }
     ]
   },
@@ -366,14 +382,24 @@ window.TIL_LIBRARY_INDEX = [
     "source_name": "ProjectPriest_Unreal_AI_BT_Notes.html",
     "source_url": "",
     "project": "ProjectPriest",
-    "notice": "개념을 정리한 문서다. 이후 구현과 디버깅 결과는 아래 관련 실습에서 따로 본다.",
+    "notice": "개념 문서에 실제 공격 코드와 플레이 영상에서 확인할 수 있는 범위를 덧붙였다. 영상 원본은 Project (1).mp4이며 로컬에 보관한다. 실행 화면과 개별 버그의 해결 여부는 구분한다.",
     "related_ids": [
       "20260924-priest-concepts",
       "20260907-priest",
       "20260910-priest",
-      "20260925-priest-ai"
+      "20260925-priest-ai",
+      "20260928-priest"
     ],
-    "references": []
+    "references": [
+      {
+        "label": "공격 범위와 Notify 피해 적용 · 49c42fc",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/49c42fc0c144d3b137fc0b3e9e2c8b169d462c8d"
+      },
+      {
+        "label": "이후 공격 범위 에셋 변경 · 6f40359",
+        "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/6f40359179126e90655ef8a201a21d9799513170"
+      }
+    ]
   },
   {
     "id": "project-priest-oop-notes",
