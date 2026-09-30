@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20260929-priest",
+      "date": "2026-09-29",
+      "date_end": null,
+      "date_label": "2026-09-29",
+      "title": "Project Priest 발표와 돌아보기",
+      "summary": "Project Priest 발표를 마쳤다. 적 AI와 무기 파츠를 만들면서 막혔던 부분은 프로젝트 돌아보기에 모았다.",
+      "project": "ProjectPriest",
+      "primary_topic": "project",
+      "tags": [
+        "Unreal",
+        "팀 프로젝트",
+        "발표",
+        "돌아보기"
+      ],
+      "activity": "team",
+      "month": "2026-09",
+      "file": "data/2026/09/2026-09-29.js"
+    },
+    {
       "id": "20260928-priest",
       "date": "2026-09-28",
       "date_end": null,
