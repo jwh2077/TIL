@@ -10,7 +10,7 @@
     ['stl', 'STL · 자료구조', '컨테이너와 자료 저장 방식을 선택하고 적용한 기록입니다.'],
     ['project', '프로젝트 · 협업', '기능 구현, Git과 팀 협업에서 배운 내용을 모았습니다.']
   ];
-  const state = { topic: 'all', project: 'all', from: '', to: '', dateKind: 'all', sub: 'all', activity:'all' };
+  const state = { topic: 'all', project: 'all', from: '', to: '', dateKind: 'all', sub: 'all', activity:'all', query:'', tags:[] };
   const subdivisions = {
     unreal: [['ai','AI · 행동 흐름',/AI|몬스터|순찰|시야|추적|Behavior|비헤이비어/i], ['combat','전투 · 스탯',/공격|피해|사망|스탯|DataTable/i], ['parts','아이템 · 파츠',/파츠|아이템|Item|Part/i], ['engine','엔진 · 게임플레이',/.*/]],
     cpp: [['flow','문법 · 제어 흐름',/조건|반복|변수|연산|입출력/], ['function','함수 · 문제 풀이',/함수|문제|알고리즘/], ['practice','기초 실습',/.*/]],
@@ -49,7 +49,7 @@
   }
   function visible() {
     if (state.from && state.to && state.from > state.to) return [];
-    return records.filter(r => (state.activity==='all'||r.activity===state.activity) && (state.topic === 'all' || r.primary_topic === state.topic) &&
+    return records.filter(r => (!window.TIL_FILTERS || window.TIL_FILTERS.matches(r,state,'record')) && (state.activity==='all'||r.activity===state.activity) && (state.topic === 'all' || r.primary_topic === state.topic) &&
       (state.project === 'all' || r.project === state.project) && matchesDate(r) && (state.sub === 'all' || subOf(r) === state.sub))
       .sort((a, b) => !a.date && b.date ? 1 : a.date && !b.date ? -1 :
         ($('#sort').value === 'asc' ? 1 : -1) * String(a.date || '').localeCompare(String(b.date || '')) || a.id.localeCompare(b.id));
@@ -67,6 +67,7 @@
     const shown = visible(); $('#count').textContent = `${shown.length}개 기록`;
     $('#records').innerHTML = shown.map(r => `<article class="record"><button class="record-button" type="button" data-record-id="${esc(r.id)}"><div class="record-meta"><span>${esc(r.date_label)}</span><span class="topic-badge">${esc(name(r.primary_topic))}</span></div><h3>${esc(r.title)}</h3>${r.project ? `<p class="summary">${esc(r.project)}</p>` : ''}<span class="more">열기 →</span></button></article>`).join('') || '<div class="empty">선택한 조건에 맞는 기록이 없습니다.</div>';
   }
+  window.TIL_RECORD_VIEW = { state, records, visible, subdivisions, update(patch) { Object.assign(state, patch); dateOptions(); dateChange(); }, render };
   function load(file) {
     if (!/^data\/(?:\d{4}\/\d{2}|undated|project-period)\/[\w-]+\.js$/.test(file)) return Promise.reject(new Error('잘못된 기록 경로'));
     if (window.TIL_FILES?.[file]) return Promise.resolve(window.TIL_FILES[file]);
@@ -80,7 +81,7 @@
   }
   const list = (label, values) => Array.isArray(values) && values.length ? `<section class="section"><h3>${label}</h3><ul>${values.map(v => `<li>${esc(v)}</li>`).join('')}</ul></section>` : '';
   function noteBody(r) {
-    const paragraphs = [r.study_content, r.learning_process].filter(Boolean);
+    const paragraphs = [r.study_content, r.learning_process].filter(Boolean).flatMap(value => value.split(/\n\s*\n/));
     return `<section class="note-body">${paragraphs.map(value => `<p>${esc(value)}</p>`).join('')}</section>`;
   }
   function gallery(images) {
@@ -143,7 +144,7 @@
       }).map(x => link(x.label || x.title || '참고 기록', x.url)).join('');
       const hasNotes = (r.questions || []).length || (r.mistakes_or_difficulties || []).length;
       $('#detailContent').innerHTML = `<div class="detail-top"><div><div class="record-meta">${esc(meta.date_label)} · ${esc(name(meta.primary_topic))}</div><h2 id="detailTitle" class="detail-title">${esc(r.title)}</h2></div></div><p class="detail-label">${esc(r.project || '개인 공부')}</p>${noteBody(r)}${gallery(r.images)}${hasNotes ? `<details class="extra"><summary>막힌 부분과 남은 질문</summary><div class="extra-body">${list('궁금했던 것', r.questions)}${list('남은 부분', r.mistakes_or_difficulties)}</div></details>` : ''}${r.notice ? `<p class="article-notice">${esc(r.notice)}</p>` : ''}${sourceLinks ? `<section class="note-sources" aria-label="원본과 참고 링크">${sourceLinks}</section>` : ''}<section class="related"><h3>앞뒤 기록</h3><div class="related-list">${button(sequence[at-1], '← 이전 기록')}${button(sequence[at+1], '다음 기록 →')}</div></section><section class="related"><h3>비슷한 내용</h3><div class="related-list">${related.map(x => button(x)).join('')}</div></section>`;
-      buildSections(); window.scrollTo({ top: 0 }); $('#detailTitle').setAttribute('tabindex', '-1'); $('#detailTitle').focus();
+      buildSections(); window.TIL_SITE?.articleReady(); window.scrollTo({ top: 0 }); $('#detailTitle').setAttribute('tabindex', '-1'); $('#detailTitle').focus();
     } catch (error) {
       if (token !== request || page.hidden) return;
       $('#detailContent').innerHTML = `<div class="detail-top"><h2 id="detailTitle">기록을 열지 못했습니다</h2></div><p>${esc(error.message)}</p>${button(meta, '다시 열기')}`;

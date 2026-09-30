@@ -23,10 +23,11 @@ window.TIL_FILES["data/2026/06/2026-06-22.js"] = [
       "while",
       "break"
     ],
-    "velog": null,
+    "velog": "https://velog.io/@jwh4410/6.22",
     "repository": null,
     "source": [
-      "Velog 학습 기록"
+      "Velog 학습 기록",
+      "Velog"
     ],
     "primary_topic": "cpp",
     "summary": "HP에 따라 사망·위험·주의·안전을 출력하고, HP가 줄어드는 상황을 for와 while로 써봤다.",

@@ -20,10 +20,11 @@ window.TIL_FILES["data/2026/06/2026-06-19.js"] = [
       "논리 연산자",
       "cin"
     ],
-    "velog": null,
+    "velog": "https://velog.io/@jwh4410/06.19",
     "repository": null,
     "source": [
-      "학습 기록"
+      "학습 기록",
+      "Velog"
     ],
     "primary_topic": "cpp",
     "summary": "정수 두 개를 입력받아 예시와 같은 모양으로 출력하는 문제를 풀었다.",

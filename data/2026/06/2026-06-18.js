@@ -21,10 +21,11 @@ window.TIL_FILES["data/2026/06/2026-06-18.js"] = [
       "if",
       "else"
     ],
-    "velog": null,
+    "velog": "https://velog.io/@jwh4410/6.18",
     "repository": null,
     "source": [
-      "학습 기록"
+      "학습 기록",
+      "Velog"
     ],
     "primary_topic": "cpp",
     "summary": "C++로 처음 Hello World를 출력했다.",

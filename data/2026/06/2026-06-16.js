@@ -24,7 +24,8 @@ window.TIL_FILES["data/2026/06/2026-06-16.js"] = [
     "velog": "https://velog.io/@jwh4410/6.16",
     "repository": null,
     "source": [
-      "학습 기록"
+      "학습 기록",
+      "Velog"
     ],
     "primary_topic": "unreal",
     "summary": "플랫폼이 생긴 뒤 일정 시간이 지나면 사라지게 만들었다.",

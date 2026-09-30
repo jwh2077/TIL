@@ -21,10 +21,11 @@ window.TIL_FILES["data/2026/06/2026-06-23.js"] = [
       "Overlap",
       "Door"
     ],
-    "velog": null,
+    "velog": "https://velog.io/@jwh4410/6.23",
     "repository": null,
     "source": [
-      "Velog 학습 기록"
+      "Velog 학습 기록",
+      "Velog"
     ],
     "primary_topic": "unreal",
     "summary": "Fab 맵과 조명을 배치하고 E키로 문을 열어보려고 했다.",

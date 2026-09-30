@@ -19,10 +19,11 @@ window.TIL_FILES["data/2026/06/2026-06-15.js"] = [
       "Collision",
       "Blueprint"
     ],
-    "velog": null,
+    "velog": "https://velog.io/@jwh4410/6.15",
     "repository": null,
     "source": [
-      "학습 기록"
+      "학습 기록",
+      "Velog"
     ],
     "primary_topic": "unreal",
     "summary": "Fab에서 무료 에셋을 받아 발판을 놓고 Blueprint를 따라 해봤다.",

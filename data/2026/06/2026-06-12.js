@@ -18,10 +18,11 @@ window.TIL_FILES["data/2026/06/2026-06-12.js"] = [
       "데이터",
       "자료형"
     ],
-    "velog": null,
+    "velog": "https://velog.io/@jwh4410/6.12",
     "repository": null,
     "source": [
-      "학습 기록"
+      "학습 기록",
+      "Velog"
     ],
     "primary_topic": "cpp",
     "summary": "변수는 값을 담는 공간이고 자료형은 어떤 값을 담을지 정한다.",

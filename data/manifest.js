@@ -81,7 +81,7 @@ window.TIL_INDEX = {
       "date_label": "2026-06-17",
       "month": "2026-06",
       "title": "게임에서 캐릭터와 오브젝트 동작 살펴보기",
-      "summary": "게임을 플레이하면서 상황에 따라 캐릭터와 오브젝트가 어떻게 달라지는지 봤다.",
+      "summary": "게임에서 할 수 있는 행동과 상태 변화, 적·벽·발판 같은 Actor의 역할을 나눠 적었다.",
       "project": "Basecamp",
       "primary_topic": "unreal",
       "tags": [
@@ -932,20 +932,6 @@ window.TIL_INDEX = {
       "primary_topic": "unreal",
       "tags": [],
       "file": "data/undated/note-tem-014.js",
-      "activity": "study"
-    },
-    {
-      "id": "note-tem-015",
-      "date": "2026-07-17",
-      "date_end": "2026-07-28",
-      "date_label": "2026-07-17 ~ 2026-07-28 · 관련 자료구조 공부 기간",
-      "month": "project-period",
-      "title": "컨테이너와 탐색·정렬·Big-O 학습 메모",
-      "summary": "vector의 size와 capacity, 공간이 부족할 때 다시 할당하는 과정을 적었다.",
-      "project": null,
-      "primary_topic": "stl",
-      "tags": [],
-      "file": "data/undated/note-tem-015.js",
       "activity": "study"
     },
     {

@@ -11,8 +11,7 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260717-001",
       "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260728-001"
     ],
     "topics": [
       "cpp",
@@ -39,8 +38,7 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260717-001",
       "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260728-001"
     ],
     "topics": [
       "cpp",
@@ -83,8 +81,7 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260717-001",
       "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260728-001"
     ],
     "topics": [
       "cpp",
@@ -115,8 +112,7 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260717-001",
       "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260728-001"
     ],
     "topics": [
       "cpp",
@@ -137,8 +133,7 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260717-001",
       "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260728-001"
     ],
     "topics": [
       "cpp",
@@ -159,8 +154,7 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260717-001",
       "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260728-001"
     ],
     "topics": [
       "cpp",
@@ -181,8 +175,7 @@ window.TIL_LIBRARY_INDEX = [
     "related_ids": [
       "20260717-001",
       "20260727-001",
-      "20260728-001",
-      "note-tem-015"
+      "20260728-001"
     ],
     "topics": [
       "ds"
