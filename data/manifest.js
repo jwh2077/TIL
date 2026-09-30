@@ -1,19 +1,36 @@
 window.TIL_INDEX = {
   "records": [
     {
-      "id": "20260929-priest",
-      "date": "2026-09-29",
+      "id": "20260930-priest",
+      "date": "2026-09-30",
       "date_end": null,
-      "date_label": "2026-09-29",
-      "title": "Project Priest 발표와 돌아보기",
-      "summary": "Project Priest 발표를 마쳤다. 적 AI와 무기 파츠를 만들면서 막혔던 부분은 프로젝트 돌아보기에 모았다.",
+      "date_label": "2026-09-30",
+      "title": "Project Priest 돌아보기 정리",
+      "summary": "적 AI와 무기 파츠를 만들면서 막혔던 부분과 팀원과 연결했던 작업을 돌아봤다.",
       "project": "ProjectPriest",
       "primary_topic": "project",
       "tags": [
         "Unreal",
         "팀 프로젝트",
-        "발표",
         "돌아보기"
+      ],
+      "activity": "team",
+      "month": "2026-09",
+      "file": "data/2026/09/2026-09-30.js"
+    },
+    {
+      "id": "20260929-priest",
+      "date": "2026-09-29",
+      "date_end": null,
+      "date_label": "2026-09-29",
+      "title": "Project Priest 발표와 마무리",
+      "summary": "Project Priest 발표를 마쳤다. 적 AI와 무기 파츠를 맡았던 팀 프로젝트를 마무리했다.",
+      "project": "ProjectPriest",
+      "primary_topic": "project",
+      "tags": [
+        "Unreal",
+        "팀 프로젝트",
+        "발표"
       ],
       "activity": "team",
       "month": "2026-09",

@@ -25,7 +25,7 @@ window.TIL_FILES["data/2026/09/2026-09-28.js"] = [
     "repository": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project",
     "references": [
       {
-        "label": "다음 기록 · 발표와 돌아보기",
+        "label": "다음 기록 · 발표와 마무리",
         "url": "https://jwh2077.github.io/TIL/#record=20260929-priest"
       }
     ],
@@ -33,6 +33,6 @@ window.TIL_FILES["data/2026/09/2026-09-28.js"] = [
       "ChatGPT 대화 · ProjectPriest · 2026-09-28 17:02~20:23 KST",
       "Project (1).mp4 · 사용자 제공 로컬 영상 · 2026-09-29 주요 장면 확인"
     ],
-    "notice": "원본: Project (1).mp4 (로컬 보관). 촬영·편집일과 최종 제출 영상 여부는 미확인. 이후 발표 일정과 돌아보기는 9월 29일 마무리 기록에서 이어진다."
+    "notice": "원본: Project (1).mp4 (로컬 보관). 촬영·편집일과 최종 제출 영상 여부는 미확인. 이후 발표 일정은 9월 29일 마무리 기록에서 이어진다."
   }
 ];
