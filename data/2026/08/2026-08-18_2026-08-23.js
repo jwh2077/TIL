@@ -16,7 +16,7 @@ window.TIL_FILES["data/2026/08/2026-08-18_2026-08-23.js"] = [
       "공통 아이템의 처리와 파생 아이템의 효과는 어느 지점에서 연결하는가?"
     ],
     "mistakes_or_difficulties": [
-      "Item에 PrimaryActorTick.bCanEverTick 표기가 남아 있다. 이 상태로 컴파일되는지는 확인되지 않았다."
+      "Item에 PrimaryActorTick.bCanEverTick 표기가 남아 있다. 이 코드의 컴파일 결과는 기록에 없다."
     ],
     "source_files": [
       "CH3Character.cpp",

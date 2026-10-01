@@ -434,5 +434,22 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "references": [],
     "file": "data/materials/project-priest-oop-notes.js"
+  },
+  {
+    "id": "unreal-multiplayer-basics",
+    "title": "멀티플레이에서 값과 판정을 나누기",
+    "summary": "숫자 야구 과제를 앞두고 GameMode, GameState, PlayerState, GameInstance의 역할과 서버 구분을 적어 봤다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "CH4 수업 메모 · 학습일 미확인",
+    "source_name": "CH4개인과제.txt / UE_Multiplayer_Server_TIL.md",
+    "source_url": "",
+    "notice": "과제 안내와 개념 정리다. 실제 멀티플레이 구현 완료 기록은 아니며, 정확한 학습일은 남아 있지 않다.",
+    "related_ids": [],
+    "file": "data/materials/unreal-multiplayer-basics.js"
   }
 ];

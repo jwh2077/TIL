@@ -85,10 +85,10 @@ window.TIL_FILES["data/2026/09/2026-09-24_2026-09-25.js"] = [
       "ChatGPT 대화 · ProjectPriest · 2026-09-25",
       "jwh2077 작성자 Git diff · 49c42fc / 이후 BP_Whisper 에셋 변경 · 6f40359"
     ],
-    "verification_note": "대화에서 확인한 증상과 코드 점검 흐름을 바탕으로 적었다. Damage Sense와 감지 상태 분리의 실제 구현, Collision 문제의 최종 해결은 확인되지 않았다.",
+    "verification_note": "증상을 두고 코드를 살펴보며 질문했던 내용이다. Damage Sense와 감지 상태 분리는 설계 단계까지 적혀 있고, Collision 수정 뒤 실행 결과는 기록에 없다.",
     "date_start": "2026-09-25",
     "date_label": "2026-09-25",
     "activity": "team",
-    "notice": "설계 제안과 실제 적용 결과를 구분했다. 9/28 공격 범위 수정 커밋은 이후 변경으로 연결했다. BP_Whisper 에셋 변경은 확인했지만 내부 수치와 최종 해결 여부는 확인되지 않았다."
+    "notice": "당시 수정하면서 적어 둔 내용이라, 마지막 코드와는 조금 다를 수 있다. Damage Sense와 감지 상태 분리는 설계 단계의 내용이다. BP_Whisper의 세부 설정과 Collision 수정 뒤 실행 결과는 기록에 없다. 이후 공격 범위를 바꾼 9/28 커밋도 함께 연결해 뒀다."
   }
 ];
