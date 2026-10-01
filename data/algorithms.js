@@ -819,5 +819,61 @@ window.TIL_ALGORITHMS = [
     "code_title": "완료 코드 · C++",
     "solution_code": "class Solution {\npublic:\n    bool checkStraightLine(vector<vector<int>>& coordinates) \n    {\n        float r = (float)(coordinates[0][0] - coordinates[1][0]) / (coordinates[0][1] - coordinates[1][1]);\n\n        if (0 == coordinates[0][0] - coordinates[1][0])\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (0 != coordinates[i-1][0] - coordinates[i][0])\n                {\n                    return false;\n                }\n            }\n        }\n        else if (0 == coordinates[0][1] - coordinates[1][1])\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (0 != coordinates[i-1][1] - coordinates[i][1])\n                {\n                    return false;\n                }\n            }\n        }\n        else\n        {\n            for (int i = 2; i < coordinates.size(); i++)\n            {\n                if (r != (float)(coordinates[i-1][0] - coordinates[i][0]) / (coordinates[i-1][1] - coordinates[i][1]))\n                {\n                    return false;\n                }\n            }\n        }\n\n        return true;\n    }\n};",
     "verification": "사용자 제공 결과: LeetCode Accepted · 83 / 83 · Runtime 0 ms · 학습일 2026-09-29 · 제출 상세 링크와 제출 시각은 미확인 · 제공된 코드 유지: r 계산이 수평선 분기보다 앞에 있고 float를 직접 비교함"
+  },
+  {
+    "id": "lc-155",
+    "title": "Min Stack · 최소값을 함께 저장하는 스택",
+    "group": "implementation",
+    "tags": [
+      "스택",
+      "배열",
+      "vector",
+      "최소값"
+    ],
+    "url": "https://leetcode.com/problems/min-stack/description/",
+    "status": "통과 확인",
+    "date": "2026-10-01",
+    "problem": "push, pop, top, getMin으로 값을 넣고 빼면서 현재 최소값도 상수 시간에 반환하는 스택을 만든다.",
+    "summary": "값을 넣을 때 그 시점까지의 최소값도 함께 저장했다. 배열과 vector 두 방식으로 풀었다.",
+    "question": "처음에는 pop()이 최대값을 제거하는 것으로 착각했다. 배열이나 vector의 중간 값을 빼면 뒤 원소를 당겨야 하니 O(1)이 불가능하다고 생각했다. 하지만 스택의 pop()은 마지막에 들어온 값인 top을 제거한다. 배열에서는 값을 실제로 지우지 않고 size만 줄이면 됐다.",
+    "attempt": "현재 최소값이 빠지면 다음 최소값을 찾으려고 다시 순회해야 할 것 같았다. 그래서 실제 값과 함께 각 시점까지의 최소값을 따로 저장했다. 값이 5, 3, 7, 2일 때 최소값 배열은 5, 3, 3, 2가 된다. 2를 빼면 마지막 최소값은 다시 3이다.\n\n호출 횟수가 최대 30,000번이라 배열도 30,000칸으로 만들었다. val에는 넣은 값, min에는 이전 최소값과 새 값 중 작은 값을 저장하고 size를 늘렸다. pop은 size를 줄이고, top과 getMin은 size - 1 위치를 읽었다.",
+    "turning": "vector로 바꿀 때는 빈 vector에 val[size] = value로 접근했다. 아직 그 위치가 없어서 push_back()으로 추가하도록 고쳤다. min.back()도 비어 있을 때 읽으면 안 되므로 첫 값은 따로 넣었다. pop에서는 두 vector의 마지막 원소를 함께 뺐다. 배열과 vector 풀이 모두 45개 테스트를 통과했다.",
+    "learned": [
+      "스택은 마지막에 넣은 값을 먼저 꺼내는 LIFO 구조다. push는 맨 위에 추가하고 pop은 제거하며 top은 값을 확인한다.",
+      "최소값을 하나만 기억하는 대신 각 위치까지의 최소값을 저장하면 pop 이후에도 마지막 min 값을 읽으면 된다.",
+      "고정 배열 풀이의 네 연산은 모두 O(1)이다. vector의 push_back은 재할당이 일어날 수 있어 분할 상환 O(1), 한 번의 최악 시간은 O(n)이다. vector 풀이의 나머지 세 연산은 O(1)이다.",
+      "배열은 size를 직접 관리하고, vector는 push_back(), pop_back(), back()으로 마지막 원소를 다룬다."
+    ],
+    "code_title": "통과 코드 두 가지 · C++ · 각각 별도 제출",
+    "solution_code": "// 1. 배열 풀이 · Accepted 45 / 45 · 55 ms · 152.34 MB\nclass MinStack {\npublic:\n    int size;\n    int val[30000];\n    int min[30000];\n\n    MinStack()\n    {\n        size = 0;\n    }\n\n    void push(int value)\n    {\n        val[size] = value;\n\n        if(size > 0 && value < min[size - 1])\n        {\n            min[size] = value;\n        }\n        else if(size == 0)\n        {\n            min[size] = value;\n        }\n        else\n        {\n            min[size] = min[size - 1];\n        }\n\n        size++;\n    }\n\n    void pop()\n    {\n        size--;\n    }\n\n    int top()\n    {\n        return val[size - 1];\n    }\n\n    int getMin()\n    {\n        return min[size - 1];\n    }\n};\n\n// 2. vector 풀이 · Accepted 45 / 45 · 35 ms · 152.62 MB\n// 위 배열 풀이와 별도로 제출한 코드\nclass MinStack {\npublic:\n    vector<int> val;\n    vector<int> min;\n\n    MinStack()\n    {\n    }\n\n    void push(int value)\n    {\n        val.push_back(value);\n\n        if(min.size() > 0 && value < min.back())\n        {\n            min.push_back(value);\n        }\n        else if(min.size() == 0)\n        {\n            min.push_back(value);\n        }\n        else\n        {\n            min.push_back(min.back());\n        }\n    }\n\n    void pop()\n    {\n        min.pop_back();\n        val.pop_back();\n    }\n\n    int top()\n    {\n        return val.back();\n    }\n\n    int getMin()\n    {\n        return min.back();\n    }\n};",
+    "verification": "사용자 제공 결과: 두 풀이 모두 LeetCode Accepted · 45 / 45. 배열: Runtime 55 ms / Memory 152.34 MB. vector: Runtime 35 ms / Memory 152.62 MB. 학습일 2026-10-01. 제출 상세 링크와 제출 시각은 미확인. 제공된 풀이 코드는 유지했다."
+  },
+  {
+    "id": "lc-2514",
+    "title": "Count Anagrams · 팩토리얼 계산에서 막힘",
+    "group": "math",
+    "tags": [
+      "문자열",
+      "팩토리얼",
+      "경우의 수",
+      "나머지 연산"
+    ],
+    "url": "https://leetcode.com/problems/count-anagrams/description/",
+    "status": "미완성",
+    "date": "2026-09-30",
+    "problem": "문장을 이루는 각 단어의 문자 순서를 바꿔 만들 수 있는 서로 다른 애너그램의 수를 구한다. 결과는 1,000,000,007로 나눈 나머지를 반환한다.",
+    "summary": "풀이 실패·보류. 중복 문자를 고려한 경우의 수는 계산했지만, 나머지 연산 뒤의 나눗셈에서 막혔다.",
+    "question": "처음에는 단어별 애너그램을 직접 만들어 set에 넣으려고 했다. 하지만 경우의 수가 많아 시간 초과가 날 것 같아서 직접 만들지 않고 개수를 계산하는 방식으로 바꿨다.",
+    "attempt": "서로 다른 문자가 n개면 n!이고, 중복된 문자가 있으면 그 개수의 팩토리얼로 나눈다. \"too\"는 3! / 2! = 3, \"aabb\"는 4! / 2! / 2! = 6, \"aaabbc\"는 6! / 3! / 2!로 계산할 수 있다는 것까지 이해했다.\n\n소문자는 26개라 int alphabet[26] = {}를 만들고 alphabet[s[j] - 'a']++로 개수를 셌다. 공백이나 마지막 문자에서 단어의 경우의 수를 계산해 A에 곱했다. 단어 하나가 끝나면 anagrams를 비우고 alphabet도 모두 0으로 돌려 다음 단어에 사용했다.",
+    "turning": "팩토리얼이 빠르게 커져 int와 long long으로도 오버플로가 났다. 계산 중간에 % 1000000007을 넣어봤지만, 나머지를 구한 값에 일반적인 /를 쓰면 원래의 나눗셈과 같은 결과가 나오지 않았다. 큰 팩토리얼의 오버플로를 막으면서 나눗셈까지 처리하는 방법을 아직 몰라 여기서 보류했다.",
+    "learned": [
+      "단어 길이의 팩토리얼을 중복된 각 문자 개수의 팩토리얼로 나누면 서로 다른 배열의 수를 계산할 수 있다.",
+      "소문자에서 a를 빼면 알파벳 개수 배열의 0~25번 위치로 사용할 수 있다.",
+      "다음 단어를 계산하기 전에 문자열과 알파벳 개수 배열을 초기화했다.",
+      "나머지 연산을 적용한 값끼리 일반 나눗셈을 하는 것으로는 원래 계산을 대신할 수 없었다."
+    ],
+    "code_title": "작성한 코드 · C++ · 미완성, 풀이 보류",
+    "solution_code": "class Solution {\npublic:\n    int countAnagrams(string s) {\n        int A = 1;\n        string anagrams;\n        int alphabet[26] = {};\n\n        for (int j = 0; j < s.size(); j++)\n        {\n            if(s[j] == ' ' || j == s.size() - 1)\n            {\n                long long n = 1;\n\n                if(j == s.size() - 1)\n                {\n                    anagrams += s[j];\n                    alphabet[s[j] - 'a']++;\n                }\n\n                for(int i = anagrams.size(); i > 0; i--)\n                {\n                    n = n * i % (1000000000 + 7);\n                }\n\n                for(int al = 0; al < 26; al++)\n                {\n                    if(alphabet[al] > 1)\n                    {\n                        int b = 1;\n\n                        for (int i = 1; i <= alphabet[al]; i++)\n                        {\n                            b = b * i % (1000000000 + 7);\n                        }\n\n                        n /= b;\n                    }\n                }\n\n                A *= n % (1000000000 + 7);\n\n                anagrams.clear();\n\n                for (int i = 0; i < 26; i++)\n                {\n                    alphabet[i] = 0;\n                }\n            }\n            else\n            {\n                alphabet[s[j] - 'a']++;\n                anagrams += s[j];\n            }\n        }\n\n        return A % (1000000000 + 7);\n    }\n};",
+    "verification": "사용자 제공 학습일 2026-09-30 · 결과: 풀이 실패 / 보류. 통과 결과나 제출 시각은 확인되지 않았다. 당시 작성 코드를 유지했으며 정답 코드가 아니다. b의 곱셈과 A의 누적 곱셈에도 오버플로 문제가 남아 있다."
   }
 ];
