@@ -8,7 +8,7 @@ C++와 Unreal을 배우면서 적은 메모와 프로젝트 기록을 모은 정
 - **PC에서 바로 열기:** 루트의 `00 시작하기/`에 공개 사이트, 관리 도구, 로컬 미리보기, 새 자료와 저장 데이터 바로가기를 모았다. 번호 순서대로 찾으면 된다. 이 폴더는 공개되지 않는다.
 - **새 파일을 정리하고 싶을 때:** PC의 `local/inbox/`에 넣고 정리를 요청한다. 사용법은 그 폴더의 `README.md`에 있다.
 - **글을 직접 작성·수정할 때:** `local/manage/start.cmd`를 실행한다. 초안 → 검증·미리보기 → 적용 → commit/push 순서로 확인한다.
-- **공개 글을 찾을 때:** 날짜별 글은 `data/연도/월/`, 정리 자료는 `data/materials/`, 알고리즘은 `data/algorithms.js`를 본다.
+- **공개 글을 찾을 때:** 날짜별 글은 `data/연도/월/`, 정리 자료는 `data/materials/`, 알고리즘은 `data/algorithms/`의 문제별 파일을 본다.
 - **원본·정리 내역을 찾을 때:** `local/README.md`에서 폴더별 위치를 확인한다. `local/`은 별도 비공개 저장소로 백업하며 GitHub Pages에는 포함되지 않는다.
 
 ## 화면
@@ -50,8 +50,9 @@ Git 기반 프로젝트 글의 날짜는 코드 변경일이다. 실행 근거�
 | `data/manifest.js` | 날짜별 기록 목록 |
 | `data/연도/월/날짜.js` | 날짜별 본문 |
 | `data/undated/`, `data/project-period/` | 날짜 없는 메모와 프로젝트 전체 기록 |
-| `data/library-index.js`, `data/materials/library.js` | 자료실 목록과 본문 |
-| `data/algorithms.js` | 알고리즘 풀이와 문제·제출 링크 |
+| `data/library-index.js`, `data/materials/자료ID.js` | 자료실 목록과 본문 |
+| `data/algorithms/문제.js` | 문제별 설명·시행착오·코드·결과 (직접 수정하는 본문) |
+| `data/algorithms.js` | 본문에서 생성한 목록·검색 정보와 파일 경로 |
 | `data/guides/stl-reference.html` | 자료구조 원문 공개용 사본 |
 | `local/` | Git에서 제외한 원본 사본, 작업 자료, 검증 도구 |
 
@@ -72,3 +73,13 @@ git diff --check
 ```
 
 화면은 데스크톱과 모바일에서 긴 글, 이미지, 카드 전체의 hover·focus, 날짜 범위, 필터, 상세 이동과 외부 링크를 함께 확인한다. 커밋·푸시·병합은 사용자가 해당 작업에서 직접 요청했을 때만 실행한다.
+
+### 알고리즘 파일 수정
+
+문제 하나를 파일 하나에 둔다. 예: `data/algorithms/lc-155-min-stack.js`.
+설명·코드·결과를 더 잘게 나누지 않으며 자료실도 글당 한 파일로 두고, 프로젝트 파일은 그대로 둔다.
+기존 문제 ID와 `#algorithm=lc-155` 같은 주소는 바뀌지 않는다.
+
+관리 화면에서 저장하면 문제 본문과 목록이 함께 갱신된다. 파일을 직접 수정하거나 새 파일을 추가했다면 `node local/tools/sync-algorithms.cjs`로 목록을 갱신한다. `--check`를 붙이면 파일을 바꾸지 않고 일치 여부만 검사한다. 문제 파일은 기존 형식을 복사하고 고유 ID를 지정한다. 목록 파일은 직접 편집하지 않는다.
+
+자료실 본문은 `data/materials/`에 글당 한 파일로 보관한다. 직접 수정한 뒤 `node local/tools/sync-materials.cjs`로 목록을 갱신한다. `--check`는 일치 여부만 확인한다. 관리 화면에서는 본문과 목록이 함께 저장된다. 원본 자료구조 문서와 비공개 원본은 기존 위치를 유지한다.

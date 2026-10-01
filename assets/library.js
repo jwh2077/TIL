@@ -8,7 +8,7 @@
   const state = {kind:'all',fields:[],publication:'all',query:'',tags:[],sort:'asc'};
   const fields = r => r.topics || [r.topic];
   const classification = r => fields(r).map(id=>topics[id]||id).join(' · ');
-  let pending; let token = 0;
+  const pending=new Map(); let token = 0;
   $('aside .brand').insertAdjacentHTML('afterend', `<div class="side-title">보기 방식</div><div id="archiveModes" class="project-list"><a class="project" href="#list">날짜별 기록</a><a class="project" href="#library">정리 자료</a></div>`);
   $('#sidebarFilters > summary').insertAdjacentHTML('afterend', `<div id="libraryNav" hidden><div class="side-title">자료 종류</div><div id="materialKinds" class="project-list"></div><div class="side-title">학습 분야</div><div id="materialTopics" class="project-list"></div><div id="materialOutline" hidden><div class="side-title">자료 목차</div><div id="materialSections" class="project-list"></div><div class="side-title">같은 분야 자료</div><div id="materialRelated" class="project-list"></div></div></div>`);
   $('main').insertAdjacentHTML('beforeend', '<div id="libraryPage" hidden></div>');
@@ -38,14 +38,15 @@
     $('#libraryCards').innerHTML=shown.map(r=>`<article class="record"><button type="button" class="record-button" data-material="${esc(r.id)}"><div class="record-meta"><span class="topic-badge">${esc(kinds[r.kind])}</span><span>${esc(classification(r))}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><span class="more">열기 →</span></button></article>`).join('')||'<div class="empty">조건에 맞는 자료가 없습니다.</div>';
   }
   window.TIL_MATERIAL_VIEW={state,records:materials,results,update(patch){Object.assign(state,patch);controls();cards();}};
-  function load() {
-    if(window.TIL_LIBRARY) return Promise.resolve(window.TIL_LIBRARY);
-    if(!pending) pending=new Promise((resolve,reject)=>{
-      const s=document.createElement('script');s.src='data/materials/library.js';
-      const fail=()=>{pending=null;s.remove();reject(new Error('자료 파일을 읽지 못했습니다.'));};
-      s.onload=()=>window.TIL_LIBRARY?resolve(window.TIL_LIBRARY):fail();s.onerror=fail;document.head.append(s);
-    });
-    return pending;
+  function load(file) {
+    if(!/^data\/materials\/[a-zA-Z0-9_-]+\.js$/.test(file))return Promise.reject(new Error('잘못된 자료 경로입니다.'));
+    if(window.TIL_FILES?.[file]) return Promise.resolve(window.TIL_FILES[file]);
+    if(!pending.has(file))pending.set(file,new Promise((resolve,reject)=>{
+      const s=document.createElement('script');s.src=file;
+      const fail=()=>{pending.delete(file);s.remove();reject(new Error('자료를 열지 못했습니다.'));};
+      s.onload=()=>window.TIL_FILES?.[file]?resolve(window.TIL_FILES[file]):fail();s.onerror=fail;document.head.append(s);
+    }));
+    return pending.get(file);
   }
   function sourceLink(r) {
     const links=[];
@@ -67,7 +68,7 @@
     $('#materialRelated').innerHTML=materials.filter(r=>r.id!==id&&fields(r).some(id=>fields(meta).includes(id))).sort((a,b)=>fields(b).filter(id=>fields(meta).includes(id)).length-fields(a).filter(id=>fields(meta).includes(id)).length).slice(0,6).map(r=>`<button type="button" class="project" data-material="${esc(r.id)}">${esc(r.title)}</button>`).join('');
     $('#libraryPage').innerHTML='<p>정리 자료를 여는 중…</p>';
     try {
-      const r=(await load()).find(r=>r.id===id);if(stamp!==token||!active())return;if(!r)throw new Error('자료를 찾을 수 없습니다.');
+      const r=(await load(meta.file)).find(r=>r.id===id);if(stamp!==token||!active())return;if(!r)throw new Error('자료를 찾을 수 없습니다.');
       $('#libraryPage').innerHTML=`<button type="button" class="related-button" data-library-back>← 자료 목록으로</button><header><div class="record-meta">${esc(kinds[r.kind])} · ${esc(classification(r))}</div><h1 id="materialTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p><p class="library-notice">원본: ${esc(r.source_name)}</p>${r.notice?`<p class="core library-notice">${esc(r.notice)}</p>`:''}<div class="material-links">${sourceLink(r)}</div></header>${r.sections.map((s,i)=>`<section id="material-section-${i}" class="material-section"><h2>${esc(s.title)}</h2>${s.html||''}${s.text?`<p style="white-space:pre-line">${esc(s.text)}</p>`:''}${s.code?`<pre><code>${esc(s.code)}</code></pre>`:''}${s.items?`<ul>${s.items.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:''}</section>`).join('')}<section class="related"><h3>관련 실습</h3><div class="related-list">${(r.related_ids||[]).map(id=>window.TIL_INDEX.records.find(x=>x.id===id)).filter(Boolean).slice(0,6).map(x=>`<a class="related-button" href="#record=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div></section>`;
       $('#materialSections').innerHTML=r.sections.map((s,i)=>`<button type="button" class="project" data-material-section="material-section-${i}">${esc(s.title)}</button>`).join('');
       window.TIL_SITE?.articleReady(); window.scrollTo({top:0});$('#materialTitle').setAttribute('tabindex','-1');$('#materialTitle').focus();

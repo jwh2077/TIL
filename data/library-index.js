@@ -24,7 +24,8 @@ window.TIL_LIBRARY_INDEX = [
         "label": "관련 Velog · STL과 vector 기초",
         "url": "https://velog.io/@jwh4410/7.17"
       }
-    ]
+    ],
+    "file": "data/materials/stl-foundation.js"
   },
   {
     "id": "stl-sequence",
@@ -67,7 +68,8 @@ window.TIL_LIBRARY_INDEX = [
         "label": "프로그래머스 피보나치 수 원문",
         "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12945"
       }
-    ]
+    ],
+    "file": "data/materials/stl-sequence.js"
   },
   {
     "id": "stl-associative",
@@ -98,7 +100,8 @@ window.TIL_LIBRARY_INDEX = [
         "label": "관련 Velog · map과 auto, range-for",
         "url": "https://velog.io/@jwh4410/7.28"
       }
-    ]
+    ],
+    "file": "data/materials/stl-associative.js"
   },
   {
     "id": "stl-adaptor",
@@ -119,7 +122,8 @@ window.TIL_LIBRARY_INDEX = [
       "ds",
       "stl"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/stl-adaptor.js"
   },
   {
     "id": "stl-algorithm",
@@ -140,7 +144,8 @@ window.TIL_LIBRARY_INDEX = [
       "ds",
       "stl"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/stl-algorithm.js"
   },
   {
     "id": "stl-selection",
@@ -161,7 +166,8 @@ window.TIL_LIBRARY_INDEX = [
       "ds",
       "stl"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/stl-selection.js"
   },
   {
     "id": "concept-bigo",
@@ -180,7 +186,8 @@ window.TIL_LIBRARY_INDEX = [
     "topics": [
       "ds"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/concept-bigo.js"
   },
   {
     "id": "unreal-containers",
@@ -216,7 +223,8 @@ window.TIL_LIBRARY_INDEX = [
         "label": "TSet 공식 문서",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/set-containers-in-unreal-engine"
       }
-    ]
+    ],
+    "file": "data/materials/unreal-containers.js"
   },
   {
     "id": "velog-20260706-001",
@@ -234,7 +242,8 @@ window.TIL_LIBRARY_INDEX = [
       "cpp",
       "memory"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/velog-20260706-001.js"
   },
   {
     "id": "velog-20260709-001",
@@ -252,7 +261,8 @@ window.TIL_LIBRARY_INDEX = [
       "cpp",
       "oop"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/velog-20260709-001.js"
   },
   {
     "id": "velog-20260710-001",
@@ -270,7 +280,8 @@ window.TIL_LIBRARY_INDEX = [
       "cpp",
       "memory"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/velog-20260710-001.js"
   },
   {
     "id": "velog-20260712-001",
@@ -288,7 +299,8 @@ window.TIL_LIBRARY_INDEX = [
       "cpp",
       "oop"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/velog-20260712-001.js"
   },
   {
     "id": "velog-20260716-001",
@@ -306,7 +318,8 @@ window.TIL_LIBRARY_INDEX = [
       "cpp",
       "oop"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/velog-20260716-001.js"
   },
   {
     "id": "velog-20260810-001",
@@ -323,7 +336,8 @@ window.TIL_LIBRARY_INDEX = [
     "topics": [
       "unreal"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/velog-20260810-001.js"
   },
   {
     "id": "file-note-tem-014",
@@ -341,7 +355,8 @@ window.TIL_LIBRARY_INDEX = [
     "topics": [
       "unreal"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/file-note-tem-014.js"
   },
   {
     "id": "file-continue",
@@ -359,7 +374,8 @@ window.TIL_LIBRARY_INDEX = [
     "topics": [
       "cpp"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "file": "data/materials/file-continue.js"
   },
   {
     "id": "project-priest-ai-notes",
@@ -392,7 +408,8 @@ window.TIL_LIBRARY_INDEX = [
         "label": "이후 공격 범위 에셋 변경 · 6f40359",
         "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/6f40359179126e90655ef8a201a21d9799513170"
       }
-    ]
+    ],
+    "file": "data/materials/project-priest-ai-notes.js"
   },
   {
     "id": "project-priest-oop-notes",
@@ -415,6 +432,7 @@ window.TIL_LIBRARY_INDEX = [
       "note-tem-011",
       "20260715-001"
     ],
-    "references": []
+    "references": [],
+    "file": "data/materials/project-priest-oop-notes.js"
   }
 ];

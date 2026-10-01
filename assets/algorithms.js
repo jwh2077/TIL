@@ -20,7 +20,7 @@
   }
   function results() {
     const q=state.query.trim().toLocaleLowerCase();
-    return records.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'algorithm'))&&(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.date,r.title,r.summary,r.problem,r.question,r.attempt,r.turning,...(r.learned||[]),groups[r.group]].join(' ').toLocaleLowerCase().includes(q)).sort((a,b)=>window.TIL_FILTERS?window.TIL_FILTERS.compare(a,b,state.sort):0);
+    return records.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'algorithm'))&&(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.date,r.title,r.summary,r.problem,r.search_text,groups[r.group]].join(' ').toLocaleLowerCase().includes(q)).sort((a,b)=>window.TIL_FILTERS?window.TIL_FILTERS.compare(a,b,state.sort):0);
   }
   function cards() {
     const shown=results();$('#algorithmCount').textContent=`${shown.length}개 문제`;
@@ -32,8 +32,33 @@
     cards();$('#algorithmSearch').addEventListener('input',e=>{state.query=e.target.value;cards();});
   }
   window.TIL_ALGORITHM_VIEW={state,records,results,update(patch){Object.assign(state,patch);controls();cards();}};
-  function open(id) {
-    const r=records.find(r=>r.id===id);if(!r){$('#algorithmPage').innerHTML='<p class="empty">문제를 찾을 수 없습니다.</p><a class="related-button" href="#algorithms">문제 목록으로</a>';$('#algorithmOutline').hidden=true;return;}
+  const cache=new Map();
+  let request=0;
+  function load(file) {
+    if(!/^data\/algorithms\/[a-zA-Z0-9_-]+\.js$/.test(file))return Promise.reject(new Error('잘못된 문제 파일 경로입니다.'));
+    if(window.TIL_FILES?.[file])return Promise.resolve(window.TIL_FILES[file]);
+    if(!cache.has(file))cache.set(file,new Promise((resolve,reject)=>{
+      const script=document.createElement('script');script.src=file;
+      const fail=()=>{cache.delete(file);script.remove();reject(new Error('문제 파일을 열지 못했습니다.'));};
+      script.onload=()=>window.TIL_FILES?.[file]?resolve(window.TIL_FILES[file]):fail();
+      script.onerror=fail;document.head.append(script);
+    }));
+    return cache.get(file);
+  }
+  async function open(id) {
+    const token=++request;
+    const meta=records.find(r=>r.id===id);if(!meta){$('#algorithmPage').innerHTML='<p class="empty">문제를 찾을 수 없습니다.</p><a class="related-button" href="#algorithms">문제 목록으로</a>';$('#algorithmOutline').hidden=true;return;}
+    $('#algorithmOutline').hidden=true;
+    $('#algorithmPage').innerHTML='<p role="status">풀이를 불러오는 중입니다.</p>';
+    let r;
+    try {
+      r=(await load(meta.file)).find(row=>row.id===id);
+      if(!r)throw new Error('문제 본문을 찾을 수 없습니다.');
+    } catch(error) {
+      if(token===request && active())$('#algorithmPage').innerHTML=`<p class="empty">${esc(error.message)}</p><button type="button" data-algorithm="${esc(id)}">다시 열기</button><a href="#algorithms">문제 목록으로</a>`;
+      return;
+    }
+    if(token!==request || location.hash!=='#algorithm='+encodeURIComponent(id))return;
     $('#algorithmOutline').hidden=false;
     const sections=[
       ['problem','문제',`<p>${esc(r.problem)}</p>`],
@@ -48,6 +73,7 @@
     window.TIL_SITE?.articleReady(); window.scrollTo({top:0});$('#algorithmTitle').setAttribute('tabindex','-1');$('#algorithmTitle').focus();
   }
   function route() {
+    request++;
     const enabled=active();$('#algorithmPage').hidden=!enabled;$('#algorithmNav').hidden=!enabled;
     if(!enabled)return;
     for(const selector of ['#listPage','#articlePage','#libraryPage','#libraryNav','#subnav','#articleNav'])$(selector).hidden=true;
@@ -60,6 +86,6 @@
     if(group||status){if(group)state.group=group.dataset.algorithmGroup;if(status)state.status=status.dataset.algorithmStatus;if(location.hash==='#algorithms'){controls();list();}else location.hash='algorithms';}
     if(section)document.getElementById(section.dataset.algorithmSection)?.scrollIntoView({behavior:'smooth'});
   });
-  $('#algorithmPage').addEventListener('click',e=>{const item=e.target.closest('[data-algorithm]');if(item)location.hash='algorithm='+encodeURIComponent(item.dataset.algorithm);});
+  $('#algorithmPage').addEventListener('click',e=>{const item=e.target.closest('[data-algorithm]');if(item){const hash='#algorithm='+encodeURIComponent(item.dataset.algorithm);if(location.hash===hash)open(item.dataset.algorithm);else location.hash=hash;}});
   window.addEventListener('hashchange',route);route();
 })();
