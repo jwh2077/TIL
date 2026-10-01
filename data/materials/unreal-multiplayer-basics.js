@@ -8,10 +8,10 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
     "topic": "unreal",
     "topics": ["unreal"],
     "publication": "reference",
-    "status": "CH4 수업 메모 · 학습일 미확인",
-    "source_name": "CH4개인과제.txt / UE_Multiplayer_Server_TIL.md",
+    "status": "CH4 과제 발제 · 2026-10-01",
+    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md",
     "source_url": "",
-    "notice": "과제 안내와 개념 정리다. 실제 멀티플레이 구현 완료 기록은 아니며, 정확한 학습일은 남아 있지 않다.",
+    "notice": "10월 1일 과제 발제를 들으며 적어 둔 내용이다. 과제 안내와 멀티플레이 개념을 함께 정리했다.",
     "sections": [
       {
         "title": "이번 개인 과제",
@@ -47,6 +47,6 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
         "text": "TCP는 전달과 순서를 보장하기 위한 재전송이 있고, UDP 자체는 전달과 순서를 보장하지 않는다. TCP는 웹, UDP는 게임이라고만 외우기보다는 어떤 데이터를 주고받는지 나눠 봐야 한다. 언리얼 RPC의 Reliable과 Unreliable도 전달이 필요한 정도를 구분해서 사용한다. 서버 쪽은 화면 메시지 대신 로그를 확인하고, LogTemp만 쓰기보다 프로젝트용 로그 카테고리로 구분하라는 내용도 적어 뒀다."
       }
     ],
-    "related_ids": []
+    "related_ids": ["20261001-study"]
   }
 ];

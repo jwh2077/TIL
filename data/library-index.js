@@ -445,11 +445,13 @@ window.TIL_LIBRARY_INDEX = [
       "unreal"
     ],
     "publication": "reference",
-    "status": "CH4 수업 메모 · 학습일 미확인",
-    "source_name": "CH4개인과제.txt / UE_Multiplayer_Server_TIL.md",
+    "status": "CH4 과제 발제 · 2026-10-01",
+    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md",
     "source_url": "",
-    "notice": "과제 안내와 개념 정리다. 실제 멀티플레이 구현 완료 기록은 아니며, 정확한 학습일은 남아 있지 않다.",
-    "related_ids": [],
+    "notice": "10월 1일 과제 발제를 들으며 적어 둔 내용이다. 과제 안내와 멀티플레이 개념을 함께 정리했다.",
+    "related_ids": [
+      "20261001-study"
+    ],
     "file": "data/materials/unreal-multiplayer-basics.js"
   }
 ];

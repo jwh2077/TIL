@@ -1092,6 +1092,26 @@ window.TIL_INDEX = {
       "file": "data/project-period/ch3-2.js",
       "project_part": "CH3_2",
       "activity": "personal"
+    },
+    {
+      "id": "20261001-study",
+      "date": "2026-10-01",
+      "date_end": null,
+      "date_label": "2026-10-01",
+      "title": "CH4 멀티플레이 발제와 SourceTree 사용",
+      "summary": "CH4 발제를 들으며 서버와 클라이언트의 역할을 정리했다. SourceTree로 TIL을 업로드하고 강의 자료의 브랜치를 오가 봤다.",
+      "project": "개인 공부",
+      "primary_topic": "unreal",
+      "tags": [
+        "C++",
+        "Unreal",
+        "멀티플레이",
+        "Git",
+        "SourceTree"
+      ],
+      "activity": "study",
+      "file": "data/2026/10/2026-10-01.js",
+      "month": "2026-10"
     }
   ]
 };
