@@ -1112,6 +1112,26 @@ window.TIL_INDEX = {
       "activity": "study",
       "file": "data/2026/10/2026-10-01.js",
       "month": "2026-10"
+    },
+    {
+      "id": "20261002-chatx",
+      "date": "2026-10-02",
+      "date_end": null,
+      "date_label": "2026-10-02",
+      "title": "ChatX · Build.cs와 헤더 경로 따라가기",
+      "summary": "Dependency와 IncludePaths를 구분하고, 파일 위치를 바꾸면서 헤더를 찾는 경로와 C++ 빌드 흐름을 살펴봤다.",
+      "project": "ChatX",
+      "primary_topic": "unreal",
+      "activity": "personal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "Build.cs",
+        "헤더",
+        "빌드"
+      ],
+      "file": "data/2026/10/2026-10-02.js",
+      "month": "2026-10"
     }
   ]
 };

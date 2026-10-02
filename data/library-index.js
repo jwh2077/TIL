@@ -453,5 +453,30 @@ window.TIL_LIBRARY_INDEX = [
       "20261001-study"
     ],
     "file": "data/materials/unreal-multiplayer-basics.js"
+  },
+  {
+    "id": "unreal-build-flow",
+    "title": "Build.cs와 C++ 빌드 흐름",
+    "summary": "모듈 의존성과 헤더 검색 경로를 구분하고, cpp·UHT·IntelliSense가 하는 일을 연결해 봤다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "2026-10-02 공부 메모",
+    "source_name": "10.02.md · 로컬 보관",
+    "source_url": "",
+    "notice": "ChatX를 진행하며 설정과 파일 위치를 바꿔 보고 적은 내용이다. 아래 짧은 코드는 설명용 예시도 포함한다.",
+    "related_ids": [
+      "20261002-chatx"
+    ],
+    "references": [
+      {
+        "label": "ChatX · 이번 과제 저장소",
+        "url": "https://github.com/jwh2077/ChatX"
+      }
+    ],
+    "file": "data/materials/unreal-build-flow.js"
   }
 ];
