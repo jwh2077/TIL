@@ -3,7 +3,7 @@ window.TIL_FILES["data/materials/velog-20260712-001.js"] = [
   {
     "id": "velog-20260712-001",
     "title": "함수 오버로딩과 타입 변환",
-    "summary": "같은 이름의 함수를 나누는 방법과 타입 변환에서 남은 질문.",
+    "summary": "함수 오버로딩 조건과 승격·표준 변환 예시.",
     "kind": "velog",
     "topic": "oop",
     "source_name": "Velog 원문",
@@ -11,12 +11,13 @@ window.TIL_FILES["data/materials/velog-20260712-001.js"] = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "같은 이름의 함수",
-        "text": "매개변수의 타입이나 개수가 다르면 같은 이름의 함수를 나눠 만들 수 있다. 반환 타입만 바꾸는 것으로는 구분할 수 없다."
+        "title": "오버로딩 가능 여부",
+        "html": "<table><thead><tr><th scope=\"col\">차이</th><th scope=\"col\">구분 가능 여부</th></tr></thead><tbody><tr><td>매개변수 타입</td><td>가능</td></tr><tr><td>매개변수 개수</td><td>가능</td></tr><tr><td>반환 타입만 다름</td><td>불가능</td></tr></tbody></table>"
       },
       {
-        "title": "아직 헷갈리는 변환",
-        "text": "정확한 타입 일치, 승격, 표준 변환, 사용자 정의 변환 순서로 적었다. char나 short에서 int, float에서 double로 바뀌는 것은 승격인데 int에서 double은 왜 표준 변환인지 질문이 남았다."
+        "title": "기본 타입 변환 예시",
+        "html": "<table><thead><tr><th scope=\"col\">예</th><th scope=\"col\">분류</th></tr></thead><tbody><tr><td>char / short → int</td><td>원래 값을 int로 표현할 수 있는 경우 정수 승격</td></tr><tr><td>float → double</td><td>부동소수점 승격</td></tr><tr><td>int → double</td><td>일반적인 표준 변환</td></tr></tbody></table>",
+        "text": "승격도 표준 변환에 속한다. 위 표는 승격과 그 밖의 변환을 구분하는 예시이며 전체 오버로드 결정 규칙을 나열한 것은 아니다."
       }
     ],
     "related_ids": [

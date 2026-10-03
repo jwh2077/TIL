@@ -2,8 +2,8 @@ window.TIL_FILES = window.TIL_FILES || {};
 window.TIL_FILES["data/materials/project-priest-ai-notes.js"] = [
   {
     "id": "project-priest-ai-notes",
-    "title": "AI와 Behavior Tree의 역할 나누기",
-    "summary": "감지, Blackboard에 저장할 값, Behavior Tree에서 실행할 행동을 나눠 봤다.",
+    "title": "Unreal AI — Perception·Blackboard·Behavior Tree",
+    "summary": "감지·상태·행동의 역할, Selector·Sequence 비교, Task·Decorator·Service와 공격 시점.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -14,46 +14,33 @@ window.TIL_FILES["data/materials/project-priest-ai-notes.js"] = [
     "source_name": "ProjectPriest_Unreal_AI_BT_Notes.html",
     "source_url": "",
     "project": "ProjectPriest",
-    "notice": "원본: ProjectPriest_Unreal_AI_BT_Notes.html, Project (1).mp4 (로컬 보관). 공격 판정과 감지 상실 처리의 최종 해결 여부는 미확인.",
+    "notice": "ProjectPriest에서 사용한 이름과 흐름을 예로 든다. 작업 경과와 플레이 영상 설명은 관련 학습 기록에 남겼다.",
     "sections": [
       {
-        "title": "감지와 행동을 나눠 보기",
-        "text": "AI Perception은 주변을 감지하고, Blackboard는 판단에 쓸 상태를 보관한다. Behavior Tree는 그 상태를 보고 어떤 행동을 할지 정한다. AI Perception과 Blackboard를 모두 Behavior Tree 안의 노드로 묶지 않고 역할을 나눠 봤다."
+        "title": "감지에서 행동까지",
+        "html": "<ol class=\"reference-flow\"><li>AI Perception: 감지</li><li>AIController: AI 제어</li><li>Blackboard: 판단용 상태</li><li>Behavior Tree: 행동 선택</li><li>Character: 이동·공격</li></ol>"
       },
       {
-        "title": "AIController와 Blackboard",
-        "text": "Enemy Character가 실제 몸체라면 AIController는 그 캐릭터의 AI 제어를 맡는다. 감지한 내용을 Blackboard에 넣고 Behavior Tree를 실행하는 흐름으로 나눠 봤다. Player는 현재 목표, PlayerVector는 목표 위치, IsCombat은 전투 상태로 두었다. Blackboard가 직접 이동하거나 공격하는 것은 아니다."
+        "title": "구성요소 역할",
+        "html": "<table><thead><tr><th scope=\"col\">요소</th><th scope=\"col\">역할</th></tr></thead><tbody><tr><td>AIController</td><td>캐릭터의 AI 제어, Behavior Tree 실행</td></tr><tr><td>AI Perception</td><td>외부 상황 감지</td></tr><tr><td>Blackboard</td><td>목표·위치·상태 보관. 직접 이동·공격하지 않음</td></tr><tr><td>Behavior Tree</td><td>상태와 조건을 보고 행동 실행</td></tr><tr><td>NavMesh</td><td>이동 가능한 영역</td></tr></tbody></table>"
+      },
+      {
+        "title": "Blackboard 값 예시",
+        "html": "<table><thead><tr><th scope=\"col\">키</th><th scope=\"col\">의미</th></tr></thead><tbody><tr><td>Player</td><td>현재 목표</td></tr><tr><td>PlayerVector</td><td>목표 위치</td></tr><tr><td>IsCombat</td><td>전투 상태</td></tr></tbody></table>",
+        "text": "ProjectPriest에서 사용한 이름이며 고정된 엔진 키가 아니다."
       },
       {
         "title": "Selector와 Sequence",
-        "items": [
-          "Sequence는 자식 노드를 순서대로 실행한다. 중간에 하나라도 실패하면 전체 흐름도 실패한다. 플레이어 확인 → 바라보기 → 공격처럼 이어지는 행동을 묶는다.",
-          "Selector는 자식 노드를 순서대로 시도하다가 하나가 성공하면 성공한다. 공격할 수 있으면 공격하고, 아니면 추적하고, 그것도 안 되면 순찰하는 식으로 볼 수 있다."
-        ]
+        "html": "<table><thead><tr><th scope=\"col\">노드</th><th scope=\"col\">진행 방식</th><th scope=\"col\">예</th></tr></thead><tbody><tr><td>Sequence</td><td>순서대로 진행, 자식 하나가 실패하면 실패</td><td>플레이어 확인 → 바라보기 → 공격</td></tr><tr><td>Selector</td><td>순서대로 시도, 자식 하나가 성공하면 성공</td><td>공격 가능 여부 → 추적 → 순찰</td></tr></tbody></table>"
       },
       {
         "title": "Task·Decorator·Service",
-        "items": [
-          "Task: 실제로 할 행동. 이동하거나 공격하고, 순찰 위치를 정하는 부분이다.",
-          "Decorator: 지금 이 Branch를 실행해도 되는지 조건을 검사한다.",
-          "Service: 연결된 Branch가 활성화된 동안 일정 주기로 상태를 확인하거나 Blackboard 값을 바꾼다."
-        ]
+        "html": "<table><thead><tr><th scope=\"col\">요소</th><th scope=\"col\">담당</th></tr></thead><tbody><tr><td>Task</td><td>이동·공격·순찰 위치 지정 등 행동</td></tr><tr><td>Decorator</td><td>Branch 실행 조건 검사</td></tr><tr><td>Service</td><td>Branch 활성 중 일정 주기로 상태 확인·갱신</td></tr></tbody></table>"
       },
       {
-        "title": "이동과 공격 시점",
-        "text": "Blackboard에 목표 Actor나 위치를 두고 Move To로 이동을 요청한다. 이동할 수 있는 영역은 NavMesh로 잡는다. 근접 공격은 공격 시작과 실제 피해를 주는 시점을 나눠 봤다. Montage의 타격 프레임에서 Anim Notify를 호출하고, Player가 있는지 확인한 뒤 ApplyDamage로 이어지는 흐름이다."
-      },
-      {
-        "title": "개념 정리와 이후 작업",
-        "text": "우선 순찰 → 감지 → 추적 → 공격으로 기본 흐름을 나눴다. 이후에는 플레이어를 놓쳤을 때 바로 전투를 끝낼지, 마지막 위치를 수색할지 고민했다. 이 부분은 9/25 작업 기록에 따로 적었다."
-      },
-      {
-        "title": "공격 범위와 피해를 주는 시점",
-        "text": "9/23 변경 코드에서는 손에 붙인 Sphere 대신 AttackCollision Box를 두었다. BeginOverlap에서 Player를 기억하고 EndOverlap에서 비운다. 실제 피해는 OnNotifyApplyDamage에서 Player가 있을 때 준다. 범위 안에 있다는 것과 공격 애니메이션의 타격 시점은 따로 처리하는 흐름이다."
-      },
-      {
-        "title": "플레이 영상",
-        "text": "남겨둔 Project (1).mp4에는 일반 적과 보스의 전투가 나온다. 전투 중에는 체력과 탄약, 남은 적 수가 표시된다. 감지 상실 처리와 간헐적으로 빠지던 공격 판정은 9/25 기록에 남겨뒀다."
+        "title": "공격 범위와 타격 시점 분리",
+        "html": "<ol class=\"reference-flow\"><li>범위 검사: 대상 보관</li><li>공격 Montage 재생</li><li>타격 프레임: Anim Notify</li><li>대상 유효 여부 확인</li><li>피해 적용</li></ol>",
+        "text": "범위 안에 있다는 것과 실제 피해를 주는 시점은 별도로 처리한다. Overlap에서 대상을 보관하고 Notify에서 사용하는 흐름의 예시이며, 모든 공격 판정에 적용하는 단일 정답은 아니다."
       }
     ],
     "related_ids": [
@@ -71,6 +58,10 @@ window.TIL_FILES["data/materials/project-priest-ai-notes.js"] = [
       {
         "label": "이후 공격 범위 에셋 변경 · 6f40359",
         "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project/commit/6f40359179126e90655ef8a201a21d9799513170"
+      },
+      {
+        "label": "객체지향 설계 — 상속·Component·Interface",
+        "url": "https://jwh2077.github.io/TIL/#material=project-priest-oop-notes"
       }
     ]
   }

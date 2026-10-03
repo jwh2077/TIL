@@ -15,7 +15,7 @@ window.TIL_FILES["data/2026/07/2026-07-16.js"] = [
       "실습"
     ],
     "study_content": "template <typename T>로 배열 출력 함수와 값 교환 함수를 써봤다. swapValuse는 T&로 받아 원래 두 변수의 값을 바꾼다.",
-    "learning_process": "Array 클래스에도 T를 쓰고 객체를 만들 때 타입을 지정하려 했다. auto가 값을 보고 타입을 정하는 것과 템플릿에 타입을 지정하는 것이 헷갈렸고, 객체를 만드는 문법에서도 실수가 있었다.",
+    "learning_process": "Array 클래스에도 T를 쓰고 객체를 만들 때 타입을 지정하려 했다. auto가 값을 보고 타입을 정하는 것과 템플릿에 타입을 지정하는 것이 헷갈렸고, 객체를 만드는 문법에서도 실수가 있었다. 원문에 Array(int)arr로 적었는데, 객체 선언에는 Array<int> arr처럼 꺾쇠를 써야 했다.",
     "code_reference": "template <typename T> void printarr(); / template <typename T> void swapValuse(T& a, T& b); / template <typename T> class Array",
     "related_topics": [
       "typename",

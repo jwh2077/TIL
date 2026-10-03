@@ -23,8 +23,12 @@ window.TIL_FILES["data/2026/10/2026-10-02.js"] = [
     "repository": "https://github.com/jwh2077/ChatX",
     "references": [
       {
-        "label": "Build.cs와 C++ 빌드 흐름 정리",
+        "label": "C++·Unreal 빌드 과정",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-build-flow"
+      },
+      {
+        "label": "Unreal Build.cs 설정",
+        "url": "https://jwh2077.github.io/TIL/#material=unreal-build-settings"
       }
     ],
     "source": [

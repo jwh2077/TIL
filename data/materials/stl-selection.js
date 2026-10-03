@@ -25,6 +25,20 @@ window.TIL_FILES["data/materials/stl-selection.js"] = [
       "ds",
       "stl"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "references": [
+      {
+        "label": "vector / list / deque",
+        "url": "https://jwh2077.github.io/TIL/#material=stl-sequence"
+      },
+      {
+        "label": "set / map · 중복과 정렬",
+        "url": "https://jwh2077.github.io/TIL/#material=stl-associative"
+      },
+      {
+        "label": "stack / queue / priority_queue",
+        "url": "https://jwh2077.github.io/TIL/#material=stl-adaptor"
+      }
+    ]
   }
 ];

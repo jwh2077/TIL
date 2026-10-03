@@ -17,11 +17,12 @@ window.TIL_FILES["data/materials/velog-20260810-001.js"] = [
       {
         "title": "컴포넌트 연결",
         "text": "SceneRoot를 루트로 두고 StaticMeshComp를 그 아래에 붙인다. 기준점과 화면에 보이는 메시를 나눈 구조다.",
-        "code": "SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT(\"SceneRoot\"));\nSetRootComponent(SceneRoot);\nStaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT(\"StaticMesh\"));\nStaticMeshComp->SetupAttachment(SceneRoot);"
+        "code": "SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT(\"SceneRoot\"));\nSetRootComponent(SceneRoot);\nStaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT(\"StaticMesh\"));\nStaticMeshComp->SetupAttachment(SceneRoot);",
+        "html": "<pre><code>AItem\n└─ SceneRoot (기준점)\n   └─ StaticMeshComp (표시할 메시)</code></pre>"
       },
       {
         "title": "Actor 함수",
-        "text": "PostInitializeComponents, BeginPlay, Destroyed, EndPlay를 헤더에 선언했다. 각 시점에 할 일은 cpp에서 작성한다."
+        "text": "헤더에서 선언하고 cpp에서 각 시점의 동작을 작성할 함수 예: PostInitializeComponents, BeginPlay, Destroyed, EndPlay."
       }
     ],
     "related_ids": [
@@ -30,6 +31,16 @@ window.TIL_FILES["data/materials/velog-20260810-001.js"] = [
     "topics": [
       "unreal"
     ],
-    "publication": "reference"
+    "publication": "reference",
+    "references": [
+      {
+        "label": "Unreal Build.cs 설정",
+        "url": "https://jwh2077.github.io/TIL/#material=unreal-build-settings"
+      },
+      {
+        "label": "C++·Unreal 빌드 과정",
+        "url": "https://jwh2077.github.io/TIL/#material=unreal-build-flow"
+      }
+    ]
   }
 ];

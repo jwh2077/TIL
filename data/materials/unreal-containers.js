@@ -23,7 +23,7 @@ window.TIL_FILES["data/materials/unreal-containers.js"] = [
         "code": "TArray<int32> Scores;\nScores.Add(10);\nScores.Add(20);\n\nTMap<FName, int32> Stats;\nStats.Add(FName(TEXT(\"Damage\")), 10);\nif (const int32* Damage = Stats.Find(FName(TEXT(\"Damage\"))))\n{\n    // *Damage로 저장된 값 확인\n}\n\nTSet<int32> UniqueIds;\nUniqueIds.Add(1);\nUniqueIds.Add(1); // 같은 값 중복 추가를 비교할 예제"
       },
       {
-        "title": "실행 전에 남은 것",
+        "title": "예제 확인 항목",
         "items": [
           "사용 중인 Unreal 버전에서 예제 컴파일하기",
           "TArray의 Num과 인덱스 범위 살펴보기",
@@ -43,7 +43,7 @@ window.TIL_FILES["data/materials/unreal-containers.js"] = [
       "ds"
     ],
     "publication": "draft",
-    "notice": "아직 Velog에 올리지 않은 초안이다. 아래 예제는 Unreal에서 컴파일하거나 실행해보지 않았다.",
+    "notice": "아래 예제는 Unreal에서 컴파일·실행 확인 전인 초안이다.",
     "references": [
       {
         "label": "TArray 공식 문서",
@@ -56,6 +56,14 @@ window.TIL_FILES["data/materials/unreal-containers.js"] = [
       {
         "label": "TSet 공식 문서",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/set-containers-in-unreal-engine"
+      },
+      {
+        "label": "vector / list / deque",
+        "url": "https://jwh2077.github.io/TIL/#material=stl-sequence"
+      },
+      {
+        "label": "set / map · 중복과 정렬",
+        "url": "https://jwh2077.github.io/TIL/#material=stl-associative"
       }
     ]
   }
