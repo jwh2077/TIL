@@ -548,19 +548,34 @@ window.TIL_LIBRARY_INDEX = [
   {
     "id": "unreal-multiplayer-basics",
     "title": "Unreal 멀티플레이 — 클래스 역할·서버·복제",
-    "summary": "GameMode·GameState·PlayerState·GameInstance 비교, 리슨·전용 서버, 복제 권한과 통신 구분.",
+    "summary": "서버 종류, 클라이언트 접속 흐름, GameMode·PlayerController 등 클래스별 위치와 복제 범위.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
       "unreal"
     ],
     "publication": "reference",
-    "status": "CH4 과제 발제 · 2026-10-01",
-    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md",
+    "status": "멀티플레이 개념 정리",
+    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md / 10-5 서버.txt",
     "source_url": "",
-    "notice": "10월 1일 발제에서 다룬 개념을 정리했다. 과제 안내와 당시 학습 과정은 관련 학습 기록에 있다.",
+    "notice": "10월 1일 발제와 10월 5일 서버 메모의 개념을 묶었다. 과제 안내와 당시 공부하며 남긴 질문은 관련 학습 기록에 있다.",
     "related_ids": [
-      "20261001-study"
+      "20261001-study",
+      "20261005-chatx"
+    ],
+    "references": [
+      {
+        "label": "Epic 공식 문서 · Client-Server Model",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/client-server-model?application_version=4.27"
+      },
+      {
+        "label": "Epic 공식 문서 · Networking Overview",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-overview?application_version=4.27"
+      },
+      {
+        "label": "Epic 공식 문서 · Actors and their Owning Connections",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/actors-and-their-owning-connections-in-unreal-engine?application_version=5.2"
+      }
     ],
     "file": "data/materials/unreal-multiplayer-basics.js"
   },

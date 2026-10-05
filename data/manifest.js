@@ -1132,6 +1132,25 @@ window.TIL_INDEX = {
       ],
       "file": "data/2026/10/2026-10-02.js",
       "month": "2026-10"
+    },
+    {
+      "id": "20261005-chatx",
+      "date": "2026-10-05",
+      "date_end": null,
+      "date_label": "2026-10-05",
+      "title": "ChatX · 서버 종류와 클라이언트 접속 흐름",
+      "summary": "P2P·리슨·전용 서버를 구분하고, 클라이언트가 접속할 때 어떤 객체와 정보가 필요한지 메모했다.",
+      "project": "ChatX",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "서버",
+        "복제"
+      ],
+      "activity": "personal",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-05.js"
     }
   ]
 };
