@@ -5,7 +5,7 @@
   const recordURL=id=>'#record='+encodeURIComponent(id);
   const projectRecords=p=>records.filter(r=>r.project===p.record_project);
   const groups=[...new Set(records.filter(r=>['team','personal'].includes(r.activity)&&r.project).map(r=>r.project))];
-  const projects=[...curated,...groups.filter(name=>!curated.some(p=>p.record_project===name)).map((name,i)=>{
+  const projects=[...curated.map(p=>{if(!p.archive)return p;const rows=projectRecords(p),dates=rows.map(r=>r.date).filter(Boolean).sort(),ends=rows.map(r=>r.date_end||r.date).filter(Boolean).sort();return {...p,period:dates[0]+'–'+ends.at(-1),period_note:'남아 있는 기록의 범위이며 프로젝트의 정확한 시작·종료일은 아닙니다.'};}),...groups.filter(name=>!curated.some(p=>p.record_project===name)).map((name,i)=>{
     const rows=records.filter(r=>r.project===name), dates=rows.filter(r=>r.date).map(r=>r.date).sort(), ends=rows.filter(r=>r.date).map(r=>r.date_end||r.date).sort();
     return {id:'archive-'+Array.from(name).map(c=>c.codePointAt(0).toString(16)).join('-'),record_project:name,title:name,summary:'기존 작업 기록을 모았습니다.',period:dates[0]+'–'+ends.at(-1),period_note:'남아 있는 기록의 범위이며 프로젝트의 정확한 시작·종료일은 아닙니다.',tags:[],archive:true,activity:rows[0].activity};
   })];
@@ -14,7 +14,7 @@
   const views={record:window.TIL_RECORD_VIEW,material:window.TIL_MATERIAL_VIEW,algorithm:window.TIL_ALGORITHM_VIEW};
   const route=()=>{const hash=location.hash.slice(1);if(!hash||hash==='home'||hash==='top')return {type:'home'};const at=hash.indexOf('=');return at<0?{type:hash}:{type:hash.slice(0,at),id:decodeURIComponent(hash.slice(at+1))};};
   const page=$('main');
-  $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">TIL <span>만들고, 공부한 기록</span></a><nav aria-label="주 메뉴">'+[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['algorithms','알고리즘'],['library','자료실']].map(([id,label])=>`<a href="#${id}" data-menu="${id}">${label}</a>`).join('')+'</nav></div>');
+  $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">개발·학습 기록 <span>C++ / Unreal 프로젝트와 학습 기록</span></a><nav aria-label="주 메뉴">'+[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['algorithms','알고리즘'],['library','자료실']].map(([id,label])=>`<a href="#${id}" data-menu="${id}">${label}</a>`).join('')+'</nav></div>');
   page.insertAdjacentHTML('afterbegin','<div id="sitePages" hidden></div><header id="listIntro" hidden></header><div id="siteFilters" hidden></div>');
   page.insertAdjacentHTML('beforeend','<details id="readingToc" hidden><summary>이 글의 목차</summary><nav aria-label="본문 목차"></nav></details>');
   const dateBox=$('.date-range'), dateParking=$('aside');
@@ -27,10 +27,16 @@
   function home(){return `<header><div class="eyebrow">C++ · UNREAL ENGINE</div><h1>만든 프로젝트와<br>그 과정에서 공부한 것들</h1><p class="intro">팀 프로젝트의 작업 과정부터 작은 기능 연습, 알고리즘 풀이까지 남겨두고 있습니다.</p></header><form id="globalSearch"><label class="sr-only" for="globalQuery">전체 자료 검색</label><input id="globalQuery" type="search" placeholder="프로젝트, 글 제목, 태그로 찾기" required><button class="button">검색</button></form><div class="section-head"><h2>프로젝트</h2><a href="#projects" class="source">전체 프로젝트 →</a></div>${feature(featured)}<div class="section-head"><h2>다른 공부 기록도 찾아보기</h2></div><div class="areas">${[['list','학습 기록','날짜별 작업과 작은 기능 연습, C++와 Unreal을 공부한 과정.',records.length],['algorithms','알고리즘','문제를 풀 때의 접근과 시행착오, 제출 코드와 풀이 기록.',algorithms.length],['library','자료실','다시 찾아볼 개념과 정리 자료, 관련 원문과 참고 링크.',materials.length]].map(([id,title,text,n])=>`<a class="area" href="#${id}"><span class="meta">${n}개 기록</span><h3>${title}</h3><p>${text}</p><span class="source">찾아보기 →</span></a>`).join('')}</div><div class="section-head"><h2>최근 학습 기록</h2><a class="source" href="#list">전체 보기 →</a></div>${[...records].filter(r=>r.date).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4).map(row).join('')}<p class="caption">학습 날짜 기준입니다. 자료를 추가하거나 수정한 날짜와는 다를 수 있습니다.</p><p class="caption">화면 구성과 글 정리에 AI의 도움을 받았으며, 내용과 코드는 제 실제 학습·작업 기록을 바탕으로 했습니다.</p>`;}
   function projectList(){return `<header><h1>프로젝트</h1><p class="intro">만든 결과물과 내가 맡은 작업, 그 과정의 기록입니다.</p></header>${feature(featured)}<div class="section-head"><h2>다른 프로젝트 기록</h2></div><div class="areas">${projects.filter(p=>p!==featured).map(p=>`<a class="area" href="#project=${p.id}"><div class="meta">${p.activity==='team'?'팀 프로젝트':'개인 프로젝트·실습'}</div><h3>${esc(p.title)}</h3><p>${projectRecords(p).length}개 작업 기록</p><span class="source">기록 보기 →</span></a>`).join('')}</div>`;}
   const section=(id,title,body)=>`<section id="${id}" class="project-section"><h2>${esc(title)}</h2>${body}</section>`;
+  // Only explicitly configured public videos are shown. Local originals stay private.
+  const mediaLink=media=>media?.url&&/^https:\/\/(youtu\.be\/|www\.youtube\.com\/watch\?v=)/.test(media.url)?`<a class="project-video" href="${esc(media.url)}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> ${esc(media.label||'플레이 영상 보기')} ↗</a>`:'';
+  const relatedRecords=ids=>ids.map(id=>records.find(r=>r.id===id)).filter(Boolean).map(r=>`<a class="related-button" href="${recordURL(r.id)}">${esc(r.title)} →</a>`).join('');
   function projectPage(p){
-    const title=`<a class="source" href="#projects">← 프로젝트 목록</a><header><div class="eyebrow">${p.archive?'프로젝트 기록':'팀 프로젝트 · '+esc(p.team)}</div><h1>${esc(p.title)}</h1><p class="intro">${esc(p.summary)}</p><p class="meta">${esc(p.period)}</p><p class="caption">${esc(p.period_note)}</p></header>`;
-    if(p.archive)return title+section('project-history','전체 작업 기록','<div id="projectFilterSlot"></div><div id="projectRows"></div>');
-    return title+section('project-role','내가 맡은 부분',`<ul>${p.roles.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`)+section('project-result','결과물',`<p>${esc(p.result)}</p><div class="material-links">${links(p.links)}</div><p class="caption">${esc(p.result_note)}</p>`)+section('project-work','작업 과정',p.work.map((w,i)=>`<div class="work-block"><div class="eyebrow">${String(i+1).padStart(2,'0')}</div><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p>${w.note?`<p class="caption">덧붙임<br>${esc(w.note)}</p>`:''}<div class="related-list">${w.ids.map(id=>records.find(r=>r.id===id)).filter(Boolean).map(r=>`<a class="related-button" href="${recordURL(r.id)}">${esc(r.title)} →</a>`).join('')}</div></div>`).join(''))+(p.reflection?section('project-reflection','프로젝트 돌아보기',`<p>${esc(p.reflection.summary)}</p><a class="button" href="#reflection=${p.id}">돌아보기 읽기 →</a>`):'')+section('project-history','전체 작업 기록','<div id="projectFilterSlot"></div><div id="projectRows"></div>');
+    const title=`<a class="source" href="#projects">← 프로젝트 목록</a><header class="project-intro"><div class="eyebrow">${p.archive?(p.activity==='team'?'팀 프로젝트':'개인 프로젝트·실습'):'팀 프로젝트'}</div><h1>${esc(p.title)}</h1><p class="intro">${esc(p.summary)}</p>${mediaLink(p.media)}<div class="project-facts">${[p.team,p.technology,p.role_summary&&'담당 · '+p.role_summary,p.period].filter(Boolean).map(v=>`<span>${esc(v)}</span>`).join('')}</div></header>`;
+    const shortcuts=p.highlights?.length?`<nav class="project-shortcuts" aria-label="대표 작업">${p.highlights.map(h=>`<button type="button" data-scroll="project-work-${h.work}"><strong>${esc(h.label)} <span aria-hidden="true">↓</span></strong><span>${esc(h.summary)}</span></button>`).join('')}</nav>`:'';
+    const parts=p.parts?.length?section('project-parts','과제별 영상과 기록',`<div class="project-parts">${p.parts.map(part=>`<div class="project-part"><h3>${esc(part.title)}</h3>${mediaLink({url:part.video})}<div class="related-list">${relatedRecords(part.ids)}</div></div>`).join('')}</div>`):'';
+    const history=section('project-history','전체 작업 기록','<div id="projectFilterSlot"></div><div id="projectRows"></div>');
+    if(p.archive)return title+`<p class="caption">${esc(p.period_note)}</p>`+parts+history;
+    return title+shortcuts+'<div id="projectTocSlot"></div>'+section('project-work','작업 과정',p.work.map((w,i)=>`<div class="work-block" id="project-work-${i}"><div class="eyebrow">${String(i+1).padStart(2,'0')}</div><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p>${w.note?`<p class="caption">덧붙임<br>${esc(w.note)}</p>`:''}<div class="related-list">${relatedRecords(w.ids)}</div></div>`).join(''))+section('project-role','내가 맡은 부분',`<ul>${p.roles.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`)+section('project-result','결과물',`<p>${esc(p.result)}</p><div class="material-links">${links(p.links)}</div><p class="caption">${esc(p.result_note)}</p><p class="caption">${esc(p.period_note)}</p>`)+(p.reflection?section('project-reflection','프로젝트 돌아보기',`<p>${esc(p.reflection.summary)}</p><a class="button" href="#reflection=${p.id}">돌아보기 읽기 →</a>`):'')+history;
   }
   function reflection(p){const r=p.reflection;return `<a class="source" href="#project=${p.id}">← ${esc(p.title)} 상세로</a><header><div class="eyebrow">프로젝트 돌아보기</div><h1>${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>section('reflection-'+i,s.title,`<p>${esc(s.text)}</p>`)).join('')}<section class="project-section"><h2>덧붙임과 참고 자료</h2><p class="caption">${esc(r.notice)}</p><ul>${r.sources.map(s=>`<li>${esc(s)}</li>`).join('')}</ul><div class="material-links">${links(p.links)}</div></section>`;}
   function buildToc(){
@@ -38,8 +44,8 @@
     if(!document.body.classList.contains('reading'))return;
     const content=['#sitePages','#articlePage','#libraryPage','#algorithmPage'].map($).find(el=>!el.hidden);
     if(!content)return;
-    const pageTitle=content.querySelector('h1,#detailTitle');if(pageTitle)document.title=pageTitle.textContent+' · TIL';
-    const headings=[...content.querySelectorAll('.project-section>h2,.material-section>h2,.section>h3,.related>h3')];
+    const pageTitle=content.querySelector('h1,#detailTitle');if(pageTitle)document.title=pageTitle.textContent+' · 개발·학습 기록';
+    const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.material-section>h2,.section>h3,.related>h3')];
     if(headings.length<3)return;
     toc.hidden=false;toc.open=!matchMedia('(max-width:800px)').matches;
     const targets=headings.map((h,i)=>{h.id=content.id+'-heading-'+i;return h;});
@@ -48,6 +54,7 @@
     targets.forEach(h=>tocObserver.observe(h));
   }
   $('#readingToc').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(b){const target=document.getElementById(b.dataset.scroll);target?.scrollIntoView();target?.setAttribute('tabindex','-1');target?.focus({preventScroll:true});}});
+  $('#sitePages').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(!b)return;const target=document.getElementById(b.dataset.scroll);target?.setAttribute('tabindex','-1');target?.scrollIntoView();target?.focus({preventScroll:true});});
   window.TIL_SITE={articleReady(){queueMicrotask(buildToc);}};
   function filterState(){return currentKind==='project'?projectFilter:views[currentKind]?.state;}
   function filterRows(){return currentKind==='project'?projectRecords(projects.find(p=>p.id===lastProject)):views[currentKind].records;}
@@ -99,7 +106,8 @@
   $('#sitePages').addEventListener('submit',e=>{if(e.target.id==='globalSearch'){e.preventDefault();const q=$('#globalQuery').value.trim();if(q)location.hash='search='+encodeURIComponent(q);}});
   function navigate(){
     let r;try{r=route();}catch{r={type:'home'};}
-    tocObserver?.disconnect();$('#readingToc').hidden=true;
+    const alias=projects.find(p=>p.aliases?.includes(r.id));if(r.type==='project'&&alias){r.id=alias.id;history.replaceState(null,'','#project='+alias.id);}
+    tocObserver?.disconnect();$('#readingToc').hidden=true;page.append($('#readingToc'));
     if(dateBox.parentElement!==dateParking)dateParking.append(dateBox);
     $('#siteFilters').innerHTML='';$('#siteFilters').hidden=true;$('#sitePages').hidden=true;$('#listIntro').hidden=true;currentKind='';
     const custom=['home','projects','project','reflection','search'].includes(r.type);
@@ -110,9 +118,10 @@
     if(custom){for(const id of ['listPage','articlePage','libraryPage','algorithmPage'])$('#'+id).hidden=true;const target=$('#sitePages');target.hidden=false;
       if(r.type==='home')target.innerHTML=home();else if(r.type==='projects')target.innerHTML=projectList();else if(r.type==='search')target.innerHTML=searchPage(r.id||'');else{const p=projects.find(p=>p.id===r.id);if(!p||(r.type==='reflection'&&!p.reflection))target.innerHTML='<h1>글을 찾을 수 없습니다</h1><a href="#projects">프로젝트 목록으로</a>';else{target.innerHTML=r.type==='reflection'?reflection(p):projectPage(p);if(r.type==='project'){if(lastProject!==p.id)projectFilter={query:'',tags:[],from:'',to:'',sort:'asc'};lastProject=p.id;filters('project',$('#projectFilterSlot'));apply({});}}}
     }else if(!reading){const kind=menu==='library'?'material':menu==='algorithms'?'algorithm':'record';$('#listIntro').hidden=false;$('#listIntro').innerHTML=`<h1>${kind==='record'?'학습 기록':kind==='material'?'자료실':'알고리즘'}</h1><p class="intro">${kind==='record'?'날짜별 작업과 작은 기능 연습을 찾아봅니다.':kind==='material'?'필요한 개념과 사용법을 주제별로 찾아보세요. 관련 자료를 따라 더 자세한 설명으로 이어갈 수 있습니다.':'풀이 과정과 제출 결과를 남긴 기록입니다. 미완성 문제도 함께 표시합니다.'}</p>`;$('#siteFilters').hidden=false;filters(kind,$('#siteFilters'));}
+    if($('#projectTocSlot'))$('#projectTocSlot').append($('#readingToc'));
     if(reading)buildToc();
-    const recordMeta=r.type==='record'?records.find(x=>x.id===r.id):null;const p=recordMeta&&projects.find(p=>p.record_project===recordMeta.project);if(p&&!$('#articlePage .project-return'))$('#backToList').insertAdjacentHTML('afterend',`<a class="source project-return" href="#project=${p.id}">${esc(p.title)} 프로젝트로 →</a>`);else if(!p)$('#articlePage .project-return')?.remove();else if(p){const a=$('#articlePage .project-return');a.href='#project='+p.id;a.textContent=p.title+' 프로젝트로 →';}
-    document.title=(r.type==='project'||r.type==='reflection'?(r.type==='reflection'?projects.find(p=>p.id===r.id)?.reflection?.title:projects.find(p=>p.id===r.id)?.title)||'프로젝트':{home:'홈',projects:'프로젝트',list:'학습 기록',library:'자료실',algorithms:'알고리즘',search:'전체 검색'}[r.type]||'학습 기록')+' · TIL';
+    const recordMeta=r.type==='record'?records.find(x=>x.id===r.id):null;const p=recordMeta&&projects.find(p=>p.record_project===recordMeta.project);if(p&&!$('#articlePage .project-return'))$('#backToList').insertAdjacentHTML('afterend',`<a class="source project-return" href="#project=${p.id}">${esc(p.title)}로 →</a>`);else if(!p)$('#articlePage .project-return')?.remove();else if(p){const a=$('#articlePage .project-return');a.href='#project='+p.id;a.textContent=p.title+'로 →';}
+    document.title=(r.type==='project'||r.type==='reflection'?(r.type==='reflection'?projects.find(p=>p.id===r.id)?.reflection?.title:projects.find(p=>p.id===r.id)?.title)||'프로젝트':{home:'홈',projects:'프로젝트',list:'학습 기록',library:'자료실',algorithms:'알고리즘',search:'전체 검색'}[r.type]||'학습 기록')+' · 개발·학습 기록';
     window.scrollTo({top:0,behavior:'instant'});
   }
   document.addEventListener('click',e=>{document.querySelectorAll('.filter-option[open]').forEach(d=>{if(!d.contains(e.target))d.open=false;});});
