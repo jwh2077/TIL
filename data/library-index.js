@@ -575,6 +575,10 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "Epic 공식 문서 · Actors and their Owning Connections",
         "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/actors-and-their-owning-connections-in-unreal-engine?application_version=5.2"
+      },
+      {
+        "label": "PIE·로컬 UI·NetMode 실행 구분",
+        "url": "https://jwh2077.github.io/TIL/#material=unreal-network-testing"
       }
     ],
     "file": "data/materials/unreal-multiplayer-basics.js"
@@ -678,5 +682,49 @@ window.TIL_LIBRARY_INDEX = [
       }
     ],
     "file": "data/materials/graph-tree.js"
+  },
+  {
+    "id": "unreal-network-testing",
+    "title": "Unreal 멀티플레이 실행 구분 — PIE·로컬 UI·NetMode",
+    "summary": "전용 서버로 PIE 실행하기, 개인 UI 분기, NetMode와 NetDriver 연결 값 구분.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "멀티플레이 실행·디버깅",
+    "source_name": "10-6.txt / 스크린샷 2026-10-06 153305.png",
+    "source_url": "",
+    "related_ids": [
+      "20261006-chatx"
+    ],
+    "references": [
+      {
+        "label": "클래스 역할·서버·복제 기본 개념",
+        "url": "https://jwh2077.github.io/TIL/#material=unreal-multiplayer-basics"
+      },
+      {
+        "label": "Epic · PIE Multiplayer Options",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/play-in-editor-multiplayer-options-in-unreal-engine"
+      },
+      {
+        "label": "Epic · 멀티플레이 디버깅",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/testing-and-debugging-networked-games-in-unreal-engine"
+      },
+      {
+        "label": "Epic · IsLocalController",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/GameFramework/APlayerController/IsLocalController?application_version=5.5"
+      },
+      {
+        "label": "Epic · UNetDriver",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/UNetDriver"
+      },
+      {
+        "label": "Epic · ENetMode",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/ENetMode"
+      }
+    ],
+    "file": "data/materials/unreal-network-testing.js"
   }
 ];

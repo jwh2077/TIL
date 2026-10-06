@@ -1151,6 +1151,26 @@ window.TIL_INDEX = {
       "activity": "personal",
       "month": "2026-10",
       "file": "data/2026/10/2026-10-05.js"
+    },
+    {
+      "id": "20261006-chatx",
+      "date": "2026-10-06",
+      "date_end": null,
+      "date_label": "2026-10-06",
+      "title": "ChatX · 전용 서버 설정과 로컬 UI 구분",
+      "summary": "개인 화면에만 UI를 띄우려고 IsLocalController()를 보고, PIE 실행 설정과 NetDriver의 연결 구조를 따라갔다.",
+      "project": "ChatX",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "PIE",
+        "NetMode",
+        "UI"
+      ],
+      "activity": "personal",
+      "file": "data/2026/10/2026-10-06.js",
+      "month": "2026-10"
     }
   ]
 };

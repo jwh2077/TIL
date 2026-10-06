@@ -73,6 +73,10 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
       {
         "label": "Epic 공식 문서 · Actors and their Owning Connections",
         "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/actors-and-their-owning-connections-in-unreal-engine?application_version=5.2"
+      },
+      {
+        "label": "PIE·로컬 UI·NetMode 실행 구분",
+        "url": "https://jwh2077.github.io/TIL/#material=unreal-network-testing"
       }
     ]
   }
