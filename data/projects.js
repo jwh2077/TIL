@@ -76,7 +76,7 @@ window.TIL_PROJECTS.push(...[
     "title": "퍼스트 FPS",
     "archive": true,
     "activity": "personal",
-    "summary": "첫 주 Blueprint 프로젝트의 플레이 영상과 작업 기록.",
+    "summary": "Blueprint로 이동·발사, 적 추적, 아이템과 HUD를 연결한 FPS 실습.",
     "tags": [
       "Unreal",
       "Blueprint"
@@ -85,5 +85,47 @@ window.TIL_PROJECTS.push(...[
       "url": "https://youtu.be/QkZXdj-Wmzo",
       "label": "퍼스트 FPS 플레이 영상"
     }
+  }
+]);
+
+window.TIL_PROJECTS.push(...[
+  {
+    "id": "archive-ac1c-c778-20-54-65-78-74-52-50-47",
+    "record_project": "개인 TextRPG",
+    "title": "개인 TextRPG",
+    "archive": true,
+    "activity": "personal",
+    "summary": "직업 선택과 Player 구조에 상속·다형성을 적용하고, C++와 STL을 함께 공부한 기록.",
+    "tags": [
+      "C++",
+      "직업 선택",
+      "상속·다형성"
+    ]
+  },
+  {
+    "id": "archive-d300-20-54-65-78-74-52-50-47",
+    "record_project": "팀 TextRPG",
+    "title": "팀 TextRPG",
+    "archive": true,
+    "activity": "team",
+    "summary": "상점의 아이템 구매·판매와 Item 관리, Logger를 통한 게임 데이터 집계 작업.",
+    "tags": [
+      "C++",
+      "상점·아이템",
+      "Logger"
+    ]
+  },
+  {
+    "id": "archive-43-68-61-74-58",
+    "record_project": "ChatX",
+    "title": "ChatX",
+    "archive": true,
+    "activity": "personal",
+    "summary": "멀티플레이 과제를 진행하며 Build.cs 설정과 서버·클라이언트 구조를 공부한 기록.",
+    "tags": [
+      "Unreal",
+      "Build.cs",
+      "멀티플레이"
+    ]
   }
 ]);
