@@ -65,7 +65,10 @@
     const topic = topics.find(t => t[0] === state.topic);
     $('#topicTitle').textContent = topic[1]; $('#topicDescription').textContent = topic[2];
     const shown = visible(); $('#count').textContent = `${shown.length}개 기록`;
-    $('#records').innerHTML = shown.map(r => `<article class="record"><button class="record-button" type="button" data-record-id="${esc(r.id)}"><div class="record-meta"><span>${esc(r.date_label)}</span><span class="topic-badge">${esc(name(r.primary_topic))}</span></div><h3>${esc(r.title)}</h3>${r.project ? `<p class="summary">${esc(r.project)}</p>` : ''}<span class="more">열기 →</span></button></article>`).join('') || '<div class="empty">선택한 조건에 맞는 기록이 없습니다.</div>';
+    const months=new Map();
+    for(const r of shown){const key=r.month==='project-period'?'기간으로 묶은 기록':r.date?r.date.slice(0,7):'날짜 미확인';if(!months.has(key))months.set(key,[]);months.get(key).push(r);}
+    $('#records').innerHTML = [...months].map(([month,rows])=>`<section class="record-month"><h3>${esc(/^\d{4}-\d{2}$/.test(month)?month.slice(0,4)+'년 '+Number(month.slice(5))+'월':month)} <small>${rows.length}개 기록</small></h3><div class="record-month-entries">${rows.map(r=>`<article class="record"><button class="record-button" type="button" data-record-id="${esc(r.id)}"><span class="record-date">${esc(r.date_label)}</span><span class="record-description"><span class="record-meta">${esc(r.project||name(r.primary_topic))}</span><strong>${esc(r.title)}</strong>${r.summary?`<span class="record-excerpt">${esc(r.summary)}</span>`:''}</span><span class="record-arrow" aria-hidden="true">→</span></button></article>`).join('')}</div></section>`).join('') || '<div class="empty">선택한 조건에 맞는 기록이 없습니다.</div>';
+
   }
   window.TIL_RECORD_VIEW = { state, records, visible, subdivisions, update(patch) { Object.assign(state, patch); dateOptions(); dateChange(); }, render };
   function load(file) {
