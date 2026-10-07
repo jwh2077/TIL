@@ -11,12 +11,12 @@ window.TIL_FILES["data/materials/velog-20260716-001.js"] = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "값 교환 함수",
+        "title": "함수 템플릿 — 두 값 교환",
         "text": "타입 매개변수 T를 사용하는 값 교환 함수다. T&로 받아 원래 변수의 값을 바꾼다.",
         "code": "template <typename T>\nvoid swapValuse(T& a, T& b) {\n    T temp = a;\n    a = b;\n    b = temp;\n}"
       },
       {
-        "title": "템플릿 클래스의 객체 선언",
+        "title": "클래스 템플릿 — 타입을 정해 객체 선언",
         "text": "T data[100]을 가진 Array 템플릿 클래스에 int를 지정하는 예다. 타입 인수에는 괄호가 아니라 꺾쇠를 쓴다.",
         "code": "Array<int> arr;"
       }

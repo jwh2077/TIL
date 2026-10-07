@@ -19,8 +19,8 @@ window.TIL_FILES["data/2026/10/2026-10-06.js"] = [
       "UI"
     ],
     "summary": "개인 화면에만 UI를 띄우려고 IsLocalController()를 보고, PIE 실행 설정과 NetDriver의 연결 구조를 따라갔다.",
-    "study_content": "멀티플레이에서는 내가 죽었을 때 내 화면에만 사망 UI를 띄우는 것처럼, 개인 화면에서만 처리할 일이 있었다. IsLocalController()가 false면 return하도록 적었는데도 두 화면에 같은 출력이 보였다. 메모에는 UI와 PrintString을 같이 적어 두었고, 한 프로세스에서 실행하는 설정도 함께 봤다.\n\nPlay Net Mode를 Play as Client로 두고 Run Under One Process를 끄는 설정을 남겼다. 여러 창을 각각의 프로세스로 실행해서 보는 쪽으로 바꿔 봤다. Always On Top처럼 창을 위에 띄워 두는 옵션도 같이 적었다.\n\n그다음에는 같은 코드가 서버와 각 클라이언트에서 실행될 수 있으니, 지금 어디서 실행되는지 나눠야 한다는 쪽으로 생각했다. HP를 줄이는 중요한 처리는 서버에 두고, 화면에 보여줄 UI나 효과는 클라이언트 쪽에서 처리하는 기준을 봤다.\n\nGetNetMode()에서 반환하는 enum과 UNetDriver 코드를 따라갔다. ServerConnection은 클라이언트에서 서버로 연결되는 쪽이고, ClientConnections는 서버에서 클라이언트 연결들을 담는 쪽으로 정리했다. 다만 코드를 봐도 아직 한 번에 이해되지는 않았다. 포인터 멤버가 선언돼 있다는 것과 실제 연결 객체를 가리킨다는 것이 어떻게 다른지도 질문으로 남겼다.",
-    "notice": "설정과 코드를 보며 적어 둔 내용이다. 설정을 바꾼 뒤 UI 문제가 해결됐는지는 따로 적어 두지 않았다.",
+    "study_content": "오늘은 멀티플레이에서 내 화면에만 UI를 띄우는 방법과 전용 서버 테스트 설정을 봤다. 내가 죽었을 때 나한테만 사망 UI를 보여주는 경우가 예시였다.\n\nIsLocalController()가 false면 return하도록 했는데도 두 화면에 같은 출력이 보였다. 여기서 PIE 설정을 살펴봤다. Play as Client로 전용 서버 환경을 실행하고, Run Under One Process를 끄면 창마다 프로세스를 나눌 수 있었다. 설정 방법과 UI를 구분하는 코드는 자료실에 정리했다.\n\n같은 코드가 서버와 여러 클라이언트에서 실행된다는 점도 생각해야 했다. HP를 줄이는 판정은 서버에서, UI나 효과를 보여주는 처리는 클라이언트에서 맡는 식으로 역할을 나눴다. 지금 서버인지 클라이언트인지 구분하는 값이 NetMode였다.\n\n이어서 GetNetMode()와 UNetDriver 코드를 따라가 봤다. 클라이언트는 ServerConnection으로 서버에 연결하고, 서버는 ClientConnections에 클라이언트들의 연결을 담는 구조였다. 다만 코드까지 한 번에 이해되지는 않았고, 포인터 멤버가 있다는 것과 실제 연결이 있다는 것의 차이가 헷갈렸다.",
+    "notice": "설정을 바꾼 뒤 UI가 의도대로 나오는지는 아직 확인이 필요하다.",
     "repository": "https://github.com/jwh2077/ChatX",
     "references": [
       {
@@ -32,6 +32,9 @@ window.TIL_FILES["data/2026/10/2026-10-06.js"] = [
       "10-6.txt · 로컬 보관",
       "스크린샷 2026-10-06 153305.png · PIE 설정",
       "ChatGPT 이미지 2026년 10월 6일 오후 04_02_18.png · 개념 설명용 그림, 로컬 보관"
+    ],
+    "questions": [
+      "ServerConnection 멤버는 선언돼 있어도 값은 nullptr일 수 있다. 코드에서 연결이 ‘있다’, ‘없다’고 할 때는 멤버 자체가 아니라 그 안의 값을 보는 것인가?"
     ]
   }
 ];

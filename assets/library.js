@@ -5,10 +5,10 @@
   const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const kinds = {file:'문서 원본',velog:'Velog 원본',note:'메모 원본'};
   const topics = {cpp:'C / C++',unreal:'Unreal',ds:'자료구조',stl:'STL',oop:'객체지향 · 설계',memory:'포인터 · 메모리'};
-  const state = {kind:'all',fields:[],publication:'all',query:'',tags:[],sort:'asc'};
+  const state = {kind:'all',fields:[],publication:'all',query:'',tags:[],sort:'topic'};
   const fields = r => r.topics || [r.topic];
   const classification = r => fields(r).map(id=>topics[id]||id).join(' · ');
-  const pending=new Map(); let token = 0;
+  const pending=new Map(); let token = 0, requestedSection = null;
   $('aside .brand').insertAdjacentHTML('afterend', `<div class="side-title">보기 방식</div><div id="archiveModes" class="project-list"><a class="project" href="#list">날짜별 기록</a><a class="project" href="#library">정리 자료</a></div>`);
   $('#sidebarFilters > summary').insertAdjacentHTML('afterend', `<div id="libraryNav" hidden><div class="side-title">원본 종류</div><div id="materialKinds" class="project-list"></div><div class="side-title">학습 분야</div><div id="materialTopics" class="project-list"></div><div id="materialOutline" hidden><div class="side-title">자료 목차</div><div id="materialSections" class="project-list"></div><div class="side-title">같은 분야 자료</div><div id="materialRelated" class="project-list"></div></div></div>`);
   $('main').insertAdjacentHTML('beforeend', '<div id="libraryPage" hidden></div>');
@@ -23,21 +23,52 @@
     $('#materialTopics').innerHTML = [['all','모든 분야'],...Object.entries(topics).filter(([id])=>materials.some(r=>fields(r).includes(id)))].map(([id,label])=>`<button type="button" class="project" data-field="${id}" aria-pressed="${id==='all'?state.fields.length===0:state.fields.includes(id)}">${label}</button>`).join('');
     $('#publicationFilters').innerHTML=[['all','모든 상태'],['reference','기존 정리'],['draft','게시 준비 초안']].map(([id,label])=>`<button type="button" class="project" data-publication="${id}" aria-pressed="${state.publication===id}">${label}</button>`).join('');
   }
+  const queryTerms = query => query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  const contains = (text, query) => queryTerms(query).every(term => String(text).toLocaleLowerCase().includes(term));
+  const matchesQuery = (r, query) => contains([r.title,r.summary,classification(r),...(r.outline||[]).map(s=>s.text)].join(' '), query);
+  const subjectGroups = window.TIL_LIBRARY_NAVIGATION || [];
+  const expandedSubjects = new Set();
+  const relevance = (r, query) => !query ? 0 : contains(r.title,query) ? 3 : (r.outline||[]).some(s=>contains(s.title,query)) ? 2 : contains(r.summary,query) ? 1 : 0;
   function results() {
     const query = state.query.trim().toLocaleLowerCase();
-    return materials.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'material'))&&(state.kind==='all'||r.kind===state.kind)&&state.fields.every(id=>fields(r).includes(id))&&(state.publication==='all'||r.publication===state.publication)&&[r.title,r.summary,r.source_name,classification(r)].join(' ').toLocaleLowerCase().includes(query)).sort((a,b)=>state.sort==='asc'?a.title.localeCompare(b.title,'ko'):b.title.localeCompare(a.title,'ko'));
+    return materials.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'material'))&&(state.kind==='all'||r.kind===state.kind)&&state.fields.every(id=>fields(r).includes(id))&&(state.publication==='all'||r.publication===state.publication)&&matchesQuery(r,query)).sort((a,b)=>{const ranked=query&&['topic','relevance'].includes(state.sort);return (ranked?relevance(b,query)-relevance(a,query):0)||(state.sort==='desc'?-1:1)*a.title.localeCompare(b.title,'ko');});
   }
   function list() {
     controls(); $('#materialOutline').hidden = true;
-    $('#libraryPage').innerHTML = `<header><div class="eyebrow">NOTES</div><h1>자료실</h1><p class="intro">필요한 개념과 사용법, 코드 예제를 주제별로 찾아보세요. 관련 내용은 기존 문서에 보강하고, 이어 볼 자료는 서로 연결합니다.</p><label for="librarySearch" class="side-title" style="display:block;margin-left:0">자료 검색</label><input id="librarySearch" class="library-search" type="search" placeholder="예: 배열, Big-O, 매크로" value="${esc(state.query)}"></header><p id="libraryCount" class="count"></p><div id="libraryCards" class="library-grid"></div>`;
+    $('#libraryPage').innerHTML = `<header><div class="eyebrow">NOTES</div><h1>자료실</h1><p class="intro">필요한 개념과 사용법, 코드 예제를 주제별로 찾아보세요. 관련 내용은 기존 문서에 보강하고, 이어 볼 자료는 서로 연결합니다.</p><label for="librarySearch" class="side-title" style="display:block;margin-left:0">자료 검색</label><input id="librarySearch" class="library-search" type="search" placeholder="예: push_back, GameMode, 헤더 경로" value="${esc(state.query)}"></header><p id="libraryCount" class="count"></p><div id="libraryCards" class="library-index"></div>`;
     cards();
     $('#librarySearch').addEventListener('input',e=>{state.query=e.target.value;cards();});
   }
+  function materialRow(r) {
+    const matches = state.query.trim() ? (r.outline||[]).map((s,index)=>({...s,index})).filter(s=>contains(s.text,state.query)) : [];
+    return `<article class="material-row"><button type="button" class="material-open" data-material="${esc(r.id)}"><span><strong>${esc(r.title)}</strong>${r.publication==='draft'?'<small class="topic-badge">초안</small>':''}<span class="material-summary">${esc(r.summary)}</span></span><span aria-hidden="true">→</span></button>${matches.length?`<details class="material-matches"><summary>검색어가 있는 항목 ${matches.length}개</summary><div class="material-contents">${matches.map(s=>`<button type="button" data-material="${esc(r.id)}" data-open-section="${s.index}">${esc(s.title)} →</button>`).join('')}</div></details>`:''}</article>`;
+  }
   function cards() {
     const shown=results(); $('#libraryCount').textContent=`${shown.length}개 자료`;
-    $('#libraryCards').innerHTML=shown.map(r=>`<article class="record"><button type="button" class="record-button" data-material="${esc(r.id)}"><div class="record-meta"><span class="topic-badge">${esc(classification(r))}</span>${r.publication==='draft'?'<span>초안</span>':''}</div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><span class="more">열기 →</span></button></article>`).join('')||'<div class="empty">조건에 맞는 자료가 없습니다.</div>';
+    const grouped=state.sort==='topic'&&!state.query.trim();
+    const shownIds=new Set(shown.map(r=>r.id));
+    const topicRows = topic => topic.documents.map(id=>shown.find(r=>r.id===id)).filter(Boolean);
+    const disclosure=(id,label,body,count,hint='')=>`<details class="material-subject" data-subject="${id}" ${expandedSubjects.has(id)?'open':''}><summary><span><strong>${esc(label)}</strong>${hint?`<small>${esc(hint)}</small>`:''}</span><span class="subject-count">${count}개 문서</span></summary><div>${body}</div></details>`;
+    const indexed = new Set(subjectGroups.flatMap(group=>group.topics.flatMap(topic=>topic.documents)));
+    const groups=subjectGroups.map(group=>{
+      const topics=group.topics.filter(topic=>topicRows(topic).length);
+      if(!topics.length)return '';
+      const ids=new Set(topics.flatMap(topic=>topic.documents).filter(id=>shownIds.has(id)));
+      const body=topics.map(topic=>{
+        const rows=topicRows(topic);
+        const shortcuts=(topic.shortcuts||[]).filter(([,id])=>shownIds.has(id)).map(([label,id,heading])=>{
+          const index=materials.find(r=>r.id===id)?.outline?.findIndex(s=>s.title===heading);
+          return index>=0?`<button class="material-open" type="button" data-material="${esc(id)}" data-open-section="${index}"><strong>${esc(label)}</strong><span aria-hidden="true">→</span></button>`:'';
+        }).join('');
+        return disclosure(group.id+'-'+topic.id,topic.title,shortcuts+(shortcuts?'<p class="material-whole-label">문서 전체 보기</p>':'')+rows.map(materialRow).join(''),rows.length);
+      }).join('');
+      return disclosure(group.id,group.title,body,ids.size,group.hint);
+    }).join('');
+    const remaining=shown.filter(r=>!indexed.has(r.id));
+    $('#libraryCards').innerHTML=(grouped?groups+(remaining.length?disclosure('unfiled','기타 자료',remaining.map(materialRow).join(''),remaining.length):''):shown.map(materialRow).join(''))||'<div class="empty">조건에 맞는 자료가 없습니다. 검색어나 선택한 조건을 줄여보세요.</div>';
+    $('#libraryCards').querySelectorAll('[data-subject]').forEach(group=>group.addEventListener('toggle',()=>{if(!group.isConnected)return;if(group.open)expandedSubjects.add(group.dataset.subject);else expandedSubjects.delete(group.dataset.subject);}));
   }
-  window.TIL_MATERIAL_VIEW={state,records:materials,results,update(patch){Object.assign(state,patch);controls();cards();}};
+  window.TIL_MATERIAL_VIEW={state,records:materials,results,matchesQuery,update(patch){Object.assign(state,patch);controls();cards();}};
   function load(file) {
     if(!/^data\/materials\/[a-zA-Z0-9_-]+\.js$/.test(file))return Promise.reject(new Error('잘못된 자료 경로입니다.'));
     if(window.TIL_FILES?.[file]) return Promise.resolve(window.TIL_FILES[file]);
@@ -48,20 +79,22 @@
     }));
     return pending.get(file);
   }
-  function sourceLink(r) {
-    const links=[];
-    if(r.kind==='file' && r.source_url==='data/guides/stl-reference.html') links.push(`<a class="source" href="${r.source_url}">원본 자료구조 문서 보기 →</a>`);
-    for(const ref of [...(r.references||[]),...(r.kind==='velog'?[{label:'Velog 원문 보기',url:r.source_url}]:[])]) {
-      const internal = String(ref.url || '').replace(/^https:\/\/jwh2077\.github\.io\/TIL\//, '');
-      const match = internal.match(/^#(material|algorithm|record)=([a-zA-Z0-9_-]+)$/);
-      const target = match && (match[1]==='material'?materials:match[1]==='algorithm'?(window.TIL_ALGORITHMS||[]):(window.TIL_INDEX?.records||[])).some(item=>item.id===match[2]);
-      if(target) {
-        links.push(`<a class="source" href="${esc(internal)}">${esc(ref.label)} →</a>`);
-        continue;
-      }
-      try {const u=new URL(ref.url);if(u.protocol==='https:'&&['velog.io','dev.epicgames.com','github.com','swexpertacademy.com','school.programmers.co.kr'].includes(u.hostname))links.push(`<a class="source" href="${esc(u.href)}" target="_blank" rel="noopener noreferrer">${esc(ref.label)} ↗</a>`);}catch{}
+  function referenceGroups(r) {
+    const internal=[], external=[], seen=new Set();
+    if(r.kind==='file' && r.source_url==='data/guides/stl-reference.html') external.push('<a class="source" href="data/guides/stl-reference.html">원본 자료구조 문서 보기 →</a>');
+    const refs=[...(r.references||[]),...(r.kind==='velog'?[{label:'Velog 원문 보기',url:r.source_url}]:[])];
+    for(const ref of refs) {
+      if(!ref.url) continue;
+      const target=window.TIL_LINKS.resolve(ref.url);
+      if(!target || seen.has(target.href)) continue;
+      seen.add(target.href);
+      // Learning records already have their own group below.
+      if(target.internal && (r.related_ids||[]).some(id=>target.href==='#record='+id)) continue;
+      if(target.internal) internal.push(`<a class="related-button" href="${esc(target.href)}">${esc(ref.label)}</a>`);
+      else external.push(`<a class="source" href="${esc(target.href)}" target="_blank" rel="noopener noreferrer">${esc(ref.label)} ↗</a>`);
     }
-    return links.join('');
+    return (internal.length ? `<section class="related"><h3>관련 문서</h3><div class="related-list">${internal.join('')}</div></section>` : '')
+      + `<section class="material-section"><h2>원본과 외부 참고 자료</h2><p class="library-notice">원본: ${esc(r.source_name)}</p>${r.notice?`<p class="library-notice">덧붙임<br>${esc(r.notice)}</p>`:''}${external.length?`<div class="material-links">${external.join('')}</div>`:''}</section>`;
   }
   async function open(id) {
     // Keep old links to the question-only note useful after moving it to learning records.
@@ -74,9 +107,11 @@
     $('#libraryPage').innerHTML='<p>정리 자료를 여는 중…</p>';
     try {
       const r=(await load(meta.file)).find(r=>r.id===id);if(stamp!==token||!active())return;if(!r)throw new Error('자료를 찾을 수 없습니다.');
-      $('#libraryPage').innerHTML=`<button type="button" class="related-button" data-library-back>← 자료 목록으로</button><header><div class="record-meta">${esc(classification(r))}</div><h1 id="materialTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>`<section id="material-section-${i}" class="material-section"><h2>${esc(s.title)}</h2>${s.html||''}${s.text?`<p style="white-space:pre-line">${esc(s.text)}</p>`:''}${s.code?`<pre><code>${esc(s.code)}</code></pre>`:''}${s.items?`<ul>${s.items.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:''}</section>`).join('')}<section class="material-section"><h2>출처와 관련 자료</h2><p class="library-notice">원본: ${esc(r.source_name)}</p>${r.notice?`<p class="library-notice">덧붙임<br>${esc(r.notice)}</p>`:''}<div class="material-links">${sourceLink(r)}</div></section><section class="related"><h3>관련 학습 기록</h3><div class="related-list">${(r.related_ids||[]).map(id=>window.TIL_INDEX.records.find(x=>x.id===id)).filter(Boolean).slice(0,6).map(x=>`<a class="related-button" href="#record=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div></section>`;
+      $('#libraryPage').innerHTML=`<button type="button" class="related-button" data-library-back>← 자료 목록으로</button><header><div class="record-meta">${esc(classification(r))}</div><h1 id="materialTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>`<section id="material-section-${i}" class="material-section"><h2>${esc(s.title)}</h2>${s.html||''}${s.text?`<p style="white-space:pre-line">${esc(s.text)}</p>`:''}${s.code?`<pre><code>${esc(s.code)}</code></pre>`:''}${s.items?`<ul>${s.items.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:''}</section>`).join('')}${referenceGroups(r)}<section class="related"><h3>관련 학습 기록</h3><div class="related-list">${(r.related_ids||[]).map(id=>window.TIL_INDEX.records.find(x=>x.id===id)).filter(Boolean).slice(0,6).map(x=>`<a class="related-button" href="#record=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div></section>`;
       $('#materialSections').innerHTML=r.sections.map((s,i)=>`<button type="button" class="project" data-material-section="material-section-${i}">${esc(s.title)}</button>`).join('');
       window.TIL_SITE?.articleReady(); window.scrollTo({top:0});$('#materialTitle').setAttribute('tabindex','-1');$('#materialTitle').focus();
+      const destination=requestedSection; requestedSection=null;
+      if(destination?.id===id) queueMicrotask(()=>{const section=document.getElementById('material-section-'+destination.index);if(section){section.setAttribute('tabindex','-1');section.scrollIntoView();section.focus({preventScroll:true});}});
     } catch(error) {
       if(stamp!==token||!active())return;
       $('#libraryPage').innerHTML=`<p>${esc(error.message)}</p><button type="button" class="related-button" data-material="${esc(id)}">다시 열기</button><button type="button" class="related-button" data-library-back>목록으로</button>`;
@@ -105,6 +140,6 @@
     if(item)choose(item.dataset.material);
     if(section)document.getElementById(section.dataset.materialSection)?.scrollIntoView({behavior:'smooth'});
   });
-  $('#libraryPage').addEventListener('click',e=>{const b=e.target.closest('[data-material]');if(b)choose(b.dataset.material);if(e.target.closest('[data-library-back]'))location.hash='library';});
+  $('#libraryPage').addEventListener('click',e=>{const b=e.target.closest('[data-material]');if(b){requestedSection=b.dataset.openSection!==undefined?{id:b.dataset.material,index:Number(b.dataset.openSection)}:null;choose(b.dataset.material);}if(e.target.closest('[data-library-back]'))location.hash='library';});
   window.addEventListener('hashchange',route);route();
 })();

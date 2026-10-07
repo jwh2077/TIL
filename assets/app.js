@@ -95,8 +95,20 @@
     }).join('');
     return items ? `<section class="section"><h3>작업 화면</h3><div class="til-gallery">${items}</div></section>` : '';
   }
-  function link(label, url) {
-    try { const u = new URL(url); return ['https:', 'http:'].includes(u.protocol) ? `<a class="source" href="${esc(u.href)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>` : ''; } catch { return ''; }
+  function referenceLinks(sources) {
+    const groups = { internal: [], external: [] }, seen = new Set();
+    for (const ref of sources) {
+      if (!ref.url) continue;
+      const target = window.TIL_LINKS.resolve(ref.url);
+      if (!target || seen.has(target.href)) continue;
+      seen.add(target.href);
+      const label = esc(ref.label || ref.title || '참고 기록');
+      groups[target.internal ? 'internal' : 'external'].push(target.internal
+        ? `<a class="related-button" href="${esc(target.href)}">${label}</a>`
+        : `<a class="source" href="${esc(target.href)}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`);
+    }
+    return (groups.internal.length ? `<section class="related"><h3>관련 문서</h3><div class="related-list">${groups.internal.join('')}</div></section>` : '')
+      + (groups.external.length ? `<section class="related"><h3>외부 링크와 출처</h3><div class="related-list">${groups.external.join('')}</div></section>` : '');
   }
   const button = (r, label) => r ? `<button class="related-button" type="button" data-record-id="${esc(r.id)}">${esc(label || r.title)}</button>` : '';
   function navigate(id) {
@@ -132,18 +144,18 @@
       if (!r) throw new Error('기록을 찾을 수 없습니다.');
       if (token !== request || page.hidden) return;
       let sequence = visible(); if (!sequence.some(x => x.id === id)) sequence = records;
+      sequence = sequence.filter(x => x.date).sort((a,b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
       const at = sequence.findIndex(x => x.id === id);
+      const adjacent = (record, direction, label) => record ? `<button type="button" class="related-button record-${direction}" data-record-id="${esc(record.id)}"><span>${label}</span><strong>${esc(record.title)}</strong><small>${esc(record.date_label || record.date)}</small></button>` : '';
+      const previous = at > 0 ? sequence[at-1] : null;
+      const next = at >= 0 ? sequence[at+1] : null;
+      const navigation = previous || next ? `<nav class="record-navigation" aria-label="앞뒤 기록">${adjacent(previous, 'previous', '← 이전 기록')}${adjacent(next, 'next', '다음 기록 →')}</nav>` : '';
       const related = records.filter(x => x.id !== id && x.primary_topic === meta.primary_topic)
         .sort((a,b) => Math.abs(Date.parse(a.date) - Date.parse(meta.date)) - Math.abs(Date.parse(b.date) - Date.parse(meta.date))).slice(0,3);
       const sources = [{label: 'Velog 원문', url: r.velog}, {label: '프로젝트 저장소', url: r.repository}, ...(r.references || [])];
-      const seenSources = new Set();
-      const sourceLinks = sources.filter(x => {
-        if (!x.url || seenSources.has(x.url)) return false;
-        seenSources.add(x.url);
-        return true;
-      }).map(x => link(x.label || x.title || '참고 기록', x.url)).join('');
+      const sourceLinks = referenceLinks(sources);
       const hasNotes = (r.questions || []).length || (r.mistakes_or_difficulties || []).length;
-      $('#detailContent').innerHTML = `<div class="detail-top"><div><div class="record-meta">${esc(meta.date_label)} · ${esc(name(meta.primary_topic))}</div><h2 id="detailTitle" class="detail-title">${esc(r.title)}</h2></div></div><p class="detail-label">${esc(r.project || '개인 공부')}</p>${noteBody(r)}${gallery(r.images)}${hasNotes ? `<details class="extra"><summary>막힌 부분과 남은 질문</summary><div class="extra-body">${list('궁금했던 것', r.questions)}${list('남은 부분', r.mistakes_or_difficulties)}</div></details>` : ''}${r.notice ? `<p class="article-notice">덧붙임<br>${esc(r.notice)}</p>` : ''}${sourceLinks ? `<section class="note-sources" aria-label="원본과 참고 링크">${sourceLinks}</section>` : ''}<section class="related"><h3>앞뒤 기록</h3><div class="related-list">${button(sequence[at-1], '← 이전 기록')}${button(sequence[at+1], '다음 기록 →')}</div></section><section class="related"><h3>비슷한 내용</h3><div class="related-list">${related.map(x => button(x)).join('')}</div></section>`;
+      $('#detailContent').innerHTML = `<div class="detail-top"><div><div class="record-meta">${esc(meta.date_label)} · ${esc(name(meta.primary_topic))}</div><h2 id="detailTitle" class="detail-title">${esc(r.title)}</h2></div></div><p class="detail-label">${esc(r.project || '개인 공부')}</p>${noteBody(r)}${gallery(r.images)}${hasNotes ? `<details class="extra"><summary>막힌 부분과 남은 질문</summary><div class="extra-body">${list('궁금했던 것', r.questions)}${list('남은 부분', r.mistakes_or_difficulties)}</div></details>` : ''}${r.notice ? `<p class="article-notice">덧붙임<br>${esc(r.notice)}</p>` : ''}${sourceLinks}<section class="related"><h3>비슷한 내용</h3><div class="related-list">${related.map(x => button(x)).join('')}</div></section>${navigation}`;
       buildSections(); window.TIL_SITE?.articleReady(); window.scrollTo({ top: 0 }); $('#detailTitle').setAttribute('tabindex', '-1'); $('#detailTitle').focus();
     } catch (error) {
       if (token !== request || page.hidden) return;
