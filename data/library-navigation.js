@@ -135,7 +135,9 @@ window.TIL_LIBRARY_NAVIGATION = [
             "연결을 관리하는 구조",
             "unreal-network-testing",
             "연결 구조 — NetDriver와 NetConnection"
-          ]
+          ],
+          ["전용 서버와 두 클라이언트", "unreal-network-testing", "전용 서버와 두 클라이언트 — 각자 월드를 가진다"],
+          ["Owner에서 연결 찾기", "unreal-network-testing", "GetNetConnection() — Owner에서 연결까지"]
         ]
       },
       {
