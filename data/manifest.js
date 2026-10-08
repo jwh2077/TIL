@@ -1171,6 +1171,44 @@ window.TIL_INDEX = {
       "activity": "personal",
       "file": "data/2026/10/2026-10-06.js",
       "month": "2026-10"
+    },
+    {
+      "file": "data/2026/10/2026-10-07.js",
+      "month": "2026-10",
+      "id": "20261007-chatx",
+      "date": "2026-10-07",
+      "date_end": null,
+      "date_label": "2026-10-07",
+      "title": "ChatX · Owner를 따라 플레이어 연결 찾기",
+      "summary": "NetDriver의 연결 구조를 다시 보고, 무기에서 Pawn과 PlayerController를 거쳐 연결을 찾는 코드를 따라갔다.",
+      "project": "ChatX",
+      "primary_topic": "unreal",
+      "activity": "personal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "NetConnection",
+        "Ownership"
+      ]
+    },
+    {
+      "file": "data/2026/10/2026-10-08.js",
+      "month": "2026-10",
+      "id": "20261008-chatx",
+      "date": "2026-10-08",
+      "date_end": null,
+      "date_label": "2026-10-08",
+      "title": "ChatX · NetMode에서 NetRole로 이어 보기",
+      "summary": "월드를 구분하는 NetMode와 액터의 역할을 나타내는 NetRole을 이어서 봤다. LocalRole과 RemoteRole, 두 Proxy의 차이는 아직 헷갈렸다.",
+      "project": "ChatX",
+      "primary_topic": "unreal",
+      "activity": "personal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "NetRole",
+        "NetMode"
+      ]
     }
   ]
 };

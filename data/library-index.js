@@ -1035,7 +1035,8 @@ window.TIL_LIBRARY_INDEX = [
     "source_name": "10-6.txt / 스크린샷 2026-10-06 153305.png / 10.07.txt",
     "source_url": "",
     "related_ids": [
-      "20261006-chatx"
+      "20261006-chatx",
+      "20261007-chatx"
     ],
     "references": [
       {
@@ -1079,7 +1080,31 @@ window.TIL_LIBRARY_INDEX = [
     "outline": [
       {
         "title": "전용 서버와 두 클라이언트 — 각자 월드를 가진다",
-        "text": "전용 서버와 두 클라이언트 — 각자 월드를 가진다 전용 서버는 로컬 플레이어 없이 게임 상태와 판정을 담당한다. 플레이어 A와 B는 각각 클라이언트로 접속한다. 같은 PC에서 PIE로 실행해도 서버 월드와 각 클라이언트 월드는 구분된다. 전용 서버 클라이언트 A 클라이언트 B 규칙·판정·상태 관리 A의 입력·화면·UI B의 입력·화면·UI A와 B의 PlayerController A의 PlayerController B의 PlayerController A와 B의 Pawn 필요한 A·B Pawn의 복제본 필요한 A·B Pawn의 복제본 클라이언트 A ←→ 전용 서버 ←→ 클라이언트 B 입력·화면 판정·상태 입력·화면 A가 요청 → 서버가 검사하고 상태 변경 → 필요한 A·B에 전달 → 각 화면에서 표시 클라이언트끼리 같은 객체를 공유하는 구조가 아니다. 서버가 화면을 보내는 대신 상태를 전달하고, 각 클라이언트가 자기 객체로 화면을 만든다. 복제 설정과 관련성에 따라 받는 객체·값은 달라진다."
+        "text": "전용 서버와 두 클라이언트 — 각자 월드를 가진다 전용 서버는 게임의 판정과 상태를 관리하고, 플레이어 A와 B는 각각 클라이언트로 접속한다. 서버와 클라이언트는 서로 다른 월드와 객체를 가진다. 같은 PC에서 PIE로 테스트할 때도 이 구분은 유지된다. 전용 서버: 규칙·판정·상태 ├─ 연결 A ↔ 클라이언트 A: A의 입력·화면 └─ 연결 B ↔ 클라이언트 B: B의 입력·화면 다른 플레이어가 보이는 이유 A의 화면에 B가 보인다고 해서 B의 객체를 함께 사용하는 것은 아니다. 서버가 필요한 상태를 보내면 A의 월드에 있는 B의 복제본이 그 상태를 반영한다. 서버가 완성된 화면을 보내는 방식도 아니다."
+      },
+      {
+        "title": "서버와 각 클라이언트에 있는 객체",
+        "text": "서버와 각 클라이언트에 있는 객체 A와 B가 전용 서버에 접속한 경우 다. 아래 세 영역은 서로 다른 월드를 나타낸다. 여기서 “가지고 있다”는 것은 객체가 그 월드에 존재한다는 뜻이며, Actor의 Owner 관계와는 구분한다. 전용 서버 Actor GameMode PlayerController A · B Pawn A · B 맵의 배경 Actor ABP · UI A·B 캐릭터의 ABP 로컬 플레이어의 UI 없음 클라이언트 A Actor PlayerController A Pawn A · B의 복제본 맵의 배경 Actor ABP · UI A·B 캐릭터의 ABP A의 로컬 UI GameMode · PlayerController B 없음 클라이언트 B Actor PlayerController B Pawn A · B의 복제본 맵의 배경 Actor ABP · UI A·B 캐릭터의 ABP B의 로컬 UI GameMode · PlayerController A 없음 A와 B의 Pawn이 서로 보이도록 복제된 예시다. 실제 Actor 전달 범위는 복제 설정과 관련성에 따라 달라진다. 배경은 각 월드에서 맵을 로드해 존재할 수 있으며, 모두 서버에서 복제되는 것은 아니다. ABP는 서버와 클라이언트 양쪽에 존재하고, UI는 각 로컬 화면에 둔다. ABP와 UI 자체를 Actor로 분류한 것은 아니다. ABP가 존재하는 위치와 ABP 자체가 네트워크 복제되는지는 별개의 문제다."
+      },
+      {
+        "title": "연결 구조 — NetDriver와 NetConnection",
+        "text": "연결 구조 — NetDriver와 NetConnection NetDriver는 연결들을 관리하고, NetConnection은 통신 상대와의 연결을 나타낸다. 서버는 여러 클라이언트 연결을 관리하지만, 각 클라이언트는 서버 연결을 가진다. 전용 서버의 NetDriver ├─ ClientConnections: A와의 연결 │ ↕ │ A의 NetDriver.ServerConnection └─ ClientConnections: B와의 연결 ↕ B의 NetDriver.ServerConnection A에서 B로 게임 상태를 전달할 때는 서버를 거친다. 위의 A·B 표시는 상대를 구분한 것으로, 배열의 고정 인덱스나 플레이어 번호를 뜻하지 않는다. // UNetDriver의 연결 멤버 — 수업 메모 발췌 // 클라이언트에서 서버로 향하는 연결 TObjectPtr<UNetConnection> ServerConnection; // 서버에서 접속한 클라이언트들을 관리하는 배열 TArray<TObjectPtr<UNetConnection>> ClientConnections; 드라이버를 PC 한 대당 하나라고 세기보다는 월드와 드라이버의 용도를 구분한다. 서버의 Listen 경로와 클라이언트의 접속 경로도 같지 않다."
+      },
+      {
+        "title": "멤버가 있어도 연결은 없을 수 있다",
+        "text": "멤버가 있어도 연결은 없을 수 있다 ServerConnection 멤버가 선언되어 있다는 것과 실제 연결 객체를 가리킨다는 것은 다르다. ServerConnection == nullptr : 포인터에 연결 객체가 없다. 서버 쪽에서도 이 값은 nullptr이다. ClientConnections 가 빈 배열: 배열은 있지만 담긴 클라이언트 연결이 없다. “연결이 있다”는 말은 멤버 이름이 존재한다는 뜻이 아니라, 그 안에 실제 연결이 잡혀 있다는 뜻으로 읽어야 한다."
+      },
+      {
+        "title": "Ownership — has-a·Attach·Authority와 구분",
+        "text": "Ownership — has-a·Attach·Authority와 구분 Owner는 이 Actor의 소유자로 지정한 Actor다. 그 관계를 따라 플레이어의 PlayerController에 도달하면 해당 플레이어의 Owning Connection을 찾을 수 있다. 무기를 Pawn의 소유로 지정하는 예 // 관계 설명용 예시: 서버에서 소유 관계 설정 Weapon->SetOwner(Pawn); 무기 Actor → Owner인 Pawn → Pawn을 조종하는 PlayerController → 해당 플레이어의 NetConnection 이 예시는 프로젝트에 적용을 마쳤다는 뜻이 아니다. Owner를 지정한 뒤 연결을 찾는 코드 흐름은 다음 항목에서 이어진다. 무기를 가지고 있는 것과 Owner 지정은 다르다 캐릭터가 무기 포인터를 멤버로 보관하는 것은 has-a 관계로 볼 수 있다. 하지만 포인터에 넣는 것만으로 Unreal의 Owner가 자동 설정되지는 않는다. 무기를 손에 Attach 하는 것도 공간적으로 붙이는 작업이므로 별도다. Ownership과 Authority도 다르다. 어떤 클라이언트의 소유인지 정하는 것과 Actor 상태를 결정할 권한은 구분한다. Owner를 지정했다고 서버의 판정 권한이 클라이언트로 넘어가지는 않는다."
+      },
+      {
+        "title": "GetNetConnection() — Owner에서 연결까지",
+        "text": "GetNetConnection() — Owner에서 연결까지 아래는 10월 7일 메모에 남긴 엔진 코드의 핵심 흐름이다. 사용 중인 엔진 버전에 따라 구현은 다를 수 있다. 1. 일반 Actor는 Owner에게 연결을 묻는다 UNetConnection* AActor::GetNetConnection() const { return Owner ? Owner->GetNetConnection() : nullptr; } 2. Pawn은 Controller를 먼저 확인한다 UNetConnection* APawn::GetNetConnection() const { if (Controller) { return Controller->GetNetConnection(); } return Super::GetNetConnection(); } 3. PlayerController에서 연결을 얻는다 UNetConnection* APlayerController::GetNetConnection() const { return (Player != nullptr) ? NetConnection : nullptr; } 이 코드는 연결을 찾는 과정이다. Owner가 없다고 모든 복제·통신이 금지되는 것은 아니다. Owning Connection은 소유자 기준 복제 조건과 RPC 대상 등을 정할 때 사용한다. GetNetConnection()이 임의의 하위 Actor를 찾아 내려가는 함수도 아니다."
+      },
+      {
+        "title": "서버인지 클라이언트인지 구분 — GetNetMode()",
+        "text": "서버인지 클라이언트인지 구분 — GetNetMode() GetNetMode() 는 현재 월드의 실행 모드를 ENetMode 값으로 반환한다. 값 실행 형태 NM_Standalone 원격 연결 없이 서버·로컬 플레이 로직을 실행. 싱글·로컬 멀티플레이 NM_DedicatedServer 로컬 플레이어 없는 전용 서버 NM_ListenServer 서버 역할과 로컬 플레이를 함께 수행 NM_Client 서버에 접속해 입력·로컬 표현 등을 실행. 서버 전용 판정과 구분 NM_MAX 는 실행 모드로 사용하는 값이 아니다. 구분할 대상 사용하는 함수 월드가 서버인지 클라이언트인지 GetNetMode() 이 컨트롤러가 로컬 플레이어의 것인지 IsLocalController() 해당 Actor에 권한이 있는지 HasAuthority() 나와 다른 사람의 클라이언트는 모두 NM_Client 일 수 있다. NetMode만으로 누구의 UI인지 구분할 수는 없다."
       },
       {
         "title": "전용 서버 테스트 — PIE 설정",
@@ -1090,32 +1115,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "내 화면에만 UI 표시 — IsLocalController() PlayerController에서 로컬 플레이어의 컨트롤러인지 검사한다. 로컬이 아니면 반환하고, 로컬일 때만 UI 처리를 이어간다. // PlayerController 멤버 함수 안에서 if (!IsLocalController()) { return; } // 이 로컬 플레이어의 UI 처리 !IsLocalController() 와 IsLocalController() == false 는 같은 조건이다. 리슨 서버의 방장도 로컬 플레이어다. 로컬 = 서버가 아님 으로 구분하면 안 된다. 두 화면에 같은 출력이 보일 때 PrintString의 디버그 출력인지, UI 위젯이 양쪽에 생성된 것인지 먼저 구분한다. 위젯이라면 생성 위치·소유 대상·중복 호출을 살펴본다. 프로세스를 나누는 설정만으로 UI 코드가 고쳐지지는 않는다."
       },
       {
-        "title": "서버인지 클라이언트인지 구분 — GetNetMode()",
-        "text": "서버인지 클라이언트인지 구분 — GetNetMode() GetNetMode() 는 현재 월드의 실행 모드를 ENetMode 값으로 반환한다. 값 실행 형태 NM_Standalone 원격 연결 없이 서버·로컬 플레이 로직을 실행. 싱글·로컬 멀티플레이 NM_DedicatedServer 로컬 플레이어 없는 전용 서버 NM_ListenServer 서버 역할과 로컬 플레이를 함께 수행 NM_Client 서버에 접속해 입력·로컬 표현 등을 실행. 서버 전용 판정과 구분 NM_MAX 는 실행 모드로 사용하는 값이 아니다. 구분할 대상 사용하는 함수 월드가 서버인지 클라이언트인지 GetNetMode() 이 컨트롤러가 로컬 플레이어의 것인지 IsLocalController() 해당 Actor에 권한이 있는지 HasAuthority() 나와 다른 사람의 클라이언트는 모두 NM_Client 일 수 있다. NetMode만으로 누구의 UI인지 구분할 수는 없다."
-      },
-      {
-        "title": "연결 구조 — NetDriver와 NetConnection",
-        "text": "연결 구조 — NetDriver와 NetConnection UNetConnection 은 통신 상대와의 연결 객체이고, UNetDriver 는 그 연결들을 소유하고 관리한다. NetDriver가 있는 쪽 관리하는 연결 서버 ClientConnections — 접속한 클라이언트들의 연결 배열 클라이언트 ServerConnection — 서버로 연결되는 포인터 서버의 NetDriver ClientConnections → 클라이언트 A 연결 → 클라이언트 B 연결 클라이언트 A의 NetDriver ServerConnection → 서버 연결 기본 게임 통신 구조에서 클라이언트끼리 상태를 전달할 때는 서버를 거친다. // UNetDriver의 연결 멤버 — 수업 메모 발췌 TObjectPtr<UNetConnection> ServerConnection; TArray<TObjectPtr<UNetConnection>> ClientConnections; 서버 NetDriver ClientConnections[연결 A] ←→ A의 ServerConnection ClientConnections[연결 B] ←→ B의 ServerConnection A·B의 클라이언트 NetDriver는 각각 서버 연결을 관리한다. NetDriver는 연결과 네트워크 송수신을 관리한다. 위 배열 표시는 연결을 구별하기 위한 예시이며, 고정 플레이어 번호나 배열 순서를 뜻하지 않는다. PC 한 대당 반드시 하나라고 세지 않고 월드와 드라이버의 용도를 구분한다. 서버의 Listen 경로와 클라이언트의 접속 경로도 같지 않다."
-      },
-      {
-        "title": "멤버가 있어도 연결은 없을 수 있다",
-        "text": "멤버가 있어도 연결은 없을 수 있다 멤버 연결이 없는 상태 ServerConnection 멤버는 선언돼 있지만 값은 nullptr. 서버 측에서도 nullptr이다. ClientConnections 배열은 존재하지만 접속자가 없으면 비어 있다. 멤버의 선언과 실제 값은 다르다. ServerConnection이라는 멤버가 있다고 해서 연결 객체까지 생성돼 있다는 뜻은 아니다."
-      },
-      {
         "title": "HP 판정은 서버, 화면 표시는 클라이언트",
         "text": "HP 판정은 서버, 화면 표시는 클라이언트 피해량이나 HP는 클라이언트가 보낸 값만으로 확정하지 않고, 서버에서 규칙과 요청 조건을 검사한다. 클라이언트는 전달받은 결과를 화면에 표시한다. 클라이언트: 입력·요청 서버: 요청 조건 확인과 게임 상태 결정 클라이언트: 전달받은 결과를 UI·효과·소리로 표시"
-      },
-      {
-        "title": "Ownership — has-a·Attach·Authority와 구분",
-        "text": "Ownership — has-a·Attach·Authority와 구분 관계 뜻 Owner / Ownership 이 Actor가 어떤 Actor를 소유자로 가리키는지. 플레이어의 연결을 찾는 데 사용 Owning Connection 소유 관계를 따라 도달한 PlayerController에 해당하는 네트워크 연결 has-a 객체가 다른 객체를 멤버·구성 요소로 가지는 설계 관계. Owner 자동 지정과 다름 Attach 공간적으로 부모에 붙이는 관계. SetOwner와 다른 작업 Authority Actor 상태를 결정할 권한. 클라이언트가 소유한다고 서버 권한이 넘어가는 것은 아님 무기 Actor Owner → Pawn Controller → PlayerController NetConnection → 해당 플레이어 연결 서버에서 플레이어의 Pawn을 무기의 Owner로 지정하는 예가 Weapon->SetOwner(Pawn); 이다. 실제 프로젝트 적용 코드가 아닌 관계 설명용 예시다. 붙이기만 하거나 포인터에 보관하기만 해서는 이 관계를 대신하지 않는다."
-      },
-      {
-        "title": "GetNetConnection() — Owner에서 연결까지",
-        "text": "GetNetConnection() — Owner에서 연결까지 아래는 10월 7일 메모에 남긴 엔진 코드의 핵심 흐름이다. 사용 중인 엔진 버전에 따라 구현은 다를 수 있다. UNetConnection* AActor::GetNetConnection() const { return Owner ? Owner->GetNetConnection() : nullptr; } UNetConnection* APawn::GetNetConnection() const { if (Controller) { return Controller->GetNetConnection(); } return Super::GetNetConnection(); } UNetConnection* APlayerController::GetNetConnection() const { return (Player != nullptr) ? NetConnection : nullptr; } 일반 Actor는 Owner의 GetNetConnection()을 호출한다. Pawn은 Controller가 있으면 그쪽 연결을 찾고, 없으면 부모 구현으로 넘어간다. PlayerController까지 도달하면 플레이어의 연결을 얻는다. 이 코드는 연결을 찾는 과정이다. Owner가 없다고 모든 복제·통신이 금지되는 것은 아니다. Owning Connection은 소유자 기준 복제 조건과 RPC 대상 등을 정할 때 사용한다. GetNetConnection()이 임의의 하위 Actor를 찾아 내려가는 함수도 아니다."
-      },
-      {
-        "title": "실행 위치에서 헷갈리기 쉬운 점",
-        "text": "실행 위치에서 헷갈리기 쉬운 점 메모에서 구분할 부분 정리 GameMode 서버에만 존재한다. 클라이언트의 GetGameMode()는 nullptr이므로 반환값을 검사한다. HasAuthority() Actor 기준 검사다. 월드의 실행 모드가 필요하면 GetNetMode()를 쓴다. 배경·Pawn 모든 객체가 모든 클라이언트에 자동 복제되는 것은 아니다. 맵 로드와 Actor 복제를 구분한다. UI·애니메이션 UI는 로컬 표시 중심. 애니메이션이 복제되지 않는다는 말과 서버에서 애니메이션을 절대 실행하지 않는다는 말은 다르다. 전용 서버 렌더링·로컬 입력이 없어도 판정에 필요한 게임 객체와 처리는 존재한다."
       }
     ]
   }

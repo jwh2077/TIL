@@ -4,10 +4,10 @@
   const $ = selector => document.querySelector(selector);
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const groups = {array:'배열 · 좌표 변환',tree:'트리 · 경로 탐색',queue:'큐 · 우선순위',string:'문자열 · 빈도',simulation:'상태 · 시뮬레이션',math:'수학 · 완전 탐색',greedy:'가격 · 역방향 탐색',dp:'동적 계획법',bruteforce:'완전 탐색',implementation:'구현'};
-  const state = {group:'all', status:'all', query:'',tags:[],from:'',to:'',sort:'desc'};
+  const state = {group:'all', status:'all', reviewOnly:false, query:'',tags:[],from:'',to:'',sort:'desc'};
   const dateLabel = r => r.date ? `풀이 기록: ${r.date}` : '풀이 날짜 미확인';
   const style = document.createElement('style');
-  style.textContent = '#algorithmCards .record{overflow:hidden;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease} #algorithmCards .record-button{border-radius:0}';
+  style.textContent = '#algorithmCards .record{overflow:hidden;transition:border-color .15s ease,background .15s ease,box-shadow .15s ease} #algorithmCards .record-button{border-radius:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start}';
   document.head.append(style);
   $('#archiveModes').insertAdjacentHTML('beforeend','<a class="project" href="#algorithms">알고리즘 · 코드카타</a>');
   $('#sidebarFilters').insertAdjacentHTML('beforeend','<div id="algorithmNav" hidden><div class="side-title">문제 유형</div><div id="algorithmGroups" class="project-list"></div><div class="side-title">풀이 상태</div><div id="algorithmStatuses" class="project-list"></div><div id="algorithmOutline" hidden><div class="side-title">이 글의 목차</div><div id="algorithmSections" class="project-list"></div></div></div>');
@@ -20,15 +20,17 @@
   }
   function results() {
     const q=state.query.trim().toLocaleLowerCase();
-    return records.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'algorithm'))&&(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.date,r.title,r.summary,r.problem,r.search_text,groups[r.group]].join(' ').toLocaleLowerCase().includes(q)).sort((a,b)=>window.TIL_FILTERS?window.TIL_FILTERS.compare(a,b,state.sort):0);
+    return records.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'algorithm'))&&(!state.reviewOnly||r.status!=='통과 확인')&&(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.date,r.title,r.summary,r.problem,r.search_text,groups[r.group]].join(' ').toLocaleLowerCase().includes(q)).sort((a,b)=>window.TIL_FILTERS?window.TIL_FILTERS.compare(a,b,state.sort):0);
   }
   function cards() {
+    const pending=records.filter(r=>r.status!=='통과 확인').length;
+    $('#algorithmReview').innerHTML=`<button type="button" data-review="all" aria-pressed="${!state.reviewOnly}">전체 ${records.length}</button><button type="button" data-review="pending" aria-pressed="${state.reviewOnly}">다시 풀 문제 ${pending}</button><span class="caption">오답·미완성 등 아직 통과하지 못한 문제</span>`;
     const shown=results();$('#algorithmCount').textContent=`${shown.length}개 문제`;
     $('#algorithmCards').innerHTML=shown.map(r=>`<article class="record"><button type="button" class="record-button" data-algorithm="${esc(r.id)}"><div class="record-meta"><span>${esc(dateLabel(r))}</span><span class="topic-badge">${esc(groups[r.group])}</span><span>${esc(r.status)}</span></div><h3>${esc(r.title)}</h3><p class="summary">${esc(r.summary)}</p><span class="more">풀이 보기 →</span></button><div class="material-links" style="margin:0;padding:0 23px 20px">${link(r)}</div></article>`).join('')||'<p class="empty">조건에 맞는 문제가 없습니다.</p>';
   }
   function list() {
     $('#algorithmOutline').hidden=true;
-    $('#algorithmPage').innerHTML=`<header><div class="eyebrow">CODE KATA</div><h1>알고리즘</h1><p class="intro">제출한 코드와 막혔던 부분을 적었습니다. 못 끝낸 문제도 함께 남겨뒀습니다.</p><div class="stats"><span class="stat">풀이 <strong>${records.length}</strong>개</span></div><label for="algorithmSearch" class="side-title" style="display:block;margin-left:0">문제 검색</label><input id="algorithmSearch" class="library-search" type="search" placeholder="예: 행렬, 재귀, 소수" value="${esc(state.query)}"></header><p id="algorithmCount" class="count"></p><div id="algorithmCards" class="library-grid"></div>`;
+    $('#algorithmPage').innerHTML=`<header><div class="eyebrow">CODE KATA</div><h1>알고리즘</h1><p class="intro">제출한 코드와 막혔던 부분을 적었습니다. 못 끝낸 문제도 함께 남겨뒀습니다.</p><div class="stats"><span class="stat">풀이 <strong>${records.length}</strong>개</span></div><label for="algorithmSearch" class="side-title" style="display:block;margin-left:0">문제 검색</label><input id="algorithmSearch" class="library-search" type="search" placeholder="예: 행렬, 재귀, 소수" value="${esc(state.query)}"></header><div id="algorithmReview" class="algorithm-review" role="group" aria-label="다시 풀 문제 모아보기"></div><p id="algorithmCount" class="count"></p><div id="algorithmCards" class="library-grid"></div>`;
     cards();$('#algorithmSearch').addEventListener('input',e=>{state.query=e.target.value;cards();});
   }
   window.TIL_ALGORITHM_VIEW={state,records,results,update(patch){Object.assign(state,patch);controls();cards();}};
@@ -86,6 +88,6 @@
     if(group||status){if(group)state.group=group.dataset.algorithmGroup;if(status)state.status=status.dataset.algorithmStatus;if(location.hash==='#algorithms'){controls();list();}else location.hash='algorithms';}
     if(section)document.getElementById(section.dataset.algorithmSection)?.scrollIntoView({behavior:'smooth'});
   });
-  $('#algorithmPage').addEventListener('click',e=>{const item=e.target.closest('[data-algorithm]');if(item){const hash='#algorithm='+encodeURIComponent(item.dataset.algorithm);if(location.hash===hash)open(item.dataset.algorithm);else location.hash=hash;}});
+  $('#algorithmPage').addEventListener('click',e=>{const scope=e.target.closest('[data-review]');if(scope?.dataset.review){state.reviewOnly=scope.dataset.review==='pending';state.status='all';controls();cards();return;}const item=e.target.closest('[data-algorithm]');if(item){const hash='#algorithm='+encodeURIComponent(item.dataset.algorithm);if(location.hash===hash)open(item.dataset.algorithm);else location.hash=hash;}});
   window.addEventListener('hashchange',route);route();
 })();

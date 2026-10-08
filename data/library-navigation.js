@@ -1,4 +1,4 @@
-// 자료실 색인: 문서 ID와 기존 소제목으로 연결합니다. 본문을 복사하지 않습니다.
+// 자료실 색인: 주제별로 기존 문서에 연결합니다.
 window.TIL_LIBRARY_NAVIGATION = [
   {
     "id": "cpp",
@@ -104,40 +104,6 @@ window.TIL_LIBRARY_NAVIGATION = [
         "documents": [
           "unreal-multiplayer-basics",
           "unreal-network-testing"
-        ],
-        "shortcuts": [
-          [
-            "서버 종류와 접속 과정",
-            "unreal-multiplayer-basics",
-            "P2P·Listen Server·Dedicated Server"
-          ],
-          [
-            "GameMode·PlayerState 역할",
-            "unreal-multiplayer-basics",
-            "클래스별 역할"
-          ],
-          [
-            "전용 서버 테스트 설정",
-            "unreal-network-testing",
-            "전용 서버 테스트 — PIE 설정"
-          ],
-          [
-            "내 화면에만 UI 띄우기",
-            "unreal-network-testing",
-            "내 화면에만 UI 표시 — IsLocalController()"
-          ],
-          [
-            "서버·클라이언트 실행 구분",
-            "unreal-network-testing",
-            "서버인지 클라이언트인지 구분 — GetNetMode()"
-          ],
-          [
-            "연결을 관리하는 구조",
-            "unreal-network-testing",
-            "연결 구조 — NetDriver와 NetConnection"
-          ],
-          ["전용 서버와 두 클라이언트", "unreal-network-testing", "전용 서버와 두 클라이언트 — 각자 월드를 가진다"],
-          ["Owner에서 연결 찾기", "unreal-network-testing", "GetNetConnection() — Owner에서 연결까지"]
         ]
       },
       {
