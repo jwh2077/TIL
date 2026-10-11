@@ -96,6 +96,14 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
       {
         "label": "Epic · SetOwner",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Actor/SetOwner"
+      },
+      {
+        "label": "LocalRole·RemoteRole과 로컬 제어",
+        "url": "#material=unreal-network-roles"
+      },
+      {
+        "label": "RPC 호출 조건",
+        "url": "#material=unreal-rpc"
       }
     ]
   }

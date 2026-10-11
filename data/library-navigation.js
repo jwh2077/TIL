@@ -103,7 +103,9 @@ window.TIL_LIBRARY_NAVIGATION = [
         "title": "멀티플레이",
         "documents": [
           "unreal-multiplayer-basics",
-          "unreal-network-testing"
+          "unreal-network-testing",
+          "unreal-network-roles",
+          "unreal-rpc"
         ]
       },
       {

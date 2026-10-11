@@ -22,17 +22,22 @@ window.TIL_FILES["data/2026/10/2026-10-08.js"] = [
     "questions": [
       "LocalRole과 RemoteRole은 같은 액터를 어느 쪽에서 볼 때의 역할인가?",
       "Autonomous Proxy와 Simulated Proxy를 송신·수신 가능 여부만으로 나눠도 되는가?",
-      "Authority와 Proxy를 진짜·가짜나 약한 복사처럼 생각해도 되는가?"
+      "Authority와 Proxy를 진짜·가짜나 약한 복사처럼 생각해도 되는가?",
+      "클라이언트에서 RemoteRole이 None인 Actor는 어떤 경우일까?"
     ],
     "repository": "https://github.com/jwh2077/ChatX",
     "references": [
       {
         "label": "앞서 정리한 전용 서버의 연결·소유 관계",
         "url": "#material=unreal-network-testing"
+      },
+      {
+        "label": "NetRole 정리",
+        "url": "#material=unreal-network-roles"
       }
     ],
     "source": [
-      "10-8.txt · local/reference/chatx/에 원본 보관, NetRole 자료실 정리는 대기"
+      "10-8.txt / 10-8-추가메모.txt · local/reference/chatx/ 원본 보관"
     ]
   }
 ];

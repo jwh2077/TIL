@@ -1074,6 +1074,14 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "Epic · SetOwner",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/BlueprintAPI/Actor/SetOwner"
+      },
+      {
+        "label": "LocalRole·RemoteRole과 로컬 제어",
+        "url": "#material=unreal-network-roles"
+      },
+      {
+        "label": "RPC 호출 조건",
+        "url": "#material=unreal-rpc"
       }
     ],
     "file": "data/materials/unreal-network-testing.js",
@@ -1117,6 +1125,119 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "HP 판정은 서버, 화면 표시는 클라이언트",
         "text": "HP 판정은 서버, 화면 표시는 클라이언트 피해량이나 HP는 클라이언트가 보낸 값만으로 확정하지 않고, 서버에서 규칙과 요청 조건을 검사한다. 클라이언트는 전달받은 결과를 화면에 표시한다. 클라이언트: 입력·요청 서버: 요청 조건 확인과 게임 상태 결정 클라이언트: 전달받은 결과를 UI·효과·소리로 표시"
+      }
+    ]
+  },
+  {
+    "id": "unreal-network-roles",
+    "title": "Unreal NetRole — LocalRole·RemoteRole과 로컬 제어",
+    "summary": "Pawn의 역할을 서버·소유 클라이언트·다른 클라이언트에서 읽고, Possess 로그와 Authority·Ownership을 구분한다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "멀티플레이",
+    "source_name": "10-8-추가메모.txt / 10-11.txt",
+    "source_url": "",
+    "related_ids": [
+      "20261008-chatx",
+      "20261011-chatx"
+    ],
+    "references": [
+      {
+        "label": "연결과 Owner 관계",
+        "url": "#material=unreal-network-testing"
+      },
+      {
+        "label": "RPC 호출 조건",
+        "url": "#material=unreal-rpc"
+      },
+      {
+        "label": "Epic · Actor Role and Remote Role",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/actor-role-and-remote-role-in-unreal-engine"
+      },
+      {
+        "label": "Epic · Actor Owner and Owning Connection",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/actor-owner-and-owning-connection-in-unreal-engine"
+      }
+    ],
+    "file": "data/materials/unreal-network-roles.js",
+    "outline": [
+      {
+        "title": "LocalRole·RemoteRole — 어느 월드에서 보는가",
+        "text": "LocalRole·RemoteRole — 어느 월드에서 보는가 NetMode 는 월드의 실행 모드, NetRole 은 Actor의 네트워크 역할이다. GetLocalRole() 은 현재 인스턴스의 역할, GetRemoteRole() 은 원격에서의 역할을 읽는다. 컴퓨터 전체에 붙는 역할이 아니다. 아래는 A가 조종하는 복제 Pawn을 세 월드에서 본 일반적인 예다. Proxy는 가짜 화면이 아니라 각 클라이언트 월드에 있는 Actor다. 서버의 Pawn A Local: Authority Remote: AutonomousProxy │ 복제 ├─ 클라이언트 A: 내 Pawn │ Local: AutonomousProxy │ Remote: Authority └─ 클라이언트 B: 다른 사람의 Pawn Local: SimulatedProxy Remote: Authority 서버의 RemoteRole만으로 모든 클라이언트의 역할을 같게 생각하면 안 된다. 같은 Pawn도 소유 클라이언트와 다른 클라이언트에서 역할이 다르다."
+      },
+      {
+        "title": "Possess 전후 — 서버 로그에서 바뀐 값",
+        "text": "Possess 전후 — 서버 로그에서 바뀐 값 10월 11일 Pawn에 남긴 로그다. 원본의 대괄호에 나란히 찍힌 LocalRole / RemoteRole을 줄로 나눴다. CXPawn::BeginPlay() Server Local: ROLE_Authority Remote: ROLE_SimulatedProxy CXPawn::PossessedBy() Server Local: ROLE_Authority Remote: ROLE_AutonomousProxy 빙의 전후에도 서버의 LocalRole은 Authority다. 이 로그에서 달라진 것은 RemoteRole이다. 모든 Pawn이 생성 즉시 AutonomousProxy가 되는 것은 아니다."
+      },
+      {
+        "title": "Authority·Ownership·로컬 제어 구분",
+        "text": "Authority·Ownership·로컬 제어 구분 HasAuthority() : 현재 Actor의 LocalRole이 Authority인지 검사한다. IsLocalController() : 해당 Controller가 로컬 제어인지 검사한다. IsLocallyControlled() : 해당 Pawn을 로컬에서 제어하는지 검사한다. 입력과 내 UI를 구분할 때 AutonomousProxy만 검사하면 리슨 서버의 방장 같은 경우를 놓칠 수 있다. 로컬 제어와 서버 권한은 동시에 성립할 수 있다. 무기 → Pawn → PlayerController로 Owner를 따라 연결을 찾는 것과, 무기 자체의 NetRole은 별개다. 소유 관계에 들어갔다고 무기와 파츠가 모두 AutonomousProxy가 되는 것은 아니다. Server RPC의 호출 조건도 역할 이름 하나가 아니라 소유 연결과 복제 설정을 함께 본다."
+      },
+      {
+        "title": "RemoteRole이 None인 경우",
+        "text": "RemoteRole이 None인 경우 클라이언트에서만 생성한 비복제 Actor는 LocalRole: Authority / RemoteRole: None 일 수 있다. 따라서 HasAuthority가 true라는 이유만으로 서버 월드라고 판단하지 않는다. 반대로 서버가 생성한 Actor라고 RemoteRole이 항상 None인 것도 아니다. 복제하는 AI Pawn처럼 SimulatedProxy로 전달되는 경우가 있다. RemoteRole은 플레이어 접속 여부를 판별하는 값이 아니다."
+      }
+    ]
+  },
+  {
+    "id": "unreal-rpc",
+    "title": "Unreal RPC — Server·Client·NetMulticast 호출 조건",
+    "summary": "RPC의 호출 위치와 실행 대상을 구분하고, 소유 연결·Reliable·WithValidation 조건을 찾아본다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "멀티플레이",
+    "source_name": "10-12.txt / 스크린샷 2026-10-12 012554.png / 스크린샷 2026-10-12 013034.png",
+    "source_url": "",
+    "related_ids": [
+      "20261012-chatx"
+    ],
+    "references": [
+      {
+        "label": "Owner에서 연결까지",
+        "url": "#material=unreal-network-testing"
+      },
+      {
+        "label": "NetRole과 로컬 제어",
+        "url": "#material=unreal-network-roles"
+      },
+      {
+        "label": "Epic · Remote Procedure Calls",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/remote-procedure-calls-in-unreal-engine"
+      },
+      {
+        "label": "Epic · Actor Owner and Owning Connection",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/actor-owner-and-owning-connection-in-unreal-engine"
+      }
+    ],
+    "file": "data/materials/unreal-rpc.js",
+    "outline": [
+      {
+        "title": "호출 위치와 실행 위치 구분",
+        "text": "호출 위치와 실행 위치 구분 RPC는 네트워크를 통해 다른 곳에서 함수를 실행하도록 요청하는 방식이다. Server 와 Client 는 호출 출발지가 아니라 실행 방향을 나타낸다. 메모에서 다룬 세 종류는 다음처럼 구분한다. 소유 클라이언트의 Server RPC → 서버 서버의 Client RPC → Actor의 소유 클라이언트 서버의 NetMulticast → 서버 + 관련 클라이언트 원격 호출에는 Actor와 필요한 컴포넌트의 복제 설정이 필요하다. 소리·효과 같은 일시적인 이벤트뿐 아니라 서버에 처리를 요청할 때도 쓴다."
+      },
+      {
+        "title": "소유 연결에 따라 달라지는 실행",
+        "text": "소유 연결에 따라 달라지는 실행 클라이언트에서 Server RPC 자신이 소유한 복제 Actor에서 요청한다. 다른 클라이언트 소유 Actor나 소유 연결이 없는 Actor를 통해 보낸 요청은 서버로 전달되지 않는다. 서버에서 Client RPC 해당 Actor의 Owning Connection에 연결된 클라이언트가 대상이다. 서버 소유 또는 연결이 없는 경우에는 서버에서 실행되므로, Client라는 이름만으로 원격 클라이언트 실행을 보장하지 않는다. NetMulticast 서버에서 호출하면 서버와 그 Actor가 관련 있는 클라이언트에서 실행한다. 클라이언트에서 호출하면 호출한 클라이언트에서만 실행한다. PlayerController는 기본적으로 서버와 소유 클라이언트에만 있으므로 전체 플레이어에게 보내는 방송 경로로 생각하면 안 된다. Owner가 없다는 것과 서버가 Authority를 갖는다는 것은 서로 다른 기준이다. Owner는 Pawn 등을 거쳐 PlayerController로 이어질 수도 있어 SetOwner(PlayerController)를 직접 호출하는 형태만 가능한 것은 아니다."
+      },
+      {
+        "title": "선언·구현 — UFUNCTION과 _Implementation",
+        "text": "선언·구현 — UFUNCTION과 _Implementation 아래는 선언 형태를 보여 주는 예시다. 프로젝트에 적용을 끝낸 코드가 아니다. UFUNCTION(Server, Reliable) void ServerRequest(); // .cpp: 실제 처리 함수 void AMyActor::ServerRequest_Implementation() { // 서버 처리 } 호출할 때는 ServerRequest() 를 사용한다. _Implementation을 직접 부르면 RPC 전달 경로를 거치지 않는 일반 함수 호출이 된다."
+      },
+      {
+        "title": "Unreliable·Reliable — 전달 보장과 비용",
+        "text": "Unreliable·Reliable — 전달 보장과 비용 Unreliable 이 기본값이며 전달을 보장하지 않는다. Reliable 은 수신 확인까지 재전송하므로 비용이 든다. 모든 반복 호출을 Reliable로 지정하기보다 전달이 필요한 이벤트인지 구분한다. Reliable을 붙여도 소유 연결이 잘못된 호출이 유효해지지는 않는다. 연결이 끊어진 상황까지 무조건 실행된다는 뜻도 아니다."
+      },
+      {
+        "title": "WithValidation — 검증 실패와 일반 거절",
+        "text": "WithValidation — 검증 실패와 일반 거절 클라이언트의 Server RPC 요청 → 서버의 _Validate() true → _Implementation() false → 호출 클라이언트 연결 종료 WithValidation 을 지정하면 같은 매개변수를 받는 bool 반환형 _Validate를 구현한다. false는 단순히 동작 한 번을 취소하는 결과가 아니므로 주의한다. 일반적인 게임 조건 불충족을 처리할 때는 이 차이를 고려한다. 서버에서 실행된다고 입력값이 저절로 안전해지는 것은 아니다. 허용 범위와 게임 규칙은 서버 코드에서 검사한다."
       }
     ]
   }

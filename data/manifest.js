@@ -1209,6 +1209,44 @@ window.TIL_INDEX = {
         "NetRole",
         "NetMode"
       ]
+    },
+    {
+      "id": "20261011-chatx",
+      "date": "2026-10-11",
+      "date_end": null,
+      "date_label": "2026-10-11",
+      "title": "ChatX · Pawn 빙의 전후의 역할 로그",
+      "project": "ChatX",
+      "primary_topic": "unreal",
+      "activity": "personal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "NetRole",
+        "Possess"
+      ],
+      "summary": "Pawn에 로그를 남겨 빙의 전후의 역할을 비교했다. 서버의 LocalRole은 그대로이고 RemoteRole이 바뀌었다.",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-11.js"
+    },
+    {
+      "id": "20261012-chatx",
+      "date": "2026-10-12",
+      "date_end": null,
+      "date_label": "2026-10-12",
+      "title": "ChatX · RPC의 호출 위치와 실행 위치",
+      "project": "ChatX",
+      "primary_topic": "unreal",
+      "activity": "personal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "RPC",
+        "Ownership"
+      ],
+      "summary": "Server·Client·NetMulticast의 호출 조건을 나눠 보고, 소유 관계와 검증·전달 옵션을 정리했다.",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-12.js"
     }
   ]
 };

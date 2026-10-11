@@ -155,7 +155,10 @@
       const navigation = previous || next ? `<nav class="record-navigation" aria-label="앞뒤 기록">${adjacent(previous, 'previous', '← 이전 기록')}${adjacent(next, 'next', '다음 기록 →')}</nav>` : '';
       const related = records.filter(x => x.id !== id && x.primary_topic === meta.primary_topic)
         .sort((a,b) => Math.abs(Date.parse(a.date) - Date.parse(meta.date)) - Math.abs(Date.parse(b.date) - Date.parse(meta.date))).slice(0,3);
-      const sources = [{label: 'Velog 원문', url: r.velog}, {label: '프로젝트 저장소', url: r.repository}, ...(r.references || [])];
+      const materials = (window.TIL_LIBRARY_INDEX || [])
+        .filter(material => material.publication !== 'draft' && (material.related_ids || []).includes(id))
+        .map(material => ({label: material.title, url: '#material=' + material.id}));
+      const sources = [{label: 'Velog 원문', url: r.velog}, {label: '프로젝트 저장소', url: r.repository}, ...(r.references || []), ...materials];
       const sourceLinks = referenceLinks(sources);
       const hasNotes = (r.questions || []).length || (r.mistakes_or_difficulties || []).length;
       $('#detailContent').innerHTML = `<div class="detail-top"><div><div class="record-meta">${esc(meta.date_label)} · ${esc(name(meta.primary_topic))}</div><h2 id="detailTitle" class="detail-title">${esc(r.title)}</h2></div></div><p class="detail-label">${esc(r.project || '개인 공부')}</p>${noteBody(r)}${gallery(r.images)}${hasNotes ? `<details class="extra"><summary>막힌 부분과 남은 질문</summary><div class="extra-body">${list('궁금했던 것', r.questions)}${list('남은 부분', r.mistakes_or_difficulties)}</div></details>` : ''}${r.notice ? `<p class="article-notice">덧붙임<br>${esc(r.notice)}</p>` : ''}${sourceLinks}<section class="related"><h3>비슷한 내용</h3><div class="related-list">${related.map(x => button(x)).join('')}</div></section>${navigation}`;
