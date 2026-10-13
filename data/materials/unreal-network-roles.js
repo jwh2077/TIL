@@ -51,6 +51,10 @@ window.TIL_FILES["data/materials/unreal-network-roles.js"] = [
       {
         "label": "Epic · Actor Owner and Owning Connection",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/actor-owner-and-owning-connection-in-unreal-engine"
+      },
+      {
+        "label": "ChatX · Pawn BeginPlay·PossessedBy 역할 로그",
+        "url": "https://github.com/jwh2077/ChatX/commit/7ca0ed21157497e83f705322dcc5685f2acaf8f9"
       }
     ]
   }

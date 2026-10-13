@@ -71,6 +71,10 @@ window.TIL_FILES["data/materials/unreal-build-settings.js"] = [
       {
         "label": "Unreal C++ AItem 헤더 구조",
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260810-001"
+      },
+      {
+        "label": "ChatX · Slate·SlateCore 추가와 채팅 입력 연결",
+        "url": "https://github.com/jwh2077/ChatX/commit/4067d8093ea43a76d4bdf0d88827e0dbc62ea0ce"
       }
     ]
   }

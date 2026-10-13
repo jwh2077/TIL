@@ -11,7 +11,7 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
     ],
     "publication": "reference",
     "status": "멀티플레이 실행·디버깅",
-    "source_name": "10-6.txt / 스크린샷 2026-10-06 153305.png / 10.07.txt",
+    "source_name": "10-6.txt / 스크린샷 2026-10-06 153305.png / 10.07.txt / 10-11.txt / 10-12멀티쳇.txt",
     "source_url": "",
     "related_ids": [
       "20261006-chatx",
@@ -35,8 +35,8 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
         "html": "<p><code>ServerConnection</code> 멤버가 선언되어 있다는 것과 실제 연결 객체를 가리킨다는 것은 다르다.</p><ul><li><code>ServerConnection == nullptr</code>: 포인터에 연결 객체가 없다. 서버 쪽에서도 이 값은 nullptr이다.</li><li><code>ClientConnections</code>가 빈 배열: 배열은 있지만 담긴 클라이언트 연결이 없다.</li></ul><p>“연결이 있다”는 말은 멤버 이름이 존재한다는 뜻이 아니라, 그 안에 실제 연결이 잡혀 있다는 뜻으로 읽어야 한다.</p>"
       },
       {
-        "title": "Ownership — has-a·Attach·Authority와 구분",
-        "html": "<p><strong>Owner는 이 Actor의 소유자로 지정한 Actor다.</strong> 그 관계를 따라 플레이어의 PlayerController에 도달하면 해당 플레이어의 Owning Connection을 찾을 수 있다.</p><h3>무기를 Pawn의 소유로 지정하는 예</h3><pre><code>// 관계 설명용 예시: 서버에서 소유 관계 설정\nWeapon-&gt;SetOwner(Pawn);\n\n무기 Actor\n  → Owner인 Pawn\n  → Pawn을 조종하는 PlayerController\n  → 해당 플레이어의 NetConnection</code></pre><p>이 예시는 프로젝트에 적용을 마쳤다는 뜻이 아니다. Owner를 지정한 뒤 연결을 찾는 코드 흐름은 다음 항목에서 이어진다.</p><h3>무기를 가지고 있는 것과 Owner 지정은 다르다</h3><p>캐릭터가 무기 포인터를 멤버로 보관하는 것은 <strong>has-a</strong> 관계로 볼 수 있다. 하지만 포인터에 넣는 것만으로 Unreal의 Owner가 자동 설정되지는 않는다. 무기를 손에 <strong>Attach</strong>하는 것도 공간적으로 붙이는 작업이므로 별도다.</p><p><strong>Ownership과 Authority도 다르다.</strong> 어떤 클라이언트의 소유인지 정하는 것과 Actor 상태를 결정할 권한은 구분한다. Owner를 지정했다고 서버의 판정 권한이 클라이언트로 넘어가지는 않는다.</p>"
+        "title": "Ownership(오너십·오너쉽)과 패밀리 — 소유 관계",
+        "html": "<p><strong>Owner는 이 Actor의 소유자로 지정한 Actor다.</strong> 그 관계를 따라 플레이어의 PlayerController에 도달하면 해당 플레이어의 Owning Connection을 찾을 수 있다.</p><p>수업 메모에서 말하는 <strong>패밀리</strong>는 PlayerController·Pawn·무기처럼 Owner로 이어지는 소유 관계를 가리킨다. 별도의 NetRole 이름은 아니며, 같은 소유 관계에 들어갔다고 모든 Actor가 AutonomousProxy가 되는 것은 아니다.</p><h3>무기를 Pawn의 소유로 지정하는 예</h3><pre><code>// 관계 설명용 예시: 서버에서 소유 관계 설정\nWeapon-&gt;SetOwner(Pawn);\n\n무기 Actor\n  → Owner인 Pawn\n  → Pawn을 조종하는 PlayerController\n  → 해당 플레이어의 NetConnection</code></pre><p>이 예시는 프로젝트에 적용을 마쳤다는 뜻이 아니다. Owner를 지정한 뒤 연결을 찾는 코드 흐름은 다음 항목에서 이어진다.</p><h3>무기를 가지고 있는 것과 Owner 지정은 다르다</h3><p>캐릭터가 무기 포인터를 멤버로 보관하는 것은 <strong>has-a</strong> 관계로 볼 수 있다. 하지만 포인터에 넣는 것만으로 Unreal의 Owner가 자동 설정되지는 않는다. 무기를 손에 <strong>Attach</strong>하는 것도 공간적으로 붙이는 작업이므로 별도다.</p><p><strong>Ownership과 Authority도 다르다.</strong> 어떤 클라이언트의 소유인지 정하는 것과 Actor 상태를 결정할 권한은 구분한다. Owner를 지정했다고 서버의 판정 권한이 클라이언트로 넘어가지는 않는다.</p>"
       },
       {
         "title": "GetNetConnection() — Owner에서 연결까지",
@@ -48,11 +48,11 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
       },
       {
         "title": "전용 서버 테스트 — PIE 설정",
-        "html": "<p>설정 위치: <strong>Editor Preferences → Level Editor → Play</strong></p><table><thead><tr><th scope=\"col\">설정</th><th scope=\"col\">선택 / 용도</th></tr></thead><tbody><tr><td>Play Net Mode</td><td><strong>Play as Client</strong> — 클라이언트 창과 백그라운드 전용 서버 실행</td></tr><tr><td>Run Under One Process</td><td><strong>끄기</strong> — 창마다 프로세스를 나눠 테스트</td></tr><tr><td>Always On Top</td><td>선택 사항. 테스트 창을 다른 창 위에 표시</td></tr></tbody></table><p><strong>설정할 때 참고</strong></p><ul><li>Run Under One Process를 켜도 멀티플레이 테스트는 가능하다. 빠르게 실행할 수 있지만 실제로 프로세스를 나눈 환경과는 차이가 있다.</li><li>Play as Client는 전용 서버를 실행하므로 Launch Separate Server를 반드시 켤 필요는 없다. 이 옵션은 현재 모드에서 요구하지 않아도 서버를 따로 실행할 때 사용한다.</li></ul><figure style=\"margin:0\"><a href=\"assets/images/unreal-pie-settings-20261006.png\" target=\"_blank\" rel=\"noopener\"><img src=\"assets/images/unreal-pie-settings-20261006.png\" alt=\"Play as Client 선택, Run Under One Process 해제, Launch Separate Server와 Always On Top 선택 상태\" loading=\"lazy\" width=\"1080\" height=\"644\" style=\"display:block;width:100%;height:auto\"></a><figcaption class=\"caption\">10월 6일 남긴 실제 설정 화면. 이미지를 누르면 크게 볼 수 있다.</figcaption></figure>"
+        "html": "<p>설정 위치: <strong>Editor Preferences → Level Editor → Play</strong></p><table><thead><tr><th scope=\"col\">설정</th><th scope=\"col\">선택 / 용도</th></tr></thead><tbody><tr><td>Play Net Mode</td><td><strong>Play as Client</strong> — 클라이언트 창과 백그라운드 전용 서버 실행</td></tr><tr><td>Run Under One Process</td><td><strong>끄기</strong> — 창마다 프로세스를 나눠 테스트</td></tr><tr><td>Always On Top</td><td>선택 사항. 테스트 창을 다른 창 위에 표시</td></tr></tbody></table><p><strong>설정할 때 참고</strong></p><ul><li>Run Under One Process를 켜도 멀티플레이 테스트는 가능하다. 빠르게 실행할 수 있지만 실제로 프로세스를 나눈 환경과는 차이가 있다.</li><li>Play as Client는 전용 서버를 실행하므로 Launch Separate Server를 반드시 켤 필요는 없다. 이 옵션은 현재 모드에서 요구하지 않아도 서버를 따로 실행할 때 사용한다.</li></ul><figure style=\"margin:0\"><a href=\"assets/images/unreal-pie-settings-20261006.png\" target=\"_blank\" rel=\"noopener\"><img src=\"assets/images/unreal-pie-settings-20261006.png\" alt=\"Play as Client 선택, Run Under One Process 해제, Launch Separate Server와 Always On Top 선택 상태\" loading=\"lazy\" width=\"1080\" height=\"644\" style=\"display:block;width:100%;height:auto\"></a><figcaption class=\"caption\">10월 6일 남긴 실제 설정 화면. 이미지를 누르면 크게 볼 수 있다.</figcaption></figure><h3>에디터를 닫아도 빌드가 막힐 때</h3><p>서버를 별도 프로세스로 실행했다면 에디터 종료 후에도 서버 프로세스가 남아 있는지 확인한다. 메모에 남긴 점검 항목이며, 모든 빌드 오류가 이 원인이라는 뜻은 아니다.</p>"
       },
       {
         "title": "내 화면에만 UI 표시 — IsLocalController()",
-        "html": "<p>PlayerController에서 <strong>로컬 플레이어의 컨트롤러인지</strong> 검사한다. 로컬이 아니면 반환하고, 로컬일 때만 UI 처리를 이어간다.</p><pre><code>// PlayerController 멤버 함수 안에서\nif (!IsLocalController())\n{\n    return;\n}\n\n// 이 로컬 플레이어의 UI 처리</code></pre><ul><li><code>!IsLocalController()</code>와 <code>IsLocalController() == false</code>는 같은 조건이다.</li><li>리슨 서버의 방장도 로컬 플레이어다. <strong>로컬 = 서버가 아님</strong>으로 구분하면 안 된다.</li></ul><p><strong>두 화면에 같은 출력이 보일 때</strong><br>PrintString의 디버그 출력인지, UI 위젯이 양쪽에 생성된 것인지 먼저 구분한다. 위젯이라면 생성 위치·소유 대상·중복 호출을 살펴본다. 프로세스를 나누는 설정만으로 UI 코드가 고쳐지지는 않는다.</p>"
+        "html": "<p>PlayerController에서 <strong>로컬 플레이어의 컨트롤러인지</strong> 검사한다. 로컬이 아니면 반환하고, 로컬일 때만 UI 처리를 이어간다.</p><pre><code>// PlayerController 멤버 함수 안에서\nif (!IsLocalController())\n{\n    return;\n}\n\n// 이 로컬 플레이어의 UI 처리</code></pre><ul><li><code>!IsLocalController()</code>와 <code>IsLocalController() == false</code>는 같은 조건이다.</li><li>리슨 서버의 방장도 로컬 플레이어다. <strong>로컬 = 서버가 아님</strong>으로 구분하면 안 된다.</li></ul><p><strong>두 화면에 같은 출력이 보일 때</strong><br>PrintString의 디버그 출력인지, UI 위젯이 양쪽에 생성된 것인지 먼저 구분한다. 위젯이라면 생성 위치·소유 대상·중복 호출을 살펴본다. 프로세스를 나누는 설정만으로 UI 코드가 고쳐지지는 않는다.</p><h3>ChatX의 화면 출력과 서버 로그</h3><p>66da914 커밋의 <code>MyPrintString()</code>은 Client·ListenServer에서는 AddOnScreenDebugMessage를, DedicatedServer·Standalone에서는 UE_LOG를 사용한다. 이는 이 프로젝트의 출력 분기이며 Standalone에서 화면 출력을 못 한다는 뜻은 아니다. <code>GetNetModeString()</code>은 Client·StandAlone·Server 문자열로 구분한다.</p>"
       },
       {
         "title": "HP 판정은 서버, 화면 표시는 클라이언트",
@@ -104,6 +104,10 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
       {
         "label": "RPC 호출 조건",
         "url": "#material=unreal-rpc"
+      },
+      {
+        "label": "ChatX · IsLocalController와 출력 도우미",
+        "url": "https://github.com/jwh2077/ChatX/commit/66da914e921c26205327343144a6778b1ca7a565"
       }
     ]
   }

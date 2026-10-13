@@ -3,7 +3,7 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
   {
     "id": "unreal-multiplayer-basics",
     "title": "Unreal 멀티플레이 — 클래스 역할·서버·복제",
-    "summary": "서버 종류, 클라이언트 접속 흐름, GameMode·PlayerController 등 클래스별 위치와 복제 범위.",
+    "summary": "서버·클래스별 역할, 접속 흐름과 Property Replication의 방향·Replicated·DOREPLIFETIME 설정.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -11,7 +11,7 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
     ],
     "publication": "reference",
     "status": "멀티플레이 개념 정리",
-    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md / 10-5 서버.txt",
+    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md / 10-5 서버.txt / 10-12숫자야구.txt",
     "source_url": "",
     "notice": "숫자 야구는 역할 구분을 설명하는 예시다. 과제 안내와 공부하며 남긴 질문은 관련 학습 기록에 있다.",
     "sections": [
@@ -41,8 +41,12 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
         "text": "공유할 필요가 없는 값을 모두 복제하지 않는다. HasAuthority()를 단순한 서버 여부 표시와 완전히 같은 뜻으로 사용하지 않는다."
       },
       {
+        "title": "Property Replication(프로퍼티 레플리케이션) — 방향과 설정",
+        "html": "<p>프로퍼티 복제는 지정한 상태 값을 서버의 Authority에서 클라이언트의 Proxy로 전달한다. 클라이언트가 값을 바꿨다고 서버로 역방향 복제되지는 않는다. 서버에 처리를 요청하는 RPC와 구분한다.</p><ol><li>Actor의 <code>bReplicates = true</code> 설정</li><li>복제할 속성의 <code>UPROPERTY()</code>에 <code>Replicated</code> 지정</li><li><code>Net/UnrealNetwork.h</code> 포함</li><li><code>GetLifetimeReplicatedProps()</code>를 재정의하고 부모 함수를 호출한 뒤 <code>DOREPLIFETIME(클래스명, 속성명)</code>으로 등록</li></ol><p>모든 속성을 무조건 보내는 것이 아니라 공유할 속성을 선택한다. 이후 값의 변경을 전달하되, 전달 대상과 시점은 Actor의 관련성·복제 조건 등의 영향을 받는다. 매번 바뀐 중간 값이 모두 이벤트처럼 전달된다는 의미는 아니다.</p><h3>ChatX에서 복제한 값</h3><ul><li><code>CXPlayerState</code>: PlayerNameString, CurrentGuessCount, MaxGuessCount</li><li><code>CXPlayerController</code>: NotificationText</li></ul><p>91e041f 커밋에서 각 속성에 Replicated를 지정하고 GetLifetimeReplicatedProps의 DOREPLIFETIME에 등록했다. PlayerState의 플레이어 정보와 Controller 소유자에게 표시할 알림을 나눠 둔 예다. 위젯 자체를 복제하는 방식은 아니다.</p>"
+      },
+      {
         "title": "역할을 나누는 예 — 숫자 야구",
-        "html": "<ol class=\"reference-flow\"><li>클라이언트: 숫자 입력</li><li>서버: 정답과 비교</li><li>서버: Strike / Ball 판정</li><li>공유 상태 전달</li><li>클라이언트: 결과 표시</li></ol>"
+        "html": "<ol class=\"reference-flow\"><li>클라이언트: 숫자 입력</li><li>서버: 정답과 비교</li><li>서버: Strike / Ball 판정</li><li>공유 상태 전달</li><li>클라이언트: 결과 표시</li></ol><h3>GameMode에 둔 함수</h3><ul><li><code>GenerateSecretNumber</code>: 1~9 배열에서 하나씩 뽑고 제거해 세 자리 정답 생성</li><li><code>IsGuessNumberString</code>: 입력 후보의 길이·숫자·0 포함 여부 검사</li><li><code>JudgeResult</code>: 같은 위치면 Strike, 다른 위치에 포함되면 Ball, 둘 다 없으면 OUT</li><li><code>IncreaseGuessCount / JudgeGame / ResetGame</code>: 시도 횟수 증가·게임 종료 판단·새 정답과 횟수 초기화</li></ul><h3>이 코드에서 더 점검할 부분</h3><p>91e041f 기준으로 TSet에 넣은 문자 수를 검사하지 않아 중복 숫자가 통과할 수 있다. AllPlayerControllers에 접속한 Controller를 추가하는 코드도 빠져 있으며, JudgeGame과 ResetGame이 플레이어 순회 안에서 호출된다. 함수가 작성된 상태와 게임 전체의 정상 동작은 구분해야 한다.</p>"
       },
       {
         "title": "PIE와 ?Listen 구분",
@@ -64,7 +68,8 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
     ],
     "related_ids": [
       "20261001-study",
-      "20261005-chatx"
+      "20261005-chatx",
+      "20261012-chatx"
     ],
     "references": [
       {
@@ -82,6 +87,18 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
       {
         "label": "PIE·로컬 UI·NetMode 실행 구분",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-network-testing"
+      },
+      {
+        "label": "RPC 호출 조건과 채팅 전달",
+        "url": "#material=unreal-rpc"
+      },
+      {
+        "label": "Epic · Replicate Actor Properties",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/replicate-actor-properties-in-unreal-engine"
+      },
+      {
+        "label": "ChatX · 숫자 야구 판정·PlayerState 복제 코드",
+        "url": "https://github.com/jwh2077/ChatX/commit/91e041f876bbb86074db51efa01a3c6d7c832f55"
       }
     ]
   }

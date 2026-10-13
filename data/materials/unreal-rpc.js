@@ -3,7 +3,7 @@ window.TIL_FILES["data/materials/unreal-rpc.js"] = [
   {
     "id": "unreal-rpc",
     "title": "Unreal RPC — Server·Client·NetMulticast 호출 조건",
-    "summary": "RPC의 호출 위치와 실행 대상을 구분하고, 소유 연결·Reliable·WithValidation 조건을 찾아본다.",
+    "summary": "RPC 호출 조건과 소유 연결, PlayerController별 채팅 전달, Reliable·WithValidation 옵션.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -11,7 +11,7 @@ window.TIL_FILES["data/materials/unreal-rpc.js"] = [
     ],
     "publication": "reference",
     "status": "멀티플레이",
-    "source_name": "10-12.txt / 스크린샷 2026-10-12 012554.png / 스크린샷 2026-10-12 013034.png",
+    "source_name": "10-12.txt / 스크린샷 2026-10-12 012554.png / 스크린샷 2026-10-12 013034.png / 10-12멀티쳇.txt",
     "source_url": "",
     "related_ids": [
       "20261012-chatx"
@@ -24,6 +24,23 @@ window.TIL_FILES["data/materials/unreal-rpc.js"] = [
       {
         "title": "소유 연결에 따라 달라지는 실행",
         "html": "<h3>클라이언트에서 Server RPC</h3><p>자신이 소유한 복제 Actor에서 요청한다. 다른 클라이언트 소유 Actor나 소유 연결이 없는 Actor를 통해 보낸 요청은 서버로 전달되지 않는다.</p><h3>서버에서 Client RPC</h3><p>해당 Actor의 Owning Connection에 연결된 클라이언트가 대상이다. 서버 소유 또는 연결이 없는 경우에는 서버에서 실행되므로, Client라는 이름만으로 원격 클라이언트 실행을 보장하지 않는다.</p><h3>NetMulticast</h3><p>서버에서 호출하면 서버와 그 Actor가 관련 있는 클라이언트에서 실행한다. 클라이언트에서 호출하면 호출한 클라이언트에서만 실행한다. PlayerController는 기본적으로 서버와 소유 클라이언트에만 있으므로 전체 플레이어에게 보내는 방송 경로로 생각하면 안 된다.</p><p>Owner가 없다는 것과 서버가 Authority를 갖는다는 것은 서로 다른 기준이다. Owner는 Pawn 등을 거쳐 PlayerController로 이어질 수도 있어 SetOwner(PlayerController)를 직접 호출하는 형태만 가능한 것은 아니다.</p>"
+      },
+      {
+        "title": "전체 채팅 전달 — PlayerController마다 Client RPC 호출",
+        "html": "<p>서버의 PlayerController A에서 NetMulticast를 호출해도, PlayerController A가 없는 클라이언트 B에는 전달되지 않는다. 채팅 메모의 코드는 서버에서 각 PlayerController를 찾아 Client RPC를 호출한다.</p><pre><code>클라이언트 A → Server RPC → 서버\n  ├ PlayerController A의 Client RPC → 클라이언트 A\n  └ PlayerController B의 Client RPC → 클라이언트 B</code></pre><p>채팅 전달을 처음 연결한 7ca0ed2 커밋의 함수다. 이후 숫자 야구 단계에서는 서버의 처리를 GameMode로 옮겼다.</p>",
+        "code": "void ACXPlayerController::ServerRPCPrintChatMessageString_Implementation(\n    const FString& InChatMessageString)\n{\n    for (TActorIterator<ACXPlayerController> It(GetWorld()); It; ++It)\n    {\n        ACXPlayerController* CXPlayerController = *It;\n        if (IsValid(CXPlayerController) == true)\n        {\n            CXPlayerController->ClientRPCPrintChatMessageString(\n                InChatMessageString);\n        }\n    }\n}"
+      },
+      {
+        "title": "TActorIterator — 배열 대신 월드의 Actor 순회",
+        "html": "<p><code>TActorIterator&lt;ACXPlayerController&gt; It(GetWorld())</code>는 지정한 월드에서 해당 클래스의 Actor를 순회한다. 헤더는 <code>EngineUtils.h</code>다.</p><ul><li><code>It</code>: 현재 가리킬 Actor가 있는지 검사</li><li><code>++It</code>: 다음 Actor로 이동</li><li><code>*It</code>: 현재 Actor 포인터를 꺼냄</li></ul><p><code>for (auto Item : Items)</code>가 이미 가진 컨테이너의 원소를 순회하는 것과 달리, 이 예시는 월드에서 PlayerController를 찾는다. 순회 대상이 다르며 클라이언트에서 돌린다고 서버의 모든 PlayerController를 찾을 수 있는 것은 아니다.</p>"
+      },
+      {
+        "title": "숫자 야구로 확장 — Server RPC에서 GameMode로 전달",
+        "html": "<p>91e041f 커밋에서는 <code>ServerRPCPrintChatMessageString_Implementation()</code>이 GameMode를 가져와 <code>PrintChatMessageString(this, InChatMessageString)</code>을 호출한다. 메시지의 숫자 검사·판정과 각 PlayerController로 보내는 처리는 GameMode에 둔다.</p><ol><li>로컬 Controller: 플레이어 정보와 입력을 묶어 Server RPC 요청</li><li>서버 Controller: GameMode에 보낸 플레이어와 메시지 전달</li><li>GameMode: 숫자 입력이면 판정·횟수 처리, 아니면 일반 채팅 처리</li><li>각 Controller의 Client RPC: 해당 클라이언트에 결과 출력</li></ol><p>이 단계의 게임 규칙 코드는 아직 점검할 부분이 있다. 복제 문서의 숫자 야구 예시에서 작성 범위와 주의점을 함께 볼 수 있다.</p>"
+      },
+      {
+        "title": "접속 알림 — GameState의 NetMulticast 사용",
+        "html": "<p>접속 알림은 <code>GameMode::OnPostLogin()</code>에서 <code>GameState::MulticastRPCBroadcastLoginMessage()</code>를 호출한다. PlayerController 하나의 소유 클라이언트로 보내는 경로와 달리, GameState를 통해 접속 알림을 전달하는 구조다.</p><p>ChatX 구현은 <code>HasAuthority() == false</code>인 곳에서만 로컬 PlayerController를 얻어 출력한다. 전용 서버 실습 코드이며, 이 조건 그대로라면 리슨 서버 호스트의 출력 분기는 실행되지 않는다. <code>GetPlayerController(GetWorld(), 0)</code>의 0은 서버 번호가 아니라 해당 월드의 플레이어 인덱스다.</p>"
       },
       {
         "title": "선언·구현 — UFUNCTION과 _Implementation",
@@ -54,6 +71,22 @@ window.TIL_FILES["data/materials/unreal-rpc.js"] = [
       {
         "label": "Epic · Actor Owner and Owning Connection",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/actor-owner-and-owning-connection-in-unreal-engine"
+      },
+      {
+        "label": "Epic · TActorIterator",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/TActorIterator"
+      },
+      {
+        "label": "ChatX · 채팅 RPC·접속 알림 코드",
+        "url": "https://github.com/jwh2077/ChatX/commit/7ca0ed21157497e83f705322dcc5685f2acaf8f9"
+      },
+      {
+        "label": "ChatX · GameMode로 채팅 판정 연결",
+        "url": "https://github.com/jwh2077/ChatX/commit/91e041f876bbb86074db51efa01a3c6d7c832f55"
+      },
+      {
+        "label": "프로퍼티 복제와 숫자 야구 상태",
+        "url": "#material=unreal-multiplayer-basics"
       }
     ]
   }

@@ -54,14 +54,7 @@
       const topics=group.topics.filter(topic=>topicRows(topic).length);
       if(!topics.length)return '';
       const ids=new Set(topics.flatMap(topic=>topic.documents).filter(id=>shownIds.has(id)));
-      const body=topics.map(topic=>{
-        const rows=topicRows(topic);
-        const shortcuts=(topic.shortcuts||[]).filter(([,id])=>shownIds.has(id)).map(([label,id,heading])=>{
-          const index=materials.find(r=>r.id===id)?.outline?.findIndex(s=>s.title===heading);
-          return index>=0?`<button class="material-open" type="button" data-material="${esc(id)}" data-open-section="${index}"><strong>${esc(label)}</strong><span aria-hidden="true">→</span></button>`:'';
-        }).join('');
-        return disclosure(group.id+'-'+topic.id,topic.title,shortcuts+(shortcuts?'<p class="material-whole-label">문서 전체 보기</p>':'')+rows.map(materialRow).join(''),rows.length);
-      }).join('');
+      const body=[...ids].map(id=>materialRow(shown.find(r=>r.id===id))).join('');
       return disclosure(group.id,group.title,body,ids.size,group.hint);
     }).join('');
     const remaining=shown.filter(r=>!indexed.has(r.id));
@@ -99,6 +92,12 @@
   async function open(id) {
     // Keep old links to the question-only note useful after moving it to learning records.
     if(id==='file-note-tem-014'){location.hash='record=note-tem-014';return;}
+    const legacy=materials.find(r=>Object.hasOwn(r.legacy_sections||{},id));
+    if(legacy) {
+      const heading=legacy.legacy_sections[id];
+      id=legacy.id;
+      requestedSection={id,index:legacy.outline.findIndex(s=>s.title===heading)};
+    }
     const stamp=++token; const meta=materials.find(r=>r.id===id);
     if(!meta) {location.hash='library';return;}
     controls();$('#materialOutline').hidden=false;

@@ -1234,7 +1234,7 @@ window.TIL_INDEX = {
       "date": "2026-10-12",
       "date_end": null,
       "date_label": "2026-10-12",
-      "title": "ChatX · RPC의 호출 위치와 실행 위치",
+      "title": "ChatX · RPC로 채팅 전달과 프로퍼티 복제",
       "project": "ChatX",
       "primary_topic": "unreal",
       "activity": "personal",
@@ -1242,9 +1242,10 @@ window.TIL_INDEX = {
         "Unreal",
         "멀티플레이",
         "RPC",
-        "Ownership"
+        "Ownership",
+        "Replication"
       ],
-      "summary": "Server·Client·NetMulticast의 호출 조건을 나눠 보고, 소유 관계와 검증·전달 옵션을 정리했다.",
+      "summary": "PlayerController별 채팅 전달에서 GameMode의 숫자 야구 판정으로 연결하고, 플레이어 이름·시도 횟수·알림 문구를 복제하는 코드를 넣었다.",
       "month": "2026-10",
       "file": "data/2026/10/2026-10-12.js"
     }

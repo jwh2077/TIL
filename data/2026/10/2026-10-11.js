@@ -28,10 +28,15 @@ window.TIL_FILES["data/2026/10/2026-10-11.js"] = [
       {
         "label": "NetRole — LocalRole·RemoteRole과 로컬 제어",
         "url": "#material=unreal-network-roles"
+      },
+      {
+        "label": "Pawn 역할 로그 코드 · 10월 12일 커밋",
+        "url": "https://github.com/jwh2077/ChatX/commit/7ca0ed21157497e83f705322dcc5685f2acaf8f9"
       }
     ],
     "source": [
-      "10-11.txt · local/reference/chatx/ 원본 보관"
+      "10-11.txt · local/reference/chatx/ 원본 보관",
+      "ChatX 7ca0ed2 · 커밋 시각 2026-10-12 06:11 KST. 학습일은 10-11.txt와 당시 로그 기준 유지"
     ]
   }
 ];

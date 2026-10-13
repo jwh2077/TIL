@@ -1,11 +1,11 @@
 window.TIL_LIBRARY_INDEX = [
   {
     "id": "stl-foundation",
-    "title": "자료구조의 기본 · 저장 방식 · STL",
-    "summary": "데이터를 저장하는 방식과 STL의 컨테이너, 반복자, 알고리즘.",
+    "title": "C++ 자료구조·STL 정리 노트",
+    "summary": "저장 방식부터 컨테이너 사용법, 문자열·정렬·탐색, 그래프·트리, Big-O와 자료구조 선택까지.",
     "kind": "file",
     "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
+    "status": "종합 정리 노트",
     "source_name": "자료구조.html",
     "source_url": "data/guides/stl-reference.html",
     "related_ids": [
@@ -24,52 +24,6 @@ window.TIL_LIBRARY_INDEX = [
         "label": "관련 Velog · STL과 vector 기초",
         "url": "https://velog.io/@jwh4410/7.17"
       },
-      {
-        "label": "자료구조 선택 기준",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-selection"
-      },
-      {
-        "label": "Big-O · 시간 복잡도",
-        "url": "https://jwh2077.github.io/TIL/#material=concept-bigo"
-      }
-    ],
-    "file": "data/materials/stl-foundation.js",
-    "outline": [
-      {
-        "title": "자료구조",
-        "text": "자료구조 1. 개념 자료구조는 데이터를 저장, 삽입, 삭제, 접근, 탐색 등 효율적으로 관리하기 위한 방법이다."
-      },
-      {
-        "title": "메모리에서의 저장",
-        "text": "메모리에서의 저장 1. 연속적인 저장 데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다. [10][20][30][40] 예: 배열, vector 2. 불연속적인 저장 데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다. [10] → [20] → [30] 예: list , 연결 기반 Tree 연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다."
-      },
-      {
-        "title": "STL이란?",
-        "text": "STL이란? 1. 핵심 구성 구성 역할 예시 Container 데이터 저장 vector, list, set, map Iterator 컨테이너의 원소를 가리키고 이동 begin(), end() Algorithm 정렬/탐색/변경 등의 작업 sort(), find(), reverse() vector<int> vec = {3, 1, 2}; sort(vec.begin(), vec.end());"
-      }
-    ]
-  },
-  {
-    "id": "stl-sequence",
-    "title": "C++ vector·list·deque — 조회·추가·삭제",
-    "summary": "vector, list, deque에서 값을 읽고 추가하거나 지우는 방법.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001"
-    ],
-    "topics": [
-      "cpp",
-      "ds",
-      "stl"
-    ],
-    "publication": "reference",
-    "references": [
       {
         "label": "관련 Velog · STL vector와 map 복습",
         "url": "https://velog.io/@jwh4410/7.27"
@@ -91,19 +45,40 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12945"
       },
       {
-        "label": "자료구조 선택 기준",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-selection"
-      },
-      {
-        "label": "C++ 문자열·STL 알고리즘",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-algorithm"
+        "label": "관련 Velog · map과 auto, range-for",
+        "url": "https://velog.io/@jwh4410/7.28"
       }
     ],
-    "file": "data/materials/stl-sequence.js",
+    "legacy_sections": {
+      "stl-sequence": "vector — 인덱스 접근·뒤에 추가",
+      "stl-associative": "set — 중복 없이 정렬",
+      "stl-adaptor": "stack — 마지막에 넣은 값 꺼내기",
+      "stl-algorithm": "string — 문자열 다루기",
+      "graph-tree": "Graph",
+      "concept-bigo": "Big-O 표기법",
+      "stl-selection": "자료구조 선택 기준"
+    },
+    "file": "data/materials/stl-foundation.js",
     "outline": [
+      {
+        "title": "자료구조",
+        "text": "자료구조 1. 개념 자료구조는 데이터를 저장, 삽입, 삭제, 접근, 탐색 등 효율적으로 관리하기 위한 방법이다."
+      },
+      {
+        "title": "메모리에서의 저장",
+        "text": "메모리에서의 저장 1. 연속적인 저장 데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다. [10][20][30][40] 예: 배열, vector 2. 불연속적인 저장 데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다. [10] → [20] → [30] 예: list , 연결 기반 Tree 연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다."
+      },
       {
         "title": "vector — 인덱스 접근·뒤에 추가",
         "text": "vector — 인덱스 접근·뒤에 추가 1. 개념 / 구조 vector 는 크기를 변화시켜가며 사용할 수 있는 동적 배열 이다. 원소가 연속적인 메모리에 저장된다. 인덱스로 임의 접근할 수 있다. 끝에 원소를 추가할 때 평균적으로 O(1)이다. capacity 가 부족하면 더 큰 공간을 확보하고 기존 원소를 이동할 수 있다. 2. size / capacity vector<int> vec; vec.size(); // 현재 원소 개수 vec.capacity(); // 현재 확보된 공간 vec.reserve(100); // capacity를 미리 확보 개념 의미 size 현재 들어 있는 원소의 개수 capacity 현재 확보된 저장 공간의 크기 reserve(n) capacity를 최소 n까지 확보. size는 변하지 않음 3. 주요 명령어 + Big-O 명령어 기능 Big-O push_back() 뒤에 추가 평균 O(1), 재할당 시 O(n) emplace_back() 뒤에서 객체를 생성하며 추가 평균 O(1), 재할당 시 O(n) pop_back() 마지막 원소 삭제 O(1) insert() 특정 위치에 삽입 O(n) erase() 특정 위치 삭제 O(n) operator[] 인덱스로 접근 O(1) at() 인덱스로 접근 + 범위 검사 O(1) empty() 비었는지 확인 O(1) clear() 모든 원소 삭제 O(n) size() 원소 개수 O(1) 4. 장점 / 단점 / 사용하기 좋은 때 장점: 인덱스 접근이 빠르고 캐시 효율이 좋다. 단점: 중간 삽입/삭제 시 뒤 원소를 이동해야 한다. 좋은 경우: 인덱스 접근이 필요하거나 끝에서 추가/삭제가 많은 경우 5. 탐색 / 뒤집기 find(vec.begin(), vec.end(), value); // 순차 탐색 reverse(vec.begin(), vec.end()); // 뒤집기 find() 는 O(n), reverse() 는 O(n)이다. 6. 알고리즘 예시: 그래프 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 0번 정점에서 1번과 2번 정점으로 연결된 것을 인접 리스트로 표현한 것이다. {1, 2} 는 주소가 아니라 연결된 정점의 번호 를 저장한 것이다."
+      },
+      {
+        "title": "2차원 vector — 행 추가와 값 추가",
+        "text": "2차원 vector — 행 추가와 값 추가 A.push_back(vector {1})은 바깥 vector에 새 행을 추가한다. A[i].push_back(1)은 이미 있는 i번째 행에 값을 추가한다. 이전 행의 [j-1]과 [j]를 더할 때는 두 인덱스가 모두 존재하는 범위만 순회한다. vector > A; A.push_back(vector {1}); // 첫 행 추가 A[0].push_back(1); // 첫 행에 값 추가 A[i]에 접근하기 전에 i번째 행이 있어야 한다. if로 값을 검사하더라도 없는 인덱스에 먼저 접근하면 범위 검사가 되지 않는다."
+      },
+      {
+        "title": "vector 크기 — 0부터 n까지 저장하려면 n+1칸",
+        "text": "vector 크기 — 0부터 n까지 저장하려면 n+1칸 F(0)부터 F(n)까지 저장하려면 n+1칸이 필요하다. n칸만 만들면 마지막 인덱스는 n-1이다. 자료형의 크기를 키워도 배열의 인덱스 범위는 늘어나지 않는다."
       },
       {
         "title": "list — 위치를 찾아 삽입·삭제",
@@ -113,60 +88,6 @@ window.TIL_LIBRARY_INDEX = [
         "title": "forward_list — 단방향 연결 리스트",
         "text": "forward_list — 단방향 연결 리스트 1. 개념 / 구조 forward_list 는 단방향 연결 리스트 이다. [10] → [20] → [30] 다음 노드 방향으로만 이동한다. list 보다 구조가 단순하다. 인덱스 접근이 불가능하다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_front() 앞 추가 O(1) pop_front() 앞 삭제 O(1) insert_after() iterator 뒤에 삽입 O(1)* erase_after() iterator 뒤 원소 삭제 O(1)* remove() 값으로 삭제 O(n) reverse() 뒤집기 O(n) 3. 사용하기 좋은 때 양방향 이동이 필요 없고 앞쪽 또는 특정 노드 뒤에서 삽입/삭제하는 경우"
       },
-      {
-        "title": "deque — 양쪽 끝에 추가·삭제",
-        "text": "deque — 양쪽 끝에 추가·삭제 1. 개념 / 구조 Double Ended Queue — 양쪽 끝에서 삽입/삭제할 수 있다. 앞 ↔ [10][20][30][40] ↔ 뒤 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_front() 앞 추가 O(1) push_back() 뒤 추가 O(1) pop_front() 앞 삭제 O(1) pop_back() 뒤 삭제 O(1) front() / back() 양 끝 확인 O(1) operator[] 인덱스 접근 O(1) 3. 장점 / 단점 / 사용하기 좋은 때 장점: 양쪽 끝의 삽입/삭제가 빠르고 인덱스 접근도 가능 단점: vector처럼 하나의 연속된 메모리 블록에 저장된다는 보장은 없음 좋은 경우: 양쪽에서 데이터를 넣고 빼는 경우, 슬라이딩 윈도우"
-      },
-      {
-        "title": "2차원 vector — 행 추가와 값 추가",
-        "text": "2차원 vector — 행 추가와 값 추가 A.push_back(vector {1})은 바깥 vector에 새 행을 추가한다. A[i].push_back(1)은 이미 있는 i번째 행에 값을 추가한다. 이전 행의 [j-1]과 [j]를 더할 때는 두 인덱스가 모두 존재하는 범위만 순회한다. vector > A; A.push_back(vector {1}); // 첫 행 추가 A[0].push_back(1); // 첫 행에 값 추가 A[i]에 접근하기 전에 i번째 행이 있어야 한다. if로 값을 검사하더라도 없는 인덱스에 먼저 접근하면 범위 검사가 되지 않는다."
-      },
-      {
-        "title": "vector 크기 — 0부터 n까지 저장하려면 n+1칸",
-        "text": "vector 크기 — 0부터 n까지 저장하려면 n+1칸 F(0)부터 F(n)까지 저장하려면 n+1칸이 필요하다. n칸만 만들면 마지막 인덱스는 n-1이다. 자료형의 크기를 키워도 배열의 인덱스 범위는 늘어나지 않는다."
-      }
-    ]
-  },
-  {
-    "id": "stl-associative",
-    "title": "C++ set·map·unordered — 중복·키 검색·정렬",
-    "summary": "set과 map의 중복 처리, 정렬 순서, key로 값 찾기.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001"
-    ],
-    "topics": [
-      "cpp",
-      "ds",
-      "stl"
-    ],
-    "publication": "reference",
-    "references": [
-      {
-        "label": "관련 Velog · STL vector와 map 복습",
-        "url": "https://velog.io/@jwh4410/7.27"
-      },
-      {
-        "label": "관련 Velog · map과 auto, range-for",
-        "url": "https://velog.io/@jwh4410/7.28"
-      },
-      {
-        "label": "자료구조 선택 기준",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-selection"
-      },
-      {
-        "label": "C++ 문자열·STL 알고리즘",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-algorithm"
-      }
-    ],
-    "file": "data/materials/stl-associative.js",
-    "outline": [
       {
         "title": "set — 중복 없이 정렬",
         "text": "set — 중복 없이 정렬 1. 개념 / 구조 set 은 중복 없는 값 을 정렬된 상태로 저장한다. 중복 X 요소 자체가 Key 역할 기본적으로 오름차순 표준에서는 균형 잡힌 트리 계열로 동작하며 대표적으로 Red-Black Tree가 사용된다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O insert() 삽입 O(log n) emplace() 생성 후 삽입 O(log n) erase(key) Key 삭제 O(log n) find() 탐색 O(log n) contains() 존재 확인 O(log n) lower_bound() 값 이상인 첫 위치 O(log n) upper_bound() 값 초과인 첫 위치 O(log n) 3. 사용하기 좋은 때 중복 제거 정렬된 상태 유지 범위 탐색 set<int> nums; set<int, greater<>> descNums;"
@@ -190,41 +111,7 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "multimap — 같은 키 여러 개 저장",
         "text": "multimap — 같은 키 여러 개 저장 1. 개념 / 구조 multimap 은 하나의 Key에 여러 Value를 저장할 수 있으며 Key 기준으로 정렬한다. multimap<string, int> data; data.insert({\"A\", 10}); data.insert({\"A\", 20}); 2. 주요 명령어 + Big-O 명령어 기능 Big-O insert() 삽입 O(log n) erase(key) 해당 Key의 모든 원소 삭제 O(log n + k) find() Key 탐색 O(log n) count() Key 개수 O(log n + k) equal_range() 같은 Key의 범위 O(log n) 3. 사용하기 좋은 때 하나의 Key에 여러 데이터를 연결하면서 Key 정렬이 필요할 때 Key와 Value를 같이 비교해 정렬하고 싶다면 multiset<pair<...>, 비교함수> 같은 방법도 가능하다. 다만 Key-Value 자체가 목적이라면 map/multimap 이 보통 더 자연스럽다."
-      }
-    ]
-  },
-  {
-    "id": "stl-adaptor",
-    "title": "C++ stack·queue·priority_queue — 꺼내는 순서",
-    "summary": "stack은 마지막 값부터, queue는 처음 값부터 꺼낸다.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001"
-    ],
-    "topics": [
-      "cpp",
-      "ds",
-      "stl"
-    ],
-    "publication": "reference",
-    "references": [
-      {
-        "label": "자료구조 선택 기준",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-selection"
       },
-      {
-        "label": "C++ 문자열·STL 알고리즘",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-algorithm"
-      }
-    ],
-    "file": "data/materials/stl-adaptor.js",
-    "outline": [
       {
         "title": "stack — 마지막에 넣은 값 꺼내기",
         "text": "stack — 마지막에 넣은 값 꺼내기 1. 개념 / 구조 LIFO(Last In, First Out) — 후입선출 TOP ↓ [30] [20] [10] 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 맨 위에 추가 O(1) emplace() 맨 위에서 생성/추가 O(1) pop() 맨 위 삭제 O(1) top() 맨 위 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 괄호 짝 검사 계산기 DFS 되돌리기 / Undo"
@@ -234,128 +121,40 @@ window.TIL_LIBRARY_INDEX = [
         "text": "queue — 먼저 넣은 값 꺼내기 1. 개념 / 구조 FIFO(First In, First Out) — 선입선출 front → [10][20][30] ← back 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 뒤에 추가 O(1) emplace() 뒤에서 생성/추가 O(1) pop() 앞 삭제 O(1) front() 앞 확인 O(1) back() 뒤 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 BFS 대기열 먼저 들어온 작업부터 처리해야 하는 경우"
       },
       {
+        "title": "deque — 양쪽 끝에 추가·삭제",
+        "text": "deque — 양쪽 끝에 추가·삭제 1. 개념 / 구조 Double Ended Queue — 양쪽 끝에서 삽입/삭제할 수 있다. 앞 ↔ [10][20][30][40] ↔ 뒤 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_front() 앞 추가 O(1) push_back() 뒤 추가 O(1) pop_front() 앞 삭제 O(1) pop_back() 뒤 삭제 O(1) front() / back() 양 끝 확인 O(1) operator[] 인덱스 접근 O(1) 3. 장점 / 단점 / 사용하기 좋은 때 장점: 양쪽 끝의 삽입/삭제가 빠르고 인덱스 접근도 가능 단점: vector처럼 하나의 연속된 메모리 블록에 저장된다는 보장은 없음 좋은 경우: 양쪽에서 데이터를 넣고 빼는 경우, 슬라이딩 윈도우"
+      },
+      {
         "title": "priority_queue — 우선순위에 따라 꺼내기",
         "text": "priority_queue — 우선순위에 따라 꺼내기 1. 개념 / 구조 우선순위가 높은 원소를 먼저 꺼내는 자료구조이다. priority_queue 는 Heap을 사용한다. Heap은 완전 이진 트리 형태를 유지한다. 배열 형태로 효율적으로 표현할 수 있다. 전체 원소가 정렬되어 있는 것은 아니다. priority_queue<int> maxPQ; // 기본: 큰 값 우선 priority_queue<int, vector<int>, greater<int>> minPQ; // 작은 값 우선 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 삽입 O(log n) emplace() 생성 후 삽입 O(log n) pop() 최상위 우선순위 삭제 O(log n) top() 최상위 우선순위 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 최소/최대값을 반복해서 꺼낼 때 Dijkstra 우선순위가 있는 작업 처리"
-      }
-    ]
-  },
-  {
-    "id": "stl-algorithm",
-    "title": "C++ 문자열·STL 알고리즘",
-    "summary": "string 파싱, sort·find·reverse 사용 예시와 컨테이너별 정렬.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001"
-    ],
-    "topics": [
-      "cpp",
-      "ds",
-      "stl"
-    ],
-    "publication": "reference",
-    "references": [
-      {
-        "label": "vector / list / deque",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-sequence"
       },
-      {
-        "label": "stack / queue / priority_queue",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-adaptor"
-      },
-      {
-        "label": "그래프·트리 — 구조와 탐색",
-        "url": "https://jwh2077.github.io/TIL/#material=graph-tree"
-      }
-    ],
-    "file": "data/materials/stl-algorithm.js",
-    "outline": [
       {
         "title": "string — 문자열 다루기",
         "text": "string — 문자열 다루기 1. 개념 std::string 은 문자열을 저장하는 표준 컨테이너이다. 내부적으로 연속적인 문자 저장을 사용하며 인덱스로 접근할 수 있다. 2. 주요 명령어 + Big-O 명령어 기능 대략적인 Big-O str[index] 문자 접근 O(1) find() 문자열/문자 탐색 O(n) 수준 substr(pos, count) 부분 문자열 생성 O(count) reverse() 문자열 뒤집기 O(n) size() 문자열 길이 O(1) 3. 파싱 문자열을 원하는 단위로 나누어 데이터를 추출하는 작업이다. string str = \"HP:100\"; auto pos = str.find(':'); string key = str.substr(0, pos); string value = str.substr(pos + 1); 4. 뒤집기 reverse(str.begin(), str.end()); find() 는 위치를 반환하며 찾지 못하면 string::npos 를 반환한다."
       },
       {
-        "title": "파싱 — 문자열에서 필요한 값 나누기",
-        "text": "파싱 — 문자열에서 필요한 값 나누기 1. sort sort(vec.begin(), vec.end()); // 기본 오름차순 sort(vec.begin(), vec.end(), greater<>()); // 내림차순 일반적으로 O(n log n)이다. 2. find / reverse find(vec.begin(), vec.end(), value); // O(n) reverse(vec.begin(), vec.end()); // O(n) 3. 컨테이너별 정렬 sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우 lst.sort(); // list는 자체 sort 사용 list 는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 std::sort() 를 사용할 수 없고, 멤버 함수 list::sort() 를 사용한다."
-      }
-    ]
-  },
-  {
-    "id": "stl-selection",
-    "title": "자료구조 선택 기준",
-    "summary": "인덱스로 읽을지, 중간에서 지울지에 따라 골라보기.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001"
-    ],
-    "topics": [
-      "cpp",
-      "ds",
-      "stl"
-    ],
-    "publication": "reference",
-    "references": [
-      {
-        "label": "vector / list / deque",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-sequence"
+        "title": "STL 알고리즘 — sort·find·reverse와 컨테이너별 정렬",
+        "text": "STL 알고리즘 — sort·find·reverse와 컨테이너별 정렬 1. sort sort(vec.begin(), vec.end()); // 기본 오름차순 sort(vec.begin(), vec.end(), greater<>()); // 내림차순 일반적으로 O(n log n)이다. 2. find / reverse find(vec.begin(), vec.end(), value); // O(n) reverse(vec.begin(), vec.end()); // O(n) 3. 컨테이너별 정렬 sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우 lst.sort(); // list는 자체 sort 사용 list 는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 std::sort() 를 사용할 수 없고, 멤버 함수 list::sort() 를 사용한다."
       },
       {
-        "label": "set / map · 중복과 정렬",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-associative"
+        "title": "Graph",
+        "text": "Graph DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리"
       },
       {
-        "label": "stack / queue / priority_queue",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-adaptor"
-      }
-    ],
-    "file": "data/materials/stl-selection.js",
-    "outline": [
+        "title": "Tree",
+        "text": "Tree 1. 개념 부모-자식 관계를 가지는 계층적인 자료구조이다. [1] Root / \\ [2] [3] / [4] Leaf 2. 용어 용어 의미 Root 가장 위의 노드 Parent 부모 노드 Child 자식 노드 Leaf 자식이 없는 노드 Edge 노드와 노드를 연결하는 간선 3. 종류 Binary Tree Binary Search Tree Heap"
+      },
       {
-        "title": "자료구조 선택 기준",
-        "text": "자료구조 선택 기준 필요한 상황 추천 자료구조 이유 인덱스 접근 vector 임의 접근 O(1) 끝에서 추가/삭제 vector 평균 O(1) 양쪽 끝에서 추가/삭제 deque 양쪽 O(1) 중간 삽입/삭제 + 위치 iterator 보유 list 연결 변경으로 처리 중복 없는 정렬 데이터 set 정렬 + 중복 X 중복 없는 빠른 검색 unordered_set Hash Table 평균 O(1) Key-Value + 정렬 map Key 기준 정렬 Key-Value + 빠른 검색 unordered_map Hash Table 평균 O(1) Key 중복 + 정렬 multimap 같은 Key 여러 개 가능 후입선출 stack LIFO 선입선출 queue FIFO 최소/최대 우선 처리 priority_queue Heap"
-      }
-    ]
-  },
-  {
-    "id": "concept-bigo",
-    "title": "Big-O · 시간 복잡도",
-    "summary": "데이터가 많아질 때 처리할 일이 얼마나 늘어나는지.",
-    "kind": "file",
-    "topic": "stl",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001"
-    ],
-    "topics": [
-      "ds"
-    ],
-    "publication": "reference",
-    "references": [
-      {
-        "label": "자료구조 선택 기준",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-selection"
-      }
-    ],
-    "file": "data/materials/concept-bigo.js",
-    "outline": [
+        "title": "STL이란?",
+        "text": "STL이란? 1. 핵심 구성 구성 역할 예시 Container 데이터 저장 vector, list, set, map Iterator 컨테이너의 원소를 가리키고 이동 begin(), end() Algorithm 정렬/탐색/변경 등의 작업 sort(), find(), reverse() vector<int> vec = {3, 1, 2}; sort(vec.begin(), vec.end());"
+      },
       {
         "title": "Big-O 표기법",
         "text": "Big-O 표기법 1. 개념 입력 크기 n 이 커질 때 알고리즘의 실행 시간이나 필요한 공간이 어떻게 증가하는지를 나타내는 표기법이다. 표기 의미 예시 O(1) 입력 크기와 관계없이 일정 vector 인덱스 접근, stack top O(log n) 범위를 줄여가며 처리 set/map 탐색 O(n) 데이터 수에 비례 순차 탐색 O(n log n) 효율적인 정렬에서 자주 등장 sort() O(n²) 데이터 수의 제곱에 비례 중첩 반복문 Big-O는 실제 시간이 몇 초인지가 아니라, 입력 크기가 증가할 때 성능이 증가하는 정도를 표현한다."
+      },
+      {
+        "title": "자료구조 선택 기준",
+        "text": "자료구조 선택 기준 필요한 상황 추천 자료구조 이유 인덱스 접근 vector 임의 접근 O(1) 끝에서 추가/삭제 vector 평균 O(1) 양쪽 끝에서 추가/삭제 deque 양쪽 O(1) 중간 삽입/삭제 + 위치 iterator 보유 list 연결 변경으로 처리 중복 없는 정렬 데이터 set 정렬 + 중복 X 중복 없는 빠른 검색 unordered_set Hash Table 평균 O(1) Key-Value + 정렬 map Key 기준 정렬 Key-Value + 빠른 검색 unordered_map Hash Table 평균 O(1) Key 중복 + 정렬 multimap 같은 Key 여러 개 가능 후입선출 stack LIFO 선입선출 queue FIFO 최소/최대 우선 처리 priority_queue Heap"
       }
     ]
   },
@@ -798,7 +597,7 @@ window.TIL_LIBRARY_INDEX = [
   {
     "id": "unreal-multiplayer-basics",
     "title": "Unreal 멀티플레이 — 클래스 역할·서버·복제",
-    "summary": "서버 종류, 클라이언트 접속 흐름, GameMode·PlayerController 등 클래스별 위치와 복제 범위.",
+    "summary": "서버·클래스별 역할, 접속 흐름과 Property Replication의 방향·Replicated·DOREPLIFETIME 설정.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -806,12 +605,13 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "publication": "reference",
     "status": "멀티플레이 개념 정리",
-    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md / 10-5 서버.txt",
+    "source_name": "CH4개인과제10.1발제.txt / UE_Multiplayer_Server_TIL.md / 10-5 서버.txt / 10-12숫자야구.txt",
     "source_url": "",
     "notice": "숫자 야구는 역할 구분을 설명하는 예시다. 과제 안내와 공부하며 남긴 질문은 관련 학습 기록에 있다.",
     "related_ids": [
       "20261001-study",
-      "20261005-chatx"
+      "20261005-chatx",
+      "20261012-chatx"
     ],
     "references": [
       {
@@ -829,6 +629,18 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "PIE·로컬 UI·NetMode 실행 구분",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-network-testing"
+      },
+      {
+        "label": "RPC 호출 조건과 채팅 전달",
+        "url": "#material=unreal-rpc"
+      },
+      {
+        "label": "Epic · Replicate Actor Properties",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/replicate-actor-properties-in-unreal-engine"
+      },
+      {
+        "label": "ChatX · 숫자 야구 판정·PlayerState 복제 코드",
+        "url": "https://github.com/jwh2077/ChatX/commit/91e041f876bbb86074db51efa01a3c6d7c832f55"
       }
     ],
     "file": "data/materials/unreal-multiplayer-basics.js",
@@ -850,8 +662,12 @@ window.TIL_LIBRARY_INDEX = [
         "text": "복제 대상과 HasAuthority() 공유할 필요가 없는 값을 모두 복제하지 않는다. HasAuthority()를 단순한 서버 여부 표시와 완전히 같은 뜻으로 사용하지 않는다. 항목 구분 복제 대상 GameState·PlayerState뿐 아니라 Actor·변수·Component 등도 대상이 될 수 있음 HasAuthority() 현재 Actor에 대한 Authority를 가지고 있는지 검사"
       },
       {
+        "title": "Property Replication(프로퍼티 레플리케이션) — 방향과 설정",
+        "text": "Property Replication(프로퍼티 레플리케이션) — 방향과 설정 프로퍼티 복제는 지정한 상태 값을 서버의 Authority에서 클라이언트의 Proxy로 전달한다. 클라이언트가 값을 바꿨다고 서버로 역방향 복제되지는 않는다. 서버에 처리를 요청하는 RPC와 구분한다. Actor의 bReplicates = true 설정 복제할 속성의 UPROPERTY() 에 Replicated 지정 Net/UnrealNetwork.h 포함 GetLifetimeReplicatedProps() 를 재정의하고 부모 함수를 호출한 뒤 DOREPLIFETIME(클래스명, 속성명) 으로 등록 모든 속성을 무조건 보내는 것이 아니라 공유할 속성을 선택한다. 이후 값의 변경을 전달하되, 전달 대상과 시점은 Actor의 관련성·복제 조건 등의 영향을 받는다. 매번 바뀐 중간 값이 모두 이벤트처럼 전달된다는 의미는 아니다. ChatX에서 복제한 값 CXPlayerState : PlayerNameString, CurrentGuessCount, MaxGuessCount CXPlayerController : NotificationText 91e041f 커밋에서 각 속성에 Replicated를 지정하고 GetLifetimeReplicatedProps의 DOREPLIFETIME에 등록했다. PlayerState의 플레이어 정보와 Controller 소유자에게 표시할 알림을 나눠 둔 예다. 위젯 자체를 복제하는 방식은 아니다."
+      },
+      {
         "title": "역할을 나누는 예 — 숫자 야구",
-        "text": "역할을 나누는 예 — 숫자 야구 클라이언트: 숫자 입력 서버: 정답과 비교 서버: Strike / Ball 판정 공유 상태 전달 클라이언트: 결과 표시"
+        "text": "역할을 나누는 예 — 숫자 야구 클라이언트: 숫자 입력 서버: 정답과 비교 서버: Strike / Ball 판정 공유 상태 전달 클라이언트: 결과 표시 GameMode에 둔 함수 GenerateSecretNumber : 1~9 배열에서 하나씩 뽑고 제거해 세 자리 정답 생성 IsGuessNumberString : 입력 후보의 길이·숫자·0 포함 여부 검사 JudgeResult : 같은 위치면 Strike, 다른 위치에 포함되면 Ball, 둘 다 없으면 OUT IncreaseGuessCount / JudgeGame / ResetGame : 시도 횟수 증가·게임 종료 판단·새 정답과 횟수 초기화 이 코드에서 더 점검할 부분 91e041f 기준으로 TSet에 넣은 문자 수를 검사하지 않아 중복 숫자가 통과할 수 있다. AllPlayerControllers에 접속한 Controller를 추가하는 코드도 빠져 있으며, JudgeGame과 ResetGame이 플레이어 순회 안에서 호출된다. 함수가 작성된 상태와 게임 전체의 정상 동작은 구분해야 한다."
       },
       {
         "title": "PIE와 ?Listen 구분",
@@ -947,6 +763,10 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "Unreal C++ AItem 헤더 구조",
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260810-001"
+      },
+      {
+        "label": "ChatX · Slate·SlateCore 추가와 채팅 입력 연결",
+        "url": "https://github.com/jwh2077/ChatX/commit/4067d8093ea43a76d4bdf0d88827e0dbc62ea0ce"
       }
     ],
     "file": "data/materials/unreal-build-settings.js",
@@ -978,50 +798,6 @@ window.TIL_LIBRARY_INDEX = [
     ]
   },
   {
-    "id": "graph-tree",
-    "title": "그래프·트리 — 구조와 탐색",
-    "summary": "인접 리스트, BFS·DFS 비교, 트리의 부모·자식 관계와 기본 용어.",
-    "kind": "file",
-    "topic": "ds",
-    "status": "개념 정리 · 기존 문서에서 분리",
-    "source_name": "자료구조.html",
-    "source_url": "data/guides/stl-reference.html",
-    "related_ids": [
-      "20260717-001",
-      "20260727-001",
-      "20260728-001"
-    ],
-    "topics": [
-      "ds"
-    ],
-    "publication": "reference",
-    "references": [
-      {
-        "label": "vector / list / deque",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-sequence"
-      },
-      {
-        "label": "stack / queue / priority_queue",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-adaptor"
-      },
-      {
-        "label": "C++ 문자열·STL 알고리즘",
-        "url": "https://jwh2077.github.io/TIL/#material=stl-algorithm"
-      }
-    ],
-    "file": "data/materials/graph-tree.js",
-    "outline": [
-      {
-        "title": "Graph",
-        "text": "Graph DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리"
-      },
-      {
-        "title": "Tree",
-        "text": "Tree 1. 개념 부모-자식 관계를 가지는 계층적인 자료구조이다. [1] Root / \\ [2] [3] / [4] Leaf 2. 용어 용어 의미 Root 가장 위의 노드 Parent 부모 노드 Child 자식 노드 Leaf 자식이 없는 노드 Edge 노드와 노드를 연결하는 간선 3. 종류 Binary Tree Binary Search Tree Heap"
-      }
-    ]
-  },
-  {
     "id": "unreal-network-testing",
     "title": "Unreal 전용 서버 — 실행 설정과 연결·소유 관계",
     "summary": "전용 서버와 두 클라이언트의 관계, 실행 위치, NetDriver의 연결 관리와 Owner를 따라 Owning Connection을 찾는 흐름.",
@@ -1032,7 +808,7 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "publication": "reference",
     "status": "멀티플레이 실행·디버깅",
-    "source_name": "10-6.txt / 스크린샷 2026-10-06 153305.png / 10.07.txt",
+    "source_name": "10-6.txt / 스크린샷 2026-10-06 153305.png / 10.07.txt / 10-11.txt / 10-12멀티쳇.txt",
     "source_url": "",
     "related_ids": [
       "20261006-chatx",
@@ -1082,6 +858,10 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "RPC 호출 조건",
         "url": "#material=unreal-rpc"
+      },
+      {
+        "label": "ChatX · IsLocalController와 출력 도우미",
+        "url": "https://github.com/jwh2077/ChatX/commit/66da914e921c26205327343144a6778b1ca7a565"
       }
     ],
     "file": "data/materials/unreal-network-testing.js",
@@ -1103,8 +883,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "멤버가 있어도 연결은 없을 수 있다 ServerConnection 멤버가 선언되어 있다는 것과 실제 연결 객체를 가리킨다는 것은 다르다. ServerConnection == nullptr : 포인터에 연결 객체가 없다. 서버 쪽에서도 이 값은 nullptr이다. ClientConnections 가 빈 배열: 배열은 있지만 담긴 클라이언트 연결이 없다. “연결이 있다”는 말은 멤버 이름이 존재한다는 뜻이 아니라, 그 안에 실제 연결이 잡혀 있다는 뜻으로 읽어야 한다."
       },
       {
-        "title": "Ownership — has-a·Attach·Authority와 구분",
-        "text": "Ownership — has-a·Attach·Authority와 구분 Owner는 이 Actor의 소유자로 지정한 Actor다. 그 관계를 따라 플레이어의 PlayerController에 도달하면 해당 플레이어의 Owning Connection을 찾을 수 있다. 무기를 Pawn의 소유로 지정하는 예 // 관계 설명용 예시: 서버에서 소유 관계 설정 Weapon->SetOwner(Pawn); 무기 Actor → Owner인 Pawn → Pawn을 조종하는 PlayerController → 해당 플레이어의 NetConnection 이 예시는 프로젝트에 적용을 마쳤다는 뜻이 아니다. Owner를 지정한 뒤 연결을 찾는 코드 흐름은 다음 항목에서 이어진다. 무기를 가지고 있는 것과 Owner 지정은 다르다 캐릭터가 무기 포인터를 멤버로 보관하는 것은 has-a 관계로 볼 수 있다. 하지만 포인터에 넣는 것만으로 Unreal의 Owner가 자동 설정되지는 않는다. 무기를 손에 Attach 하는 것도 공간적으로 붙이는 작업이므로 별도다. Ownership과 Authority도 다르다. 어떤 클라이언트의 소유인지 정하는 것과 Actor 상태를 결정할 권한은 구분한다. Owner를 지정했다고 서버의 판정 권한이 클라이언트로 넘어가지는 않는다."
+        "title": "Ownership(오너십·오너쉽)과 패밀리 — 소유 관계",
+        "text": "Ownership(오너십·오너쉽)과 패밀리 — 소유 관계 Owner는 이 Actor의 소유자로 지정한 Actor다. 그 관계를 따라 플레이어의 PlayerController에 도달하면 해당 플레이어의 Owning Connection을 찾을 수 있다. 수업 메모에서 말하는 패밀리 는 PlayerController·Pawn·무기처럼 Owner로 이어지는 소유 관계를 가리킨다. 별도의 NetRole 이름은 아니며, 같은 소유 관계에 들어갔다고 모든 Actor가 AutonomousProxy가 되는 것은 아니다. 무기를 Pawn의 소유로 지정하는 예 // 관계 설명용 예시: 서버에서 소유 관계 설정 Weapon->SetOwner(Pawn); 무기 Actor → Owner인 Pawn → Pawn을 조종하는 PlayerController → 해당 플레이어의 NetConnection 이 예시는 프로젝트에 적용을 마쳤다는 뜻이 아니다. Owner를 지정한 뒤 연결을 찾는 코드 흐름은 다음 항목에서 이어진다. 무기를 가지고 있는 것과 Owner 지정은 다르다 캐릭터가 무기 포인터를 멤버로 보관하는 것은 has-a 관계로 볼 수 있다. 하지만 포인터에 넣는 것만으로 Unreal의 Owner가 자동 설정되지는 않는다. 무기를 손에 Attach 하는 것도 공간적으로 붙이는 작업이므로 별도다. Ownership과 Authority도 다르다. 어떤 클라이언트의 소유인지 정하는 것과 Actor 상태를 결정할 권한은 구분한다. Owner를 지정했다고 서버의 판정 권한이 클라이언트로 넘어가지는 않는다."
       },
       {
         "title": "GetNetConnection() — Owner에서 연결까지",
@@ -1116,11 +896,11 @@ window.TIL_LIBRARY_INDEX = [
       },
       {
         "title": "전용 서버 테스트 — PIE 설정",
-        "text": "전용 서버 테스트 — PIE 설정 설정 위치: Editor Preferences → Level Editor → Play 설정 선택 / 용도 Play Net Mode Play as Client — 클라이언트 창과 백그라운드 전용 서버 실행 Run Under One Process 끄기 — 창마다 프로세스를 나눠 테스트 Always On Top 선택 사항. 테스트 창을 다른 창 위에 표시 설정할 때 참고 Run Under One Process를 켜도 멀티플레이 테스트는 가능하다. 빠르게 실행할 수 있지만 실제로 프로세스를 나눈 환경과는 차이가 있다. Play as Client는 전용 서버를 실행하므로 Launch Separate Server를 반드시 켤 필요는 없다. 이 옵션은 현재 모드에서 요구하지 않아도 서버를 따로 실행할 때 사용한다. 10월 6일 남긴 실제 설정 화면. 이미지를 누르면 크게 볼 수 있다."
+        "text": "전용 서버 테스트 — PIE 설정 설정 위치: Editor Preferences → Level Editor → Play 설정 선택 / 용도 Play Net Mode Play as Client — 클라이언트 창과 백그라운드 전용 서버 실행 Run Under One Process 끄기 — 창마다 프로세스를 나눠 테스트 Always On Top 선택 사항. 테스트 창을 다른 창 위에 표시 설정할 때 참고 Run Under One Process를 켜도 멀티플레이 테스트는 가능하다. 빠르게 실행할 수 있지만 실제로 프로세스를 나눈 환경과는 차이가 있다. Play as Client는 전용 서버를 실행하므로 Launch Separate Server를 반드시 켤 필요는 없다. 이 옵션은 현재 모드에서 요구하지 않아도 서버를 따로 실행할 때 사용한다. 10월 6일 남긴 실제 설정 화면. 이미지를 누르면 크게 볼 수 있다. 에디터를 닫아도 빌드가 막힐 때 서버를 별도 프로세스로 실행했다면 에디터 종료 후에도 서버 프로세스가 남아 있는지 확인한다. 메모에 남긴 점검 항목이며, 모든 빌드 오류가 이 원인이라는 뜻은 아니다."
       },
       {
         "title": "내 화면에만 UI 표시 — IsLocalController()",
-        "text": "내 화면에만 UI 표시 — IsLocalController() PlayerController에서 로컬 플레이어의 컨트롤러인지 검사한다. 로컬이 아니면 반환하고, 로컬일 때만 UI 처리를 이어간다. // PlayerController 멤버 함수 안에서 if (!IsLocalController()) { return; } // 이 로컬 플레이어의 UI 처리 !IsLocalController() 와 IsLocalController() == false 는 같은 조건이다. 리슨 서버의 방장도 로컬 플레이어다. 로컬 = 서버가 아님 으로 구분하면 안 된다. 두 화면에 같은 출력이 보일 때 PrintString의 디버그 출력인지, UI 위젯이 양쪽에 생성된 것인지 먼저 구분한다. 위젯이라면 생성 위치·소유 대상·중복 호출을 살펴본다. 프로세스를 나누는 설정만으로 UI 코드가 고쳐지지는 않는다."
+        "text": "내 화면에만 UI 표시 — IsLocalController() PlayerController에서 로컬 플레이어의 컨트롤러인지 검사한다. 로컬이 아니면 반환하고, 로컬일 때만 UI 처리를 이어간다. // PlayerController 멤버 함수 안에서 if (!IsLocalController()) { return; } // 이 로컬 플레이어의 UI 처리 !IsLocalController() 와 IsLocalController() == false 는 같은 조건이다. 리슨 서버의 방장도 로컬 플레이어다. 로컬 = 서버가 아님 으로 구분하면 안 된다. 두 화면에 같은 출력이 보일 때 PrintString의 디버그 출력인지, UI 위젯이 양쪽에 생성된 것인지 먼저 구분한다. 위젯이라면 생성 위치·소유 대상·중복 호출을 살펴본다. 프로세스를 나누는 설정만으로 UI 코드가 고쳐지지는 않는다. ChatX의 화면 출력과 서버 로그 66da914 커밋의 MyPrintString() 은 Client·ListenServer에서는 AddOnScreenDebugMessage를, DedicatedServer·Standalone에서는 UE_LOG를 사용한다. 이는 이 프로젝트의 출력 분기이며 Standalone에서 화면 출력을 못 한다는 뜻은 아니다. GetNetModeString() 은 Client·StandAlone·Server 문자열로 구분한다."
       },
       {
         "title": "HP 판정은 서버, 화면 표시는 클라이언트",
@@ -1161,6 +941,10 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "Epic · Actor Owner and Owning Connection",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/actor-owner-and-owning-connection-in-unreal-engine"
+      },
+      {
+        "label": "ChatX · Pawn BeginPlay·PossessedBy 역할 로그",
+        "url": "https://github.com/jwh2077/ChatX/commit/7ca0ed21157497e83f705322dcc5685f2acaf8f9"
       }
     ],
     "file": "data/materials/unreal-network-roles.js",
@@ -1186,7 +970,7 @@ window.TIL_LIBRARY_INDEX = [
   {
     "id": "unreal-rpc",
     "title": "Unreal RPC — Server·Client·NetMulticast 호출 조건",
-    "summary": "RPC의 호출 위치와 실행 대상을 구분하고, 소유 연결·Reliable·WithValidation 조건을 찾아본다.",
+    "summary": "RPC 호출 조건과 소유 연결, PlayerController별 채팅 전달, Reliable·WithValidation 옵션.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -1194,7 +978,7 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "publication": "reference",
     "status": "멀티플레이",
-    "source_name": "10-12.txt / 스크린샷 2026-10-12 012554.png / 스크린샷 2026-10-12 013034.png",
+    "source_name": "10-12.txt / 스크린샷 2026-10-12 012554.png / 스크린샷 2026-10-12 013034.png / 10-12멀티쳇.txt",
     "source_url": "",
     "related_ids": [
       "20261012-chatx"
@@ -1215,6 +999,22 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "Epic · Actor Owner and Owning Connection",
         "url": "https://dev.epicgames.com/documentation/unreal-engine/actor-owner-and-owning-connection-in-unreal-engine"
+      },
+      {
+        "label": "Epic · TActorIterator",
+        "url": "https://dev.epicgames.com/documentation/unreal-engine/API/Runtime/Engine/TActorIterator"
+      },
+      {
+        "label": "ChatX · 채팅 RPC·접속 알림 코드",
+        "url": "https://github.com/jwh2077/ChatX/commit/7ca0ed21157497e83f705322dcc5685f2acaf8f9"
+      },
+      {
+        "label": "ChatX · GameMode로 채팅 판정 연결",
+        "url": "https://github.com/jwh2077/ChatX/commit/91e041f876bbb86074db51efa01a3c6d7c832f55"
+      },
+      {
+        "label": "프로퍼티 복제와 숫자 야구 상태",
+        "url": "#material=unreal-multiplayer-basics"
       }
     ],
     "file": "data/materials/unreal-rpc.js",
@@ -1226,6 +1026,22 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "소유 연결에 따라 달라지는 실행",
         "text": "소유 연결에 따라 달라지는 실행 클라이언트에서 Server RPC 자신이 소유한 복제 Actor에서 요청한다. 다른 클라이언트 소유 Actor나 소유 연결이 없는 Actor를 통해 보낸 요청은 서버로 전달되지 않는다. 서버에서 Client RPC 해당 Actor의 Owning Connection에 연결된 클라이언트가 대상이다. 서버 소유 또는 연결이 없는 경우에는 서버에서 실행되므로, Client라는 이름만으로 원격 클라이언트 실행을 보장하지 않는다. NetMulticast 서버에서 호출하면 서버와 그 Actor가 관련 있는 클라이언트에서 실행한다. 클라이언트에서 호출하면 호출한 클라이언트에서만 실행한다. PlayerController는 기본적으로 서버와 소유 클라이언트에만 있으므로 전체 플레이어에게 보내는 방송 경로로 생각하면 안 된다. Owner가 없다는 것과 서버가 Authority를 갖는다는 것은 서로 다른 기준이다. Owner는 Pawn 등을 거쳐 PlayerController로 이어질 수도 있어 SetOwner(PlayerController)를 직접 호출하는 형태만 가능한 것은 아니다."
+      },
+      {
+        "title": "전체 채팅 전달 — PlayerController마다 Client RPC 호출",
+        "text": "전체 채팅 전달 — PlayerController마다 Client RPC 호출 서버의 PlayerController A에서 NetMulticast를 호출해도, PlayerController A가 없는 클라이언트 B에는 전달되지 않는다. 채팅 메모의 코드는 서버에서 각 PlayerController를 찾아 Client RPC를 호출한다. 클라이언트 A → Server RPC → 서버 ├ PlayerController A의 Client RPC → 클라이언트 A └ PlayerController B의 Client RPC → 클라이언트 B 채팅 전달을 처음 연결한 7ca0ed2 커밋의 함수다. 이후 숫자 야구 단계에서는 서버의 처리를 GameMode로 옮겼다. void ACXPlayerController::ServerRPCPrintChatMessageString_Implementation( const FString& InChatMessageString) { for (TActorIterator It(GetWorld()); It; ++It) { ACXPlayerController* CXPlayerController = *It; if (IsValid(CXPlayerController) == true) { CXPlayerController->ClientRPCPrintChatMessageString( InChatMessageString); } } }"
+      },
+      {
+        "title": "TActorIterator — 배열 대신 월드의 Actor 순회",
+        "text": "TActorIterator — 배열 대신 월드의 Actor 순회 TActorIterator<ACXPlayerController> It(GetWorld()) 는 지정한 월드에서 해당 클래스의 Actor를 순회한다. 헤더는 EngineUtils.h 다. It : 현재 가리킬 Actor가 있는지 검사 ++It : 다음 Actor로 이동 *It : 현재 Actor 포인터를 꺼냄 for (auto Item : Items) 가 이미 가진 컨테이너의 원소를 순회하는 것과 달리, 이 예시는 월드에서 PlayerController를 찾는다. 순회 대상이 다르며 클라이언트에서 돌린다고 서버의 모든 PlayerController를 찾을 수 있는 것은 아니다."
+      },
+      {
+        "title": "숫자 야구로 확장 — Server RPC에서 GameMode로 전달",
+        "text": "숫자 야구로 확장 — Server RPC에서 GameMode로 전달 91e041f 커밋에서는 ServerRPCPrintChatMessageString_Implementation() 이 GameMode를 가져와 PrintChatMessageString(this, InChatMessageString) 을 호출한다. 메시지의 숫자 검사·판정과 각 PlayerController로 보내는 처리는 GameMode에 둔다. 로컬 Controller: 플레이어 정보와 입력을 묶어 Server RPC 요청 서버 Controller: GameMode에 보낸 플레이어와 메시지 전달 GameMode: 숫자 입력이면 판정·횟수 처리, 아니면 일반 채팅 처리 각 Controller의 Client RPC: 해당 클라이언트에 결과 출력 이 단계의 게임 규칙 코드는 아직 점검할 부분이 있다. 복제 문서의 숫자 야구 예시에서 작성 범위와 주의점을 함께 볼 수 있다."
+      },
+      {
+        "title": "접속 알림 — GameState의 NetMulticast 사용",
+        "text": "접속 알림 — GameState의 NetMulticast 사용 접속 알림은 GameMode::OnPostLogin() 에서 GameState::MulticastRPCBroadcastLoginMessage() 를 호출한다. PlayerController 하나의 소유 클라이언트로 보내는 경로와 달리, GameState를 통해 접속 알림을 전달하는 구조다. ChatX 구현은 HasAuthority() == false 인 곳에서만 로컬 PlayerController를 얻어 출력한다. 전용 서버 실습 코드이며, 이 조건 그대로라면 리슨 서버 호스트의 출력 분기는 실행되지 않는다. GetPlayerController(GetWorld(), 0) 의 0은 서버 번호가 아니라 해당 월드의 플레이어 인덱스다."
       },
       {
         "title": "선언·구현 — UFUNCTION과 _Implementation",

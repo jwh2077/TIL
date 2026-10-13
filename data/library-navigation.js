@@ -1,4 +1,4 @@
-// 자료실 색인: 주제별로 기존 문서에 연결합니다.
+// 자료실 색인: 분야별 정리 노트에 연결합니다.
 window.TIL_LIBRARY_NAVIGATION = [
   {
     "id": "cpp",
@@ -38,35 +38,10 @@ window.TIL_LIBRARY_NAVIGATION = [
     "hint": "선택 기준·컨테이너·문자열과 탐색",
     "topics": [
       {
-        "id": "selection",
-        "title": "개념·선택 기준",
+        "id": "notes",
+        "title": "종합 정리",
         "documents": [
-          "stl-foundation",
-          "concept-bigo",
-          "stl-selection"
-        ]
-      },
-      {
-        "id": "containers",
-        "title": "컨테이너 사용법",
-        "documents": [
-          "stl-sequence",
-          "stl-associative",
-          "stl-adaptor"
-        ]
-      },
-      {
-        "id": "strings",
-        "title": "문자열·정렬·검색",
-        "documents": [
-          "stl-algorithm"
-        ]
-      },
-      {
-        "id": "graph",
-        "title": "그래프·트리",
-        "documents": [
-          "graph-tree"
+          "stl-foundation"
         ]
       }
     ]
