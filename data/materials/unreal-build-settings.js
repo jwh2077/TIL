@@ -16,7 +16,7 @@ window.TIL_FILES["data/materials/unreal-build-settings.js"] = [
     "notice": "ChatX와 ProjectPriest의 설정을 예로 정리했다. 코드는 설정과 경로를 설명하기 위한 예시다.",
     "sections": [
       {
-        "title": "필요한 설정 찾기",
+        "title": "Build.cs에서 설정할 항목 찾기",
         "html": "<table><thead><tr><th scope=\"col\">하려는 일</th><th scope=\"col\">설정</th></tr></thead><tbody><tr><td>다른 모듈의 기능 사용</td><td>DependencyModuleNames</td></tr><tr><td>헤더 검색 경로 추가</td><td>IncludePaths</td></tr><tr><td>다른 모듈에도 공개</td><td>Public</td></tr><tr><td>현재 모듈 안에서만 사용</td><td>Private</td></tr></tbody></table>",
         "text": "Build.cs는 UBT에 모듈의 빌드 설정을 전달한다."
       },
@@ -75,6 +75,20 @@ window.TIL_FILES["data/materials/unreal-build-settings.js"] = [
       {
         "label": "ChatX · Slate·SlateCore 추가와 채팅 입력 연결",
         "url": "https://github.com/jwh2077/ChatX/commit/4067d8093ea43a76d4bdf0d88827e0dbc62ea0ce"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "모듈 추가",
+        "section": "모듈 추가 — DependencyModuleNames"
+      },
+      {
+        "label": "Public·Private",
+        "section": "모듈 의존성 — Public과 Private"
+      },
+      {
+        "label": "헤더 경로",
+        "section": "IncludePaths — 검색 기준과 하위 경로"
       }
     ]
   }

@@ -11,7 +11,7 @@ window.TIL_FILES["data/materials/velog-20260710-001.js"] = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "할당과 해제",
+        "title": "new·delete — 할당·해제와 메모리 문제",
         "html": "<table><thead><tr><th scope=\"col\">항목</th><th scope=\"col\">의미</th></tr></thead><tbody><tr><td>new / delete</td><td>동적 할당 / 해제</td></tr><tr><td>댕글링 포인터</td><td>해제된 메모리 주소 등을 계속 가리키는 포인터</td></tr><tr><td>메모리 누수</td><td>더 이상 쓰지 않는 할당 메모리를 해제하지 못하고 남김</td></tr></tbody></table>"
       },
       {

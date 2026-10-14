@@ -15,7 +15,7 @@ window.TIL_FILES["data/materials/stl-foundation.js"] = [
         "html": "\n<h3>1. 개념</h3>\n<p>자료구조는 데이터를 <strong>저장, 삽입, 삭제, 접근, 탐색</strong> 등 효율적으로 관리하기 위한 방법이다.</p>\n\n"
       },
       {
-        "title": "메모리에서의 저장",
+        "title": "메모리 — 연속 저장과 연결 저장",
         "html": "\n<h3>1. 연속적인 저장</h3>\n<p>데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다.</p>\n<pre>[10][20][30][40]</pre>\n<p>예: 배열, <code>vector</code></p>\n<h3>2. 불연속적인 저장</h3>\n<p>데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다.</p>\n<pre>[10] → [20] → [30]</pre>\n<p>예: <code>list</code>, 연결 기반 Tree</p>\n<blockquote>연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다.</blockquote>\n\n"
       },
       {
@@ -32,7 +32,7 @@ window.TIL_FILES["data/materials/stl-foundation.js"] = [
         ]
       },
       {
-        "title": "vector 크기 — 0부터 n까지 저장하려면 n+1칸",
+        "title": "vector 크기 — n+1칸이 필요한 경우",
         "text": "F(0)부터 F(n)까지 저장하려면 n+1칸이 필요하다. n칸만 만들면 마지막 인덱스는 n-1이다. 자료형의 크기를 키워도 배열의 인덱스 범위는 늘어나지 않는다."
       },
       {
@@ -92,12 +92,12 @@ window.TIL_FILES["data/materials/stl-foundation.js"] = [
         "html": "\n<h3>1. sort</h3>\n<pre><code>sort(vec.begin(), vec.end()); // 기본 오름차순\nsort(vec.begin(), vec.end(), greater&lt;&gt;()); // 내림차순</code></pre>\n<p>일반적으로 O(n log n)이다.</p>\n<h3>2. find / reverse</h3>\n<pre><code>find(vec.begin(), vec.end(), value); // O(n)\nreverse(vec.begin(), vec.end());     // O(n)</code></pre>\n<h3>3. 컨테이너별 정렬</h3>\n<pre><code>sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우\n\nlst.sort();                   // list는 자체 sort 사용</code></pre>\n<blockquote><code>list</code>는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 <code>std::sort()</code>를 사용할 수 없고, 멤버 함수 <code>list::sort()</code>를 사용한다.</blockquote>\n\n"
       },
       {
-        "title": "Graph",
+        "title": "그래프 — 정점과 간선",
         "text": "DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다.",
         "html": "\n<h3>1. 개념</h3>\n<p>정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다.</p>\n<h3>2. Vector를 이용한 인접 리스트</h3>\n<pre><code>vector&lt;vector&lt;int&gt;&gt; graph(4);\n\ngraph[0].push_back(1);\ngraph[0].push_back(2);</code></pre>\n<p>각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다.</p>\n<h3>3. 대표 알고리즘</h3>\n<table><tr><th>알고리즘</th><th>주로 사용하는 자료구조</th><th>목적</th></tr>\n<tr><td>BFS</td><td>Queue</td><td>너비 우선 탐색</td></tr>\n<tr><td>DFS</td><td>Stack / 재귀</td><td>깊이 우선 탐색</td></tr>\n<tr><td>Dijkstra</td><td>Priority Queue</td><td>한 시작점에서 최단 거리</td></tr>\n</table>\n\n"
       },
       {
-        "title": "Tree",
+        "title": "트리 — 부모와 자식 관계",
         "html": "\n<h3>1. 개념</h3>\n<p>부모-자식 관계를 가지는 계층적인 자료구조이다.</p>\n<pre>        [1] Root\n       /   \\\n     [2]   [3]\n     /\n   [4] Leaf</pre>\n<h3>2. 용어</h3>\n<table><tr><th>용어</th><th>의미</th></tr>\n<tr><td>Root</td><td>가장 위의 노드</td></tr>\n<tr><td>Parent</td><td>부모 노드</td></tr>\n<tr><td>Child</td><td>자식 노드</td></tr>\n<tr><td>Leaf</td><td>자식이 없는 노드</td></tr>\n<tr><td>Edge</td><td>노드와 노드를 연결하는 간선</td></tr>\n</table>\n<h3>3. 종류</h3><ul><li>Binary Tree</li><li>Binary Search Tree</li><li>Heap</li></ul>\n\n"
       },
       {
@@ -159,9 +159,49 @@ window.TIL_FILES["data/materials/stl-foundation.js"] = [
       "stl-associative": "set — 중복 없이 정렬",
       "stl-adaptor": "stack — 마지막에 넣은 값 꺼내기",
       "stl-algorithm": "string — 문자열 다루기",
-      "graph-tree": "Graph",
+      "graph-tree": "그래프 — 정점과 간선",
       "concept-bigo": "Big-O 표기법",
       "stl-selection": "자료구조 선택 기준"
-    }
+    },
+    "toc_groups": [
+      {
+        "title": "기초와 저장 방식",
+        "start": "자료구조"
+      },
+      {
+        "title": "순차 컨테이너",
+        "start": "vector — 인덱스 접근·뒤에 추가"
+      },
+      {
+        "title": "키로 찾는 컨테이너",
+        "start": "set — 중복 없이 정렬"
+      },
+      {
+        "title": "꺼내는 순서와 양쪽 접근",
+        "start": "stack — 마지막에 넣은 값 꺼내기"
+      },
+      {
+        "title": "문자열·STL 알고리즘",
+        "start": "string — 문자열 다루기"
+      },
+      {
+        "title": "그래프·트리·선택 기준",
+        "start": "그래프 — 정점과 간선"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "vector",
+        "section": "vector — 인덱스 접근·뒤에 추가"
+      },
+      {
+        "label": "map",
+        "section": "map — 키와 값 저장"
+      },
+      {
+        "label": "Big-O",
+        "section": "Big-O 표기법"
+      }
+    ]
   }
 ];

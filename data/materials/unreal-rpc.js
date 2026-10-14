@@ -18,11 +18,11 @@ window.TIL_FILES["data/materials/unreal-rpc.js"] = [
     ],
     "sections": [
       {
-        "title": "호출 위치와 실행 위치 구분",
+        "title": "RPC를 호출하는 곳과 실행되는 곳",
         "html": "<p>RPC는 네트워크를 통해 다른 곳에서 함수를 실행하도록 요청하는 방식이다. <code>Server</code>와 <code>Client</code>는 호출 출발지가 아니라 실행 방향을 나타낸다. 메모에서 다룬 세 종류는 다음처럼 구분한다.</p><pre><code>소유 클라이언트의 Server RPC\n  → 서버\n\n서버의 Client RPC\n  → Actor의 소유 클라이언트\n\n서버의 NetMulticast\n  → 서버 + 관련 클라이언트</code></pre><p>원격 호출에는 Actor와 필요한 컴포넌트의 복제 설정이 필요하다. 소리·효과 같은 일시적인 이벤트뿐 아니라 서버에 처리를 요청할 때도 쓴다.</p>"
       },
       {
-        "title": "소유 연결에 따라 달라지는 실행",
+        "title": "소유 연결에 따른 RPC 실행 조건",
         "html": "<h3>클라이언트에서 Server RPC</h3><p>자신이 소유한 복제 Actor에서 요청한다. 다른 클라이언트 소유 Actor나 소유 연결이 없는 Actor를 통해 보낸 요청은 서버로 전달되지 않는다.</p><h3>서버에서 Client RPC</h3><p>해당 Actor의 Owning Connection에 연결된 클라이언트가 대상이다. 서버 소유 또는 연결이 없는 경우에는 서버에서 실행되므로, Client라는 이름만으로 원격 클라이언트 실행을 보장하지 않는다.</p><h3>NetMulticast</h3><p>서버에서 호출하면 서버와 그 Actor가 관련 있는 클라이언트에서 실행한다. 클라이언트에서 호출하면 호출한 클라이언트에서만 실행한다. PlayerController는 기본적으로 서버와 소유 클라이언트에만 있으므로 전체 플레이어에게 보내는 방송 경로로 생각하면 안 된다.</p><p>Owner가 없다는 것과 서버가 Authority를 갖는다는 것은 서로 다른 기준이다. Owner는 Pawn 등을 거쳐 PlayerController로 이어질 수도 있어 SetOwner(PlayerController)를 직접 호출하는 형태만 가능한 것은 아니다.</p>"
       },
       {
@@ -87,6 +87,20 @@ window.TIL_FILES["data/materials/unreal-rpc.js"] = [
       {
         "label": "프로퍼티 복제와 숫자 야구 상태",
         "url": "#material=unreal-multiplayer-basics"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "호출·실행 위치",
+        "section": "RPC를 호출하는 곳과 실행되는 곳"
+      },
+      {
+        "label": "소유 연결",
+        "section": "소유 연결에 따른 RPC 실행 조건"
+      },
+      {
+        "label": "선언·구현",
+        "section": "선언·구현 — UFUNCTION과 _Implementation"
       }
     ]
   }

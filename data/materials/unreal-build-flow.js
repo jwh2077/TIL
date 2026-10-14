@@ -53,6 +53,16 @@ window.TIL_FILES["data/materials/unreal-build-flow.js"] = [
         "label": "Unreal C++ AItem 헤더 구조",
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260810-001"
       }
+    ],
+    "quick_links": [
+      {
+        "label": "빌드 순서",
+        "section": "Unreal 빌드 순서"
+      },
+      {
+        "label": "UHT 역할",
+        "section": "UHT의 역할 — 리플렉션 코드 생성"
+      }
     ]
   }
 ];

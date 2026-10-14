@@ -11,7 +11,7 @@ window.TIL_FILES["data/materials/unreal-containers.js"] = [
     "source_url": "data/guides/stl-reference.html",
     "sections": [
       {
-        "title": "Unreal Engine 자료구조",
+        "title": "TArray·TMap·TSet — 용도 비교",
         "html": "\n<table><tr><th>C++ STL</th><th>Unreal</th><th>기본 용도</th></tr>\n<tr><td><code>vector</code></td><td><code>TArray</code></td><td>동적 배열</td></tr>\n<tr><td><code>map</code></td><td><code>TMap</code></td><td>Key - Value</td></tr>\n<tr><td><code>set</code></td><td><code>TSet</code></td><td>중복 없는 집합</td></tr>\n</table>\n<blockquote>Unreal의 컨테이너는 STL과 내부 구현이 완전히 같은 것은 아니지만, 기본적인 용도를 비교하면 이해하기 쉽다.</blockquote>\n\n"
       },
       {
@@ -23,7 +23,7 @@ window.TIL_FILES["data/materials/unreal-containers.js"] = [
         "code": "TArray<int32> Scores;\nScores.Add(10);\nScores.Add(20);\n\nTMap<FName, int32> Stats;\nStats.Add(FName(TEXT(\"Damage\")), 10);\nif (const int32* Damage = Stats.Find(FName(TEXT(\"Damage\"))))\n{\n    // *Damage로 저장된 값 확인\n}\n\nTSet<int32> UniqueIds;\nUniqueIds.Add(1);\nUniqueIds.Add(1); // 같은 값 중복 추가를 비교할 예제"
       },
       {
-        "title": "예제 확인 항목",
+        "title": "컨테이너 예제 — 실행 전 확인할 항목",
         "items": [
           "사용 중인 Unreal 버전에서 예제 컴파일하기",
           "TArray의 Num과 인덱스 범위 살펴보기",
@@ -64,6 +64,20 @@ window.TIL_FILES["data/materials/unreal-containers.js"] = [
       {
         "label": "set / map · 중복과 정렬",
         "url": "https://jwh2077.github.io/TIL/#material=stl-associative"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "자료구조",
+        "section": "TArray·TMap·TSet — 용도 비교"
+      },
+      {
+        "label": "STL 비교",
+        "section": "STL과 비교하기"
+      },
+      {
+        "label": "문법 예제",
+        "section": "기본 문법 예제 · 실행 전"
       }
     ]
   }

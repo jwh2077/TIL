@@ -5,7 +5,12 @@
   const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const kinds = {file:'문서 원본',velog:'Velog 원본',note:'메모 원본'};
   const topics = {cpp:'C / C++',unreal:'Unreal',ds:'자료구조',stl:'STL',oop:'객체지향 · 설계',memory:'포인터 · 메모리'};
-  const state = {kind:'all',fields:[],publication:'all',query:'',tags:[],sort:'topic'};
+  const storageKey='til-library-preferences';
+  let preferences={};
+  try {preferences=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};} catch {}
+  const pins=new Set((Array.isArray(preferences.pins)?preferences.pins:[]).filter(id=>materials.some(r=>r.id===id)));
+  const state = {kind:'all',fields:[],publication:'all',query:'',tags:[],sort:'topic',subject:preferences.subject||'unreal',page:0};
+  function savePreferences(){try{localStorage.setItem(storageKey,JSON.stringify({pins:[...pins],subject:state.subject}));}catch{}}
   const fields = r => r.topics || [r.topic];
   const classification = r => fields(r).map(id=>topics[id]||id).join(' · ');
   const pending=new Map(); let token = 0, requestedSection = null;
@@ -27,7 +32,17 @@
   const contains = (text, query) => queryTerms(query).every(term => String(text).toLocaleLowerCase().includes(term));
   const matchesQuery = (r, query) => contains([r.title,r.summary,classification(r),...(r.outline||[]).map(s=>s.text)].join(' '), query);
   const subjectGroups = window.TIL_LIBRARY_NAVIGATION || [];
-  const expandedSubjects = new Set();
+  if(!subjectGroups.some(g=>g.id===state.subject)&&!['all','pinned','unfiled'].includes(state.subject))state.subject='all';
+  const groupIds=g=>g.topics.flatMap(t=>t.documents);
+  const indexed=new Set(subjectGroups.flatMap(groupIds));
+  function groupedSections(r) {
+    const sections=(r.outline||[]).map((s,index)=>({...s,index}));
+    const groups=(r.toc_groups||[]).map(g=>({...g,index:sections.findIndex(s=>s.title===g.start)})).filter(g=>g.index>=0).sort((a,b)=>a.index-b.index);
+    if(!groups.length)return [{title:'',sections}];
+    const result=groups.map((g,i)=>({title:g.title,sections:sections.slice(g.index,groups[i+1]?.index??sections.length)}));
+    if(groups[0].index)result.unshift({title:'',sections:sections.slice(0,groups[0].index)});
+    return result;
+  }
   const relevance = (r, query) => !query ? 0 : contains(r.title,query) ? 3 : (r.outline||[]).some(s=>contains(s.title,query)) ? 2 : contains(r.summary,query) ? 1 : 0;
   function results() {
     const query = state.query.trim().toLocaleLowerCase();
@@ -35,33 +50,31 @@
   }
   function list() {
     controls(); $('#materialOutline').hidden = true;
-    $('#libraryPage').innerHTML = `<header><div class="eyebrow">NOTES</div><h1>자료실</h1><p class="intro">필요한 개념과 사용법, 코드 예제를 주제별로 찾아보세요. 관련 내용은 기존 문서에 보강하고, 이어 볼 자료는 서로 연결합니다.</p><label for="librarySearch" class="side-title" style="display:block;margin-left:0">자료 검색</label><input id="librarySearch" class="library-search" type="search" placeholder="예: push_back, GameMode, 헤더 경로" value="${esc(state.query)}"></header><p id="libraryCount" class="count"></p><div id="libraryCards" class="library-index"></div>`;
+    $('#libraryPage').innerHTML = `<header><h1>자료실</h1><label for="librarySearch">자료 검색</label><input id="librarySearch" class="library-search" type="search" value="${esc(state.query)}"></header><div class="library-explorer"><nav id="librarySubjects" aria-label="자료실 분야"></nav><div class="library-results"><p id="libraryCount" class="count" role="status"></p><div id="libraryCards" class="library-index"></div><div id="libraryPagination" class="library-pagination"></div></div></div>`;
     cards();
-    $('#librarySearch').addEventListener('input',e=>{state.query=e.target.value;cards();});
+    $('#librarySearch').addEventListener('input',e=>{state.query=e.target.value;state.page=0;cards();});
   }
   function materialRow(r) {
     const matches = state.query.trim() ? (r.outline||[]).map((s,index)=>({...s,index})).filter(s=>contains(s.text,state.query)) : [];
-    return `<article class="material-row"><button type="button" class="material-open" data-material="${esc(r.id)}"><span><strong>${esc(r.title)}</strong>${r.publication==='draft'?'<small class="topic-badge">초안</small>':''}<span class="material-summary">${esc(r.summary)}</span></span><span aria-hidden="true">→</span></button>${matches.length?`<details class="material-matches"><summary>검색어가 있는 항목 ${matches.length}개</summary><div class="material-contents">${matches.map(s=>`<button type="button" data-material="${esc(r.id)}" data-open-section="${s.index}">${esc(s.title)} →</button>`).join('')}</div></details>`:''}</article>`;
+    const jump=s=>`<button type="button" data-material="${esc(r.id)}" data-open-section="${s.index}">${esc(s.title)} →</button>`;
+    const shortTitle=s=>s.title.split(' — ')[0];
+    const shortcuts=(r.quick_links||[]).map(link=>({title:link.label,index:(r.outline||[]).findIndex(s=>s.title===link.section)})).filter(s=>s.index>=0);
+    if(!shortcuts.length)shortcuts.push(...(r.outline||[]).slice(0,2).map((s,index)=>({...s,index})));
+    return `<article class="material-row"><button type="button" class="material-pin" data-pin="${esc(r.id)}" aria-pressed="${pins.has(r.id)}" aria-label="${esc(r.title)} ${pins.has(r.id)?'고정 해제':'고정'}">${pins.has(r.id)?'★':'☆'}</button><button type="button" class="material-open" data-material="${esc(r.id)}"><strong>${esc(r.title)}</strong>${r.publication==='draft'?'<small class="topic-badge">초안</small>':''}</button><div class="material-jumps" aria-label="${esc(r.title)} 바로 이동">${shortcuts.map(s=>`<button type="button" data-material="${esc(r.id)}" data-open-section="${s.index}" aria-label="${esc(s.title)}로 이동">${esc(shortTitle(s))}</button>`).join('')}</div><button type="button" class="material-toc-toggle" data-row-toc="${esc(r.id)}" aria-expanded="false" aria-controls="outline-${esc(r.id)}">목차 ▾</button><div class="material-row-outline" id="outline-${esc(r.id)}" hidden>${groupedSections(r).map(g=>g.title?`<details><summary>${esc(g.title)}</summary><div class="material-contents">${g.sections.map(jump).join('')}</div></details>`:`<div class="material-contents">${g.sections.map(jump).join('')}</div>`).join('')}</div>${matches.length?`<div class="material-matches">${jump(matches[0])}${matches.length>1?`<details><summary>다른 일치 항목 ${matches.length-1}개</summary><div class="material-contents">${matches.slice(1).map(jump).join('')}</div></details>`:''}</div>`:''}</article>`;
   }
   function cards() {
-    const shown=results(); $('#libraryCount').textContent=`${shown.length}개 자료`;
-    const grouped=state.sort==='topic'&&!state.query.trim();
-    const shownIds=new Set(shown.map(r=>r.id));
-    const topicRows = topic => topic.documents.map(id=>shown.find(r=>r.id===id)).filter(Boolean);
-    const disclosure=(id,label,body,count,hint='')=>`<details class="material-subject" data-subject="${id}" ${expandedSubjects.has(id)?'open':''}><summary><span><strong>${esc(label)}</strong>${hint?`<small>${esc(hint)}</small>`:''}</span><span class="subject-count">${count}개 문서</span></summary><div>${body}</div></details>`;
-    const indexed = new Set(subjectGroups.flatMap(group=>group.topics.flatMap(topic=>topic.documents)));
-    const groups=subjectGroups.map(group=>{
-      const topics=group.topics.filter(topic=>topicRows(topic).length);
-      if(!topics.length)return '';
-      const ids=new Set(topics.flatMap(topic=>topic.documents).filter(id=>shownIds.has(id)));
-      const body=[...ids].map(id=>materialRow(shown.find(r=>r.id===id))).join('');
-      return disclosure(group.id,group.title,body,ids.size,group.hint);
-    }).join('');
-    const remaining=shown.filter(r=>!indexed.has(r.id));
-    $('#libraryCards').innerHTML=(grouped?groups+(remaining.length?disclosure('unfiled','기타 자료',remaining.map(materialRow).join(''),remaining.length):''):shown.map(materialRow).join(''))||'<div class="empty">조건에 맞는 자료가 없습니다. 검색어나 선택한 조건을 줄여보세요.</div>';
-    $('#libraryCards').querySelectorAll('[data-subject]').forEach(group=>group.addEventListener('toggle',()=>{if(!group.isConnected)return;if(group.open)expandedSubjects.add(group.dataset.subject);else expandedSubjects.delete(group.dataset.subject);}));
+    const found=results(),searching=Boolean(state.query.trim());
+    const options=[{id:'all',title:'전체',ids:materials.map(r=>r.id)},...subjectGroups.map(g=>({...g,ids:groupIds(g)})),{id:'pinned',title:'고정',ids:[...pins]}];
+    if(materials.some(r=>!indexed.has(r.id)))options.push({id:'unfiled',title:'기타 자료',ids:materials.filter(r=>!indexed.has(r.id)).map(r=>r.id)});
+    const selected=options.find(g=>g.id===state.subject)||options[0];
+    const shown=searching?found:found.filter(r=>selected.ids.includes(r.id));
+    const pages=Math.max(1,Math.ceil(shown.length/12));state.page=Math.min(state.page,pages-1);
+    $('#librarySubjects').innerHTML=options.map(g=>`<button type="button" data-subject="${g.id}" aria-pressed="${!searching&&selected.id===g.id}">${esc(g.title)}<span>${found.filter(r=>g.ids.includes(r.id)).length}</span></button>`).join('')+'<p class="library-pin-note">고정은 이 브라우저에 저장됩니다.</p>';
+    $('#libraryCount').textContent=`${searching?'전체 분야 검색':selected.title} · ${shown.length}개 자료`;
+    $('#libraryCards').innerHTML=shown.slice(state.page*12,state.page*12+12).map(materialRow).join('')||'<div class="empty">조건에 맞는 자료가 없습니다. 검색어나 선택한 조건을 줄여보세요.</div>';
+    $('#libraryPagination').innerHTML=pages>1?`<button type="button" data-library-page="${state.page-1}" ${state.page===0?'disabled':''}>이전</button><span>${state.page+1} / ${pages}</span><button type="button" data-library-page="${state.page+1}" ${state.page===pages-1?'disabled':''}>다음</button>`:'';
   }
-  window.TIL_MATERIAL_VIEW={state,records:materials,results,matchesQuery,update(patch){Object.assign(state,patch);controls();cards();}};
+  window.TIL_MATERIAL_VIEW={state,records:materials,results,matchesQuery,groupedSections,update(patch){Object.assign(state,patch,{page:0});controls();cards();}};
   function load(file) {
     if(!/^data\/materials\/[a-zA-Z0-9_-]+\.js$/.test(file))return Promise.reject(new Error('잘못된 자료 경로입니다.'));
     if(window.TIL_FILES?.[file]) return Promise.resolve(window.TIL_FILES[file]);
@@ -127,6 +140,13 @@
     else {++token;list();}
   }
   function choose(id) {const hash='#material='+encodeURIComponent(id);if(location.hash===hash)open(id);else location.hash=hash;}
+  $('#libraryPage').addEventListener('click',e=>{
+    const subject=e.target.closest('[data-subject]'),pin=e.target.closest('[data-pin]'),toc=e.target.closest('[data-row-toc]'),page=e.target.closest('[data-library-page]');
+    if(subject){state.subject=subject.dataset.subject;state.query='';state.page=0;const query=$('#siteQuery');if(query)query.value='';savePreferences();cards();}
+    if(pin){const id=pin.dataset.pin;if(pins.has(id))pins.delete(id);else pins.add(id);savePreferences();cards();}
+    if(toc){const target=document.getElementById('outline-'+toc.dataset.rowToc);target.hidden=!target.hidden;toc.setAttribute('aria-expanded',String(!target.hidden));toc.textContent=target.hidden?'목차 ▾':'접기 ▴';}
+    if(page){state.page=Number(page.dataset.libraryPage);cards();$('#libraryCount').scrollIntoView({block:'nearest'});}
+  });
   $('#libraryNav').addEventListener('click',e=>{
     const kind=e.target.closest('[data-kind]'),topic=e.target.closest('[data-field]'),item=e.target.closest('[data-material]'),section=e.target.closest('[data-material-section]');
     const publication=e.target.closest('[data-publication]');

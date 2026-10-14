@@ -11,7 +11,7 @@ window.TIL_FILES["data/materials/velog-20260709-001.js"] = [
     "status": "개념 중심 발췌 · 원문 링크",
     "sections": [
       {
-        "title": "class와 접근 범위",
+        "title": "class — 멤버 선언과 접근 제어",
         "text": "관련된 변수와 함수를 하나의 클래스로 묶는다.",
         "html": "<table><thead><tr><th scope=\"col\">접근 지정자</th><th scope=\"col\">접근 범위</th></tr></thead><tbody><tr><td>public</td><td>외부에서도 접근</td></tr><tr><td>private</td><td>클래스 내부에서 접근</td></tr><tr><td>protected</td><td>클래스 내부와 자식 클래스에서 접근</td></tr></tbody></table>"
       },

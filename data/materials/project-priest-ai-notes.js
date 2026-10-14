@@ -21,7 +21,7 @@ window.TIL_FILES["data/materials/project-priest-ai-notes.js"] = [
         "html": "<ol class=\"reference-flow\"><li>AI Perception: 감지</li><li>AIController: AI 제어</li><li>Blackboard: 판단용 상태</li><li>Behavior Tree: 행동 선택</li><li>Character: 이동·공격</li></ol>"
       },
       {
-        "title": "구성요소 역할",
+        "title": "Perception·Blackboard·Behavior Tree의 역할",
         "html": "<table><thead><tr><th scope=\"col\">요소</th><th scope=\"col\">역할</th></tr></thead><tbody><tr><td>AIController</td><td>캐릭터의 AI 제어, Behavior Tree 실행</td></tr><tr><td>AI Perception</td><td>외부 상황 감지</td></tr><tr><td>Blackboard</td><td>목표·위치·상태 보관. 직접 이동·공격하지 않음</td></tr><tr><td>Behavior Tree</td><td>상태와 조건을 보고 행동 실행</td></tr><tr><td>NavMesh</td><td>이동 가능한 영역</td></tr></tbody></table>"
       },
       {
@@ -62,6 +62,20 @@ window.TIL_FILES["data/materials/project-priest-ai-notes.js"] = [
       {
         "label": "객체지향 설계 — 상속·Component·Interface",
         "url": "https://jwh2077.github.io/TIL/#material=project-priest-oop-notes"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "감지→행동",
+        "section": "감지에서 행동까지"
+      },
+      {
+        "label": "분기 노드",
+        "section": "Selector와 Sequence"
+      },
+      {
+        "label": "공격 시점",
+        "section": "공격 범위와 타격 시점 분리"
       }
     ]
   }

@@ -34,7 +34,7 @@ window.TIL_LIBRARY_NAVIGATION = [
   },
   {
     "id": "stl",
-    "title": "자료구조·STL",
+    "title": "문제 해결",
     "hint": "선택 기준·컨테이너·문자열과 탐색",
     "topics": [
       {

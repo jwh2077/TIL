@@ -41,6 +41,16 @@ window.TIL_FILES["data/materials/velog-20260810-001.js"] = [
         "label": "C++·Unreal 빌드 과정",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-build-flow"
       }
+    ],
+    "quick_links": [
+      {
+        "label": "헤더 선언",
+        "section": "AItem 헤더 — 상속과 generated.h 위치"
+      },
+      {
+        "label": "컴포넌트 연결",
+        "section": "SceneRoot·StaticMesh — 생성과 부착"
+      }
     ]
   }
 ];

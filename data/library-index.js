@@ -54,10 +54,50 @@ window.TIL_LIBRARY_INDEX = [
       "stl-associative": "set — 중복 없이 정렬",
       "stl-adaptor": "stack — 마지막에 넣은 값 꺼내기",
       "stl-algorithm": "string — 문자열 다루기",
-      "graph-tree": "Graph",
+      "graph-tree": "그래프 — 정점과 간선",
       "concept-bigo": "Big-O 표기법",
       "stl-selection": "자료구조 선택 기준"
     },
+    "toc_groups": [
+      {
+        "title": "기초와 저장 방식",
+        "start": "자료구조"
+      },
+      {
+        "title": "순차 컨테이너",
+        "start": "vector — 인덱스 접근·뒤에 추가"
+      },
+      {
+        "title": "키로 찾는 컨테이너",
+        "start": "set — 중복 없이 정렬"
+      },
+      {
+        "title": "꺼내는 순서와 양쪽 접근",
+        "start": "stack — 마지막에 넣은 값 꺼내기"
+      },
+      {
+        "title": "문자열·STL 알고리즘",
+        "start": "string — 문자열 다루기"
+      },
+      {
+        "title": "그래프·트리·선택 기준",
+        "start": "그래프 — 정점과 간선"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "vector",
+        "section": "vector — 인덱스 접근·뒤에 추가"
+      },
+      {
+        "label": "map",
+        "section": "map — 키와 값 저장"
+      },
+      {
+        "label": "Big-O",
+        "section": "Big-O 표기법"
+      }
+    ],
     "file": "data/materials/stl-foundation.js",
     "outline": [
       {
@@ -65,8 +105,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "자료구조 1. 개념 자료구조는 데이터를 저장, 삽입, 삭제, 접근, 탐색 등 효율적으로 관리하기 위한 방법이다."
       },
       {
-        "title": "메모리에서의 저장",
-        "text": "메모리에서의 저장 1. 연속적인 저장 데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다. [10][20][30][40] 예: 배열, vector 2. 불연속적인 저장 데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다. [10] → [20] → [30] 예: list , 연결 기반 Tree 연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다."
+        "title": "메모리 — 연속 저장과 연결 저장",
+        "text": "메모리 — 연속 저장과 연결 저장 1. 연속적인 저장 데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다. [10][20][30][40] 예: 배열, vector 2. 불연속적인 저장 데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다. [10] → [20] → [30] 예: list , 연결 기반 Tree 연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다."
       },
       {
         "title": "vector — 인덱스 접근·뒤에 추가",
@@ -77,8 +117,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "2차원 vector — 행 추가와 값 추가 A.push_back(vector {1})은 바깥 vector에 새 행을 추가한다. A[i].push_back(1)은 이미 있는 i번째 행에 값을 추가한다. 이전 행의 [j-1]과 [j]를 더할 때는 두 인덱스가 모두 존재하는 범위만 순회한다. vector > A; A.push_back(vector {1}); // 첫 행 추가 A[0].push_back(1); // 첫 행에 값 추가 A[i]에 접근하기 전에 i번째 행이 있어야 한다. if로 값을 검사하더라도 없는 인덱스에 먼저 접근하면 범위 검사가 되지 않는다."
       },
       {
-        "title": "vector 크기 — 0부터 n까지 저장하려면 n+1칸",
-        "text": "vector 크기 — 0부터 n까지 저장하려면 n+1칸 F(0)부터 F(n)까지 저장하려면 n+1칸이 필요하다. n칸만 만들면 마지막 인덱스는 n-1이다. 자료형의 크기를 키워도 배열의 인덱스 범위는 늘어나지 않는다."
+        "title": "vector 크기 — n+1칸이 필요한 경우",
+        "text": "vector 크기 — n+1칸이 필요한 경우 F(0)부터 F(n)까지 저장하려면 n+1칸이 필요하다. n칸만 만들면 마지막 인덱스는 n-1이다. 자료형의 크기를 키워도 배열의 인덱스 범위는 늘어나지 않는다."
       },
       {
         "title": "list — 위치를 찾아 삽입·삭제",
@@ -137,12 +177,12 @@ window.TIL_LIBRARY_INDEX = [
         "text": "STL 알고리즘 — sort·find·reverse와 컨테이너별 정렬 1. sort sort(vec.begin(), vec.end()); // 기본 오름차순 sort(vec.begin(), vec.end(), greater<>()); // 내림차순 일반적으로 O(n log n)이다. 2. find / reverse find(vec.begin(), vec.end(), value); // O(n) reverse(vec.begin(), vec.end()); // O(n) 3. 컨테이너별 정렬 sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우 lst.sort(); // list는 자체 sort 사용 list 는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 std::sort() 를 사용할 수 없고, 멤버 함수 list::sort() 를 사용한다."
       },
       {
-        "title": "Graph",
-        "text": "Graph DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리"
+        "title": "그래프 — 정점과 간선",
+        "text": "그래프 — 정점과 간선 DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리"
       },
       {
-        "title": "Tree",
-        "text": "Tree 1. 개념 부모-자식 관계를 가지는 계층적인 자료구조이다. [1] Root / \\ [2] [3] / [4] Leaf 2. 용어 용어 의미 Root 가장 위의 노드 Parent 부모 노드 Child 자식 노드 Leaf 자식이 없는 노드 Edge 노드와 노드를 연결하는 간선 3. 종류 Binary Tree Binary Search Tree Heap"
+        "title": "트리 — 부모와 자식 관계",
+        "text": "트리 — 부모와 자식 관계 1. 개념 부모-자식 관계를 가지는 계층적인 자료구조이다. [1] Root / \\ [2] [3] / [4] Leaf 2. 용어 용어 의미 Root 가장 위의 노드 Parent 부모 노드 Child 자식 노드 Leaf 자식이 없는 노드 Edge 노드와 노드를 연결하는 간선 3. 종류 Binary Tree Binary Search Tree Heap"
       },
       {
         "title": "STL이란?",
@@ -201,11 +241,25 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=stl-associative"
       }
     ],
+    "quick_links": [
+      {
+        "label": "자료구조",
+        "section": "TArray·TMap·TSet — 용도 비교"
+      },
+      {
+        "label": "STL 비교",
+        "section": "STL과 비교하기"
+      },
+      {
+        "label": "문법 예제",
+        "section": "기본 문법 예제 · 실행 전"
+      }
+    ],
     "file": "data/materials/unreal-containers.js",
     "outline": [
       {
-        "title": "Unreal Engine 자료구조",
-        "text": "Unreal Engine 자료구조 C++ STL Unreal 기본 용도 vector TArray 동적 배열 map TMap Key - Value set TSet 중복 없는 집합 Unreal의 컨테이너는 STL과 내부 구현이 완전히 같은 것은 아니지만, 기본적인 용도를 비교하면 이해하기 쉽다."
+        "title": "TArray·TMap·TSet — 용도 비교",
+        "text": "TArray·TMap·TSet — 용도 비교 C++ STL Unreal 기본 용도 vector TArray 동적 배열 map TMap Key - Value set TSet 중복 없는 집합 Unreal의 컨테이너는 STL과 내부 구현이 완전히 같은 것은 아니지만, 기본적인 용도를 비교하면 이해하기 쉽다."
       },
       {
         "title": "STL과 비교하기",
@@ -216,8 +270,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "기본 문법 예제 · 실행 전 TArray Scores; Scores.Add(10); Scores.Add(20); TMap Stats; Stats.Add(FName(TEXT(\"Damage\")), 10); if (const int32* Damage = Stats.Find(FName(TEXT(\"Damage\")))) { // *Damage로 저장된 값 확인 } TSet UniqueIds; UniqueIds.Add(1); UniqueIds.Add(1); // 같은 값 중복 추가를 비교할 예제"
       },
       {
-        "title": "예제 확인 항목",
-        "text": "예제 확인 항목 사용 중인 Unreal 버전에서 예제 컴파일하기 TArray의 Num과 인덱스 범위 살펴보기 TMap에서 없는 key를 Find했을 때 반환값 살펴보기 TSet에 같은 값을 두 번 넣어보기"
+        "title": "컨테이너 예제 — 실행 전 확인할 항목",
+        "text": "컨테이너 예제 — 실행 전 확인할 항목 사용 중인 Unreal 버전에서 예제 컴파일하기 TArray의 Num과 인덱스 범위 살펴보기 TMap에서 없는 key를 Find했을 때 반환값 살펴보기 TSet에 같은 값을 두 번 넣어보기"
       }
     ]
   },
@@ -286,8 +340,8 @@ window.TIL_LIBRARY_INDEX = [
     "file": "data/materials/velog-20260709-001.js",
     "outline": [
       {
-        "title": "class와 접근 범위",
-        "text": "class와 접근 범위 관련된 변수와 함수를 하나의 클래스로 묶는다. 접근 지정자 접근 범위 public 외부에서도 접근 private 클래스 내부에서 접근 protected 클래스 내부와 자식 클래스에서 접근"
+        "title": "class — 멤버 선언과 접근 제어",
+        "text": "class — 멤버 선언과 접근 제어 관련된 변수와 함수를 하나의 클래스로 묶는다. 접근 지정자 접근 범위 public 외부에서도 접근 private 클래스 내부에서 접근 protected 클래스 내부와 자식 클래스에서 접근"
       },
       {
         "title": "getter·setter·생성자",
@@ -322,8 +376,8 @@ window.TIL_LIBRARY_INDEX = [
     "file": "data/materials/velog-20260710-001.js",
     "outline": [
       {
-        "title": "할당과 해제",
-        "text": "할당과 해제 항목 의미 new / delete 동적 할당 / 해제 댕글링 포인터 해제된 메모리 주소 등을 계속 가리키는 포인터 메모리 누수 더 이상 쓰지 않는 할당 메모리를 해제하지 못하고 남김"
+        "title": "new·delete — 할당·해제와 메모리 문제",
+        "text": "new·delete — 할당·해제와 메모리 문제 항목 의미 new / delete 동적 할당 / 해제 댕글링 포인터 해제된 메모리 주소 등을 계속 가리키는 포인터 메모리 누수 더 이상 쓰지 않는 할당 메모리를 해제하지 못하고 남김"
       },
       {
         "title": "얕은 복사와 깊은 복사",
@@ -351,12 +405,12 @@ window.TIL_LIBRARY_INDEX = [
     "file": "data/materials/velog-20260712-001.js",
     "outline": [
       {
-        "title": "오버로딩 가능 여부",
-        "text": "오버로딩 가능 여부 차이 구분 가능 여부 매개변수 타입 가능 매개변수 개수 가능 반환 타입만 다름 불가능"
+        "title": "함수 오버로딩 — 구분할 수 있는 조건",
+        "text": "함수 오버로딩 — 구분할 수 있는 조건 차이 구분 가능 여부 매개변수 타입 가능 매개변수 개수 가능 반환 타입만 다름 불가능"
       },
       {
-        "title": "기본 타입 변환 예시",
-        "text": "기본 타입 변환 예시 승격도 표준 변환에 속한다. 위 표는 승격과 그 밖의 변환을 구분하는 예시이며 전체 오버로드 결정 규칙을 나열한 것은 아니다. 예 분류 char / short → int 원래 값을 int로 표현할 수 있는 경우 정수 승격 float → double 부동소수점 승격 int → double 일반적인 표준 변환"
+        "title": "함수 호출 — 타입 승격과 변환 예시",
+        "text": "함수 호출 — 타입 승격과 변환 예시 승격도 표준 변환에 속한다. 위 표는 승격과 그 밖의 변환을 구분하는 예시이며 전체 오버로드 결정 규칙을 나열한 것은 아니다. 예 분류 char / short → int 원래 값을 int로 표현할 수 있는 경우 정수 승격 float → double 부동소수점 승격 int → double 일반적인 표준 변환"
       }
     ]
   },
@@ -419,6 +473,16 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "C++·Unreal 빌드 과정",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-build-flow"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "헤더 선언",
+        "section": "AItem 헤더 — 상속과 generated.h 위치"
+      },
+      {
+        "label": "컴포넌트 연결",
+        "section": "SceneRoot·StaticMesh — 생성과 부착"
       }
     ],
     "file": "data/materials/velog-20260810-001.js",
@@ -503,6 +567,20 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=project-priest-oop-notes"
       }
     ],
+    "quick_links": [
+      {
+        "label": "감지→행동",
+        "section": "감지에서 행동까지"
+      },
+      {
+        "label": "분기 노드",
+        "section": "Selector와 Sequence"
+      },
+      {
+        "label": "공격 시점",
+        "section": "공격 범위와 타격 시점 분리"
+      }
+    ],
     "file": "data/materials/project-priest-ai-notes.js",
     "outline": [
       {
@@ -510,8 +588,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "감지에서 행동까지 AI Perception: 감지 AIController: AI 제어 Blackboard: 판단용 상태 Behavior Tree: 행동 선택 Character: 이동·공격"
       },
       {
-        "title": "구성요소 역할",
-        "text": "구성요소 역할 요소 역할 AIController 캐릭터의 AI 제어, Behavior Tree 실행 AI Perception 외부 상황 감지 Blackboard 목표·위치·상태 보관. 직접 이동·공격하지 않음 Behavior Tree 상태와 조건을 보고 행동 실행 NavMesh 이동 가능한 영역"
+        "title": "Perception·Blackboard·Behavior Tree의 역할",
+        "text": "Perception·Blackboard·Behavior Tree의 역할 요소 역할 AIController 캐릭터의 AI 제어, Behavior Tree 실행 AI Perception 외부 상황 감지 Blackboard 목표·위치·상태 보관. 직접 이동·공격하지 않음 Behavior Tree 상태와 조건을 보고 행동 실행 NavMesh 이동 가능한 영역"
       },
       {
         "title": "Blackboard 값 예시",
@@ -643,6 +721,20 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://github.com/jwh2077/ChatX/commit/91e041f876bbb86074db51efa01a3c6d7c832f55"
       }
     ],
+    "quick_links": [
+      {
+        "label": "서버 종류",
+        "section": "P2P·Listen Server·Dedicated Server"
+      },
+      {
+        "label": "클래스 역할",
+        "section": "멀티플레이 클래스별 역할"
+      },
+      {
+        "label": "프로퍼티 복제",
+        "section": "Property Replication(프로퍼티 레플리케이션) — 방향과 설정"
+      }
+    ],
     "file": "data/materials/unreal-multiplayer-basics.js",
     "outline": [
       {
@@ -654,8 +746,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "클라이언트 접속 흐름 기본 클라이언트–서버 모델에서 클라이언트 간 게임 상태 전달은 서버를 거친다. 클라이언트가 서버에 접속 요청 서버가 접속에 필요한 맵 정보 전달 클라이언트가 맵 로드 서버의 로그인 처리와 PlayerController 생성 클라이언트별로 필요한 객체·상태 복제 서버와 각 클라이언트는 자기 월드와 객체를 따로 가진다. 복제본은 서버 상태를 전달받는 로컬 객체다. ‘가짜’나 ‘약한 객체’로 구분하지 않는다. 모든 Actor와 변수가 자동으로 동기화되는 것은 아니다."
       },
       {
-        "title": "클래스별 역할",
-        "text": "클래스별 역할 GameMode는 서버에서 게임 규칙을 담당하는 Actor다. 서버 프로세스 자체를 뜻하지 않는다. 클래스 담을 정보 서버·클라이언트 관계 GameMode 게임 규칙·승패 판정 서버에만 존재 GameState 라운드·팀 점수 등 전체 상태 서버에서 관리하고 클라이언트에 복제 PlayerState 닉네임·개인 점수 등 플레이어 정보 다른 플레이어에게 필요한 상태 공유 GameInstance 설정·맵 이동 후 유지할 로컬 데이터 각 프로세스에 따로 존재, 자동 동기화되지 않음 PlayerController 플레이어 입력·Pawn 조종 서버와 해당 플레이어의 클라이언트에 존재. 다른 클라이언트에는 기본적으로 복제되지 않음 Pawn / Character 플레이어가 조종하는 게임 속 객체 복제 설정과 클라이언트별 필요 여부에 따라 전달"
+        "title": "멀티플레이 클래스별 역할",
+        "text": "멀티플레이 클래스별 역할 GameMode는 서버에서 게임 규칙을 담당하는 Actor다. 서버 프로세스 자체를 뜻하지 않는다. 클래스 담을 정보 서버·클라이언트 관계 GameMode 게임 규칙·승패 판정 서버에만 존재 GameState 라운드·팀 점수 등 전체 상태 서버에서 관리하고 클라이언트에 복제 PlayerState 닉네임·개인 점수 등 플레이어 정보 다른 플레이어에게 필요한 상태 공유 GameInstance 설정·맵 이동 후 유지할 로컬 데이터 각 프로세스에 따로 존재, 자동 동기화되지 않음 PlayerController 플레이어 입력·Pawn 조종 서버와 해당 플레이어의 클라이언트에 존재. 다른 클라이언트에는 기본적으로 복제되지 않음 Pawn / Character 플레이어가 조종하는 게임 속 객체 복제 설정과 클라이언트별 필요 여부에 따라 전달"
       },
       {
         "title": "복제 대상과 HasAuthority()",
@@ -678,8 +770,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "TCP·UDP와 RPC 전달 방식 TCP = 웹, UDP = 게임으로만 외우지 않고 데이터의 성격으로 구분한다. 전송 프로토콜과 RPC 옵션은 같은 분류가 아니다. 구분 핵심 TCP 전달·순서를 보장하기 위한 재전송이 있음 UDP 프로토콜 자체는 전달·순서를 보장하지 않음 Reliable / Unreliable RPC 언리얼에서 전달 신뢰성을 구분하는 설정"
       },
       {
-        "title": "서버 디버깅",
-        "text": "서버 디버깅 서버와 클라이언트 두 개를 나눠 그려 코드 실행 위치와 값의 이동을 따라간다. 전용 서버에는 화면이 없으므로 화면 메시지만 사용하지 않는다. UE_LOG와 프로젝트용 로그 카테고리로 출력 위치와 내용을 구분한다."
+        "title": "서버 디버깅 — 실행 위치와 로그 출력",
+        "text": "서버 디버깅 — 실행 위치와 로그 출력 서버와 클라이언트 두 개를 나눠 그려 코드 실행 위치와 값의 이동을 따라간다. 전용 서버에는 화면이 없으므로 화면 메시지만 사용하지 않는다. UE_LOG와 프로젝트용 로그 카테고리로 출력 위치와 내용을 구분한다."
       }
     ]
   },
@@ -712,6 +804,16 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "Unreal C++ AItem 헤더 구조",
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260810-001"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "빌드 순서",
+        "section": "Unreal 빌드 순서"
+      },
+      {
+        "label": "UHT 역할",
+        "section": "UHT의 역할 — 리플렉션 코드 생성"
       }
     ],
     "file": "data/materials/unreal-build-flow.js",
@@ -769,11 +871,25 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://github.com/jwh2077/ChatX/commit/4067d8093ea43a76d4bdf0d88827e0dbc62ea0ce"
       }
     ],
+    "quick_links": [
+      {
+        "label": "모듈 추가",
+        "section": "모듈 추가 — DependencyModuleNames"
+      },
+      {
+        "label": "Public·Private",
+        "section": "모듈 의존성 — Public과 Private"
+      },
+      {
+        "label": "헤더 경로",
+        "section": "IncludePaths — 검색 기준과 하위 경로"
+      }
+    ],
     "file": "data/materials/unreal-build-settings.js",
     "outline": [
       {
-        "title": "필요한 설정 찾기",
-        "text": "필요한 설정 찾기 Build.cs는 UBT에 모듈의 빌드 설정을 전달한다. 하려는 일 설정 다른 모듈의 기능 사용 DependencyModuleNames 헤더 검색 경로 추가 IncludePaths 다른 모듈에도 공개 Public 현재 모듈 안에서만 사용 Private"
+        "title": "Build.cs에서 설정할 항목 찾기",
+        "text": "Build.cs에서 설정할 항목 찾기 Build.cs는 UBT에 모듈의 빌드 설정을 전달한다. 하려는 일 설정 다른 모듈의 기능 사용 DependencyModuleNames 헤더 검색 경로 추가 IncludePaths 다른 모듈에도 공개 Public 현재 모듈 안에서만 사용 Private"
       },
       {
         "title": "모듈 추가 — DependencyModuleNames",
@@ -864,6 +980,20 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://github.com/jwh2077/ChatX/commit/66da914e921c26205327343144a6778b1ca7a565"
       }
     ],
+    "quick_links": [
+      {
+        "label": "객체 배치",
+        "section": "서버와 각 클라이언트에 있는 객체"
+      },
+      {
+        "label": "Owner",
+        "section": "Ownership(오너십·오너쉽)과 패밀리 — 소유 관계"
+      },
+      {
+        "label": "PIE 설정",
+        "section": "전용 서버 테스트 — PIE 설정"
+      }
+    ],
     "file": "data/materials/unreal-network-testing.js",
     "outline": [
       {
@@ -879,8 +1009,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "연결 구조 — NetDriver와 NetConnection NetDriver는 연결들을 관리하고, NetConnection은 통신 상대와의 연결을 나타낸다. 서버는 여러 클라이언트 연결을 관리하지만, 각 클라이언트는 서버 연결을 가진다. 전용 서버의 NetDriver ├─ ClientConnections: A와의 연결 │ ↕ │ A의 NetDriver.ServerConnection └─ ClientConnections: B와의 연결 ↕ B의 NetDriver.ServerConnection A에서 B로 게임 상태를 전달할 때는 서버를 거친다. 위의 A·B 표시는 상대를 구분한 것으로, 배열의 고정 인덱스나 플레이어 번호를 뜻하지 않는다. // UNetDriver의 연결 멤버 — 수업 메모 발췌 // 클라이언트에서 서버로 향하는 연결 TObjectPtr<UNetConnection> ServerConnection; // 서버에서 접속한 클라이언트들을 관리하는 배열 TArray<TObjectPtr<UNetConnection>> ClientConnections; 드라이버를 PC 한 대당 하나라고 세기보다는 월드와 드라이버의 용도를 구분한다. 서버의 Listen 경로와 클라이언트의 접속 경로도 같지 않다."
       },
       {
-        "title": "멤버가 있어도 연결은 없을 수 있다",
-        "text": "멤버가 있어도 연결은 없을 수 있다 ServerConnection 멤버가 선언되어 있다는 것과 실제 연결 객체를 가리킨다는 것은 다르다. ServerConnection == nullptr : 포인터에 연결 객체가 없다. 서버 쪽에서도 이 값은 nullptr이다. ClientConnections 가 빈 배열: 배열은 있지만 담긴 클라이언트 연결이 없다. “연결이 있다”는 말은 멤버 이름이 존재한다는 뜻이 아니라, 그 안에 실제 연결이 잡혀 있다는 뜻으로 읽어야 한다."
+        "title": "ServerConnection — 멤버 선언과 실제 연결",
+        "text": "ServerConnection — 멤버 선언과 실제 연결 ServerConnection 멤버가 선언되어 있다는 것과 실제 연결 객체를 가리킨다는 것은 다르다. ServerConnection == nullptr : 포인터에 연결 객체가 없다. 서버 쪽에서도 이 값은 nullptr이다. ClientConnections 가 빈 배열: 배열은 있지만 담긴 클라이언트 연결이 없다. “연결이 있다”는 말은 멤버 이름이 존재한다는 뜻이 아니라, 그 안에 실제 연결이 잡혀 있다는 뜻으로 읽어야 한다."
       },
       {
         "title": "Ownership(오너십·오너쉽)과 패밀리 — 소유 관계",
@@ -945,6 +1075,20 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "ChatX · Pawn BeginPlay·PossessedBy 역할 로그",
         "url": "https://github.com/jwh2077/ChatX/commit/7ca0ed21157497e83f705322dcc5685f2acaf8f9"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "LocalRole",
+        "section": "LocalRole·RemoteRole — 어느 월드에서 보는가"
+      },
+      {
+        "label": "Possess",
+        "section": "Possess 전후 — 서버 로그에서 바뀐 값"
+      },
+      {
+        "label": "소유·제어",
+        "section": "Authority·Ownership·로컬 제어 구분"
       }
     ],
     "file": "data/materials/unreal-network-roles.js",
@@ -1017,15 +1161,29 @@ window.TIL_LIBRARY_INDEX = [
         "url": "#material=unreal-multiplayer-basics"
       }
     ],
+    "quick_links": [
+      {
+        "label": "호출·실행 위치",
+        "section": "RPC를 호출하는 곳과 실행되는 곳"
+      },
+      {
+        "label": "소유 연결",
+        "section": "소유 연결에 따른 RPC 실행 조건"
+      },
+      {
+        "label": "선언·구현",
+        "section": "선언·구현 — UFUNCTION과 _Implementation"
+      }
+    ],
     "file": "data/materials/unreal-rpc.js",
     "outline": [
       {
-        "title": "호출 위치와 실행 위치 구분",
-        "text": "호출 위치와 실행 위치 구분 RPC는 네트워크를 통해 다른 곳에서 함수를 실행하도록 요청하는 방식이다. Server 와 Client 는 호출 출발지가 아니라 실행 방향을 나타낸다. 메모에서 다룬 세 종류는 다음처럼 구분한다. 소유 클라이언트의 Server RPC → 서버 서버의 Client RPC → Actor의 소유 클라이언트 서버의 NetMulticast → 서버 + 관련 클라이언트 원격 호출에는 Actor와 필요한 컴포넌트의 복제 설정이 필요하다. 소리·효과 같은 일시적인 이벤트뿐 아니라 서버에 처리를 요청할 때도 쓴다."
+        "title": "RPC를 호출하는 곳과 실행되는 곳",
+        "text": "RPC를 호출하는 곳과 실행되는 곳 RPC는 네트워크를 통해 다른 곳에서 함수를 실행하도록 요청하는 방식이다. Server 와 Client 는 호출 출발지가 아니라 실행 방향을 나타낸다. 메모에서 다룬 세 종류는 다음처럼 구분한다. 소유 클라이언트의 Server RPC → 서버 서버의 Client RPC → Actor의 소유 클라이언트 서버의 NetMulticast → 서버 + 관련 클라이언트 원격 호출에는 Actor와 필요한 컴포넌트의 복제 설정이 필요하다. 소리·효과 같은 일시적인 이벤트뿐 아니라 서버에 처리를 요청할 때도 쓴다."
       },
       {
-        "title": "소유 연결에 따라 달라지는 실행",
-        "text": "소유 연결에 따라 달라지는 실행 클라이언트에서 Server RPC 자신이 소유한 복제 Actor에서 요청한다. 다른 클라이언트 소유 Actor나 소유 연결이 없는 Actor를 통해 보낸 요청은 서버로 전달되지 않는다. 서버에서 Client RPC 해당 Actor의 Owning Connection에 연결된 클라이언트가 대상이다. 서버 소유 또는 연결이 없는 경우에는 서버에서 실행되므로, Client라는 이름만으로 원격 클라이언트 실행을 보장하지 않는다. NetMulticast 서버에서 호출하면 서버와 그 Actor가 관련 있는 클라이언트에서 실행한다. 클라이언트에서 호출하면 호출한 클라이언트에서만 실행한다. PlayerController는 기본적으로 서버와 소유 클라이언트에만 있으므로 전체 플레이어에게 보내는 방송 경로로 생각하면 안 된다. Owner가 없다는 것과 서버가 Authority를 갖는다는 것은 서로 다른 기준이다. Owner는 Pawn 등을 거쳐 PlayerController로 이어질 수도 있어 SetOwner(PlayerController)를 직접 호출하는 형태만 가능한 것은 아니다."
+        "title": "소유 연결에 따른 RPC 실행 조건",
+        "text": "소유 연결에 따른 RPC 실행 조건 클라이언트에서 Server RPC 자신이 소유한 복제 Actor에서 요청한다. 다른 클라이언트 소유 Actor나 소유 연결이 없는 Actor를 통해 보낸 요청은 서버로 전달되지 않는다. 서버에서 Client RPC 해당 Actor의 Owning Connection에 연결된 클라이언트가 대상이다. 서버 소유 또는 연결이 없는 경우에는 서버에서 실행되므로, Client라는 이름만으로 원격 클라이언트 실행을 보장하지 않는다. NetMulticast 서버에서 호출하면 서버와 그 Actor가 관련 있는 클라이언트에서 실행한다. 클라이언트에서 호출하면 호출한 클라이언트에서만 실행한다. PlayerController는 기본적으로 서버와 소유 클라이언트에만 있으므로 전체 플레이어에게 보내는 방송 경로로 생각하면 안 된다. Owner가 없다는 것과 서버가 Authority를 갖는다는 것은 서로 다른 기준이다. Owner는 Pawn 등을 거쳐 PlayerController로 이어질 수도 있어 SetOwner(PlayerController)를 직접 호출하는 형태만 가능한 것은 아니다."
       },
       {
         "title": "전체 채팅 전달 — PlayerController마다 Client RPC 호출",

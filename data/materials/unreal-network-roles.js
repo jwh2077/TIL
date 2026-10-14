@@ -56,6 +56,20 @@ window.TIL_FILES["data/materials/unreal-network-roles.js"] = [
         "label": "ChatX · Pawn BeginPlay·PossessedBy 역할 로그",
         "url": "https://github.com/jwh2077/ChatX/commit/7ca0ed21157497e83f705322dcc5685f2acaf8f9"
       }
+    ],
+    "quick_links": [
+      {
+        "label": "LocalRole",
+        "section": "LocalRole·RemoteRole — 어느 월드에서 보는가"
+      },
+      {
+        "label": "Possess",
+        "section": "Possess 전후 — 서버 로그에서 바뀐 값"
+      },
+      {
+        "label": "소유·제어",
+        "section": "Authority·Ownership·로컬 제어 구분"
+      }
     ]
   }
 ];

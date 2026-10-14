@@ -31,7 +31,7 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
         ]
       },
       {
-        "title": "클래스별 역할",
+        "title": "멀티플레이 클래스별 역할",
         "html": "<table><thead><tr><th scope=\"col\">클래스</th><th scope=\"col\">담을 정보</th><th scope=\"col\">서버·클라이언트 관계</th></tr></thead><tbody><tr><td>GameMode</td><td>게임 규칙·승패 판정</td><td>서버에만 존재</td></tr><tr><td>GameState</td><td>라운드·팀 점수 등 전체 상태</td><td>서버에서 관리하고 클라이언트에 복제</td></tr><tr><td>PlayerState</td><td>닉네임·개인 점수 등 플레이어 정보</td><td>다른 플레이어에게 필요한 상태 공유</td></tr><tr><td>GameInstance</td><td>설정·맵 이동 후 유지할 로컬 데이터</td><td>각 프로세스에 따로 존재, 자동 동기화되지 않음</td></tr><tr><td>PlayerController</td><td>플레이어 입력·Pawn 조종</td><td>서버와 해당 플레이어의 클라이언트에 존재. 다른 클라이언트에는 기본적으로 복제되지 않음</td></tr><tr><td>Pawn / Character</td><td>플레이어가 조종하는 게임 속 객체</td><td>복제 설정과 클라이언트별 필요 여부에 따라 전달</td></tr></tbody></table>",
         "text": "GameMode는 서버에서 게임 규칙을 담당하는 Actor다. 서버 프로세스 자체를 뜻하지 않는다."
       },
@@ -58,7 +58,7 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
         "text": "TCP = 웹, UDP = 게임으로만 외우지 않고 데이터의 성격으로 구분한다. 전송 프로토콜과 RPC 옵션은 같은 분류가 아니다."
       },
       {
-        "title": "서버 디버깅",
+        "title": "서버 디버깅 — 실행 위치와 로그 출력",
         "items": [
           "서버와 클라이언트 두 개를 나눠 그려 코드 실행 위치와 값의 이동을 따라간다.",
           "전용 서버에는 화면이 없으므로 화면 메시지만 사용하지 않는다.",
@@ -99,6 +99,20 @@ window.TIL_FILES["data/materials/unreal-multiplayer-basics.js"] = [
       {
         "label": "ChatX · 숫자 야구 판정·PlayerState 복제 코드",
         "url": "https://github.com/jwh2077/ChatX/commit/91e041f876bbb86074db51efa01a3c6d7c832f55"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "서버 종류",
+        "section": "P2P·Listen Server·Dedicated Server"
+      },
+      {
+        "label": "클래스 역할",
+        "section": "멀티플레이 클래스별 역할"
+      },
+      {
+        "label": "프로퍼티 복제",
+        "section": "Property Replication(프로퍼티 레플리케이션) — 방향과 설정"
       }
     ]
   }

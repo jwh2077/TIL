@@ -31,7 +31,7 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
         "html": "<p><strong>NetDriver는 연결들을 관리하고, NetConnection은 통신 상대와의 연결을 나타낸다.</strong> 서버는 여러 클라이언트 연결을 관리하지만, 각 클라이언트는 서버 연결을 가진다.</p><pre><code>전용 서버의 NetDriver\n ├─ ClientConnections: A와의 연결\n │     ↕\n │   A의 NetDriver.ServerConnection\n └─ ClientConnections: B와의 연결\n       ↕\n     B의 NetDriver.ServerConnection</code></pre><p>A에서 B로 게임 상태를 전달할 때는 서버를 거친다. 위의 A·B 표시는 상대를 구분한 것으로, 배열의 고정 인덱스나 플레이어 번호를 뜻하지 않는다.</p><pre><code>// UNetDriver의 연결 멤버 — 수업 메모 발췌\n// 클라이언트에서 서버로 향하는 연결\nTObjectPtr&lt;UNetConnection&gt; ServerConnection;\n\n// 서버에서 접속한 클라이언트들을 관리하는 배열\nTArray&lt;TObjectPtr&lt;UNetConnection&gt;&gt; ClientConnections;</code></pre><p>드라이버를 PC 한 대당 하나라고 세기보다는 월드와 드라이버의 용도를 구분한다. 서버의 Listen 경로와 클라이언트의 접속 경로도 같지 않다.</p>"
       },
       {
-        "title": "멤버가 있어도 연결은 없을 수 있다",
+        "title": "ServerConnection — 멤버 선언과 실제 연결",
         "html": "<p><code>ServerConnection</code> 멤버가 선언되어 있다는 것과 실제 연결 객체를 가리킨다는 것은 다르다.</p><ul><li><code>ServerConnection == nullptr</code>: 포인터에 연결 객체가 없다. 서버 쪽에서도 이 값은 nullptr이다.</li><li><code>ClientConnections</code>가 빈 배열: 배열은 있지만 담긴 클라이언트 연결이 없다.</li></ul><p>“연결이 있다”는 말은 멤버 이름이 존재한다는 뜻이 아니라, 그 안에 실제 연결이 잡혀 있다는 뜻으로 읽어야 한다.</p>"
       },
       {
@@ -108,6 +108,20 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
       {
         "label": "ChatX · IsLocalController와 출력 도우미",
         "url": "https://github.com/jwh2077/ChatX/commit/66da914e921c26205327343144a6778b1ca7a565"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "객체 배치",
+        "section": "서버와 각 클라이언트에 있는 객체"
+      },
+      {
+        "label": "Owner",
+        "section": "Ownership(오너십·오너쉽)과 패밀리 — 소유 관계"
+      },
+      {
+        "label": "PIE 설정",
+        "section": "전용 서버 테스트 — PIE 설정"
       }
     ]
   }
