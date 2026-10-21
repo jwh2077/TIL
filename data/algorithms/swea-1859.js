@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/swea-1859.js"] = [
     ],
     "code_title": "통과한 제출 코드",
     "solution_code": "#include<iostream>\n#include <vector>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin >> T;\n    for (test_case = 1; test_case <= T; ++test_case)\n    {\n        int c;\n        long long totoal = 0;\n        int Maxprice = 0;\n\n        cin >> c;\n\n        vector<int> market(c);\n        vector<int> my(c);\n\n        for (int i = 0; i < c; i++)\n        {\n            cin >> market[i];\n        }\n\n        int index = 0;\n        int n = 0;\n\n        for (int i = c - 1; i >= 0; i--)\n        {\n            if (Maxprice < market[i])\n            {\n                Maxprice = market[i];\n            }\n            else\n            {\n                totoal += Maxprice - market[i];\n            }\n        }\n        cout << \"#\" << test_case << \" \" << totoal << endl;\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
-    "verification": "SWEA Pass · 제출 2026-09-02 04:56 · 834 ms / 13,728 KB"
+    "verification": "SWEA Pass · 제출 2026-09-02 04:56 · 834 ms / 13,728 KB",
+    "tags": [
+      "SWEA"
+    ]
   }
 ];

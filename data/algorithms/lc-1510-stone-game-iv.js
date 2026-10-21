@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/lc-1510-stone-game-iv.js"] = [
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    bool winnerSquareGame(int n) \n    {\n        vector<bool> dp(1 + n, false);\n        for (int i = 1 ; i <= n; i++)\n        {\n            for(int j = 1 ; j * j <= i; j++)\n            {\n                if(!dp[i - j * j])\n                {\n                    dp[i] = true;\n                    break;\n                }\n            }\n        }\n        return dp[n];\n    }\n};",
     "verification": "LeetCode Accepted · 72 / 72 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-10 Accepted (사이트 표시일, 학습일과 구분)",
-    "submission_url": "https://leetcode.com/submissions/detail/2136668367/"
+    "submission_url": "https://leetcode.com/submissions/detail/2136668367/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

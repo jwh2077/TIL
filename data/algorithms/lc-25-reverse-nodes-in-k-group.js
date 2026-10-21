@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/lc-25-reverse-nodes-in-k-group.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    ListNode* reverseKGroup(ListNode* head, int k) {\n        ListNode* B = head;\n        int size = getsize(head), re = size / k;\n        vector<int>A(re * k, 0);\n        for(int b = 0; b < re * k; b++) { A[b] = B->val; B = B->next; }\n        B = head;\n        for (int a = 0; re > a; a++)\n            for(int c = k - 1; c >= 0; c--) { B->val = A[a * k + c]; B = B->next; }\n        return head;\n    }\n    int getsize(ListNode* head) {\n        int num = 0;\n        while(head != nullptr) { head = head->next; num++; }\n        return num;\n    }\n};",
-    "submission_url": "https://leetcode.com/submissions/detail/2111625723/"
+    "submission_url": "https://leetcode.com/submissions/detail/2111625723/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

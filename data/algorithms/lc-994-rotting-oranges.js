@@ -9,7 +9,8 @@ window.TIL_FILES["data/algorithms/lc-994-rotting-oranges.js"] = [
       "너비 우선 탐색",
       "큐",
       "2차원 배열",
-      "다중 시작점 탐색"
+      "다중 시작점 탐색",
+      "LeetCode"
     ],
     "url": "https://leetcode.com/problems/rotting-oranges/",
     "status": "통과 확인",

@@ -11,7 +11,8 @@ window.TIL_FILES["data/algorithms/lc-46-permutations.js"] = [
       "vector",
       "방문 여부",
       "DFS",
-      "깊이 우선 탐색"
+      "깊이 우선 탐색",
+      "LeetCode"
     ],
     "url": "https://leetcode.com/problems/permutations/",
     "date": "2026-10-13",

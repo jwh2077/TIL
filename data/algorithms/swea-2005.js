@@ -21,6 +21,9 @@ window.TIL_FILES["data/algorithms/swea-2005.js"] = [
     "code_title": "통과한 제출 코드",
     "solution_code": "#include<iostream>\n#include<vector>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin>>T;\n    int N;\n    for(test_case = 1; test_case <= T; ++test_case)\n    {\n        cout << \"#\" << test_case << endl;\n        cin >> N;\n        vector<vector<int>>A;\n        A.push_back(vector<int>{ 1 });\n        for(int i = 1; i < N; i++)\n        {\n            A.push_back(vector<int>{ 1 });\n            for(int j = 1; j < i; j++)\n            {\n                int num = 0;\n                num += A[i - 1][ j - 1] ;\n                num += A[i - 1][ j ];\n                A[i].push_back(num);\n            }\n            A[i].push_back( 1 );\n        }\n        for(int i = 0; i < A.size(); i++)\n        {\n            for(int j = 0; j < A[i].size(); j++)\n            {\n                cout << A[i][j] << \" \" ;\n            }\n            cout << endl;\n        }\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
     "verification": "SWEA Pass · 제출 2026-09-28 09:25 · 7 ms / 5,844 KB · My제출에서 코드와 결과 확인",
-    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AV5P0-h6Ak4DFAUq"
+    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AV5P0-h6Ak4DFAUq",
+    "tags": [
+      "SWEA"
+    ]
   }
 ];

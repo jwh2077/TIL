@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/pg-12977.js"] = [
     ],
     "code_title": "통과한 제출 코드",
     "solution_code": "#include <vector>\n#include <iostream>\nusing namespace std;\n\nint solution(vector<int> nums) {\n    int answer = 0;\n    for(int a = 0; a < nums.size(); a++ )\n    {\n        for(int b = a + 1; b < nums.size(); b++)\n        {\n            for(int c = b + 1; c < nums.size(); c++)\n            {\n                int num = nums[a] + nums[b] + nums[c];\n                bool s = true;\n                for(int i = 2; i < num; i++ )\n                {\n                    if(num % i == 0)\n                    {\n                        s = false;\n                        break;\n                    }\n                }\n                if(s)\n                {\n                    answer++;\n                }\n            }\n        }\n    }\n    \n\n    return answer;\n}",
-    "verification": "프로그래머스 정답 · 100 / 100 · 제출 2026-09-21 09:59:16 · 로그인된 제출 내역에서 코드 확인"
+    "verification": "프로그래머스 정답 · 100 / 100 · 제출 2026-09-21 09:59:16 · 로그인된 제출 내역에서 코드 확인",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

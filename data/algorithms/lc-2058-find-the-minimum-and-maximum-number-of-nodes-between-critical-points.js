@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/lc-2058-find-the-minimum-and-maximum-number-of
     ],
     "code_title": "참고 예제 · 위치로 거리 계산",
     "solution_code": "class Solution {\npublic:\n    vector<int> nodesBetweenCriticalPoints(ListNode* head) {\n        int first = -1, previous = -1;\n        int minDistance = INT_MAX, index = 1;\n        ListNode* prev = head;\n        ListNode* current = head->next;\n\n        while (current->next != nullptr) {\n            bool critical =\n                (prev->val < current->val && current->val > current->next->val) ||\n                (prev->val > current->val && current->val < current->next->val);\n\n            if (critical) {\n                if (first == -1) first = index;\n                if (previous != -1) minDistance = min(minDistance, index - previous);\n                previous = index;\n            }\n            prev = current;\n            current = current->next;\n            index++;\n        }\n\n        if (first == previous) return {-1, -1};\n        return {minDistance, previous - first};\n    }\n};",
-    "verification": "LeetCode Practice History · 최근 제출 9월 1일 · Runtime Error · 제출 20회 · 2026-09-29 목록 확인, 통과 제출은 확인되지 않음 · 아래 코드는 실제 제출이 아닌 참고 예제"
+    "verification": "LeetCode Practice History · 최근 제출 9월 1일 · Runtime Error · 제출 20회 · 2026-09-29 목록 확인, 통과 제출은 확인되지 않음 · 아래 코드는 실제 제출이 아닌 참고 예제",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

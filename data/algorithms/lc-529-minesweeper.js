@@ -10,7 +10,8 @@ window.TIL_FILES["data/algorithms/lc-529-minesweeper.js"] = [
       "2차원 배열",
       "8방향 탐색",
       "방문 처리",
-      "깊이 우선 탐색"
+      "깊이 우선 탐색",
+      "LeetCode"
     ],
     "url": "https://leetcode.com/problems/minesweeper/description/",
     "status": "통과 확인",

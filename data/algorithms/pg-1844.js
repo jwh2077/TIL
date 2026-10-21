@@ -23,7 +23,8 @@ window.TIL_FILES["data/algorithms/pg-1844.js"] = [
       "BFS",
       "너비 우선 탐색",
       "큐",
-      "최단 경로"
+      "최단 경로",
+      "프로그래머스"
     ]
   }
 ];

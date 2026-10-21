@@ -18,6 +18,9 @@ window.TIL_FILES["data/algorithms/pg-42586.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nvector<int> solution(vector<int> progresses, vector<int> speeds) \n{\n    vector<int> A;\n    int num = 0, size = progresses.size(), count = 0;\n    while(num <= size - 1)\n    {\n        if(progresses[num] >= 100)\n        {\n            count = 0;\n            while(progresses[num + count] >= 100 && num + count < size) count++;\n            A.push_back(count);\n            num += count;\n        }\n        while(progresses[num] < 100 && num < size)\n        {\n            for(int i = num; i < size; i++) progresses[i] += speeds[i];\n        }\n    }\n    return A;\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

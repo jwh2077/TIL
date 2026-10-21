@@ -18,6 +18,9 @@ window.TIL_FILES["data/algorithms/lc-58-length-of-last-word.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    int lengthOfLastWord(string s) {\n        int answer{};\n        bool isAfterSpace{};\n        for (char c : s) {\n            if (c == ' ') isAfterSpace = true;\n            else {\n                if (isAfterSpace) answer = 1;\n                else answer += 1;\n                isAfterSpace = false;\n            }\n        }\n        return answer;\n    }\n};",
-    "submission_url": "https://leetcode.com/submissions/detail/2117914094/"
+    "submission_url": "https://leetcode.com/submissions/detail/2117914094/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

@@ -21,6 +21,9 @@ window.TIL_FILES["data/algorithms/swea-16910.js"] = [
     "code_title": "마지막 통과 제출 코드",
     "solution_code": "#include<iostream>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin>>T;\n    for(test_case = 1; test_case <= T; ++test_case)\n    {\n        int N;\n        int c = 0;\n        cin >> N;\n        for(int x = -N ; x < N; x++)\n        {\n            for(int y = -N; y < N; y++)\n            {\n                if( x * x + y * y <= N * N)\n                {\n                    c++;\n                }\n            }\n        }\n        c = c + 2; \n        cout << \"#\" << test_case << \" \" << c << endl;\n    }\n    return 0;\n}",
     "verification": "SWEA Pass · 제출 2026-09-10 08:42 · 38 ms / 5,832 KB",
-    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AYcllbDqUVgDFASR"
+    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AYcllbDqUVgDFASR",
+    "tags": [
+      "SWEA"
+    ]
   }
 ];

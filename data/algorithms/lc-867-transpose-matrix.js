@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/lc-867-transpose-matrix.js"] = [
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> transpose(vector<vector<int>>& matrix) {\n        int X = matrix.size();\n        int Y = matrix[0].size();\n        vector<vector<int>>A(Y,vector<int>(X));\n        for(int x = 0; x < Y; x++)\n            for(int y = 0; y < X; y++) A[x][y] = matrix[y][x];\n        return A;\n    }\n};",
     "verification": "LeetCode Accepted · 36 / 36 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-17 Accepted (사이트 표시일, 학습일과 구분)",
-    "submission_url": "https://leetcode.com/submissions/detail/2109291619/"
+    "submission_url": "https://leetcode.com/submissions/detail/2109291619/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

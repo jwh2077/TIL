@@ -21,6 +21,9 @@ window.TIL_FILES["data/algorithms/lc-2022-convert-1d-array-into-2d-array.js"] = 
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) \n    {\n        if(original.size() != m * n)\n        return vector<vector<int>>{ 0 };\n        vector<vector<int>>A(m, vector<int>(n));\n        int num = 0;\n        for(int M = 0; M < m; M++)\n        {\n            for(int N = 0; N < n; N++)\n            {\n                A[M][N] = original[num];\n                num++;\n            }\n        }\n        return A;\n    }\n};",
     "verification": "LeetCode Accepted · 107 / 107 · 9/29 본인 제출 목록의 마지막 결과: 2026-08-17 Accepted (사이트 표시일, 학습일과 구분)",
-    "submission_url": "https://leetcode.com/submissions/detail/2109169458/"
+    "submission_url": "https://leetcode.com/submissions/detail/2109169458/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

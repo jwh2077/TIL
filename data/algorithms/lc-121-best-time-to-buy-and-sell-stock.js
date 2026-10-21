@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/lc-121-best-time-to-buy-and-sell-stock.js"] = 
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    int maxProfit(vector<int>& prices) \n    {\n        int topprices = 0;\n        int profit = 0;\n        for(int i = prices.size() - 1; i >= 0; i--)\n        {\n            topprices = max(topprices, prices[i]);\n            profit = max(profit, topprices - prices[i]);\n        }\n        return profit;\n    }\n};",
     "verification": "LeetCode Accepted · 213 / 213 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-03 Accepted (사이트 표시일, 학습일과 구분)",
-    "submission_url": "https://leetcode.com/submissions/detail/2129035853/"
+    "submission_url": "https://leetcode.com/submissions/detail/2129035853/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

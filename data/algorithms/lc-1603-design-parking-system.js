@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/lc-1603-design-parking-system.js"] = [
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class ParkingSystem {\npublic:\n    int A[3];\n    ParkingSystem(int big, int medium, int small) \n    {\n        A[0] = big; A[1] = medium; A[2] = small;\n    }\n    bool addCar(int carType) \n    {\n        if(A[carType - 1] >= 1)\n        {\n            A[carType - 1]--;\n            return true;\n        }\n        return false;\n    }\n};",
     "verification": "LeetCode Accepted · 102 / 102 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-04 Accepted (사이트 표시일, 학습일과 구분)",
-    "submission_url": "https://leetcode.com/submissions/detail/2130652933/"
+    "submission_url": "https://leetcode.com/submissions/detail/2130652933/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

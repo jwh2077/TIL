@@ -8,7 +8,8 @@ window.TIL_FILES["data/algorithms/lc-70-climbing-stairs.js"] = [
       "DP",
       "계단",
       "vector",
-      "경우의 수"
+      "경우의 수",
+      "LeetCode"
     ],
     "url": "https://leetcode.com/problems/climbing-stairs/",
     "submission_url": "https://leetcode.com/problems/climbing-stairs/submissions/2163653661/",

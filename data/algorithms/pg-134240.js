@@ -17,6 +17,9 @@ window.TIL_FILES["data/algorithms/pg-134240.js"] = [
       "홀수로 남는 음식 하나는 양쪽에 똑같이 나눌 수 없다."
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
-    "solution_code": "#include <string>\n#include <vector>\n#include <deque>\nusing namespace std;\nstring solution(vector<int> food) {\n    deque<int>A(1, 0);\n    for (int i = food.size() - 1; i >= 1; i--)\n        while (food[i] >= 2) { A.push_back(i); A.push_front(i); food[i] -= 2; }\n    string answer = \"\";\n    for (int value : A) answer += to_string(value);\n    return answer;\n}"
+    "solution_code": "#include <string>\n#include <vector>\n#include <deque>\nusing namespace std;\nstring solution(vector<int> food) {\n    deque<int>A(1, 0);\n    for (int i = food.size() - 1; i >= 1; i--)\n        while (food[i] >= 2) { A.push_back(i); A.push_front(i); food[i] -= 2; }\n    string answer = \"\";\n    for (int value : A) answer += to_string(value);\n    return answer;\n}",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

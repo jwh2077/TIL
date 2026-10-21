@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-160586.js"] = [
     ],
     "verification": "풀이 진행 중. 완성 코드와 채점 결과는 아직 없다. 기록 날짜: 2026-10-06. 원본: # 2026-10-06 — 프로그래머스 160586. 대충 만든.txt",
     "code_title": "메모에 남긴 코드 조각 · 미완성",
-    "solution_code": "// 문자별 최소 횟수를 저장하려고 생각한 형태\nunordered_map<char, int> key;\n\n// 처음 위치를 찾으려던 코드 조각. ...은 미작성 부분이다.\nfind(keymap[i].begin(), keymap[i].end(), ...)\n\n// target 문자열에서 현재 문자에 접근\ntargets[i][j]"
+    "solution_code": "// 문자별 최소 횟수를 저장하려고 생각한 형태\nunordered_map<char, int> key;\n\n// 처음 위치를 찾으려던 코드 조각. ...은 미작성 부분이다.\nfind(keymap[i].begin(), keymap[i].end(), ...)\n\n// target 문자열에서 현재 문자에 접근\ntargets[i][j]",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

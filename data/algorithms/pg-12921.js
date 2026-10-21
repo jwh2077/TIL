@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-12921.js"] = [
     ],
     "code_title": "참고 예제 · 배수를 지우는 방식",
     "solution_code": "int solution(int n) {\n    vector<bool> isPrime(n + 1, true);\n    isPrime[0] = isPrime[1] = false;\n\n    for (int i = 2; i * i <= n; i++) {\n        if (!isPrime[i]) continue;\n        for (int multiple = i * i; multiple <= n; multiple += i) {\n            isPrime[multiple] = false;\n        }\n    }\n\n    return count(isPrime.begin(), isPrime.end(), true);\n}",
-    "verification": "프로그래머스 오답 · 68.8 / 100 · 최근 제출 2026-09-10 20:38:25 · 로그인된 제출 내역 확인"
+    "verification": "프로그래머스 오답 · 68.8 / 100 · 최근 제출 2026-09-10 20:38:25 · 로그인된 제출 내역 확인",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

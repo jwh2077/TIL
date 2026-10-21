@@ -8,7 +8,8 @@ window.TIL_FILES["data/algorithms/lc-155-min-stack.js"] = [
       "스택",
       "배열",
       "vector",
-      "최소값"
+      "최소값",
+      "LeetCode"
     ],
     "url": "https://leetcode.com/problems/min-stack/description/",
     "status": "통과 확인",

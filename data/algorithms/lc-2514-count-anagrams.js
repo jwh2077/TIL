@@ -8,7 +8,8 @@ window.TIL_FILES["data/algorithms/lc-2514-count-anagrams.js"] = [
       "문자열",
       "팩토리얼",
       "경우의 수",
-      "나머지 연산"
+      "나머지 연산",
+      "LeetCode"
     ],
     "url": "https://leetcode.com/problems/count-anagrams/description/",
     "status": "미완성",

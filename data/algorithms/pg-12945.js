@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-12945.js"] = [
     ],
     "code_title": "통과한 제출 코드",
     "solution_code": "#include <vector>\n\nusing namespace std;\n\nint solution(int n) {\n    int answer = 0;\n    vector<long long> Fibonacci(n + 1);\n    Fibonacci[0] = 0;\n    Fibonacci[1] = 1;\n    for(int i = 2; i <= n; i++)\n    {\n        Fibonacci[i] = (Fibonacci[i - 1] + Fibonacci[i - 2]) % 1234567;\n    }\n    if(n <= 2)\n    {\n        return Fibonacci[n] % 1234567;\n    }\n    return Fibonacci[n];\n}",
-    "verification": "프로그래머스 정답 · 100 / 100 · 제출 2026-09-22 08:34:08 · 로그인된 제출 내역에서 코드 확인"
+    "verification": "프로그래머스 정답 · 100 / 100 · 제출 2026-09-22 08:34:08 · 로그인된 제출 내역에서 코드 확인",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

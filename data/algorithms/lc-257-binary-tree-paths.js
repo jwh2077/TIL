@@ -10,7 +10,8 @@ window.TIL_FILES["data/algorithms/lc-257-binary-tree-paths.js"] = [
       "DFS",
       "문자열",
       "리프 노드",
-      "깊이 우선 탐색"
+      "깊이 우선 탐색",
+      "LeetCode"
     ],
     "url": "https://leetcode.com/problems/binary-tree-paths/",
     "date": "2026-10-12",

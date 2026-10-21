@@ -9,7 +9,8 @@ window.TIL_FILES["data/algorithms/pg-12939.js"] = [
       "stoi",
       "to_string",
       "최솟값",
-      "최댓값"
+      "최댓값",
+      "프로그래머스"
     ],
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12939",
     "status": "통과 확인",

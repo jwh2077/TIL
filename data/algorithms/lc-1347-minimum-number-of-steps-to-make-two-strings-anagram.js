@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/lc-1347-minimum-number-of-steps-to-make-two-st
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    int minSteps(string s, string t)\n    {\n        unordered_map<char,int>sum;        \n        for(int i = 0 ; i < s.size(); i++)\n        {\n            sum[s[i]]++;\n            sum[t[i]]--;\n        }\n        int num = 0;\n        for(auto A : sum)\n        {\n            if(0 > A.second) num += !A.second;\n            else num += A.second;\n        }\n        return num;\n    }\n};",
     "verification": "LeetCode Accepted · 63 / 63 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-07 Accepted (사이트 표시일, 학습일과 구분)",
-    "submission_url": "https://leetcode.com/submissions/detail/2133362982/"
+    "submission_url": "https://leetcode.com/submissions/detail/2133362982/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

@@ -8,7 +8,8 @@ window.TIL_FILES["data/algorithms/pg-389481.js"] = [
       "진법 변환",
       "문자열",
       "정렬",
-      "long long"
+      "long long",
+      "프로그래머스"
     ],
     "url": "https://school.programmers.co.kr/learn/courses/30/lessons/389481",
     "status": "통과 확인",

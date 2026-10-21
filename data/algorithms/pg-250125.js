@@ -17,6 +17,9 @@ window.TIL_FILES["data/algorithms/pg-250125.js"] = [
       "행과 열의 이동량을 같은 인덱스로 묶어 쓴다."
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
-    "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nint solution(vector<vector<string>> board, int h, int w) {\n    int n = board.size(), count = 0;\n    int dh[4] = {0, 1, -1, 0};\n    int dw[4] = {1, 0, 0, -1};\n    for(int i = 0; i <= 3; i++) {\n        int h_check = h + dh[i], w_check = w + dw[i];\n        if(h_check >= 0 && h_check < n && w_check >= 0 && w_check < n)\n            if(board[h][w] == board[h_check][w_check]) count++;\n    }\n    return count;\n}"
+    "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nint solution(vector<vector<string>> board, int h, int w) {\n    int n = board.size(), count = 0;\n    int dh[4] = {0, 1, -1, 0};\n    int dw[4] = {1, 0, 0, -1};\n    for(int i = 0; i <= 3; i++) {\n        int h_check = h + dh[i], w_check = w + dw[i];\n        if(h_check >= 0 && h_check < n && w_check >= 0 && w_check < n)\n            if(board[h][w] == board[h_check][w_check]) count++;\n    }\n    return count;\n}",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

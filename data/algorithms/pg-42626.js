@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-42626.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <vector>\n#include <queue>\nusing namespace std;\nint solution(vector<int> scoville, int K) {\n    int answer = 0;\n    priority_queue<int, vector<int>, greater<int>>sco;\n    for(int value : scoville) sco.push(value);\n    while(sco.top() < K)\n    {\n        if(sco.size() < 2) return -1;\n        int num = sco.top(); sco.pop();\n        num += sco.top() * 2; sco.pop();\n        sco.push(num);\n        answer++;\n    }\n    return answer;\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

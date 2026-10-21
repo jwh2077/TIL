@@ -18,6 +18,9 @@ window.TIL_FILES["data/algorithms/lc-38-count-and-say.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    string countAndSay(int n) {\n        string A = \"1\", B;\n        char C;\n        int D = 0;\n        for(int a = 1; a < n; a++) {\n            B = \"\"; C = A[0]; D = 0;\n            for(int b = 0; b < A.size(); b++) {\n                if(C != A[b]) { B += to_string(D); B += C; D = 0; }\n                C = A[b]; D++;\n            }\n            B += to_string(D); B += C; A = B;\n        }\n        return A;\n    }\n};",
-    "submission_url": "https://leetcode.com/submissions/detail/2113884747/"
+    "submission_url": "https://leetcode.com/submissions/detail/2113884747/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

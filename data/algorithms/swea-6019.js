@@ -21,6 +21,9 @@ window.TIL_FILES["data/algorithms/swea-6019.js"] = [
     "code_title": "통과한 제출 코드",
     "solution_code": "#include<iostream>\n#include <iomanip>\n\nusing namespace std;\n\nint main(int argc, char** argv)\n{\n    int test_case;\n    int T;\n    cin >> T;\n    for(test_case = 1; test_case <= T; ++test_case)\n    {\n        double D;\n        cin >> D;\n        int A;\n        cin >> A;\n        int B;\n        cin >> B;\n        A += B;\n        cin >> B;\n        D = D / A;\n        D *= B;\n        cout << \"#\" << test_case << \" \" << fixed << setprecision(10) << D << endl;\n    }\n    return 0;//정상종료시 반드시 0을 리턴해야합니다.\n}",
     "verification": "SWEA Pass · 제출 2026-09-23 08:44 · 512 ms / 5,832 KB",
-    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AWajaTmaZw4DFAWM"
+    "submission_url": "https://swexpertacademy.com/main/code/problem/problemSubmitHistory.do?contestProbId=AWajaTmaZw4DFAWM",
+    "tags": [
+      "SWEA"
+    ]
   }
 ];

@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-42587.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <string>\n#include <vector>\n#include <queue>\nusing namespace std;\nint solution(vector<int> priorities, int location) \n{\n    int answer = 0;\n    queue<pair<int,int>>pro;\n    priority_queue<int> pq;\n    for(int i = 0; i < priorities.size(); i++)\n    {\n        pro.push({priorities[i], i});\n        pq.push(priorities[i]);\n    }\n    while(true)\n    {\n        if(pro.front().first >= pq.top())\n        {\n            answer++;\n            if(pro.front().second == location) return answer;\n            pro.pop(); pq.pop();\n        }\n        else { pro.push(pro.front()); pro.pop(); }\n    }\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

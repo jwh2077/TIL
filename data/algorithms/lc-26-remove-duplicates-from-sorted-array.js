@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/lc-26-remove-duplicates-from-sorted-array.js"]
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    int removeDuplicates(vector<int>& nums) {\n        for(int i = -100; i <= 100;i++) {\n            bool era = false;\n            for(int index = 0; index < nums.size();index++) {\n                if(!era && nums[index] == i) era = true;\n                else if(era && nums[index] == i) { nums.erase(nums.begin() + index); index--; }\n            }\n        }\n        return nums.size();\n    }\n};",
-    "submission_url": "https://leetcode.com/submissions/detail/2125551510/"
+    "submission_url": "https://leetcode.com/submissions/detail/2125551510/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

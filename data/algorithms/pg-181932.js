@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-181932.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <string>\nusing namespace std;\nstring solution(string code)\n{\n    bool mode = false;\n    string answer = \"\";\n    for(int i = 0; i < code.size(); i++)\n    {\n        if(code[i] != '1')\n        {\n            if(mode == false && i % 2 == 0) answer += code[i];\n            else if(mode == true && i % 2 != 0) answer += code[i];\n        }\n        else mode = !mode;\n    }\n    if(answer.size() == 0) answer = \"EMPTY\";\n    return answer;\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

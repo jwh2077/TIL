@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/lc-88-merge-sorted-array.js"] = [
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) \n    {\n        for(int i = m; i < m + n; i++) nums1[i] = nums2[i - m];\n        sort(nums1.begin(),nums1.end());\n    }\n};",
     "verification": "LeetCode Accepted · 63 / 63 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-08 Runtime Error (사이트 표시일, 학습일과 구분) · 위 통과 근거와 마지막 제출 결과는 서로 다른 제출",
-    "submission_url": "https://leetcode.com/submissions/detail/2134457404/"
+    "submission_url": "https://leetcode.com/submissions/detail/2134457404/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

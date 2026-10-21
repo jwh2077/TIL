@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/lc-486-predict-the-winner.js"] = [
     "code_title": "마지막 제출 코드 · Wrong Answer",
     "solution_code": "class Solution {\npublic:\n    bool predictTheWinner(vector<int>& nums) {\n        int WinA = 0;\n        int winB = 0;\n        int index = nums.size() - 1;\n        int i = 0;\n        while(true)\n        {\n\n            if(nums[i] >= nums[index - i])\n            {\n                WinA += nums[i];\n                i++;\n            }\n            else\n            {\n                WinA += nums[index];\n                index--;\n            }\n            if(nums[i] >= nums[index])\n            {\n                winB += nums[i];\n                i++;\n            }\n            else\n            {\n                winB += nums[index];\n                index--;\n            }\n            if(i >= index)\n            {\n                if(WinA >= winB){return true;}\n                else{return false;}\n            }\n        }\n\n    }\n};",
     "verification": "LeetCode Wrong Answer · 1 / 67 · 제출 화면 2026-08-27 21:02 · 로그인된 본인 제출 코드 확인 · 기록 날짜는 제출 표시일 기준, 학습 시작일 미확인 · 통과 제출 없음",
-    "submission_url": "https://leetcode.com/problems/predict-the-winner/submissions/2121862138"
+    "submission_url": "https://leetcode.com/problems/predict-the-winner/submissions/2121862138",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-132267.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nint solution(int a, int b, int n) {\n    int answer = 0, cola = 0, my = n;\n    while(my >= a)\n    {\n        cola = (my / a) * b;\n        my = my % a + cola;\n        answer += cola;\n    }\n    return answer;\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

@@ -18,6 +18,9 @@ window.TIL_FILES["data/algorithms/pg-12953.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <string>\n#include <vector>\nusing namespace std;\nbool 이름뭐하지(vector<int> arr)\n{\n    for(int i = 0 ; i < arr.size(); i++)\n        if(arr[0] != arr[i]) return false;\n    return true;\n}\nint solution(vector<int> arr) \n{\n    int top = 0;\n    vector<int>temp(arr);\n    while(true)\n    {\n        for(int i = 0; i < arr.size(); i++)\n        {\n            while(arr[i] < top) arr[i] += temp[i];\n            if(top < arr[i]) top = arr[i];\n        }\n        if(이름뭐하지(arr)) return arr[0];\n    }\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

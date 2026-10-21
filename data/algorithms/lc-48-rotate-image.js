@@ -23,7 +23,8 @@ window.TIL_FILES["data/algorithms/lc-48-rotate-image.js"] = [
       "배열",
       "행렬",
       "좌표",
-      "제자리 회전"
+      "제자리 회전",
+      "LeetCode"
     ],
     "verification": "사용자 제공 제출 결과: 2026-10-02 09:35 · Accepted 21 / 21 · Runtime 0 ms · Memory 10.04 MB. 기존 2026-09-11 미완성 기록에 10월 2일 풀이를 이어 정리했다. 이전에 실려 있던 전치·행 뒤집기 코드는 제출하지 않은 참고 예제였으며, 위 코드는 사용자가 제공한 Accepted 코드다."
   }

@@ -23,7 +23,8 @@ window.TIL_FILES["data/algorithms/lc-965-univalued-binary-tree.js"] = [
     "tags": [
       "DFS",
       "깊이 우선 탐색",
-      "재귀"
+      "재귀",
+      "LeetCode"
     ]
   }
 ];

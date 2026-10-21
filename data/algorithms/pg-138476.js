@@ -17,6 +17,9 @@ window.TIL_FILES["data/algorithms/pg-138476.js"] = [
       "귤 크기 자체보다 그 크기의 개수가 필요해서 힙에는 개수만 넣는다."
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
-    "solution_code": "#include <vector>\n#include <unordered_map>\n#include <queue>\nusing namespace std;\nint solution(int k, vector<int> tangerine) {\n    unordered_map<int, int> data;\n    for(auto A : tangerine) data[A]++;\n    priority_queue<int> num;\n    for(auto A : data) num.push(A.second);\n    int answer = 0;\n    while(k > 0) { k -= num.top(); num.pop(); answer++; }\n    return answer;\n}"
+    "solution_code": "#include <vector>\n#include <unordered_map>\n#include <queue>\nusing namespace std;\nint solution(int k, vector<int> tangerine) {\n    unordered_map<int, int> data;\n    for(auto A : tangerine) data[A]++;\n    priority_queue<int> num;\n    for(auto A : data) num.push(A.second);\n    int answer = 0;\n    while(k > 0) { k -= num.top(); num.pop(); answer++; }\n    return answer;\n}",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

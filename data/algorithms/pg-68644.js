@@ -19,6 +19,9 @@ window.TIL_FILES["data/algorithms/pg-68644.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include <vector>\n#include <set>\nusing namespace std;\nvector<int> solution(vector<int> numbers) {\n    set<int> A;\n    for(int i = 0 ; i < numbers.size(); i++)\n        for(int b = i + 1; b < numbers.size(); b++) A.insert(numbers[i] + numbers[b]);\n    vector<int> answer(A.begin(), A.end());\n    return answer;\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "프로그래머스"
+    ]
   }
 ];

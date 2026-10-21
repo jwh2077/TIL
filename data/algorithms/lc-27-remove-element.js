@@ -20,6 +20,9 @@ window.TIL_FILES["data/algorithms/lc-27-remove-element.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    int removeElement(vector<int>& nums, int val) {\n        for(int i = 0; i < nums.size(); i++) {\n            if (nums[i] == val) { nums.erase(nums.begin()+i); i--; }\n        }\n        return nums.size();\n    }\n};",
-    "submission_url": "https://leetcode.com/submissions/detail/2125542053/"
+    "submission_url": "https://leetcode.com/submissions/detail/2125542053/",
+    "tags": [
+      "LeetCode"
+    ]
   }
 ];

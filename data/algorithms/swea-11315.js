@@ -9,7 +9,8 @@ window.TIL_FILES["data/algorithms/swea-11315.js"] = [
       "vector",
       "문자열",
       "배열 범위",
-      "완전 탐색"
+      "완전 탐색",
+      "SWEA"
     ],
     "url": "https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AXaSUPYqPYMDFASQ",
     "date": "2026-10-19",
