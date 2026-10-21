@@ -18,6 +18,11 @@ window.TIL_FILES["data/algorithms/lc-100-same-tree.js"] = [
     ],
     "code_title": "오답 원인을 반영한 풀이",
     "solution_code": "class Solution {\npublic:\n    bool isSameTree(TreeNode* p, TreeNode* q) {\n        if (p == nullptr && q == nullptr) return true;\n        if (p == nullptr || q == nullptr) return false;\n\n        return p->val == q->val\n            && isSameTree(p->left, q->left)\n            && isSameTree(p->right, q->right);\n    }\n};",
-    "verification": "아래 코드는 수정안 · 통과 제출 미확인"
+    "verification": "아래 코드는 수정안 · 통과 제출 미확인",
+    "tags": [
+      "DFS",
+      "깊이 우선 탐색",
+      "재귀"
+    ]
   }
 ];

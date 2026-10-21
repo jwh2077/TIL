@@ -20,7 +20,7 @@
   }
   function results() {
     const q=state.query.trim().toLocaleLowerCase();
-    return records.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'algorithm'))&&(!state.reviewOnly||r.status!=='통과 확인')&&(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.date,r.title,r.summary,r.problem,r.search_text,groups[r.group]].join(' ').toLocaleLowerCase().includes(q)).sort((a,b)=>window.TIL_FILTERS?window.TIL_FILTERS.compare(a,b,state.sort):0);
+    return records.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'algorithm'))&&(!state.reviewOnly||r.status!=='통과 확인')&&(state.group==='all'||r.group===state.group)&&(state.status==='all'||r.status===state.status)&&[r.date,r.title,r.summary,r.problem,r.search_text,...(r.tags||[]),groups[r.group]].join(' ').toLocaleLowerCase().includes(q)).sort((a,b)=>window.TIL_FILTERS?window.TIL_FILTERS.compare(a,b,state.sort):0);
   }
   function cards() {
     const pending=records.filter(r=>r.status!=='통과 확인').length;

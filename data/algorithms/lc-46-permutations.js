@@ -9,7 +9,9 @@ window.TIL_FILES["data/algorithms/lc-46-permutations.js"] = [
       "재귀",
       "백트래킹",
       "vector",
-      "방문 여부"
+      "방문 여부",
+      "DFS",
+      "깊이 우선 탐색"
     ],
     "url": "https://leetcode.com/problems/permutations/",
     "date": "2026-10-13",

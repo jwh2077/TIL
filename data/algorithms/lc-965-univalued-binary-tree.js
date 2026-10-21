@@ -19,6 +19,11 @@ window.TIL_FILES["data/algorithms/lc-965-univalued-binary-tree.js"] = [
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "class Solution {\npublic:\n    bool A = true;\n    bool isUnivalTree(TreeNode* root) \n    {\n        A = true;\n        tree(root);\n        return A;\n    }\n    int tree (TreeNode* root)\n    {\n        if (!A){ return 0;}\n        if(root->left != nullptr && tree(root->left) != root-> val) A = false;\n        if(root->right != nullptr && tree(root->right)!= root-> val) A = false;\n        return root-> val;\n    }\n};",
     "verification": "LeetCode Accepted · 72 / 72 · 9/29 본인 제출 목록의 마지막 결과: 2026-09-14 Accepted (사이트 표시일, 학습일과 구분)",
-    "submission_url": "https://leetcode.com/submissions/detail/2141062788/"
+    "submission_url": "https://leetcode.com/submissions/detail/2141062788/",
+    "tags": [
+      "DFS",
+      "깊이 우선 탐색",
+      "재귀"
+    ]
   }
 ];

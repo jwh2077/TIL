@@ -18,6 +18,12 @@ window.TIL_FILES["data/algorithms/pg-1844.js"] = [
     ],
     "code_title": "통과 제출을 바탕으로 정리한 코드",
     "solution_code": "#include<vector>\n#include<queue>\nusing namespace std;\n\nint solution(vector<vector<int> > maps)\n{\n    int count = 1;\n    queue<pair<int,int>>my;\n    my.push({0,0}); \n    maps[0][0] = -1;\n    int X = maps.size() - 1;\n    int Y = maps[0].size() - 1;\n    int SearchX[4]{0,1,0,-1};\n    int SearchY[4]{1,0,-1,0};\n    while(!my.empty())\n    {\n        int num = my.size();\n        for(int j = 0; j < num; j++)\n        {\n            int x = my.front().first;\n            int y = my.front().second;\n            if(X == x && Y == y) return count;\n            my.pop();\n            for(int i = 0; i < 4; i++)\n            {\n                if (x + SearchX[i] < 0 || y + SearchY[i] < 0){}\n                else if(x + SearchX[i] > X || y + SearchY[i] > Y){}\n                else if(maps[x + SearchX[i]][y + SearchY[i]] == 1)\n                {\n                    maps[x + SearchX[i]][y + SearchY[i]] = -1;\n                    my.push({x + SearchX[i],y + SearchY[i]});\n                }\n            }\n        }\n        count++;\n    }\n    return -1;\n}",
-    "verification": "프로그래머스 정답 · 100 / 100"
+    "verification": "프로그래머스 정답 · 100 / 100",
+    "tags": [
+      "BFS",
+      "너비 우선 탐색",
+      "큐",
+      "최단 경로"
+    ]
   }
 ];
