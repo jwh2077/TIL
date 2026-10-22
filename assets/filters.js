@@ -5,7 +5,7 @@
   const algorithmTagLabel=t=>({DFS:'DFS · 깊이 우선 탐색',BFS:'BFS · 너비 우선 탐색',DP:'DP · 동적 계획법'})[normalizeAlgorithmTag(t)]||normalizeAlgorithmTag(t);
   function algorithmTagGroups(values) {
     const sites=new Set(['LeetCode','프로그래머스','SWEA']);
-    const techniques=new Set(['DFS','BFS','DP','백트래킹','정렬','완전 탐색','선형 탐색','경로 탐색','탐색','재귀','그리디','시뮬레이션','구현']);
+    const techniques=new Set(['DFS','BFS','DP','백트래킹','정렬','완전 탐색','선형 탐색','이진 탐색','경로 탐색','탐색','재귀','그리디','시뮬레이션','구현']);
     const structures=new Set(['배열','2차원 배열','문자열','스택','큐','트리','이진 트리','해시','vector']);
     const groups=[{title:'문제 사이트',expanded:true,tags:[]},{title:'풀이 기법',expanded:true,tags:[]},{title:'자료구조',expanded:false,tags:[]},{title:'세부 개념',expanded:false,tags:[]}];
     for(const t of [...new Set(values.map(normalizeAlgorithmTag))])groups[sites.has(t)?0:techniques.has(t)?1:structures.has(t)?2:3].tags.push(t);

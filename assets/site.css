@@ -51,3 +51,9 @@
 .algorithm-tag-group .tag-options input{flex-shrink:0}
 .algorithm-tag-group[hidden],.algorithm-tag-group label[hidden]{display:none}
 @media(max-width:600px){.algorithm-tag-popover{max-height:65vh;padding:14px}.algorithm-tag-group .tag-options{grid-template-columns:1fr}.algorithm-tag-group .tag-options label{min-height:40px}}
+
+/* C++ submission text stays intact; only the algorithm code presentation changes. */
+#algorithmPage .algorithm-code{background:#f0f4f2;color:#263b35;border:1px solid var(--line);border-radius:8px;padding:18px;overflow:auto;white-space:pre;overflow-wrap:normal;tab-size:4}
+#algorithmPage .algorithm-code code{font-family:Consolas,"Cascadia Mono",monospace;font-size:15px;line-height:1.7;background:transparent;padding:0;color:inherit}
+.algorithm-code .cpp-keyword{color:#7041a0}.algorithm-code .cpp-string{color:#9b411b}.algorithm-code .cpp-number{color:#125c9b}.algorithm-code .cpp-comment{color:#576b60;font-style:italic}
+@media(max-width:600px){#algorithmPage .algorithm-code{padding:14px}#algorithmPage .algorithm-code code{font-size:14px}}

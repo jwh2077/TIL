@@ -62,10 +62,15 @@
     }
     if(token!==request || location.hash!=='#algorithm='+encodeURIComponent(id))return;
     $('#algorithmOutline').hidden=false;
+    const codeBlock = code => `<pre class="algorithm-code" tabindex="0" aria-label="풀이 코드 · 가로 스크롤 가능"><code>${window.TIL_CPP_HIGHLIGHT ? window.TIL_CPP_HIGHLIGHT(code) : esc(code)}</code></pre>`;
+    const codeSections = [...(r.previous_solutions || []), {title:r.code_title,code:r.solution_code,result:r.code_result,submission_url:r.submission_url}].map((solution,i)=>[
+      i===0?'code':`code-${i+1}`,solution.title,
+      `${solution.result?`<p>${esc(solution.result)}</p>`:''}${solution.submission_url?`<p><a class="source" href="${esc(solution.submission_url)}" target="_blank" rel="noopener noreferrer">제출 내역 ↗</a></p>`:''}${codeBlock(solution.code)}`
+    ]);
     const sections=[
       ['problem','문제',`<p>${esc(r.problem)}</p>`],
       ['story',r.question ? '풀이 과정' : '코드 설명',[r.question,r.attempt,r.turning].filter(Boolean).map(text=>`<p>${esc(text)}</p>`).join('')],
-      ['code',r.code_title,`<pre><code>${esc(r.solution_code)}</code></pre>`],
+      ...codeSections,
       ['learned','메모',`<ul>${r.learned.map(item=>`<li>${esc(item)}</li>`).join('')}</ul>`]
     ];
     const submission=r.submission_url ? `<a class="source" href="${esc(r.submission_url)}" target="_blank" rel="noopener noreferrer">제출 내역 ↗</a>` : '';
