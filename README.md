@@ -25,6 +25,7 @@ C++ / Unreal 프로젝트와 학습 기록을 모은 정적 사이트다. [사�
 | `index.html` | 공통 화면·기본 스타일 |
 | `assets/app.js`, `assets/filters.js` | 학습 기록과 검색·날짜·태그 조건 |
 | `assets/library.js`, `assets/algorithms.js` | 자료실·알고리즘 화면 |
+| `assets/learning-demos.js`, `assets/learning-demo-data.js` | 자료실의 접이식 동작 예제·코드 강조·단계별 상태 (vector·이진 탐색은 각각의 demo 파일) |
 | `assets/site.js`, `assets/site.css` | 홈·프로젝트·돌아보기·공통 메뉴·목차 |
 | `data/projects.js` | 프로젝트 소개·역할·작업·돌아보기 |
 | `data/manifest.js` | 학습 기록 목록 |

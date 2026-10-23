@@ -1,0 +1,32 @@
+.learning-demo-picture svg {display:block;width:100%;max-height:210px}
+.learning-demo-picture svg line {stroke:var(--muted);stroke-width:2}
+.learning-demo-picture svg circle {fill:var(--paper,#fff);stroke:var(--line);stroke-width:2}
+.learning-demo-picture svg text {fill:var(--text,#263c46);font-size:14px;text-anchor:middle}
+.learning-demo-picture svg .is-current circle {fill:#d5e9e1;stroke:var(--blue);stroke-width:3}
+.learning-demo-row {margin:0 0 10px}
+.learning-demo-row-label {font-size:.85rem;color:var(--muted);margin-bottom:4px}
+.learning-demo-values {display:flex;flex-wrap:wrap;align-items:center;gap:4px;min-height:32px}
+.learning-demo-value {padding:5px 9px;border:1px solid var(--line);border-radius:5px;background:var(--paper,#fff);font-variant-numeric:tabular-nums}
+.learning-demo-value.is-active {background:#d5e9e1;border-color:var(--blue);font-weight:700}
+.learning-demo-arrow {color:var(--blue)}
+.learning-demo .binary-demo-code {max-height:23rem;overflow:auto}
+.learning-demo .vector-demo-step {min-height:3em;margin-bottom:10px}
+.learning-demo-picture svg.learning-demo-traversal {max-height:none}
+.learning-demo-legend {display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem;margin-bottom:5px}
+.learning-demo-legend .is-current {color:var(--blue);font-weight:700}
+.learning-demo-legend .is-pending {color:#946321}
+.learning-demo-legend .is-finished {color:#60727a}
+.learning-demo-picture svg .is-pending circle {fill:#fff0cd;stroke:#b78b43;stroke-dasharray:3 2}
+.learning-demo-picture svg .is-finished circle {fill:#e1e8eb;stroke:#8a9ba3}
+.learning-demo-picture svg .learning-demo-level {stroke:var(--line);stroke-width:1;stroke-dasharray:3 5}
+.learning-demo-picture svg .learning-demo-edge {stroke:var(--blue);stroke-width:3}
+.learning-demo-picture svg .learning-demo-return {stroke:#a96928;stroke-width:3;stroke-dasharray:5 3}
+.learning-demo-picture svg .learning-demo-node-detail {font-size:9px}
+.learning-demo-picture svg .learning-demo-node-mark {font-size:12px;fill:var(--blue)}
+.learning-demo-picture svg .learning-demo-depth {font-size:11px;fill:var(--muted)}
+.learning-demo-diagram-note {font-size:.8rem;color:var(--muted);margin:3px 0 9px}
+.learning-demo-state-rows:not(:empty) {margin-top:12px}
+.learning-demo-board-row {display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.learning-demo-board-row .learning-demo-row-label {width:32px;margin:0}
+.learning-demo-board-row .learning-demo-values {display:grid;grid-template-columns:repeat(4,34px);gap:3px}
+.learning-demo-board-row .learning-demo-value {text-align:center;padding:5px}

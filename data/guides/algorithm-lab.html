@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>알고리즘 플레이그라운드 · 개발·학습 기록</title>
+<style>
+:root{--ink:#18263b;--muted:#62728a;--line:#e0e7f0;--paper:#f5f7fa;--white:#fff;--primary:#2868c7;--primarylight:#eaf2ff;--teal:#05776d;--teallight:#e7f5f2;--amber:#a6601d;--amberlight:#fff2df;--red:#b7464a;--redlight:#fff0f0;--radius:16px;--shadow:0 8px 26px rgba(29,49,75,.055)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #74adff;outline-offset:2px}a{color:var(--primary)}
+.shell{max-width:1420px;min-height:100vh;margin:auto;display:grid;grid-template-columns:250px minmax(0,1fr);background:var(--paper)}
+.sidebar{background:#fff;border-right:1px solid var(--line);padding:30px 17px 24px;position:sticky;top:0;height:100vh;overflow-y:auto}.eyebrow{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--primary);font-weight:850}.brand{font-size:19px;font-weight:850;letter-spacing:-.05em;margin:8px 0 7px}.brand-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:30px}.group-name{margin:20px 11px 8px;color:#8b97a6;font-size:11px;letter-spacing:.08em;font-weight:800}.nav-button{display:flex;align-items:center;gap:11px;width:100%;border:0;border-radius:10px;background:none;color:#506077;text-align:left;padding:10px 11px;margin:2px 0;font-size:13px;font-weight:650}.nav-button:hover{background:#f5f8fd}.nav-button[aria-current=true]{background:var(--primarylight);color:#17509c;font-weight:850}.nav-icon{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:#f1f4f8;font-size:12px;font-weight:850;color:#60718c}.nav-button[aria-current=true] .nav-icon{background:#d4e5ff;color:#1b61ba}.aside-note{font-size:11px;border-top:1px solid var(--line);padding:16px 10px 0;margin-top:24px;color:#8190a3}
+.content{min-width:0;padding:36px clamp(18px,3.7vw,55px) 60px}.page-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.page-top h1{font-size:clamp(22px,2.65vw,37px);margin:5px 0 5px;letter-spacing:-.055em;line-height:1.24}.intro{font-size:13px;color:var(--muted);margin:0}.version{white-space:nowrap;font-size:11px;color:#6e8299;background:white;border:1px solid var(--line);border-radius:99px;padding:5px 10px;margin-top:6px}.mobile-select{display:none}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:16px;margin:29px 0 18px}.subheading{font-size:11px;font-weight:850;letter-spacing:.06em;color:var(--primary);margin:0 0 4px;text-transform:uppercase}.hero h2{font-size:25px;margin:0 0 5px;letter-spacing:-.04em;line-height:1.3}.hero p{margin:0;color:var(--muted);font-size:13px;max-width:660px}.tags{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.tag{font-size:11px;font-weight:700;color:#466581;background:#eaf0f7;border-radius:99px;padding:4px 10px}.tag.highlight{background:#e6f4f1;color:#15796d}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.stage{padding:21px 22px}.stage-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}.section-label{margin:0;font-weight:850;font-size:14px;letter-spacing:-.025em}.step-counter{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;font-weight:750}.progress-track{width:100%;height:6px;background:#ecf1f7;border-radius:99px;overflow:hidden;margin:0 0 17px}.progress-fill{height:100%;width:0;background:var(--primary);border-radius:99px;transition:width .2s}
+.visual-stage{background:#f8fafd;border-radius:12px;min-height:290px;padding:19px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}.visual-stage svg{max-width:100%;height:auto;display:block;margin:auto}.visual-stage:empty:after{content:'시각화 로딩 중';color:var(--muted)}.step-explanation{margin-top:14px;padding:13px 15px;border:1px solid #dce9fb;border-radius:10px;background:#f2f7ff;min-height:81px}.step-explanation strong{display:block;font-size:14px;color:#184f97;letter-spacing:-.02em}.step-explanation p{font-size:12px;color:#536780;margin:4px 0 0}
+.toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:16px}.button-set{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.btn{border:1px solid #d3dfec;background:#fff;color:#35516f;border-radius:9px;min-height:39px;padding:7px 13px;font-size:12px;font-weight:780}.btn:hover:not(:disabled){background:#f3f8ff}.btn.primary{background:var(--primary);color:white;border-color:var(--primary)}.btn.primary:hover:not(:disabled){background:#1b59b5}.btn.subtle{border-color:transparent;color:#53687f}.speed{display:flex;gap:7px;align-items:center;font-size:12px;color:#63778c}.speed select{padding:7px 21px 7px 9px;min-height:38px;border-radius:8px;border:1px solid var(--line);color:#3d5771;background:#fff}
+.lower{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:16px;margin:16px 0}.panel{padding:19px 20px;min-width:0}.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}.panel-heading h3{font-size:14px;margin:0;letter-spacing:-.025em}.panel-kicker{color:#8b98a8;font-size:11px}.explanation{font-size:13px;color:#47586c;margin:0 0 12px}.when-list{font-size:12px;color:#53657a;padding-left:19px;margin:8px 0}.when-list li{padding:3px 0}.note{background:#fff9eb;border:1px solid #f2e1c5;border-radius:9px;padding:10px 12px;color:#795a2e;font-size:12px;margin:11px 0 0}.code{background:#14273c;color:#dae6f6;padding:14px;border-radius:10px;overflow:auto;font-size:11px;line-height:1.65;margin:0;min-height:150px;tab-size:2;white-space:pre}.code .highlight-line{display:block;background:rgba(96,163,250,.18);box-shadow:-14px 0 0 rgba(96,163,250,.18),14px 0 0 rgba(96,163,250,.18);color:#fff}.code .code-line{display:block}.complexity{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.complexity span{border:1px solid #dbe7f6;color:#45627f;background:#f8fbff;border-radius:7px;padding:5px 9px;font-size:11px;font-weight:750}
+.inputbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:15px;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:#fff}.inputbar label{font-size:12px;font-weight:760;color:#4c627a}.inputbar input{width:90px;height:35px;padding:5px 9px;border-radius:7px;border:1px solid #d3deea;color:var(--ink);background:#fff}.inputbar .hint{font-size:11px;color:#7b8da1}.section-divider{border:0;border-top:1px solid var(--line);margin:18px 0}.footer{margin-top:23px;text-align:center;font-size:11px;color:#8594a5}
+/* Visual primitives */
+.arr{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}.arr-cell{width:clamp(31px,6vw,63px);height:64px;border:1px solid #d9e1ea;background:#fff;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;gap:2px;transition:background .2s,opacity .2s}.arr-cell .num{font-size:20px;font-weight:850;line-height:1.2}.arr-cell .idx{font-size:10px;color:#8795a8}.arr-cell.excluded{opacity:.35;background:#e9eef4}.arr-cell.range{border-color:#b2d0ef;background:#eff6ff}.arr-cell.mid{border:2px solid var(--primary);background:#dcecff;box-shadow:0 0 0 3px rgba(40,104,199,.10)}.arr-cell.found{border:2px solid #219782;background:#d7f2eb}.pointer-row{display:flex;justify-content:center;gap:5px;margin:5px auto 0}.pointer{width:clamp(31px,6vw,63px);text-align:center;font-size:10px;font-weight:800;color:#3777c1;height:25px}.pointer.mid{color:#b36b20}.pointer.found{color:#007968}.formula{font-size:13px;text-align:center;color:#53677e;margin:19px auto 5px;max-width:600px;font-weight:700}.muted-small{text-align:center;color:#8493a7;font-size:12px;margin-top:12px}.viz-columns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin-top:17px}.viz-block{background:white;border:1px solid var(--line);border-radius:10px;padding:12px 15px;min-width:128px;text-align:center}.viz-block .caption{font-size:11px;color:#8996a4;display:block;margin-bottom:5px}.viz-block strong{font-size:16px;font-weight:850;overflow-wrap:anywhere}.pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}.pill{border:1px solid #bed1e6;background:#fff;color:#275780;border-radius:8px;padding:6px 10px;min-width:30px;min-height:32px;text-align:center;font-weight:850;font-size:13px}.pill.current{color:#fff;background:var(--primary);border-color:var(--primary)}.pill.good{background:#ddf4e9;color:#08725e;border-color:#a0d8c9}.pill.bad{background:#fbe0e0;color:#a44349;border-color:#e8b6b7}.slot-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.slot{border:1px solid #dbe3ee;background:white;border-radius:9px;text-align:center;padding:12px 4px;font-weight:820;font-size:16px}.slot.current{border-color:var(--primary);background:#dbeaff}.slot small{display:block;font-size:10px;color:#8b99a8;font-weight:700}.board{display:grid;grid-template-columns:repeat(4,minmax(0,58px));justify-content:center;border:2px solid #96aeca;border-radius:8px;overflow:hidden;width:fit-content;margin:auto}.square{width:clamp(47px,10vw,58px);height:clamp(47px,10vw,58px);display:grid;place-items:center;font-size:26px;font-weight:800;position:relative}.square.light{background:#ecf3fa}.square.dark{background:#bdd2e6}.square.try{outline:3px solid #da932c;outline-offset:-3px}.square.invalid{background:#ffc6c9}.square.queen{color:#174f9c}.square.remove{background:#f8d8af}.square.solution{background:#ace3cd}.hint-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 4px 0 11px}.hint-dot:first-child{margin-left:0}.legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin-top:13px;color:#6f8094;font-size:11px}.stack-viz{display:flex;flex-direction:column-reverse;gap:5px;min-height:164px;justify-content:flex-start;align-items:center;margin:auto}.stack-item{width:180px;border:1px solid #b8d1ec;border-radius:7px;background:white;color:#235584;text-align:center;font-weight:850;font-size:17px;padding:7px}.stack-item:last-child{border-color:#2c78ce;background:#d7eafe}.data-viz{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(520px,100%);margin:auto;align-items:center}.data-column h4{font-size:12px;margin:0 0 9px;color:#627990;text-align:center}.queue-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;align-items:center;min-height:54px}.empty-text{text-align:center;color:#9ba8b8;font-size:12px}.choice-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;max-width:560px;margin:auto}.choice{background:#fff;border:1px solid #dce5ef;border-radius:9px;padding:12px 4px;text-align:center}.choice.active{border:2px solid var(--primary);background:#eaf2ff}.choice.good{border-color:#8dcfb7;background:#e6f5ed}.choice.bad{opacity:.72}.choice code{font-size:15px;font-weight:850}.choice small{display:block;font-size:10px;color:#7d8c9c;margin-top:4px}.choice .status{display:block;font-size:12px;font-weight:850;margin-top:6px}.fib-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:5px}.fib-item{display:flex;align-items:center;flex-direction:column;gap:4px;width:clamp(42px,6vw,59px);border:1px solid #dce5ee;background:#fff;border-radius:8px;padding:7px 2px}.fib-item.current{border:2px solid #246cc5;background:#e6f1ff}.fib-item.dependency{border-color:#e0b76e;background:#fff4dd}.fib-item .i{font-size:10px;color:#93a1b0}.fib-item strong{font-size:20px}.fib-item.pending strong{color:#bdc7d4}.coin-row{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}.coin{width:58px;height:58px;display:grid;place-items:center;border:3px double #dabf7b;background:#fff5d9;border-radius:50%;font-weight:900;font-size:20px;color:#91632b}.coin.new{border-color:#2876cf;background:#e0efff;color:#2762aa}.frame{border:1px solid #b8d2ea;background:white;border-radius:9px;padding:9px 14px;min-width:165px;text-align:center;font-weight:800;color:#315e8e}.frame.active{border:2px solid #2e75c4;background:#e5f1ff}.frame.returned{background:#e3f6ea;border-color:#84c9aa;color:#1f7c65}.rec-frames{display:flex;flex-direction:column;justify-content:flex-end;gap:5px;min-height:155px;align-items:center}.outline-text{text-align:center;font-size:12px;color:#73869d;margin-top:11px}
+body.embed{background:#fff}body.embed .shell{display:block;min-height:0}body.embed .sidebar,body.embed .page-top,body.embed .footer{display:none}body.embed .content{padding:14px;max-width:1100px;margin:auto}body.embed .hero{margin-top:0}body.embed .stage{padding:17px}body.embed .visual-stage{min-height:210px}body.embed .lower{margin-top:12px}
+@media(max-width:1050px){.shell{grid-template-columns:210px minmax(0,1fr)}.sidebar{padding:24px 11px}.content{padding:28px 22px}.lower{grid-template-columns:1fr}}
+@media(max-width:690px){.shell{display:block}.sidebar{display:none}.mobile-select{display:block;margin-top:17px}.mobile-select label{display:block;font-size:11px;font-weight:800;color:var(--muted);margin-bottom:5px}.mobile-select select{width:100%;border:1px solid var(--line);background:white;padding:11px 10px;border-radius:10px;font-weight:700;color:var(--ink)}.content{padding:23px 14px 40px}.page-top h1{font-size:25px}.version{font-size:9px;padding:4px 7px}.hero{grid-template-columns:1fr;gap:7px;margin:20px 0 12px}.hero h2{font-size:22px}.tags{justify-content:flex-start}.stage{padding:14px}.visual-stage{padding:13px;min-height:250px}.btn{padding:6px 10px;min-height:37px}.toolbar{justify-content:center}.inputbar{gap:7px}.inputbar label{flex:1}.data-viz{grid-template-columns:1fr}.lower{gap:11px;margin-top:11px}.panel{padding:17px}.coin{width:48px;height:48px}.coin-row{gap:5px}.choice-grid{gap:5px}.choice{padding:8px 2px}.choice code{font-size:13px}.arr-cell{height:55px}.arr-cell .num{font-size:15px}.arr-cell .idx{font-size:9px}.pointer{font-size:8px}.board .square{font-size:22px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Approved v4 compact selector, current-line emphasis, responsive visual components. */
+.content{max-width:1040px;width:100%;margin:0 auto}.hero{display:block;margin:23px 0 16px}.hero h2{margin:0;font-size:clamp(22px,2.8vw,29px)}.implementation-title{display:flex;flex-wrap:wrap;align-items:center;gap:13px;margin:0 0 9px}.tabs{display:inline-flex;align-items:center;gap:2px;background:#edf2f8;padding:3px;border:1px solid #dbe5f2;border-radius:8px;flex:none}.tabs[hidden]{display:none}.tab{border:0;border-radius:6px;background:transparent;color:#53637a;font-size:12px;font-weight:780;padding:5px 10px;min-height:31px}.tab[aria-selected=true]{background:#fff;color:#164c9d;box-shadow:0 1px 5px rgba(26,51,88,.12)}.hero .tags{justify-content:flex-start;margin-top:10px}.stage{padding:22px}.lower{display:flex;flex-direction:column-reverse;gap:15px}.lower .panel{width:100%}
+.live-code{background:#17253d;border:1px solid #314766;border-radius:9px;margin-top:13px;overflow:hidden;box-shadow:inset 4px 0 #72c5ff}.live-code-header{padding:8px 13px 0;display:flex;justify-content:space-between;color:#c1dcff;font-size:12px;font-weight:800}.live-code code{display:block;color:#fff;padding:8px 13px 12px;font:700 14px/1.55 Consolas,ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.code-frame{background:#152238;border-radius:11px;border:1px solid #273953;max-height:430px;overflow:auto}.code-lines{counter-reset:line;display:block;background:transparent!important;color:#e3edff;font:14px/1.55 Consolas,ui-monospace,monospace;white-space:normal;margin:0;padding:10px 0;tab-size:4}.code-line{display:block;position:relative;white-space:pre-wrap;overflow-wrap:anywhere;padding:1px 15px 1px 53px;min-height:24px}.code-line:before{counter-increment:line;content:counter(line);position:absolute;left:0;width:39px;text-align:right;color:#9aacc9;font-size:12px}.code-line.active{background:#315e99;color:#fff;font-weight:800;box-shadow:inset 5px 0 #91d1ff}.code-line.active:before{color:#fff}.submission{font-size:13px;color:#435774;margin:12px 0 0}.submission a{font-weight:700}.comparison{background:white;border:1px solid #dce5f1;border-radius:12px;margin:16px 0;overflow:hidden}.comparison summary{padding:14px 19px;font-size:13px;font-weight:850;color:#365a88;cursor:pointer}.comparison div{border-top:1px solid #dce5f1;padding:14px 19px;color:#536980;font-size:13px}
+.grid-matrix{display:grid;grid-template-columns:repeat(var(--matrix-cols),minmax(0,58px));gap:5px;justify-content:center;padding:10px}.matrix-cell{border:1px solid #bfcddd;background:white;border-radius:8px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;flex-direction:column;font-weight:850;font-size:19px;min-width:0}.matrix-cell small{color:#657b93;font-size:9px;font-weight:650}.matrix-cell.unseen{background:#dfe7f0;color:#53657a}.matrix-cell.mine{background:#f8dadd;color:#a13e45}.matrix-cell.opened{background:#d8efeb;color:#187a67}.matrix-cell.counted{background:#fff4dc;color:#91651e}.matrix-cell.fresh{background:#e8f4e4;color:#3b7f40}.matrix-cell.rotted{background:#ffe6d5;color:#ba5620}.matrix-cell.empty{background:#f0f3f6;color:#9ba7b4}.matrix-cell.active{outline:3px solid #2868c7;outline-offset:1px;box-shadow:0 0 0 5px #bed9fa}.linear-tag{font-size:10px;color:#6285ad}.related-line{font-size:12px;color:#506980;margin:14px 0 0}.related-line a{font-weight:700}
+@media(max-width:690px){.implementation-title{gap:8px}.tab{padding:5px 8px;font-size:11px}.stage{padding:16px}.code-line{padding-left:37px;padding-right:7px;font-size:12px}.code-line:before{width:27px;font-size:10px}.live-code code{font-size:12px}.grid-matrix{gap:4px;grid-template-columns:repeat(var(--matrix-cols),minmax(0,48px))}.matrix-cell{font-size:17px}.visual-stage{min-height:240px}}
+
+/* v3: 동작 시각화 외에도 실제 활용과 실행 복잡도를 바로 찾기 */
+.quick-ref{margin-top:16px}.quick-ref h4{margin:0 0 7px;font-size:12px;color:#244b7b;font-weight:850}.reference-list{margin:0;padding-left:19px;color:#445d77;font-size:13px;line-height:1.7}.reference-list li+li{margin-top:3px}.quick-ref .complexity{margin:4px 0 9px}.table-scroll{overflow-x:auto;max-width:100%}.big-o{border-collapse:collapse;width:100%;min-width:300px;text-align:left;font-size:12px}.big-o th{background:#f1f6fc;color:#45617e}.big-o th,.big-o td{padding:7px 8px;border-bottom:1px solid #e3edf7;vertical-align:top}.big-o td:nth-child(2){white-space:nowrap;color:#1864b5;font-weight:850}.big-o td:last-child{color:#61718a}.panel .note{margin-top:15px}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar" aria-label="알고리즘 선택">
+  <div class="eyebrow">INTERACTIVE REFERENCE</div><div class="brand">Algorithm Lab</div>
+  <div class="brand-desc">알고리즘의 실행 흐름을<br>직접 움직여 보는 학습 자료</div>
+  <nav id="sidebarNav"></nav>
+  <div class="aside-note">독립 실행형 HTML · 서버/패키지 불필요<br>키보드와 모바일 환경 지원</div>
+</aside>
+<main class="content">
+  <header class="page-top"><div><div class="eyebrow">개발·학습 기록 / 자료실</div><h1>알고리즘 시각화 자료실</h1><p class="intro">일반적인 구현을 기본으로 보고, 실제로 작성한 풀이가 있다면 선택해서 실행 흐름을 확인합니다.</p></div><span class="version">Single HTML · v2.0</span></header>
+  <div class="mobile-select"><label for="mobileAlgorithm">개념 선택</label><select id="mobileAlgorithm" aria-label="학습할 알고리즘 선택"></select></div>
+  <div class="hero"><div><div class="subheading" id="categoryLabel">탐색 알고리즘</div><div class="implementation-title"><h2 id="algorithmTitle">이진 탐색</h2><div class="tabs" role="tablist" aria-label="구현 방식 선택" id="modeTabs" hidden><button type="button" class="tab" data-mode="standard" role="tab" aria-selected="true">일반 구현</button><button type="button" class="tab" data-mode="mine" role="tab" aria-selected="false">내 풀이</button></div></div><p id="algorithmSubtitle"></p></div><div class="tags" id="tags"></div></div>
+  <section class="card stage" aria-labelledby="visualHeading"><div class="stage-header"><h3 class="section-label" id="visualHeading">실행 과정</h3><span class="step-counter" id="stepCounter" aria-live="polite"></span></div>
+    <div class="progress-track" role="progressbar" aria-label="실행 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="visual-stage" id="visual" aria-label="현재 알고리즘 상태"></div>
+    <div class="step-explanation" aria-live="polite"><strong id="stepTitle"></strong><p id="stepDetail"></p><div class="live-code" aria-label="현재 실행 위치"><div class="live-code-header">현재 실행 코드 <span id="lineNumber"></span></div><code id="currentLine"></code></div></div>
+    <div id="inputs"></div>
+    <div class="toolbar"><div class="button-set"><button class="btn subtle" type="button" id="resetBtn" title="처음 상태로">↺ 초기화</button><button class="btn" type="button" id="prevBtn" aria-label="이전 단계">← 이전</button><button class="btn primary" type="button" id="playBtn">▶ 재생</button><button class="btn" type="button" id="nextBtn" aria-label="다음 단계">다음 →</button></div><div class="speed"><label for="speedSelect">재생 속도</label><select id="speedSelect"><option value="1300">느리게</option><option value="850" selected>보통</option><option value="420">빠르게</option></select></div></div>
+  </section>
+  <div class="lower"><section class="card panel"><div class="panel-heading"><h3>개념 이해</h3><span class="panel-kicker">개념 · 활용 · 주의점</span></div><p id="concept" class="explanation"></p><div class="quick-ref"><h4>주요 특징</h4><ul class="reference-list" id="features"></ul></div><div class="quick-ref"><h4>실제 사용 예</h4><ul class="reference-list" id="when"></ul></div><div class="quick-ref"><h4>Big O · 구현과 조건별</h4><div class="complexity" id="complexity"></div><div class="table-scroll"><table class="big-o"><thead><tr><th scope="col">연산·조건</th><th scope="col">복잡도</th><th scope="col">해설</th></tr></thead><tbody id="costTable"></tbody></table></div></div><p class="note" id="caution"></p></section>
+  <section class="card panel"><div class="panel-heading"><h3>C++ 핵심 코드</h3><span class="panel-kicker">학습용 예시 코드</span></div><div class="code-frame" id="codeFrame"><pre class="code-lines" id="sampleCode" aria-label="선택한 구현의 C++ 코드"></pre></div><p class="outline-text" id="codeFootnote">실행 중인 코드 줄이 강조됩니다.</p><p class="submission" id="submission" hidden></p></section></div>
+  <details class="comparison" id="comparison" hidden><summary>두 구현의 차이 살펴보기 (선택 사항)</summary><div id="comparisonText"></div></details><footer class="footer">GitHub Pages 호환 · HTML / CSS / Vanilla JavaScript / SVG · 외부 라이브러리 없음</footer>
+</main>
+</div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const esc=x=>String(x??'').replace(/[&<>"']/g,k=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[k]));
+const groups=[{label:'탐색 알고리즘',items:[['linear','선형 탐색','→'],['binary','이진 탐색','½'],['dfs','깊이 우선 탐색 (DFS)','↓'],['bfs','너비 우선 탐색 (BFS)','↳'],['exhaustive','완전 탐색','∞']]},{label:'문제 해결 전략',items:[['dp','동적 계획법 (DP)','DP'],['greedy','그리디','✓'],['backtrack','백트래킹','↶']]},{label:'프로그래밍 기법',items:[['recursion','재귀 함수','↻']]}];
+const graph={A:['B','C'],B:['A','D','E'],C:['A','F','G'],D:['B'],E:['B'],F:['C'],G:['C']};
+const cfg={
+ linear:{cat:'탐색 알고리즘',title:'선형 탐색 (Linear Search)',sub:'배열의 앞에서부터 차례대로 확인합니다. 이 예시는 정렬 배열에서 삽입 위치를 찾습니다.',tags:['순차 확인','O(n)'],concept:'배열의 각 원소를 앞에서부터 방문하며 조건을 검사합니다. 목표값 이상인 첫 인덱스에 도달하면 반환합니다.',complex:['시간 O(n)','추가 공간 O(1)'],when:['데이터가 적거나 정렬되지 않았을 때','처음 만족하는 원소를 찾고 싶을 때'],caution:'여기서는 정렬된 배열의 삽입 위치를 찾는 예시입니다. 일반적인 선형 탐색은 배열 정렬이 필수는 아닙니다.',code:`int searchInsert(vector<int>& nums, int target) {
+    for (int i = 0; i < nums.size(); ++i) {
+        if (nums[i] >= target) return i;
+    }
+    return nums.size();
+}`},
+ binary:{cat:'탐색 알고리즘',title:'이진 탐색 (Binary Search)',sub:'정렬된 배열에서 탐색 범위를 절반씩 줄입니다. 목표값을 바꿔 직접 비교해 보세요.',tags:['정렬된 데이터','O(log n)'],concept:'현재 탐색 범위의 가운데 값을 비교하고, 목표값이 있을 수 없는 절반을 제외합니다. 찾지 못한 경우 lower_bound 형태로 삽입 위치를 얻을 수도 있습니다.',complex:['시간 O(log n)','공간 O(1)'],when:['정렬된 배열에서 특정 값 찾기','정렬 배열의 삽입 위치 찾기'],caution:'배열이 정렬되어 있어야 합니다. 이 예시는 목표값 이상인 첫 위치를 찾는 lower_bound 방식입니다.',code:`int low = 0, high = nums.size();
+while (low < high) {
+    int mid = low + (high-low)/2;
+    if (nums[mid] < target) low = mid+1;
+    else high = mid;
+}
+return low; // 삽입 위치`},
+ dfs:{cat:'탐색 알고리즘',title:'깊이 우선 탐색 (DFS)',sub:'한 방향으로 끝까지 들어간 뒤 이전 위치로 돌아가 다른 갈래를 확인합니다.',tags:['그래프·트리','재귀 / 스택'],concept:'한 정점을 방문한 뒤 방문하지 않은 인접 정점으로 내려갑니다. 더 갈 곳이 없으면 호출 스택을 따라 돌아옵니다.',complex:['시간 O(V+E)','공간 O(V)'],when:['연결된 영역 확인','경로와 그래프 순회'],caution:'그래프에 순환이 있다면 visited 검사로 무한 재방문을 막아야 합니다. 방문 순서는 인접 정점의 나열 순서에 따라 달라집니다.',code:`void dfs(int u) {
+    visited[u] = true;
+    for (int v : graph[u]) {
+        if (!visited[v]) dfs(v);
+    }
+}`},
+ bfs:{cat:'탐색 알고리즘',title:'너비 우선 탐색 (BFS)',sub:'시작점과 가까운 정점부터 순서대로 방문합니다. 큐가 어떻게 바뀌는지 확인해 보세요.',tags:['그래프·트리','큐'],concept:'시작점을 큐에 넣고, 꺼낸 정점에서 새로 발견한 이웃을 큐 뒤에 추가합니다. 선입선출(FIFO)이므로 가까운 단계부터 처리됩니다.',complex:['시간 O(V+E)','공간 O(V)'],when:['가중치가 없는 그래프의 최단 거리','격자의 단계별 전파·확산'],caution:'이 예시는 정점을 큐에 넣을 때 방문 표시를 하여 중복 등록을 방지합니다. 최단 거리 성질은 간선 비용이 동일할 때 적용됩니다.',code:`queue<int> q;
+q.push(start); visited[start] = true;
+while (!q.empty()) {
+    int u = q.front(); q.pop();
+    for (int v : graph[u]) {
+        if (!visited[v]) {
+            visited[v] = true; q.push(v);
+        }
+    }
+}`},
+ exhaustive:{cat:'탐색 알고리즘',title:'완전 탐색 (Brute Force)',sub:'스위치 3개를 켜거나 끄는 8가지 경우를 빠짐없이 확인합니다.',tags:['모든 경우 확인','2³ = 8가지'],concept:'가능한 모든 후보를 차례로 만들어 조건을 검사합니다. 이 예시는 3개 스위치 중 정확히 2개가 켜진 경우를 찾습니다.',complex:['시간 O(2ⁿ) — 이 예시','공간 O(n) 이하'],when:['입력 크기가 작아 모든 경우를 확인할 수 있을 때','정답을 빠뜨리지 않고 검증할 때'],caution:'완전 탐색의 시간 복잡도는 후보를 만드는 방식에 따라 달라집니다. O(2ⁿ)은 이진 선택 n개의 모든 조합을 확인하는 이 예시의 복잡도입니다.',code:`for (int mask = 0; mask < (1<<3); ++mask) {
+    int cnt = 0;
+    for (int i = 0; i < 3; ++i)
+        if (mask & (1<<i)) ++cnt;
+    if (cnt == 2) {
+        // 조건 만족
+    }
+}`},
+ dp:{cat:'문제 해결 전략',title:'동적 계획법 (DP)',sub:'작은 문제의 답을 저장하고 다시 사용합니다. 피보나치 수의 DP 테이블을 채워 보세요.',tags:['중복 계산 재사용','점화식'],concept:'큰 문제의 답이 작은 문제의 답에 의존할 때, 이미 구한 값을 저장해 반복 계산을 줄입니다. 아래는 F(n)=F(n−1)+F(n−2)를 아래에서부터 계산하는 Bottom-Up 방식입니다.',complex:['시간 O(n)','공간 O(n)'],when:['같은 하위 문제가 반복될 때','최적 부분 구조를 이용할 수 있을 때'],caution:'문제를 쪼개는 것만으로 DP는 아닙니다. 작은 문제의 정답을 저장해 재사용하는 구조가 중요합니다. 이 코드는 피보나치에 대한 예시입니다.',code:`vector<int> dp(n+1);
+dp[0] = 0;
+dp[1] = 1;
+for (int i = 2; i <= n; ++i) {
+    dp[i] = dp[i-1] + dp[i-2];
+}
+return dp[n];`},
+ greedy:{cat:'문제 해결 전략',title:'그리디 (Greedy)',sub:'그 순간 가장 큰 동전을 선택해 봅니다. 언제 최적해가 아닐 수 있을까요?',tags:['지역적 최선','반례 관찰'],concept:'매 단계에서 현재 기준으로 가장 좋아 보이는 선택을 합니다. 여기서는 4·3·1원 동전으로 목표 금액을 만들 때 가능한 가장 큰 동전을 선택합니다.',complex:['시간 O(k·m) — 단순 구현','공간 O(m) — 결과 기록'],when:['선택의 최적성이 증명되는 문제','정렬 후 단계별 선택이 유효한 문제'],caution:'항상 전체 최적해를 보장하지는 않습니다. 예를 들어 6원에서 그리디는 4+1+1(3개), 최적해는 3+3(2개)입니다. 동전 종류와 구현 방식에 따라 복잡도는 달라집니다.',code:`vector<int> coins = {4,3,1};
+for (int c : coins) {
+    while (amount >= c) {
+        amount -= c;
+        chosen.push_back(c);
+    }
+}`},
+ backtrack:{cat:'문제 해결 전략',title:'백트래킹 (Backtracking)',sub:'4×4 체스판에 퀸을 놓으며 불가능한 선택을 되돌립니다.',tags:['선택 → 재귀 → 취소','N-Queens'],concept:'가능한 선택을 하나 적용하고 더 깊이 탐색합니다. 조건을 어기거나 탐색을 마치면 선택을 취소하여 다른 후보를 시도합니다.',complex:['시간 지수적 — 경우에 따라 다름','공간 O(n) — 배치/호출 스택'],when:['N-Queens·순열·조합','제약 조건이 있는 경우의 수 탐색'],caution:'이 시각화는 4-Queens의 실제 탐색 흐름을 보여 줍니다. 시간 복잡도는 문제 및 가지치기 효과에 따라 다릅니다.',code:`void solve(int row) {
+    if (row == n) { save(); return; }
+    for (int col = 0; col < n; ++col) {
+        if (!safe(row,col)) continue;
+        place(row,col);
+        solve(row+1);
+        remove(row,col);
+    }
+}`},
+ recursion:{cat:'프로그래밍 기법',title:'재귀 함수 (Recursion)',sub:'팩토리얼 함수의 호출 스택이 쌓이고 반환되는 순서를 확인해 보세요.',tags:['종료 조건','호출 스택'],concept:'함수가 자기 자신을 호출하는 방식입니다. 각 호출마다 별도의 실행 문맥이 스택에 쌓이고, 종료 조건에 도달하면 가장 나중에 호출된 함수부터 반환됩니다.',complex:['시간 O(n) — 팩토리얼 예시','공간 O(n) — 호출 스택'],when:['트리와 계층 구조 처리','DFS·백트래킹 구현'],caution:'종료 조건이 없거나 깊이가 너무 깊으면 스택 오버플로가 발생할 수 있습니다. 모든 재귀 알고리즘의 시간 복잡도가 O(n)인 것은 아닙니다.',code:`int fact(int n) {
+    if (n <= 1) return 1;
+    return n * fact(n-1);
+}`},
+ stack:{cat:'자료구조',title:'스택 (Stack)',sub:'마지막에 넣은 값을 먼저 꺼내는 후입선출(LIFO)을 체험합니다.',tags:['LIFO','push / pop'],concept:'스택은 한쪽 끝(top)에서만 원소를 추가하고 꺼냅니다. 마지막에 넣은 원소가 가장 먼저 나옵니다.',complex:['push/pop O(1)','top O(1)'],when:['재귀 호출 관리','DFS·괄호 검사·되돌리기'],caution:'비어 있는 스택에서 pop/top을 호출하면 안 됩니다. 아래 C++ 코드도 비었는지 먼저 확인합니다.',code:`stack<int> st;
+st.push(5); st.push(12);
+if (!st.empty()) {
+    int x = st.top();
+    st.pop();
+}`},
+ queue:{cat:'자료구조',title:'큐 (Queue)',sub:'먼저 넣은 값을 먼저 꺼내는 선입선출(FIFO)을 체험합니다.',tags:['FIFO','push / pop'],concept:'큐는 뒤(back)에서 원소를 넣고 앞(front)에서 꺼냅니다. 먼저 들어온 작업이 먼저 처리됩니다.',complex:['push/pop O(1)','front O(1)'],when:['BFS의 탐색 대기열','순서대로 처리하는 작업'],caution:'비어 있는 큐에서 front/pop을 호출하면 안 됩니다.',code:`queue<int> q;
+q.push(5); q.push(12);
+if (!q.empty()) {
+    int x = q.front();
+    q.pop();
+}`},
+ heap:{cat:'자료구조',title:'힙 / 우선순위 큐',sub:'최소 힙에 값을 삽입하고 꺼낼 때 부모·자식의 교환을 확인합니다.',tags:['최소 힙','삽입/삭제 O(log n)'],concept:'최소 힙은 부모 값이 자식 값보다 작거나 같도록 유지하는 완전 이진 트리입니다. 최솟값은 항상 루트에 있지만 전체 배열이 정렬된 것은 아닙니다.',complex:['삽입/삭제 O(log n)','최솟값 조회 O(1)'],when:['최솟값·최댓값을 반복해서 꺼낼 때','우선순위 작업 처리·다익스트라'],caution:'C++ priority_queue는 기본적으로 최대 힙입니다. 아래 코드는 greater<int>로 최소 힙을 만든 예시입니다.',code:`priority_queue<int, vector<int>, greater<int>> pq;
+pq.push(7); pq.push(3);
+if (!pq.empty()) {
+    int x = pq.top();
+    pq.pop();
+}`}
+};
+// Distinct actual-submission traces. Personal code is not rewritten or normalized.
+const mineSources = {
+  binary: `class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int u = nums.size() - 1;
+        int d = 0;
+        
+        if(nums[u] < target)
+        {
+            return nums.size();
+        }
+
+        if(nums[0] > target)
+        {
+            return 0;
+        }
+
+        while(true)
+        {
+            if(nums[u] == target || nums[d] == target || u == d + 1)
+            {
+                if(nums[d] == target)
+                {
+                    return d;
+                }
+                return u;
+            }
+
+            if(nums[(u + d) / 2] > target)
+            {
+                u = (u + d) / 2;
+            }
+            else
+            {
+                d = (u + d) / 2;
+            }
+        }
+    }
+};`,
+  linear: `class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        for(int i = 0; i < nums.size(); i++)
+        {
+            if(nums[i] >= target)
+            {
+                return i;
+            }
+        }
+        return nums.size();
+    }
+};`,
+  dfs: `class Solution {
+    int dx[8] = {-1,-1,-1,0,0,1,1,1};
+    int dy[8] = {-1,0,1,-1,1,-1,0,1};
+
+public:
+    void index(vector<vector<char>>& board , int x, int y)
+    {
+        int count = 0;
+        for(int i = 0; i < 8; i++)
+        {
+            int X = x + dx[i];
+            int Y = y + dy[i];
+
+            if( X >= 0 && X < board.size() &&
+                Y >= 0 && Y < board[0].size())
+            {
+                if(board[X][Y] == 'M')
+                {
+                    count++;
+                }
+            }
+        }
+        if(count != 0)
+        {
+            board[x][y] = '0' + count;
+        }
+        else
+        {
+            board[x][y] = 'B';
+            for(int i = 0; i < 8; i++)
+            {
+                int X = x + dx[i];
+                int Y = y + dy[i];
+                
+                if( X >= 0 && X < board.size() &&
+                    Y >= 0 && Y < board[0].size())
+                {
+                    if(board[X][Y] == 'E')
+                    {
+                        index(board, x + dx[i], y + dy[i]);
+                    }
+                }
+            }
+        }
+    }
+        
+    vector<vector<char>> updateBoard(vector<vector<char>>& board, vector<int>& click) {
+        int x = click[0];
+        int y = click[1];
+
+        if(board[x][y] == 'M')
+        {
+            board[x][y] = 'X';
+            return board;
+        }
+
+        index(board, x, y);
+
+        return board;
+    }
+};`,
+  bfs: `class Solution {
+public:
+    int dx[4] = {-1, 1, 0, 0};
+    int dy[4] = {0 ,0 ,-1 ,1};
+
+    int orangesRotting(vector<vector<int>>& grid) {
+
+        queue<pair<int, int>> q;
+        int A = 0;
+        
+        for(int i = 0; i < grid.size(); i++)
+        {
+            for(int j = 0; j < grid[0].size(); j++)
+            {
+                if(grid[i][j] == 2)
+                {
+                    q.push({i, j});
+                }
+            }
+        }
+
+        while(true)
+        {
+            int size = q.size();
+
+            for(int j = 0; j < size; j++)
+            {
+                for(int i = 0; i < 4; i++)
+                {
+                    int x = q.front().first;
+                    int y = q.front().second;
+
+                    int X = x + dx[i];
+                    int Y = y + dy[i];
+
+                    if( X >= 0 && X < grid.size() &&
+                        Y >= 0 && Y < grid[0].size())
+                    {
+                        if(grid[X][Y] == 1)
+                        {
+                            grid[X][Y] = 2;
+                            q.push({X, Y});
+                        }
+                    }
+                }
+                q.pop();
+            }
+            if(q.size() == 0)
+            {
+                for(int i = 0; i < grid.size(); i++)
+                {
+                    for(int j = 0; j < grid[0].size(); j++)
+                    {
+                        if(grid[i][j] == 1)
+                        {
+                            return -1;
+                        }
+                    }
+                }
+                return A;
+            }
+            A++;
+        }
+    }
+};`,
+  dp: `#include <vector>
+
+using namespace std;
+
+int solution(int n) {
+    int answer = 0;
+    vector<long long> Fibonacci(n + 1);
+    Fibonacci[0] = 0;
+    Fibonacci[1] = 1;
+    for(int i = 2; i <= n; i++)
+    {
+        Fibonacci[i] = (Fibonacci[i - 1] + Fibonacci[i - 2]) % 1234567;
+    }
+    if(n <= 2)
+    {
+        return Fibonacci[n] % 1234567;
+    }
+    return Fibonacci[n];
+}`,
+  backtrack: `class Solution {
+public:
+    int xa[3]{ -1, -1, -1};
+    int ya[3]{ -1 , 1, 0};
+
+    vector<vector<string>>A;
+
+    vector<vector<string>> solveNQueens(int n) {
+        A.clear();
+        vector<string> t(n, string(n, '.'));
+        for(int i = 0; i < n; i++)
+        {
+            t[0][i] = 'Q';
+            Queens(t, 1);
+            t[0][i] = '.';
+        }
+        return A;
+    }
+
+    void Queens(vector<string>& t, int num)
+    {
+        if(num > t.size() - 1)
+        {
+            A.push_back(t);            
+            return;
+        }
+        int X = num;
+        for(int Y = 0; Y < t.size(); Y++)
+        {
+            bool b = true;
+
+
+            for(int i = 0; i < 3; i++)
+            {
+                int tX = X + xa[i];
+                int tY = Y + ya[i];
+
+                while(tX >= 0 && tX < t.size() &&
+                        tY >= 0 && tY < t.size())
+                {
+
+                    if(t[tX][tY] == 'Q')
+                    {
+                        b = false;
+                    }
+                    tX += xa[i];
+                    tY += ya[i];                    
+                }
+
+            }
+            if(b)
+            {
+                t[X][Y] = 'Q';
+                Queens(t, num + 1);
+                t[X][Y] = '.';
+            }
+        }
+    }
+};`,
+  recursion: `// 첫 값은 if로 값이 없으면 push_back 혀면서 넣고 이후  to string += ->val 형태로 이어 붙이기
+// 변경 값을 재귀에서 temp로 가지고 있다가 양쪽 모두 끝 null에 도달시 push_back한다
+
+class Solution {
+public:
+vector<string> A;
+void tree(TreeNode* root, string temp)
+{
+    if(root->left == nullptr && root->right == nullptr)
+    {
+        A.push_back(temp);
+        return;
+    }
+
+    if(root->left != nullptr)
+    {
+        tree(root->left, temp + "->" + to_string(root->left->val));
+    }
+
+    if(root->right != nullptr)
+    {
+        tree(root->right, temp + "->" + to_string(root->right->val));
+    }
+}
+
+    vector<string> binaryTreePaths(TreeNode* root) {
+        string temp = to_string(root->val);
+        tree(root, temp);
+        return A;
+    }
+};`
+};
+const personalMeta={
+ binary:{problem:'LeetCode 35 · Search Insert Position',url:'https://leetcode.com/problems/search-insert-position/submissions/2178415740',note:'실제 통과한 제출 코드 · 68/68'},
+ linear:{problem:'LeetCode 35 · Search Insert Position',url:'https://leetcode.com/problems/search-insert-position/submissions/2178396905/',note:'실제 통과한 첫 번째 제출 코드 · 68/68'},
+ dfs:{problem:'LeetCode 529 · Minesweeper',url:'https://leetcode.com/problems/minesweeper/',note:'실제 제출 코드 · 주변 8방향 DFS'},
+ bfs:{problem:'LeetCode 994 · Rotting Oranges',url:'https://leetcode.com/problems/rotting-oranges/',note:'실제 제출 코드 · 다중 시작점 BFS'},
+ dp:{problem:'Programmers 12945 · 피보나치 수',url:'https://school.programmers.co.kr/learn/courses/30/lessons/12945',note:'실제 풀이 코드 · Bottom-Up DP'},
+ backtrack:{problem:'LeetCode 51 · N-Queens',url:'https://leetcode.com/problems/n-queens/submissions/2177693802',note:'실제 통과한 제출 코드 · 9/9'},
+ recursion:{problem:'LeetCode 257 · Binary Tree Paths',url:'https://leetcode.com/problems/binary-tree-paths/',note:'실제 제출 코드 · 재귀 경로 생성'}
+};
+const lineNumber=(source,fragment)=>Math.max(1,source.split('\n').findIndex(x=>x.includes(fragment))+1);
+const pushFrame=(out,title,detail,state,fragment)=>{out.push({title,detail,...structuredClone(state),codeFragment:fragment})};
+function mineBinarySteps(){const arr=[3,8,12,19,23,27,35],target=values.binary;let d=0,u=arr.length-1;const out=[],frame=(title,detail,fragment,mid=-1,done=false,found=false,answer=null)=>pushFrame(out,title,detail,{arr,low:d,high:u,mid,done,found,answer,personal:true},fragment);frame('초기 범위','d = 0, u = 6 으로 시작합니다.','int d = 0;');if(arr[u]<target){frame('최댓값보다 큰 목표','nums[u] < target → 배열 끝 인덱스 '+arr.length+'를 반환합니다.','return nums.size();',-1,true,false,arr.length);return out;}if(arr[d]>target){frame('최솟값보다 작은 목표','nums[0] > target → 인덱스 0을 반환합니다.','return 0;',-1,true,false,0);return out;}for(let n=0;n<40;n++){if(arr[u]===target||arr[d]===target||u===d+1){const answer=arr[d]===target?d:u;frame('종료 조건 검사',`양쪽 경계 ${d}, ${u}를 확인합니다.`,'if(nums[u] == target || nums[d] == target || u == d + 1)');frame('반환 위치 확정',`인덱스 ${answer} 반환${arr[answer]===target?' · 목표값 발견':' · 삽입 위치'}`,arr[d]===target?'return d;':'return u;',-1,true,arr[answer]===target,answer);return out;}const mid=Math.floor((u+d)/2);frame('중간값 비교',`nums[${mid}] = ${arr[mid]}와 target ${target}을 비교합니다.`,'if(nums[(u + d) / 2] > target)',mid);if(arr[mid]>target){u=mid;frame('u 이동',`큰 값을 제외하지 않고 새 상한으로 유지: u = ${u}`,'u = (u + d) / 2;')}else{d=mid;frame('d 이동',`중간값을 새 하한으로 유지: d = ${d}`,'d = (u + d) / 2;')}}throw Error('mine binary bounds did not converge');}
+function linearSteps(personal){const out=[],arr=[1,3,5,6],target=values.linear;pushFrame(out,'선형 탐색 시작',`[${arr.join(', ')}]에서 ${target} 이상인 첫 위치를 찾습니다.`,{arr,i:-1,found:false},personal?'for(int i = 0; i < nums.size(); i++)':'for (int i = 0; i < nums.size(); ++i)');for(let i=0;i<arr.length;i++){pushFrame(out,`인덱스 ${i} 확인`,`nums[${i}] = ${arr[i]} · ${arr[i]>=target?'목표값 이상':'더 작은 값'}`,{arr,i,found:false},personal?'if(nums[i] >= target)':'if (nums[i] >= target)');if(arr[i]>=target){pushFrame(out,'찾기 종료',`첫 번째 조건 만족 인덱스 ${i} 반환`,{arr,i,found:arr[i]===target,done:true,answer:i},personal?'return i;':'return i;');return out;}}pushFrame(out,'배열 끝까지 탐색',`모든 값이 ${target}보다 작으므로 길이 ${arr.length} 반환`,{arr,i:-1,done:true,answer:arr.length},personal?'return nums.size();':'return nums.size();');return out;}
+function mineDfsSteps(){const out=[],board=[['E','E','E','E','E'],['E','E','E','E','E'],['E','E','M','E','E'],['E','E','E','E','E']];const dx=[-1,-1,-1,0,0,1,1,1],dy=[-1,0,1,-1,1,-1,0,1],stack=[];let calls=0;function snap(title,detail,at,fragment){pushFrame(out,title,detail,{board:board.map(r=>r.slice()),at,stack:stack.map(p=>p.join(',')),calls,personal:true},fragment)}snap('Minesweeper 준비','시작 위치 (0,0). E는 닫힌 칸, M은 지뢰입니다.',[0,0],'int x = click[0];');function visit(x,y){calls++;stack.push([x,y]);let cnt=0;snap(`(${x},${y}) DFS 진입`,`재귀 깊이 ${stack.length}. 주변 지뢰를 셉니다.`,[x,y],'int count = 0;');for(let d=0;d<8;d++){const X=x+dx[d],Y=y+dy[d];if(X>=0&&X<board.length&&Y>=0&&Y<board[0].length&&board[X][Y]==='M')cnt++;}if(cnt){board[x][y]=String(cnt);snap(`주변 지뢰 ${cnt}개`,`(${x},${y})에 숫자 ${cnt}을 표시하고 반환합니다.`,[x,y],"board[x][y] = '0' + count;");}else{board[x][y]='B';snap('빈 영역 펼치기',`(${x},${y})를 B로 공개하고 이웃을 재귀로 확인합니다.`,[x,y],"board[x][y] = 'B';");for(let d=0;d<8;d++){const X=x+dx[d],Y=y+dy[d];if(X>=0&&X<board.length&&Y>=0&&Y<board[0].length&&board[X][Y]==='E')visit(X,Y);}}stack.pop();snap('이전 호출로 반환',`(${x},${y}) 탐색 종료`,[x,y],'index(board, x + dx[i], y + dy[i]);');}visit(0,0);snap('Minesweeper 종료',`공개된 칸 ${board.flat().filter(c=>c!=='E'&&c!=='M').length}개 · 재귀 호출 ${calls}회`,null,'return board;');out[out.length-1].done=true;return out;}
+function mineBfsSteps(){const out=[],grid=[[2,1,1],[1,1,0],[0,1,1]],queue=[];let minutes=0;const dirs=[[-1,0],[1,0],[0,-1],[0,1]];function snap(title,detail,at,fragment,done=false){pushFrame(out,title,detail,{grid:grid.map(x=>x.slice()),queue:queue.map(x=>x.slice()),minutes,at,done,personal:true},fragment)}for(let x=0;x<3;x++)for(let y=0;y<3;y++)if(grid[x][y]===2)queue.push([x,y]);snap('초기 썩은 오렌지 큐 등록','처음부터 썩은 오렌지를 전부 큐에 넣습니다.',queue[0],'q.push({i, j});');for(let safety=0;safety<12;safety++){const size=queue.length;const snapshot=queue.slice(0,size);snap(`${minutes}분째 · 현재 레벨 ${size}개`,`현재 큐 크기(size)를 고정하여 같은 분에 전파되는 위치를 처리합니다.`,null,'int size = q.size();');for(let j=0;j<size;j++){const [x,y]=queue[0];for(const [dx,dy] of dirs){const X=x+dx,Y=y+dy;if(X>=0&&X<3&&Y>=0&&Y<3&&grid[X][Y]===1){grid[X][Y]=2;queue.push([X,Y]);snap('인접 오렌지가 썩음',`(${x},${y}) → (${X},${Y}); 다음 분의 큐에 추가합니다.`,[X,Y],'q.push({X, Y});');}}queue.shift();snap('현재 오렌지 처리 완료',`(${x},${y})를 큐에서 제거합니다.`,[x,y],'q.pop();');}if(queue.length===0){const hasFresh=grid.some(r=>r.includes(1));snap('전파 종료',hasFresh?'남은 신선한 오렌지가 있으므로 -1 반환':`${minutes}분 만에 모두 썩었습니다.`,null,hasFresh?'return -1;':'return A;',true);return out;}minutes++;snap('다음 분으로 진행',`처리한 ${snapshot.length}개 시작점에서 확산했습니다.`,null,'A++;');}throw Error('mine BFS did not terminate');}
+function mineDpSteps(){const out=[],n=values.dp,a=Array(n+1).fill(null),frame=(title,detail,current,deps,frag,done=false)=>pushFrame(out,title,detail,{a:[...a],current,deps,done,personal:true},frag);frame('저장 공간 확보',`F(0) ~ F(${n})까지 long long 배열을 준비합니다.`,-1,[],'vector<long long> Fibonacci(n + 1);');a[0]=0;a[1]=1;frame('기저값 초기화','F(0)=0, F(1)=1을 저장합니다.',1,[0],'Fibonacci[1] = 1;');for(let i=2;i<=n;i++){frame(`F(${i}) 계산 준비`,`${a[i-1]} + ${a[i-2]}를 계산합니다.`,i,[i-1,i-2],'for(int i = 2; i <= n; i++)');a[i]=(a[i-1]+a[i-2])%1234567;frame(`F(${i}) 저장`,`${a[i]} = (${a[i-1]} + ${a[i-2]}) % 1234567`,i,[i-1,i-2],'Fibonacci[i] = (Fibonacci[i - 1] + Fibonacci[i - 2]) % 1234567;');}frame('계산 결과 반환',`F(${n}) = ${a[n]} · 모듈러 1234567 적용`,n,[],n<=2?'return Fibonacci[n] % 1234567;':'return Fibonacci[n];',true);return out;}
+function mineQueenSteps(){const out=[],board=[-1,-1,-1,-1];let solutions=0;const safe=(r,c)=>{for(let prev=r-1;prev>=0;prev--)if(board[prev]===c||Math.abs(board[prev]-c)===r-prev)return false;return true};function snap(title,detail,active,phase,frag,done=false){pushFrame(out,title,detail,{board:[...board],active,phase,solutions,done,personal:true},frag)}snap('N-Queens 시작','첫 행의 각 열에 퀸을 놓으며 재귀를 시작합니다.',null,'init',"vector<string> t(n, string(n, '.'));");for(let first=0;first<4;first++){board[0]=first;snap('첫 행 퀸 배치',`0행 ${first}열에 Q를 놓고 Queens(t, 1) 호출`,[0,first],'place',"t[0][i] = 'Q';");function queens(row){if(row>=4){solutions++;snap(`${solutions}번째 해 완성`,'모든 행에 퀸 배치 성공 · A.push_back(t)',null,'solution','A.push_back(t);');return;}for(let col=0;col<4;col++){snap('위쪽 3방향 안전 검사',`${row}행 ${col}열에서 위·왼쪽 위·오른쪽 위 충돌 검사`,[row,col],'try','for(int i = 0; i < 3; i++)');if(!safe(row,col)){snap('공격 범위에 있음','배치하지 않고 다음 열로 이동합니다.',[row,col],'invalid',"if(t[tX][tY] == 'Q')");continue;}board[row]=col;snap('Q 놓기',`${row}행 ${col}열에 놓고 다음 행으로 재귀`,[row,col],'place',"t[X][Y] = 'Q';");queens(row+1);snap('Q 되돌리기',`${row}행 ${col}열을 다시 . 으로 변경`,[row,col],'remove',"t[X][Y] = '.';");board[row]=-1;}}queens(1);snap('첫 행 선택 취소',`첫 행 ${first}열 퀸 제거`,[0,first],'remove',"t[0][i] = '.';");board[0]=-1;}snap('전체 탐색 완료',`4×4 판에서 해 ${solutions}개`,null,'done','return A;',true);return out;}
+function mineRecursionSteps(){const out=[],tree={1:[2,3],2:[5],3:[],5:[]},stack=[],paths=[];function snap(title,detail,current,fragment,done=false){pushFrame(out,title,detail,{tree,stack:[...stack],paths:[...paths],current,done,personal:true},fragment)}snap('Binary Tree Paths 시작','루트 1에서 자식으로 이동하며 경로 문자열을 이어붙입니다.',null,'string temp = to_string(root->val);');function walk(u,path){stack.push(u);snap(`${u} 노드 호출`,`현재 경로: ${path}`,u,'void tree(TreeNode* root, string temp)');if(tree[u].length===0){paths.push(path);snap('리프에서 경로 저장',`A.push_back("${path}")`,u,'A.push_back(temp);');}else for(const [i,v]of tree[u].entries()){snap('자식 재귀 호출',`${u} → ${v}로 이동`,u,(u===1&&i===0)?'tree(root->left, temp + "->" + to_string(root->left->val));':'tree(root->right, temp + "->" + to_string(root->right->val));');walk(v,path+'->'+v);}stack.pop();snap('호출 반환',`${u} 탐색을 마치고 돌아옵니다.`,stack.at(-1)??null,'return;');}walk(1,'1');snap('트리 경로 탐색 종료',paths.join(' / '),null,'return A;',true);return out;}
+function renderMineGrid(f,kind){const a=kind==='dfs'?f.board:f.grid;const cols=a[0].length;let s=`<div class="grid-matrix" style="--matrix-cols:${cols}">`;for(let r=0;r<a.length;r++)for(let c=0;c<cols;c++){const v=a[r][c],active=f.at&&f.at[0]===r&&f.at[1]===c;const cls=kind==='dfs'?(v==='M'?'mine':v==='E'?'unseen':v==='B'?'opened':'counted'):(v===0?'empty':v===2?'rotted':'fresh');s+=`<div class="matrix-cell ${cls} ${active?'active':''}" aria-label="${r}행 ${c}열, ${v}">${kind==='bfs'?(v===0?'·':v===1?'1':'2'):v}<small>${r},${c}</small></div>`;}s+='</div>';s+='<div class="viz-columns">';if(kind==='dfs')s+=`<div class="viz-block"><span class="caption">재귀 호출 스택</span><strong>${f.stack.length?f.stack.join(' → '):'비어 있음'}</strong></div><div class="viz-block"><span class="caption">호출 횟수</span><strong>${f.calls}</strong></div>`;else s+=`<div class="viz-block"><span class="caption">경과 시간</span><strong>${f.minutes}분</strong></div><div class="viz-block"><span class="caption">큐 (앞 → 뒤)</span><div class="pills">${f.queue.map(x=>`<span class="pill">${x.join(',')}</span>`).join('')||'비어 있음'}</div></div>`;return s+'</div>';}
+function renderBinaryMine(f){let s='<div class="arr">',p='<div class="pointer-row">';f.arr.forEach((v,i)=>{const active=i>=f.low&&i<=f.high;let klass=i===f.mid?'mid':active?'range':'excluded';if(f.done&&i===f.answer)klass=f.found?'found':'mid';s+=`<div class="arr-cell ${klass}"><span class="num">${v}</span><span class="idx">${i}</span></div>`;let parts=[];if(i===f.low)parts.push('d');if(i===f.high)parts.push('u');if(i===f.mid)parts.push('mid');p+=`<div class="pointer">${parts.join(' · ')}</div>`});s+='</div>'+p+'</div>';s+=`<p class="formula">${f.done?'반환 인덱스 = '+f.answer:`탐색 경계 d=${f.low}, u=${f.high} · 목표값 ${values.binary}`}</p>`;return s;}
+function renderLinear(f){let s='<div class="arr">';for(let i=0;i<f.arr.length;i++)s+=`<div class="arr-cell ${f.i===i?'mid':f.i>=0&&i<f.i?'excluded':''}"><span class="num">${f.arr[i]}</span><span class="idx">${i}</span><div class="linear-tag">${f.i===i?'현재':f.i>=0&&i<f.i?'확인':'대기'}</div></div>`;s+='</div>';if(f.done)s+=`<p class="formula">삽입 위치 ${f.answer} ${f.found?'· 목표값 발견':'· 해당 위치에 삽입 가능'}</p>`;return s;}
+function renderMineRecursion(f){const xy={1:[280,45],2:[155,123],3:[405,123],5:[100,215]},edges=[[1,2],[1,3],[2,5]],visited=new Set(f.stack);let s='<svg viewBox="0 0 560 275" role="img" aria-label="Binary Tree Paths 루트와 리프를 탐색하는 트리">';for(const [a,b] of edges)s+=`<line x1="${xy[a][0]}" y1="${xy[a][1]}" x2="${xy[b][0]}" y2="${xy[b][1]}" stroke="#b7c9dd" stroke-width="3"/>`;for(const [key,p] of Object.entries(xy)){let active=Number(key)===f.current;s+=`<circle cx="${p[0]}" cy="${p[1]}" r="29" fill="${active?'#2563c6':visited.has(Number(key))?'#d7eaff':'#fff'}" stroke="#92aac5" stroke-width="2"/><text x="${p[0]}" y="${p[1]+6}" text-anchor="middle" font-size="20" font-weight="800" fill="${active?'#fff':'#27496c'}">${key}</text>`;}s+='</svg><div class="viz-columns"><div class="viz-block"><span class="caption">호출 경로</span><strong>'+ (f.stack.length?f.stack.join(' → '):'비어 있음')+'</strong></div><div class="viz-block"><span class="caption">저장한 경로</span><strong>'+ (f.paths.length?f.paths.join(' | '):'없음')+'</strong></div></div>';return s;}
+
+const all=groups.flatMap(g=>g.items.map(x=>x[0]));
+let kind='binary', mode='standard', index=0, frames=[], timer=null;
+const values={binary:23,linear:2,dp:7,greedy:6,recursion:4};
+const defaults={stack:[['push',5],['push',12],['push',7],['pop'],['push',9]],queue:[['push',5],['push',12],['push',7],['pop'],['push',9]],heap:[['push',7],['push',3],['push',9],['push',1],['pop']]};
+const ops={stack:defaults.stack.slice(),queue:defaults.queue.slice(),heap:defaults.heap.slice()};
+const add=(out,title,detail,state)=>out.push({title,detail,...structuredClone(state)});
+function binarySteps(){const out=[],arr=[3,8,12,19,23,27,35],target=values.binary;let low=0,high=arr.length;add(out,'초기 범위 설정',`값 ${target} 이상이 처음 나타나는 위치를 찾습니다.`,{arr,low,high,mid:-1,found:false});while(low<high){let mid=low+Math.floor((high-low)/2);add(out,`중간값 ${arr[mid]} 확인`,`중간 인덱스 ${mid}, 현재 범위 [${low}, ${high})`,{arr,low,high,mid,found:arr[mid]===target});if(arr[mid]<target){low=mid+1;add(out,'왼쪽 구간 제외',`${arr[mid]} < ${target}이므로 low = ${low}로 이동합니다.`,{arr,low,high,mid:-1,found:false})}else{high=mid;add(out,'오른쪽 구간 제외',`${arr[mid]} ≥ ${target}이므로 high = ${high}로 이동합니다.`,{arr,low,high,mid:-1,found:false})}}add(out,arr[low]===target?'목표값 발견':'삽입 위치 결정',`최종 인덱스 ${low}${low===arr.length?'(배열 맨 뒤)':''}. ${arr[low]===target?'목표값과 일치합니다.':'이 위치에 삽입하면 정렬이 유지됩니다.'}`,{arr,low,high,mid:low,found:arr[low]===target,done:true});return out}
+function graphSteps(isBfs){const out=[],visited=new Set(['A']),order=[],queue=['A'],stack=[];if(isBfs){add(out,'시작점 A 등록','A를 방문 표시하고 큐에 넣습니다.',{visited:[...visited],order:[...order],queue:[...queue],current:'A',edge:null});while(queue.length){const u=queue.shift();order.push(u);add(out,`${u}를 큐에서 꺼냄`,`방문 순서: ${order.join(' → ')}`,{visited:[...visited],order:[...order],queue:[...queue],current:u,edge:null});for(const v of graph[u])if(!visited.has(v)){visited.add(v);queue.push(v);add(out,`${v} 발견·큐에 추가`,`${u}에서 ${v}를 발견하여 큐 뒤에 넣습니다.`,{visited:[...visited],order:[...order],queue:[...queue],current:u,edge:[u,v]})}}add(out,'BFS 완료',`방문 순서: ${order.join(' → ')}`,{visited:[...visited],order:[...order],queue:[],current:null,edge:null,done:true})}else{visited.clear();function dfs(u,parent){visited.add(u);stack.push(u);order.push(u);add(out,`${u} 방문·재귀 진입`,`${parent?parent+' → ':''}${u} / 호출 스택: ${stack.join(' → ')}`,{visited:[...visited],order:[...order],stack:[...stack],current:u,edge:parent?[parent,u]:null});for(const v of graph[u])if(!visited.has(v))dfs(v,u);stack.pop();add(out,`${u} 탐색 종료·반환`,`호출 스택: ${stack.length?stack.join(' → '):'(비어 있음)'}`,{visited:[...visited],order:[...order],stack:[...stack],current:stack.at(-1)||null,edge:null})}dfs('A',null);add(out,'DFS 완료',`방문 순서: ${order.join(' → ')}`,{visited:[...visited],order:[...order],stack:[],current:null,edge:null,done:true})}return out}
+function exhaustiveSteps(){const out=[],checked=[];add(out,'모든 경우 준비','각 스위치는 켜짐(1) 또는 꺼짐(0)입니다.',{checked:[...checked],active:-1});for(let i=0;i<8;i++){const bits=i.toString(2).padStart(3,'0'),ok=bits.split('').filter(x=>x==='1').length===2;checked.push({index:i,ok});add(out,`${bits} 검사 — ${ok?'조건 만족':'조건 불만족'}`,`켜진 스위치 ${bits.split('').filter(x=>x==='1').length}개, 목표는 2개입니다.`,{checked:[...checked],active:i})}add(out,'모든 경우 확인 완료',`8가지 후보 중 ${checked.filter(x=>x.ok).length}가지가 조건을 만족합니다.`,{checked:[...checked],active:-1,done:true});return out}
+function dpSteps(){const n=values.dp,out=[],a=Array(n+1).fill(null);add(out,'DP 테이블 준비',`F(0)부터 F(${n})까지 저장 공간을 만듭니다.`,{a:[...a],current:-1,deps:[]});a[0]=0;a[1]=1;add(out,'기저값 저장','F(0)=0, F(1)=1을 먼저 기록합니다.',{a:[...a],current:1,deps:[0]});for(let i=2;i<=n;i++){add(out,`F(${i}) 계산 준비`,`이미 저장된 F(${i-2})=${a[i-2]}, F(${i-1})=${a[i-1]}을 사용합니다.`,{a:[...a],current:i,deps:[i-2,i-1]});a[i]=a[i-1]+a[i-2];add(out,`F(${i}) = ${a[i]} 저장`,`이제 같은 하위 값을 다시 계산할 필요가 없습니다.`,{a:[...a],current:i,deps:[i-2,i-1]})}add(out,'DP 계산 완료',`F(${n}) = ${a[n]}`,{a:[...a],current:n,deps:[],done:true});return out}
+function optimalCoins(amount){const best=Array(amount+1).fill(Infinity);best[0]=0;for(let x=1;x<=amount;x++)for(const c of [4,3,1])if(x>=c)best[x]=Math.min(best[x],best[x-c]+1);return best[amount]}
+function greedySteps(){const out=[],amount=values.greedy,used=[];let remain=amount;add(out,'목표 금액 준비',`${amount}원을 4·3·1원 동전으로 만듭니다.`,{amount,remain,used:[...used],newCoin:null});for(const c of [4,3,1])while(remain>=c){remain-=c;used.push(c);add(out,`${c}원 동전 선택`,`현재 가능한 가장 큰 동전 ${c}원을 고릅니다. 남은 금액: ${remain}원`,{amount,remain,used:[...used],newCoin:c})}const optimal=optimalCoins(amount);add(out,'그리디 결과 확인',`그리디 ${used.length}개 / 최소 개수 ${optimal}개${used.length>optimal?' → 그리디가 최적이 아닙니다.':' → 이 입력에서는 최적 개수입니다.'}`,{amount,remain,used:[...used],newCoin:null,optimal,done:true});return out}
+function queensSteps(){const out=[],board=[-1,-1,-1,-1],solutions=[];add(out,'4×4 체스판 준비','각 행에 퀸을 하나씩 놓습니다.',{board:[...board],active:null,phase:'init',solutions:0});function safe(r,c){for(let i=0;i<r;i++)if(board[i]===c||Math.abs(board[i]-c)===r-i)return false;return true}function solve(r){if(r===4){solutions.push([...board]);add(out,`${solutions.length}번째 해 완성`,'서로 공격하지 않는 퀸 4개를 놓았습니다.',{board:[...board],active:null,phase:'solution',solutions:solutions.length});return}for(let c=0;c<4;c++){add(out,`(${r+1}행, ${c+1}열) 후보 확인`,'이미 놓은 퀸의 열·대각선과 충돌하는지 검사합니다.',{board:[...board],active:[r,c],phase:'try',solutions:solutions.length});if(!safe(r,c)){add(out,'충돌 발견 — 다른 후보 탐색','이 위치는 유효하지 않아 배치하지 않습니다.',{board:[...board],active:[r,c],phase:'invalid',solutions:solutions.length});continue}board[r]=c;add(out,'퀸 배치 → 다음 행 탐색',`${r+1}행 ${c+1}열에 퀸을 놓고 다음 행으로 내려갑니다.`,{board:[...board],active:[r,c],phase:'place',solutions:solutions.length});solve(r+1);add(out,'선택 취소 — 되돌아오기',`${r+1}행 ${c+1}열의 퀸을 제거하고 다음 후보를 시도합니다.`,{board:[...board],active:[r,c],phase:'remove',solutions:solutions.length});board[r]=-1}}solve(0);add(out,'전체 탐색 종료',`4-Queens의 서로 다른 해 ${solutions.length}개를 찾았습니다.`,{board:[...board],active:null,phase:'done',solutions:solutions.length,done:true});return out}
+function recursionSteps(){const out=[],n=values.recursion,stack=[];add(out,'재귀 호출 시작',`fact(${n}) 값을 계산합니다.`,{stack:[],latest:null,result:null});for(let v=n;v>=1;v--){stack.push(v);add(out,`fact(${v}) 호출`,`${v<=1?'종료 조건 도달':'fact('+(v-1)+')을 호출하기 전에 현재 실행 문맥을 스택에 저장합니다.'}`,{stack:[...stack],latest:null,result:null})}let result=1;stack.pop();add(out,'fact(1) → 1 반환','가장 깊은 호출에서 종료 조건을 만족합니다.',{stack:[...stack],latest:1,result});for(let v=2;v<=n;v++){result*=v;stack.pop();add(out,`fact(${v}) → ${result} 반환`,`이전 결과에 ${v}를 곱하고 호출자에게 돌아갑니다.`,{stack:[...stack],latest:v,result})}add(out,'재귀 계산 완료',`${n}! = ${result}, 호출 스택이 모두 비었습니다.`,{stack:[],latest:null,result,done:true});return out}
+function linearOpsSteps(type){const out=[],a=[];add(out,type==='stack'?'빈 스택':'빈 큐','push로 값을 넣어 보세요.',{a:[],changed:null,extracted:null});for(const [op,value] of ops[type]){let extracted=null,changed=null;if(op==='push'){a.push(value);changed=value}else if(a.length){extracted=type==='stack'?a.pop():a.shift()}add(out,op==='push'?`${value} 추가`:`${extracted===null?'비어 있어 제거할 값 없음':extracted+' 제거'}`,op==='push'?(type==='stack'?'맨 위(top)에 넣습니다.':'맨 뒤(back)에 넣습니다.'):(type==='stack'?'가장 나중에 넣은 값을 꺼냅니다.':'가장 먼저 넣은 값을 꺼냅니다.'),{a:[...a],changed,extracted})}return out}
+function heapSteps(){const out=[],a=[];const snap=(title,detail,highlight=[],done=false)=>add(out,title,detail,{a:[...a],highlight,done});snap('빈 최소 힙','push로 값을 추가해 보세요.');for(const [op,value] of ops.heap){if(op==='push'){a.push(value);let i=a.length-1;snap(`${value}을 배열 끝에 삽입`,'새 노드를 마지막 자리에 넣습니다.',[i]);while(i>0){const p=Math.floor((i-1)/2);if(a[p]<=a[i])break;[a[i],a[p]]=[a[p],a[i]];snap('부모와 교환','부모가 더 크므로 위로 올려 최소 힙 조건을 복구합니다.',[p,i]);i=p}}else{if(a.length===0){snap('제거할 값 없음','힙이 비어 있습니다.');continue}const min=a[0],last=a.pop();if(a.length){a[0]=last;snap(`${min} 제거·마지막 값 이동`,'마지막 노드를 루트로 옮긴 다음 아래로 정렬합니다.',[0]);let i=0;while(true){let l=i*2+1,r=l+1,small=i;if(l<a.length&&a[l]<a[small])small=l;if(r<a.length&&a[r]<a[small])small=r;if(small===i)break;[a[i],a[small]]=[a[small],a[i]];snap('자식과 교환','더 작은 자식과 바꾸어 최소 힙 조건을 복구합니다.',[i,small]);i=small}}else snap(`${min} 제거`,'마지막 원소를 꺼냈습니다.') }}return out}
+function createSteps(){if(mode==='mine'){switch(kind){case'binary':return mineBinarySteps();case'linear':return linearSteps(true);case'dfs':return mineDfsSteps();case'bfs':return mineBfsSteps();case'dp':return mineDpSteps();case'backtrack':return mineQueenSteps();case'recursion':return mineRecursionSteps();}}switch(kind){case'linear':return linearSteps(false);case'binary':return binarySteps();case'dfs':return graphSteps(false);case'bfs':return graphSteps(true);case'exhaustive':return exhaustiveSteps();case'dp':return dpSteps();case'greedy':return greedySteps();case'backtrack':return queensSteps();case'recursion':return recursionSteps();case'stack':case'queue':return linearOpsSteps(kind);case'heap':return heapSteps()}return []}
+function renderBinary(f){let s='<div class="arr">',p='<div class="pointer-row">';f.arr.forEach((v,i)=>{let klass=i===f.mid?(f.found?'found':'mid'):(i>=f.low&&i<f.high?'range':'excluded');if(f.done&&i===f.low)klass=f.found?'found':'mid';s+=`<div class="arr-cell ${klass}"><span class="num">${v}</span><span class="idx">${i}</span></div>`;let pointer=[];if(i===f.low)pointer.push('L');if(i===f.high)pointer.push('H');if(i===f.mid&&!f.done)pointer.push('M');p+=`<div class="pointer ${i===f.mid?'mid':''}">${pointer.join('·')}</div>`});s+='</div>'+p+'</div>';s+=`<p class="formula">${f.done?'삽입 위치 = '+f.low:`탐색 범위 [${f.low}, ${f.high}) · 목표값 = ${values.binary}`}</p>`;return s}
+function renderGraph(f,isBfs){const pts={A:[300,35],B:[165,115],C:[435,115],D:[75,215],E:[255,215],F:[345,215],G:[525,215]};const edges=[['A','B'],['A','C'],['B','D'],['B','E'],['C','F'],['C','G']];const visited=new Set(f.visited);let s='<svg viewBox="0 0 600 264" role="img" aria-label="7개 노드의 트리형 그래프. 방문 정점은 색상으로 구분합니다.">';for(let [a,b] of edges){let hot=f.edge&&(f.edge[0]===a&&f.edge[1]===b||f.edge[1]===a&&f.edge[0]===b);s+=`<line x1="${pts[a][0]}" y1="${pts[a][1]}" x2="${pts[b][0]}" y2="${pts[b][1]}" stroke="${hot?'#df9841':'#b7c9dd'}" stroke-width="${hot?5:3}" stroke-linecap="round"/>`}for(let [name,pos] of Object.entries(pts)){let current=name===f.current,seen=visited.has(name);s+=`<circle cx="${pos[0]}" cy="${pos[1]}" r="27" fill="${current?'#2c71c5':seen?'#d9f1e9':'#ffffff'}" stroke="${current?'#1c59ae':seen?'#8bc8b7':'#b2c2d5'}" stroke-width="${current?4:2}"/><text x="${pos[0]}" y="${pos[1]+6}" text-anchor="middle" font-size="20" font-weight="850" fill="${current?'#fff':seen?'#14735f':'#61738b'}">${name}</text>`}s+='</svg><div class="viz-columns">';s+=`<div class="viz-block"><span class="caption">${isBfs?'큐 (앞 → 뒤)':'재귀 호출 스택'}</span><div class="pills">${(isBfs?f.queue:f.stack)?.map(v=>`<span class="pill">${v}</span>`).join('')||'<span class="empty-text">비어 있음</span>'}</div></div>`;s+=`<div class="viz-block"><span class="caption">방문 순서</span><div class="pills">${f.order.map(v=>`<span class="pill good">${v}</span>`).join('')||'<span class="empty-text">방문 전</span>'}</div></div></div>`;return s}
+function renderExhaustive(f){let s='<div class="choice-grid">';for(let i=0;i<8;i++){const bits=i.toString(2).padStart(3,'0'),item=f.checked.find(x=>x.index===i),active=i===f.active;s+=`<div class="choice ${active?'active':item?(item.ok?'good':'bad'):''}"><code>${bits}</code><small>후보 ${i+1}</small>${item?`<span class="status" style="color:${item.ok?'#177d66':'#9da9b7'}">${item.ok?'✓ 정답':'— 제외'}</span>`:''}</div>`}return s+'</div><p class="muted-small">조건: 3개 스위치 중 정확히 2개 켜기 · 2³ = 8가지 경우</p>'}
+function renderDp(f){let s='<div class="fib-grid">';f.a.forEach((v,i)=>{const cn=i===f.current?'current':f.deps.includes(i)?'dependency':'';s+=`<div class="fib-item ${cn} ${v===null?'pending':''}"><span class="i">F(${i})</span><strong>${v===null?'?':v}</strong></div>`});s+='</div>';if(f.current>=2&&f.a[f.current]!==null)s+=`<div class="formula">F(${f.current}) = F(${f.current-1}) + F(${f.current-2}) = ${f.a[f.current-1]} + ${f.a[f.current-2]} = ${f.a[f.current]}</div>`;else s+='<p class="muted-small">파란색: 현재 계산 위치 · 노란색: 재사용할 값</p>';return s}
+function renderGreedy(f){let s=`<div class="viz-columns"><div class="viz-block"><span class="caption">목표 금액</span><strong>${f.amount}원</strong></div><div class="viz-block"><span class="caption">남은 금액</span><strong>${f.remain}원</strong></div><div class="viz-block"><span class="caption">선택한 동전</span><strong>${f.used.length}개</strong></div></div><div class="coin-row" style="margin-top:20px">${f.used.map((n,i)=>`<span class="coin ${f.newCoin===n&&i===f.used.length-1?'new':''}">${n}</span>`).join('')||'<span class="empty-text">아직 선택한 동전이 없습니다.</span>'}</div>`;if(f.done)s+=`<p class="formula">그리디: ${f.used.length}개 · 최소 가능 개수: ${f.optimal}개 ${f.used.length>f.optimal?'— 반례 확인!':'— 일치'}</p>`;else s+='<p class="muted-small">항상 사용 가능한 가장 큰 동전을 선택</p>';return s}
+function renderQueens(f){let s='<div class="board" role="img" aria-label="4×4 퀸 배치 상태">';for(let r=0;r<4;r++)for(let c=0;c<4;c++){let queen=f.board[r]===c,active=f.active&&f.active[0]===r&&f.active[1]===c,extra=active?(f.phase==='invalid'?'invalid':f.phase==='remove'?'remove':'try'):'',sol=f.phase==='solution'&&queen?'solution':'';s+=`<div class="square ${(r+c)%2?'dark':'light'} ${extra} ${sol} ${queen?'queen':''}" aria-label="${r+1}행 ${c+1}열 ${queen?'퀸 배치됨':extra==='invalid'?'공격받는 위치':''}">${queen?'♛':''}</div>`}s+='</div><div class="legend"><span class="hint-dot" style="background:#2b6fcc"></span>배치된 퀸 <span class="hint-dot" style="background:#df9c45"></span>검사 중 <span class="hint-dot" style="background:#e78d95"></span>충돌 <span class="hint-dot" style="background:#83d1af"></span>완성</div>';s+=`<p class="muted-small">현재까지 찾은 해: ${f.solutions}개</p>`;return s}
+function renderRecursion(f){let s='<div class="rec-frames">';if(f.stack.length)f.stack.forEach((v,i)=>s+=`<div class="frame ${i===f.stack.length-1?'active':''}">fact(${v}) ${i===f.stack.length-1?'← 현재':''}</div>`);else s+='<span class="empty-text">호출 스택이 비어 있습니다.</span>';s+='</div>';if(f.result!==null)s+=`<p class="formula">최근 반환값 = ${f.result}</p>`;else s+='<p class="muted-small">위에서 아래로 호출 스택이 쌓이고, 역순으로 반환됩니다.</p>';return s}
+function renderStack(f){let s='<div class="data-viz"><div class="data-column"><h4>스택 내부 (맨 위 = top)</h4><div class="stack-viz">';if(!f.a.length)s+='<span class="empty-text">비어 있음</span>';f.a.forEach(v=>s+=`<div class="stack-item">${v}</div>`);s+='</div></div><div class="data-column"><h4>현재 상태</h4><div class="viz-block"><span class="caption">top</span><strong>'+ (f.a.length?f.a[f.a.length-1]:'비어 있음')+'</strong></div><div class="viz-block" style="margin-top:8px"><span class="caption">크기</span><strong>'+f.a.length+'</strong></div></div></div>';return s}
+function renderQueue(f){return `<div class="data-viz"><div class="data-column"><h4>큐 내부 (front → back)</h4><div class="queue-row">${f.a.map((v,i)=>`<span class="pill ${i===0?'current':''}">${v}</span>`).join('')||'<span class="empty-text">비어 있음</span>'}</div></div><div class="data-column"><div class="viz-block"><span class="caption">front</span><strong>${f.a[0]??'비어 있음'}</strong></div><div class="viz-block" style="margin-top:8px"><span class="caption">back</span><strong>${f.a.at(-1)??'비어 있음'}</strong></div></div></div>`}
+function renderHeap(f){const w=560,h=260,positions=[];for(let i=0;i<7;i++){const level=Math.floor(Math.log2(i+1)),start=(1<<level)-1,offset=i-start,num=1<<level;positions.push([(offset+1)*w/(num+1),36+level*95])}let s=`<svg role="img" aria-label="완전 이진 트리로 표현한 최소 힙" viewBox="0 0 ${w} ${h}">`;for(let i=1;i<f.a.length;i++){const p=Math.floor((i-1)/2);s+=`<line x1="${positions[p][0]}" y1="${positions[p][1]}" x2="${positions[i][0]}" y2="${positions[i][1]}" stroke="#b4c9e0" stroke-width="3"/>`}f.a.forEach((n,i)=>{const active=f.highlight.includes(i),[x,y]=positions[i]||[0,0];s+=`<circle cx="${x}" cy="${y}" r="27" fill="${active?'#d9eaff':'#fff'}" stroke="${active?'#296ec0':'#b6cadf'}" stroke-width="${active?4:2}"/><text x="${x}" y="${y+6}" text-anchor="middle" font-size="20" font-weight="850" fill="#2e5e8b">${n}</text>`});s+='</svg><div class="viz-columns"><div class="viz-block"><span class="caption">배열 표현</span><div class="pills">'+(f.a.map((v,i)=>`<span class="pill ${f.highlight.includes(i)?'current':''}">${v}</span>`).join('')||'<span class="empty-text">비어 있음</span>')+'</div></div></div>';return s}
+function renderVisual(f){if(kind==='linear')return renderLinear(f);if(mode==='mine'){if(kind==='binary')return renderBinaryMine(f);if(kind==='dfs'||kind==='bfs')return renderMineGrid(f,kind);if(kind==='recursion')return renderMineRecursion(f);}switch(kind){case'binary':return renderBinary(f);case'dfs':return renderGraph(f,false);case'bfs':return renderGraph(f,true);case'exhaustive':return renderExhaustive(f);case'dp':return renderDp(f);case'greedy':return renderGreedy(f);case'backtrack':return renderQueens(f);case'recursion':return renderRecursion(f);case'stack':return renderStack(f);case'queue':return renderQueue(f);case'heap':return renderHeap(f)}return ''}
+function stop(){if(timer!==null)clearInterval(timer);timer=null;$('playBtn').textContent='▶ 재생'}
+
+const standardHint={binary:['중간값','int mid'],linear:['인덱스','if (nums[i]'],dfs:['방문','visited[u]'],bfs:['큐','q.push'],exhaustive:['검사','if (cnt'],dp:['F(','dp[i]'],greedy:['선택','chosen.push_back'],backtrack:['퀸','place(row,col)'],recursion:['호출','return n * fact']};
+const standardReference = {"linear":{"features":["정렬 여부에 관계없이 처음부터 순서대로 확인","대상이 앞에 있으면 빨리 끝나지만 뒤에 있으면 모두 살펴봄"],"uses":["작은 비정렬 목록에서 ID·이름 검색","정렬된 배열의 첫 조건 충족 위치 확인"],"cost":[["최선","O(1)","첫 원소가 조건에 맞는 경우"],["최악","O(n)","마지막 원소까지 확인"],["추가 공간","O(1)","인덱스만 유지"]]},"binary":{"features":["정렬 또는 단조성 조건이 있어야 함","매번 가능한 범위의 절반가량을 버림"],"uses":["정렬된 점수표에서 기준값 이상인 첫 위치 찾기","정렬된 상품 가격 목록에서 검색 범위 좁히기"],"cost":[["일반적인 탐색","O(log n)","범위를 반복해서 절반으로 줄임"],["추가 공간","O(1)","반복문 구현 기준"],["사전 정렬","O(n log n)","입력이 정렬돼 있지 않다면 별도 비용"]]},"dfs":{"features":["현재 갈래를 끝까지 들어간 뒤 돌아옴","그래프의 순환을 만나면 방문 기록이 필요"],"uses":["연결된 섬·영역의 크기 계산","트리 노드를 재귀로 전체 순회"],"cost":[["그래프 전체 탐색","O(V+E)","정점 V개·간선 E개 (인접 리스트)"],["방문 기록","O(V)","방문 배열"],["재귀 스택","최대 O(V)","최악 깊이 V인 경우"]]},"bfs":{"features":["큐를 이용해 먼저 발견한 정점부터 처리","간선 비용이 같을 때 단계 수가 최단 거리"],"uses":["격자에서 최소 이동 횟수 구하기","감염·불·물 같은 확산 현상의 단계별 처리"],"cost":[["그래프 전체 탐색","O(V+E)","정점 V개·간선 E개 (인접 리스트)"],["큐·방문 기록","O(V)","최악 V개 정점 보관"],["격자 예제","O(R×C)","행 R·열 C의 각 칸을 최대 한 번 방문"]]},"exhaustive":{"features":["가능한 후보를 모두 생성해 검사","정답을 놓치지 않지만 후보 수가 매우 많아질 수 있음"],"uses":["작은 입력에서 정답 기준 구현 만들기","스위치 n개의 모든 ON/OFF 패턴 검사"],"cost":[["이진 선택 n개","O(n·2ⁿ)","2ⁿ개의 후보마다 n칸 검사"],["반복 열거의 추가 공간","O(1)","마스크만 유지할 경우"],["후보 저장","O(2ⁿ)","모든 후보를 보관한다면 별도 비용"]]},"dp":{"features":["작은 문제의 답을 저장해 반복 계산 감소","메모이제이션(Top-Down) 또는 테이블(Bottom-Up)로 구현"],"uses":["피보나치·계단 오르기 계산","게임 승패·최소 비용·경우의 수 상태 계산"],"cost":[["피보나치 Bottom-Up","O(n)","F(0)부터 F(n)까지 계산"],["테이블 공간","O(n)","n+1개 결과 저장"],["공간 최적화","O(1)","직전 두 값만 필요하다면 가능"]]},"greedy":{"features":["매 순간 가장 유리해 보이는 선택을 즉시 확정","국소 최적이 전체 최적을 보장하는 조건을 검증해야 함"],"uses":["활동 선택(끝나는 시간이 빠른 일정부터)","특정 동전 체계에서 거스름돈 최소 개수 계산"],"cost":[["단순 동전 예제","O(k+m)","동전 종류 k와 선택된 동전 수 m"],["선택 결과 저장","O(m)","선택한 동전을 모두 담을 때"],["동전 정렬 포함","O(k log k)","필요 시 내림차순 정렬 추가"]]},"backtrack":{"features":["후보 선택 뒤 재귀 탐색하고 끝나면 원상 복구","가능성이 없는 분기는 더 확장하지 않고 가지치기"],"uses":["N-Queens에서 퀸의 충돌 없는 배치","순열·조합과 제약 충족 문제 풀이"],"cost":[["탐색 시간","문제에 따라 지수·팩토리얼 수준","후보 수와 가지치기에 크게 좌우됨"],["호출 스택","O(n)","깊이가 n일 때"],["체스판 저장","O(n²)","n×n 보드를 직접 유지한다면"]]},"recursion":{"features":["자기 자신을 호출하며 문제를 더 작은 입력으로 만듦","종료 조건에 도달하면 호출 역순으로 반환"],"uses":["폴더·트리의 계층 순회","DFS·분할 정복·백트래킹 작성"],"cost":[["팩토리얼 예제 시간","O(n)","n부터 1까지 한 번씩 호출"],["팩토리얼 호출 공간","O(n)","호출 스택 깊이"],["일반 재귀 시간","문제별 상이","중복 호출이 많으면 더 커짐"]]}};
+const personalReference = {"linear":{"features":["실제 LeetCode 35에서 배열 앞부터 검사","첫 target 이상 값의 인덱스를 즉시 반환"],"uses":["정렬 배열에서 삽입 위치를 선형으로 구하는 풀이","입력 규모가 작다면 간단한 기준 구현으로 활용"],"cost":[["실행 시간","O(n)","마지막까지 검사할 수 있음"],["추가 공간","O(1)","인덱스 1개 사용"]]},"binary":{"features":["실제 제출 코드의 d·u를 탐색 경계로 유지","mid를 경계에 포함하고, 경계가 인접하면 종료"],"uses":["LeetCode 35에서 값 검색·삽입 인덱스 반환","일반 구현과 종료 조건 차이 비교"],"cost":[["실행 시간","O(log n)","구간이 반복해서 축소됨"],["추가 공간","O(1)","두 경계 인덱스만 사용"],["전제","정렬된 서로 다른 값·비어 있지 않은 배열","문제의 입력 조건에 맞춘 구현"]]},"dfs":{"features":["Minesweeper의 8방향 인접 칸을 DFS로 펼침","주변에 지뢰가 있으면 숫자를 기록하고 더 확장하지 않음"],"uses":["LeetCode 529 지뢰찾기 빈 영역 개방","같은 주변 칸을 여러 번 처리하지 않도록 보드 상태 변경"],"cost":[["최악 실행 시간","O(R×C)","칸마다 상수 개(8개) 이웃 확인"],["재귀 호출 스택","최악 O(R×C)","빈 칸이 깊게 연결된 경우"],["별도 visited","O(1)","보드 문자 E→B 등으로 방문 여부 표시"]]},"bfs":{"features":["처음 썩은 오렌지를 모두 큐에 넣는 다중 시작점 BFS","한 분을 처리할 때 현재 큐 길이를 고정해 레벨 구분"],"uses":["LeetCode 994 썩은 오렌지의 경과 시간 계산","여러 곳에서 동시에 시작되는 확산 모델"],"cost":[["최악 실행 시간","O(R×C)","각 칸을 방문·최종 검사"],["큐 보조 공간","O(R×C)","최악 모든 칸이 큐에 들어갈 수 있음"],["보드 활용","입력 격자 갱신","새 visited 배열을 만들지 않음"]]},"dp":{"features":["실제 제출 코드에서 vector로 F(0)~F(n)을 저장","각 단계에 1234567 나머지 연산 적용"],"uses":["Programmers 12945 피보나치 수 계산","이전 두 상태만 필요한 DP의 기본형 학습"],"cost":[["실행 시간","O(n)","F(2)부터 F(n)까지 순차 계산"],["저장 공간","O(n)","n+1칸의 vector"],["추가 최적화 가능성","O(1) 공간","두 값만 보관한다면 가능하지만 원본은 변경하지 않음"]]},"backtrack":{"features":["실제 N-Queens 코드에서 한 행에 퀸 하나씩 배치","윗방향 세 직선의 충돌 여부를 검사한 뒤 재귀·복구"],"uses":["LeetCode 51 N-Queens 가능한 배치 전부 열거","상태 복구와 제약 검사의 역할 구분"],"cost":[["탐색 시간","지수·팩토리얼 수준","가지 수·충돌 검사 비용에 따라 달라짐"],["체스판 저장","O(n²)","vector<string>으로 보드 유지"],["호출 스택","O(n)","한 행씩 재귀"],["결과 저장","해답 수에 비례","모든 정답 보드를 별도 저장"]]},"recursion":{"features":["실제 Tree Paths 코드에서 문자열을 값으로 전달","리프 노드에서 완성한 경로를 결과에 추가"],"uses":["LeetCode 257 루트부터 리프까지 경로 열거","트리 방문과 문자열 누적의 재귀 활용"],"cost":[["트리 탐색","O(N)회 방문","N은 트리 노드 수"],["문자열 누적 시간","최악 O(N·H)","경로를 복사하면서 누적, H는 높이"],["출력 저장","전체 경로 문자열 크기에 비례","리프마다 문자열 보관"],["재귀 호출 깊이","O(H)","트리 높이에 비례"]]}};
+const comparisonNotes={binary:'대표 구현은 탐색 경계를 좁히며, 내 풀이는 중간 위치를 경계에 포함하고 양 끝이 인접했을 때 종료합니다.',linear:'두 구현 모두 배열을 앞에서부터 확인해 목표값 이상인 첫 원소의 인덱스를 반환합니다. 코드 표현이 조금 다릅니다.',dfs:'대표 구현은 정점 그래프에서 재귀 DFS를 설명합니다. 내 풀이는 Minesweeper 격자에서 8방향 주변 지뢰를 확인하며 빈 영역을 재귀로 펼칩니다.',bfs:'대표 구현은 그래프 정점과 방문 큐를 보여줍니다. 내 풀이는 시작할 때 모든 썩은 오렌지를 큐에 넣고, 분 단위로 전파하는 다중 시작점 BFS입니다.',dp:'대표 구현은 피보나치 DP 테이블을 채웁니다. 내 풀이는 같은 Bottom-Up 방식에 1234567 나머지 연산을 적용한 실제 코드입니다.',backtrack:'대표 구현과 내 풀이 모두 N-Queens를 풀지만, 내 풀이는 각 행에서 위쪽 3방향 공격을 검사하며 직접 배치·복구합니다.',recursion:'대표 구현은 팩토리얼 호출과 반환을 보여줍니다. 내 풀이는 이진 트리의 루트부터 리프까지 경로 문자열을 재귀로 생성합니다.'};
+function standardFragment(f){const t=f.title;if(kind==='linear')return f.codeFragment||'for (int i';if(kind==='binary'){if(/중간/.test(t))return 'int mid';if(/왼쪽/.test(t))return 'low = mid+1';if(/오른쪽/.test(t))return 'else high = mid';return 'return low;'}if(kind==='dfs'){if(/방문/.test(t))return 'visited[u] = true';return 'dfs(v)';}if(kind==='bfs'){if(/추가|등록/.test(t))return 'q.push(v)';if(/꺼냄/.test(t))return 'q.front()';return 'visited[v] = true';}if(kind==='exhaustive'){if(/검사/.test(t))return 'if (cnt == 2)';return 'for (int mask';}if(kind==='dp'){if(/계산|저장/.test(t))return 'dp[i] = dp[i-1]';return 'dp[0] = 0';}if(kind==='greedy'){if(/선택/.test(t))return 'chosen.push_back(c)';return 'for (int c : coins)';}if(kind==='backtrack'){if(/배치/.test(t))return 'place(row,col)';if(/취소/.test(t))return 'remove(row,col)';if(/후보/.test(t)||/충돌/.test(t))return '!safe(row,col)';return 'solve(row+1)';}if(kind==='recursion'){if(/반환/.test(t))return 'return n * fact';return 'if (n <= 1)';}return '';}
+let currentShownCode='';
+function renderCode(f){const code=mode==='mine'?mineSources[kind]:cfg[kind].code;if(!code)return;const area=$('sampleCode');if(currentShownCode!==code){area.innerHTML=code.split('\n').map((s,i)=>`<span class="code-line" data-line="${i+1}">${esc(s)||' '}</span>`).join('');currentShownCode=code;$('codeFrame').scrollTop=0;}const frag=f.codeFragment||standardFragment(f);let line=lineNumber(code,frag);if(line<1)line=1;const row=area.querySelector(`[data-line="${line}"]`);area.querySelectorAll('.active').forEach(x=>x.classList.remove('active'));if(row){row.classList.add('active');const frame=$('codeFrame');if(row.offsetTop-frame.offsetTop>frame.scrollTop+frame.clientHeight-35||row.offsetTop-frame.offsetTop<frame.scrollTop+15)(()=>{const a=row.getBoundingClientRect(),b=frame.getBoundingClientRect();if(a.top<b.top+18)frame.scrollTop+=a.top-b.top-24;else if(a.bottom>b.bottom-18)frame.scrollTop+=a.bottom-b.bottom+24;})();}const literal=code.split('\n')[line-1]||'';$('currentLine').textContent=literal.trim()||'(빈 줄)';$('lineNumber').textContent=`${line}번째 줄`;const personal=mode==='mine',meta=personalMeta[kind];$('codeFootnote').textContent=personal?`실제 제출 원본 · ${meta.note}. 줄 강조는 시각화 단계에 대응하는 코드 위치입니다.`:'일반 구현의 학습용 코드입니다. 실행 중인 줄을 강조합니다.';$('submission').hidden=!personal;if(personal){const a=document.createElement('a');a.href=meta.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='관련 풀이 보기 ↗';$('submission').replaceChildren(document.createTextNode(meta.problem+' · '),a);}}
+
+function render(){let f=frames[index];if(!f)return;$('stepCounter').textContent=`${index+1} / ${frames.length}`;let progress=100*(index+1)/frames.length;$('progress').setAttribute('aria-valuenow',String(Math.round(progress)));$('progressFill').style.width=progress+'%';$('stepTitle').textContent=f.title;$('stepDetail').textContent=f.detail;$('visual').innerHTML=renderVisual(f);renderCode(f);$('prevBtn').disabled=index===0;$('nextBtn').disabled=index===frames.length-1;if(timer!==null&&index===frames.length-1)stop()}
+function go(step){index=Math.max(0,Math.min(step,frames.length-1));render()}
+function restart(){stop();index=0;render()}
+function play(){if(timer!==null){stop();return}if(index===frames.length-1)index=0;$('playBtn').textContent='Ⅱ 일시정지';timer=setInterval(()=>{if(index<frames.length-1)go(index+1);else stop()},Number($('speedSelect').value));render()}
+function refresh(atEnd=false){stop();frames=createSteps();index=atEnd?frames.length-1:0;render()}
+function inputsHtml(){if(['binary','linear','dp','greedy','recursion'].includes(kind)){const label={binary:'목표값',linear:'찾을 목표값',dp:'계산할 F(n)',greedy:'만들 금액',recursion:'팩토리얼 n'}[kind];const lim={binary:[-50,100],linear:[-20,30],dp:[2,10],greedy:[1,20],recursion:[2,6]}[kind];return `<form class="inputbar" id="paramForm"><label for="parameter">${label}</label><input id="parameter" type="number" min="${lim[0]}" max="${lim[1]}" step="1" value="${values[kind]}" required><button class="btn" type="submit">값 적용</button><span class="hint">${kind==='binary'?'배열 [3, 8, 12, 19, 23, 27, 35] 고정':kind==='linear'?'배열 [1, 3, 5, 6] 고정':`범위 ${lim[0]} ~ ${lim[1]}`}</span></form>`}
+if(['stack','queue','heap'].includes(kind))return `<form class="inputbar" id="opForm"><label for="opValue">추가할 값</label><input id="opValue" type="number" value="6" min="-99" max="99" step="1" required><button class="btn" type="submit">push 추가</button><button class="btn" id="popOp" type="button">pop 추가</button><button class="btn subtle" id="restoreOps" type="button">예제 연산 복원</button><span class="hint">연산 추가 시 마지막 상태로 이동 · 초기화 버튼은 현재 연산을 다시 재생</span></form>`;return ''}
+function updateReference(){const detail=(mode==='mine' ? personalReference[kind] : standardReference[kind]) || standardReference[kind];if(!detail)return;$('features').innerHTML=detail.features.map(x=>`<li>${esc(x)}</li>`).join('');$('when').innerHTML=detail.uses.map(x=>`<li>${esc(x)}</li>`).join('');$('costTable').innerHTML=detail.cost.map(([name,complexity,condition])=>`<tr><td>${esc(name)}</td><td>${esc(complexity)}</td><td>${esc(condition)}</td></tr>`).join('');const overview=mode==='mine'&&kind==='dfs'?['시간 O(R×C)','스택 최악 O(R×C)']:mode==='mine'&&kind==='bfs'?['시간 O(R×C)','큐 최악 O(R×C)']:mode==='mine'&&kind==='recursion'?['방문 N개','복사 비용 O(N·H)']:mode==='mine'&&kind==='backtrack'?['시간 경우에 따라 지수적','보드 O(n²)']:cfg[kind].complex;$('complexity').innerHTML=overview.map(t=>`<span>${esc(t)}</span>`).join('');}
+function renderPage(){const c=cfg[kind];$('categoryLabel').textContent=c.cat;$('algorithmTitle').textContent=c.title;$('algorithmSubtitle').textContent=c.sub;$('tags').innerHTML=c.tags.map((t,i)=>`<span class="tag ${i===0?'highlight':''}">${esc(t)}</span>`).join('');$('concept').textContent=c.concept;$('complexity').innerHTML=c.complex.map(t=>`<span>${esc(t)}</span>`).join('');$('caution').textContent=c.caution;currentShownCode='';$('modeTabs').hidden=!mineSources[kind];document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.mode===mode)));$('comparison').hidden=!mineSources[kind];$('comparisonText').textContent=comparisonNotes[kind]||'';$('inputs').innerHTML=inputsHtml();document.querySelectorAll('[data-kind]').forEach(b=>b.setAttribute('aria-current',String(b.dataset.kind===kind)));$('mobileAlgorithm').value=kind;updateReference();refresh()}
+function choose(id,updateHash=true){if(!all.includes(id))return;kind=id;mode='standard';if(updateHash&&location.hash.slice(1)!==id)history.replaceState(null,'','#'+id);renderPage()}
+function makeNav(){let h='';for(const g of groups){h+=`<div class="group-name">${g.label}</div>`;for(const [id,label,icon]of g.items)h+=`<button type="button" class="nav-button" data-kind="${id}" aria-current="false"><span class="nav-icon">${icon}</span>${esc(label)}</button>`} $('sidebarNav').innerHTML=h;$('mobileAlgorithm').innerHTML=groups.map(g=>`<optgroup label="${esc(g.label)}">${g.items.map(([id,label])=>`<option value="${id}">${esc(label)}</option>`).join('')}</optgroup>`).join('')}
+$('sidebarNav').addEventListener('click',e=>{let el=e.target.closest('[data-kind]');if(el)choose(el.dataset.kind)});
+$('mobileAlgorithm').addEventListener('change',e=>choose(e.target.value));document.getElementById('modeTabs').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b||!mineSources[kind])return;mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.mode===mode)));$('concept').textContent=mode==='standard'?cfg[kind].concept:`실제 풀이 예제: ${personalMeta[kind].problem}. 아래 시각화는 해당 코드의 주요 흐름을 보여 줍니다.`;$('caution').textContent=mode==='standard'?cfg[kind].caution:comparisonNotes[kind];currentShownCode='';updateReference();refresh();});$('prevBtn').addEventListener('click',()=>{stop();go(index-1)});$('nextBtn').addEventListener('click',()=>{stop();go(index+1)});$('resetBtn').addEventListener('click',restart);$('playBtn').addEventListener('click',play);$('speedSelect').addEventListener('change',()=>{if(timer!==null){stop();play()}});
+$('inputs').addEventListener('submit',e=>{e.preventDefault();if(e.target.id==='paramForm'){let v=Number($('parameter').value),lims={binary:[-50,100],linear:[-20,30],dp:[2,10],greedy:[1,20],recursion:[2,6]}[kind];if(!Number.isInteger(v)||v<lims[0]||v>lims[1]){$('parameter').reportValidity();return}values[kind]=v;refresh()}else if(e.target.id==='opForm'){let v=Number($('opValue').value);if(!Number.isInteger(v)||v<-99||v>99){$('opValue').reportValidity();return}ops[kind].push(['push',v]);refresh(true)}});
+$('inputs').addEventListener('click',e=>{if(e.target.id==='popOp'){ops[kind].push(['pop']);refresh(true)}else if(e.target.id==='restoreOps'){ops[kind]=defaults[kind].slice();refresh()}});
+window.addEventListener('hashchange',()=>choose(location.hash.slice(1),false));
+window.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement?.tagName))return;if(e.key==='ArrowRight'){stop();go(index+1)}else if(e.key==='ArrowLeft'){stop();go(index-1)}else if(e.key===' '){e.preventDefault();play()}});
+// Embed mode: algorithm-visualizer.html?embed=1#binary (no extra assets or build).
+if(new URLSearchParams(location.search).get('embed')==='1')document.body.classList.add('embed');
+makeNav();choose(all.includes(location.hash.slice(1))?location.hash.slice(1):'binary',false);
+})();
+</script>
+</body>
+</html>

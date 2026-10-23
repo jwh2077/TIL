@@ -1,0 +1,30 @@
+.vector-demo {margin:12px 0 20px;border:1px solid var(--line);border-radius:8px;background:var(--soft)}
+.vector-demo-heading {display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
+.vector-demo-heading h2 {margin:0}
+.vector-demo-toggle {font:inherit;font-size:.8rem;font-weight:600;padding:3px 8px;color:#fff;background:var(--blue);border:1px solid var(--blue);border-radius:5px;cursor:pointer;white-space:nowrap}
+.vector-demo-toggle:hover {filter:brightness(.9)}
+.vector-demo-toggle[aria-expanded="true"] {color:var(--blue);background:var(--soft)}
+.vector-demo-body {padding:14px}
+.vector-demo-operations {display:flex;flex-wrap:wrap;gap:6px}
+.vector-demo-operations button {display:flex;align-items:baseline;gap:6px}
+.vector-demo-operations small {font-size:.8rem;color:var(--muted)}
+.vector-demo-operations button[aria-pressed="true"] {border-color:var(--blue);color:var(--blue);background:var(--soft);font-weight:700}
+.vector-demo select,.vector-demo button {font:inherit;color:inherit;background:var(--paper,#fff);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+.vector-demo select {max-width:100%}
+.vector-demo-cells {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-top:16px;max-width:520px}
+.vector-demo-cell {display:flex;flex-direction:column;align-items:center;padding:10px 2px;border:1px solid var(--line);border-radius:6px;background:var(--paper,#fff)}
+.vector-demo-cell small {color:var(--muted);margin-top:3px}
+.vector-demo-cell.is-active {border:2px solid var(--blue);padding:9px 1px;background:var(--soft)}
+.vector-demo-cell.is-empty {border-style:dashed;color:var(--muted)}
+.vector-demo-cell.is-empty strong {font-size:.8rem;font-weight:400}
+.vector-demo-controls {display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.vector-demo button {cursor:pointer}
+.vector-demo button:disabled {opacity:.45;cursor:default}
+.vector-demo button:focus-visible,.vector-demo-toggle:focus-visible {outline:2px solid var(--blue);outline-offset:3px}
+.vector-demo-count,.vector-demo-note {font-size:.85rem;color:var(--muted)}
+.vector-demo-step {min-height:3em;margin:12px 0 0}
+.vector-demo-note {margin:12px 0 0;line-height:1.6}
+.vector-demo-cost {display:block;padding:10px 12px;margin:8px 0 12px;border-left:3px solid var(--blue);background:var(--paper,#fff);font-size:.9rem}
+.vector-demo-cost strong {color:var(--blue)}
+.vector-demo-cost p {margin:4px 0 6px;line-height:1.65}
+.vector-demo-cost small {color:var(--muted);line-height:1.5}

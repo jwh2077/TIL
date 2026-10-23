@@ -1,12 +1,12 @@
 window.TIL_LIBRARY_INDEX = [
   {
     "id": "stl-foundation",
-    "title": "C++ 자료구조·STL 정리 노트",
-    "summary": "저장 방식부터 컨테이너 사용법, 문자열·정렬·탐색, 그래프·트리, Big-O와 자료구조 선택까지.",
+    "title": "C++ STL 정리 노트",
+    "summary": "vector·list·map 등 컨테이너 사용법, 문자열, sort·find·reverse, 연산 비용과 선택 기준.",
     "kind": "file",
     "topic": "stl",
     "status": "종합 정리 노트",
-    "source_name": "자료구조.html",
+    "source_name": "자료구조.html / data-structures-stl-lab-v3.html",
     "source_url": "data/guides/stl-reference.html",
     "related_ids": [
       "20260717-001",
@@ -15,7 +15,6 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "topics": [
       "cpp",
-      "ds",
       "stl"
     ],
     "publication": "reference",
@@ -47,6 +46,18 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "관련 Velog · map과 auto, range-for",
         "url": "https://velog.io/@jwh4410/7.28"
+      },
+      {
+        "label": "연결 리스트·트리 등 자료구조 원리",
+        "url": "#material=data-structures"
+      },
+      {
+        "label": "탐색·DP·백트래킹 정리",
+        "url": "#material=algorithm-techniques"
+      },
+      {
+        "label": "자료구조·STL 원본 HTML",
+        "url": "data/guides/structures-stl-lab.html"
       }
     ],
     "legacy_sections": {
@@ -54,15 +65,10 @@ window.TIL_LIBRARY_INDEX = [
       "stl-associative": "set — 중복 없이 정렬",
       "stl-adaptor": "stack — 마지막에 넣은 값 꺼내기",
       "stl-algorithm": "string — 문자열 다루기",
-      "graph-tree": "그래프 — 정점과 간선",
       "concept-bigo": "Big-O 표기법",
-      "stl-selection": "자료구조 선택 기준"
+      "stl-selection": "STL 컨테이너 선택 기준"
     },
     "toc_groups": [
-      {
-        "title": "기초와 저장 방식",
-        "start": "자료구조"
-      },
       {
         "title": "순차 컨테이너",
         "start": "vector — 인덱스 접근·뒤에 추가"
@@ -80,8 +86,8 @@ window.TIL_LIBRARY_INDEX = [
         "start": "string — 문자열 다루기"
       },
       {
-        "title": "그래프·트리·선택 기준",
-        "start": "그래프 — 정점과 간선"
+        "title": "STL 개념·복잡도·선택 기준",
+        "start": "STL이란?"
       }
     ],
     "quick_links": [
@@ -101,16 +107,8 @@ window.TIL_LIBRARY_INDEX = [
     "file": "data/materials/stl-foundation.js",
     "outline": [
       {
-        "title": "자료구조",
-        "text": "자료구조 1. 개념 자료구조는 데이터를 저장, 삽입, 삭제, 접근, 탐색 등 효율적으로 관리하기 위한 방법이다."
-      },
-      {
-        "title": "메모리 — 연속 저장과 연결 저장",
-        "text": "메모리 — 연속 저장과 연결 저장 1. 연속적인 저장 데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다. [10][20][30][40] 예: 배열, vector 2. 불연속적인 저장 데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다. [10] → [20] → [30] 예: list , 연결 기반 Tree 연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다."
-      },
-      {
         "title": "vector — 인덱스 접근·뒤에 추가",
-        "text": "vector — 인덱스 접근·뒤에 추가 1. 개념 / 구조 vector 는 크기를 변화시켜가며 사용할 수 있는 동적 배열 이다. 원소가 연속적인 메모리에 저장된다. 인덱스로 임의 접근할 수 있다. 끝에 원소를 추가할 때 평균적으로 O(1)이다. capacity 가 부족하면 더 큰 공간을 확보하고 기존 원소를 이동할 수 있다. 2. size / capacity vector<int> vec; vec.size(); // 현재 원소 개수 vec.capacity(); // 현재 확보된 공간 vec.reserve(100); // capacity를 미리 확보 개념 의미 size 현재 들어 있는 원소의 개수 capacity 현재 확보된 저장 공간의 크기 reserve(n) capacity를 최소 n까지 확보. size는 변하지 않음 3. 주요 명령어 + Big-O 명령어 기능 Big-O push_back() 뒤에 추가 평균 O(1), 재할당 시 O(n) emplace_back() 뒤에서 객체를 생성하며 추가 평균 O(1), 재할당 시 O(n) pop_back() 마지막 원소 삭제 O(1) insert() 특정 위치에 삽입 O(n) erase() 특정 위치 삭제 O(n) operator[] 인덱스로 접근 O(1) at() 인덱스로 접근 + 범위 검사 O(1) empty() 비었는지 확인 O(1) clear() 모든 원소 삭제 O(n) size() 원소 개수 O(1) 4. 장점 / 단점 / 사용하기 좋은 때 장점: 인덱스 접근이 빠르고 캐시 효율이 좋다. 단점: 중간 삽입/삭제 시 뒤 원소를 이동해야 한다. 좋은 경우: 인덱스 접근이 필요하거나 끝에서 추가/삭제가 많은 경우 5. 탐색 / 뒤집기 find(vec.begin(), vec.end(), value); // 순차 탐색 reverse(vec.begin(), vec.end()); // 뒤집기 find() 는 O(n), reverse() 는 O(n)이다. 6. 알고리즘 예시: 그래프 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 0번 정점에서 1번과 2번 정점으로 연결된 것을 인접 리스트로 표현한 것이다. {1, 2} 는 주소가 아니라 연결된 정점의 번호 를 저장한 것이다."
+        "text": "vector — 인덱스 접근·뒤에 추가 1. 개념 / 구조 vector 는 크기를 변화시켜가며 사용할 수 있는 동적 배열 이다. 원소가 연속적인 메모리에 저장된다. 인덱스로 임의 접근할 수 있다. 끝에 원소를 추가할 때 평균적으로 O(1)이다. capacity 가 부족하면 더 큰 공간을 확보하고 기존 원소를 이동할 수 있다. 2. size / capacity vector<int> vec; vec.size(); // 현재 원소 개수 vec.capacity(); // 현재 확보된 공간 vec.reserve(100); // capacity를 미리 확보 개념 의미 size 현재 들어 있는 원소의 개수 capacity 현재 확보된 저장 공간의 크기 reserve(n) capacity를 최소 n까지 확보. size는 변하지 않음 3. 주요 명령어 + Big-O 명령어 기능 Big-O push_back() 뒤에 추가 평균 O(1), 재할당 시 O(n) emplace_back() 뒤에서 객체를 생성하며 추가 평균 O(1), 재할당 시 O(n) pop_back() 마지막 원소 삭제 O(1) insert() 특정 위치에 삽입 O(n) erase() 특정 위치 삭제 O(n) operator[] 인덱스로 접근 O(1) at() 인덱스로 접근 + 범위 검사 O(1) empty() 비었는지 확인 O(1) clear() 모든 원소 삭제 O(n) size() 원소 개수 O(1) 4. 장점 / 단점 / 사용하기 좋은 때 장점: 인덱스 접근이 빠르고 캐시 효율이 좋다. 단점: 중간 삽입/삭제 시 뒤 원소를 이동해야 한다. 좋은 경우: 인덱스 접근이 필요하거나 끝에서 추가/삭제가 많은 경우 5. 탐색 / 뒤집기 find(vec.begin(), vec.end(), value); // 순차 탐색 reverse(vec.begin(), vec.end()); // 뒤집기 find() 는 O(n), reverse() 는 O(n)이다. 6. 알고리즘 예시: 그래프 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 0번 정점에서 1번과 2번 정점으로 연결된 것을 인접 리스트로 표현한 것이다. {1, 2} 는 주소가 아니라 연결된 정점의 번호 를 저장한 것이다. 연산 예시와 주의사항 vector<int> v{4, 8, 12, 16}; v.push_back(7); v.insert(v.begin() + 1, 7); v.erase(v.begin() + 1); cout << v.size() << \" / \" << v.capacity(); vector의 capacity 증가 방식은 구현별로 달라진다."
       },
       {
         "title": "2차원 vector — 행 추가와 값 추가",
@@ -122,11 +120,11 @@ window.TIL_LIBRARY_INDEX = [
       },
       {
         "title": "list — 위치를 찾아 삽입·삭제",
-        "text": "list — 위치를 찾아 삽입·삭제 1. 개념 / 구조 list 는 일반적으로 양방향 연결 리스트 이다. [10] ⇄ [20] ⇄ [30] 노드가 메모리상 연속되어 있을 필요가 없다. 각 노드는 앞/뒤 노드와 연결된다. 인덱스 임의 접근이 불가능하다. 위치를 가리키는 iterator를 이미 가지고 있다면 삽입/삭제가 효율적이다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_back() 뒤 추가 O(1) push_front() 앞 추가 O(1) pop_back() 뒤 삭제 O(1) pop_front() 앞 삭제 O(1) insert(it) iterator 위치에 삽입 O(1)* erase(it) iterator 위치 삭제 O(1)* remove(value) 값을 찾아 삭제 O(n) find() 순차 탐색 O(n) reverse() 뒤집기 O(n) sort() 리스트 자체 정렬 O(n log n) * 해당 위치의 iterator를 이미 알고 있는 경우. 위치를 찾는 과정은 별도로 O(n)이 걸릴 수 있다. 3. 사용하기 좋은 때 중간 삽입/삭제가 많고 해당 위치를 iterator로 관리할 수 있으며 인덱스 접근이 중요하지 않을 때"
+        "text": "list — 위치를 찾아 삽입·삭제 1. 개념 / 구조 list 는 일반적으로 양방향 연결 리스트 이다. [10] ⇄ [20] ⇄ [30] 노드가 메모리상 연속되어 있을 필요가 없다. 각 노드는 앞/뒤 노드와 연결된다. 인덱스 임의 접근이 불가능하다. 위치를 가리키는 iterator를 이미 가지고 있다면 삽입/삭제가 효율적이다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_back() 뒤 추가 O(1) push_front() 앞 추가 O(1) pop_back() 뒤 삭제 O(1) pop_front() 앞 삭제 O(1) insert(it) iterator 위치에 삽입 O(1)* erase(it) iterator 위치 삭제 O(1)* remove(value) 값을 찾아 삭제 O(n) find() 순차 탐색 O(n) reverse() 뒤집기 O(n) sort() 리스트 자체 정렬 O(n log n) * 해당 위치의 iterator를 이미 알고 있는 경우. 위치를 찾는 과정은 별도로 O(n)이 걸릴 수 있다. 3. 사용하기 좋은 때 중간 삽입/삭제가 많고 해당 위치를 iterator로 관리할 수 있으며 인덱스 접근이 중요하지 않을 때 연산 예시와 주의사항 list<int> a{4, 8, 12, 16}; a.insert(next(a.begin(), 1), 7); a.erase(next(a.begin(), 1)); for (int x : a) cout << x << ' '; iterator를 이미 알고 있을 때 삽입·삭제는 O(1)입니다. next(begin, n)처럼 위치를 찾는 비용은 O(n)일 수 있습니다."
       },
       {
         "title": "forward_list — 단방향 연결 리스트",
-        "text": "forward_list — 단방향 연결 리스트 1. 개념 / 구조 forward_list 는 단방향 연결 리스트 이다. [10] → [20] → [30] 다음 노드 방향으로만 이동한다. list 보다 구조가 단순하다. 인덱스 접근이 불가능하다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_front() 앞 추가 O(1) pop_front() 앞 삭제 O(1) insert_after() iterator 뒤에 삽입 O(1)* erase_after() iterator 뒤 원소 삭제 O(1)* remove() 값으로 삭제 O(n) reverse() 뒤집기 O(n) 3. 사용하기 좋은 때 양방향 이동이 필요 없고 앞쪽 또는 특정 노드 뒤에서 삽입/삭제하는 경우"
+        "text": "forward_list — 단방향 연결 리스트 1. 개념 / 구조 forward_list 는 단방향 연결 리스트 이다. [10] → [20] → [30] 다음 노드 방향으로만 이동한다. list 보다 구조가 단순하다. 인덱스 접근이 불가능하다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_front() 앞 추가 O(1) pop_front() 앞 삭제 O(1) insert_after() iterator 뒤에 삽입 O(1)* erase_after() iterator 뒤 원소 삭제 O(1)* remove() 값으로 삭제 O(n) reverse() 뒤집기 O(n) 3. 사용하기 좋은 때 양방향 이동이 필요 없고 앞쪽 또는 특정 노드 뒤에서 삽입/삭제하는 경우 연산 예시와 주의사항 forward_list<int> a{4, 8, 12, 16}; a.insert_after(a.begin(), 7); a.erase_after(a.begin()); for (int x : a) cout << x << ' '; forward_list에는 size()가 없습니다. 인덱스로 직접 접근할 수도 없습니다."
       },
       {
         "title": "set — 중복 없이 정렬",
@@ -142,11 +140,11 @@ window.TIL_LIBRARY_INDEX = [
       },
       {
         "title": "map — 키와 값 저장",
-        "text": "map — 키와 값 저장 1. 개념 / 구조 map 은 Key - Value 쌍을 저장하고 Key 기준으로 정렬한다. Key 중복 X Key 기준 정렬 Key로 Value 접근 균형 트리 계열로 구현된다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O map[key] Key 접근. 없으면 새 원소를 삽입할 수 있음 O(log n) at(key) Key 접근. 없으면 예외 O(log n) insert() 삽입 O(log n) emplace() 생성 후 삽입 O(log n) erase(key) Key 삭제 O(log n) find() Key 탐색 O(log n) contains() Key 존재 확인 O(log n) 3. 사용하기 좋은 때 Key와 Value를 묶어 관리하고 Key 기준 정렬이나 탐색이 필요할 때 map<string, int> data; data[\"HP\"] = 100;"
+        "text": "map — 키와 값 저장 1. 개념 / 구조 map 은 Key - Value 쌍을 저장하고 Key 기준으로 정렬한다. Key 중복 X Key 기준 정렬 Key로 Value 접근 균형 트리 계열로 구현된다. 2. 주요 명령어 + Big-O 명령어 기능 Big-O map[key] Key 접근. 없으면 새 원소를 삽입할 수 있음 O(log n) at(key) Key 접근. 없으면 예외 O(log n) insert() 삽입 O(log n) emplace() 생성 후 삽입 O(log n) erase(key) Key 삭제 O(log n) find() Key 탐색 O(log n) contains() Key 존재 확인 O(log n) 3. 사용하기 좋은 때 Key와 Value를 묶어 관리하고 Key 기준 정렬이나 탐색이 필요할 때 map<string, int> data; data[\"HP\"] = 100; 연산 예시와 주의사항 set<int> s{4, 8, 12}; s.insert(7); s.insert(8); // 중복 원소는 추가되지 않음 map<int, string> m{{4,\"A\"},{8,\"B\"}}; m[8] = \"C\"; // 기존 키의 값 갱신 s.erase(4); C++ 표준은 균형 트리의 구체적인 종류를 지정하지 않습니다. 구현에 따라 레드-블랙 트리를 흔히 사용합니다."
       },
       {
         "title": "unordered_map — 정렬 없이 키 검색",
-        "text": "unordered_map — 정렬 없이 키 검색 1. 개념 / 구조 unordered_map 은 Hash Table 기반의 Key - Value 자료구조이다. Key 중복 X 정렬 X 평균적으로 빠른 Key 검색 2. 주요 명령어 + Big-O 명령어 기능 평균 / 최악 data[key] Key 접근 / 없으면 삽입 O(1) / O(n) insert() 삽입 O(1) / O(n) erase(key) 삭제 O(1) / O(n) find() Key 탐색 O(1) / O(n) contains() 존재 확인 O(1) / O(n) 3. 사용하기 좋은 때 정렬이 필요하지 않고 Key 검색을 많이 하는 경우"
+        "text": "unordered_map — 정렬 없이 키 검색 1. 개념 / 구조 unordered_map 은 Hash Table 기반의 Key - Value 자료구조이다. Key 중복 X 정렬 X 평균적으로 빠른 Key 검색 2. 주요 명령어 + Big-O 명령어 기능 평균 / 최악 data[key] Key 접근 / 없으면 삽입 O(1) / O(n) insert() 삽입 O(1) / O(n) erase(key) 삭제 O(1) / O(n) find() Key 탐색 O(1) / O(n) contains() 존재 확인 O(1) / O(n) 3. 사용하기 좋은 때 정렬이 필요하지 않고 Key 검색을 많이 하는 경우 연산 예시와 주의사항 unordered_map<int, string> m; m[4] = \"A\"; m[9] = \"B\"; auto it = m.find(9); if (it != m.end()) cout << it->second; m.erase(9); 반복 순서는 정렬되지 않으며 일정한 순서를 기대할 수 없습니다. 평균 O(1)이지만 최악의 경우 O(n)이 될 수 있습니다."
       },
       {
         "title": "multimap — 같은 키 여러 개 저장",
@@ -154,19 +152,19 @@ window.TIL_LIBRARY_INDEX = [
       },
       {
         "title": "stack — 마지막에 넣은 값 꺼내기",
-        "text": "stack — 마지막에 넣은 값 꺼내기 1. 개념 / 구조 LIFO(Last In, First Out) — 후입선출 TOP ↓ [30] [20] [10] 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 맨 위에 추가 O(1) emplace() 맨 위에서 생성/추가 O(1) pop() 맨 위 삭제 O(1) top() 맨 위 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 괄호 짝 검사 계산기 DFS 되돌리기 / Undo"
+        "text": "stack — 마지막에 넣은 값 꺼내기 1. 개념 / 구조 LIFO(Last In, First Out) — 후입선출 TOP ↓ [30] [20] [10] 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 맨 위에 추가 O(1) emplace() 맨 위에서 생성/추가 O(1) pop() 맨 위 삭제 O(1) top() 맨 위 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 괄호 짝 검사 계산기 DFS 되돌리기 / Undo 연산 예시와 주의사항 stack<int> s; s.push(4); s.push(8); s.push(12); int x = s.top(); s.pop(); stack은 컨테이너 어댑터입니다. 실제 저장소로는 기본적으로 deque 등을 사용합니다."
       },
       {
         "title": "queue — 먼저 넣은 값 꺼내기",
-        "text": "queue — 먼저 넣은 값 꺼내기 1. 개념 / 구조 FIFO(First In, First Out) — 선입선출 front → [10][20][30] ← back 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 뒤에 추가 O(1) emplace() 뒤에서 생성/추가 O(1) pop() 앞 삭제 O(1) front() 앞 확인 O(1) back() 뒤 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 BFS 대기열 먼저 들어온 작업부터 처리해야 하는 경우"
+        "text": "queue — 먼저 넣은 값 꺼내기 1. 개념 / 구조 FIFO(First In, First Out) — 선입선출 front → [10][20][30] ← back 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 뒤에 추가 O(1) emplace() 뒤에서 생성/추가 O(1) pop() 앞 삭제 O(1) front() 앞 확인 O(1) back() 뒤 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 BFS 대기열 먼저 들어온 작업부터 처리해야 하는 경우 연산 예시와 주의사항 queue<int> q; q.push(4); q.push(8); q.push(12); int x = q.front(); q.pop(); queue도 컨테이너 어댑터이며 기본적으로 deque를 사용합니다. 인덱스 접근은 제공하지 않습니다."
       },
       {
         "title": "deque — 양쪽 끝에 추가·삭제",
-        "text": "deque — 양쪽 끝에 추가·삭제 1. 개념 / 구조 Double Ended Queue — 양쪽 끝에서 삽입/삭제할 수 있다. 앞 ↔ [10][20][30][40] ↔ 뒤 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_front() 앞 추가 O(1) push_back() 뒤 추가 O(1) pop_front() 앞 삭제 O(1) pop_back() 뒤 삭제 O(1) front() / back() 양 끝 확인 O(1) operator[] 인덱스 접근 O(1) 3. 장점 / 단점 / 사용하기 좋은 때 장점: 양쪽 끝의 삽입/삭제가 빠르고 인덱스 접근도 가능 단점: vector처럼 하나의 연속된 메모리 블록에 저장된다는 보장은 없음 좋은 경우: 양쪽에서 데이터를 넣고 빼는 경우, 슬라이딩 윈도우"
+        "text": "deque — 양쪽 끝에 추가·삭제 1. 개념 / 구조 Double Ended Queue — 양쪽 끝에서 삽입/삭제할 수 있다. 앞 ↔ [10][20][30][40] ↔ 뒤 2. 주요 명령어 + Big-O 명령어 기능 Big-O push_front() 앞 추가 O(1) push_back() 뒤 추가 O(1) pop_front() 앞 삭제 O(1) pop_back() 뒤 삭제 O(1) front() / back() 양 끝 확인 O(1) operator[] 인덱스 접근 O(1) 3. 장점 / 단점 / 사용하기 좋은 때 장점: 양쪽 끝의 삽입/삭제가 빠르고 인덱스 접근도 가능 단점: vector처럼 하나의 연속된 메모리 블록에 저장된다는 보장은 없음 좋은 경우: 양쪽에서 데이터를 넣고 빼는 경우, 슬라이딩 윈도우 연산 예시와 주의사항 deque<int> d{4, 8, 12}; d.push_front(7); d.push_back(7); d.pop_front(); cout << d[0]; deque는 인덱스 접근이 가능하지만 vector처럼 단일 연속 메모리 블록에 저장된다고 보장하지 않습니다."
       },
       {
         "title": "priority_queue — 우선순위에 따라 꺼내기",
-        "text": "priority_queue — 우선순위에 따라 꺼내기 1. 개념 / 구조 우선순위가 높은 원소를 먼저 꺼내는 자료구조이다. priority_queue 는 Heap을 사용한다. Heap은 완전 이진 트리 형태를 유지한다. 배열 형태로 효율적으로 표현할 수 있다. 전체 원소가 정렬되어 있는 것은 아니다. priority_queue<int> maxPQ; // 기본: 큰 값 우선 priority_queue<int, vector<int>, greater<int>> minPQ; // 작은 값 우선 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 삽입 O(log n) emplace() 생성 후 삽입 O(log n) pop() 최상위 우선순위 삭제 O(log n) top() 최상위 우선순위 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 최소/최대값을 반복해서 꺼낼 때 Dijkstra 우선순위가 있는 작업 처리"
+        "text": "priority_queue — 우선순위에 따라 꺼내기 1. 개념 / 구조 우선순위가 높은 원소를 먼저 꺼내는 자료구조이다. priority_queue 는 Heap을 사용한다. Heap은 완전 이진 트리 형태를 유지한다. 배열 형태로 효율적으로 표현할 수 있다. 전체 원소가 정렬되어 있는 것은 아니다. priority_queue<int> maxPQ; // 기본: 큰 값 우선 priority_queue<int, vector<int>, greater<int>> minPQ; // 작은 값 우선 2. 주요 명령어 + Big-O 명령어 기능 Big-O push() 삽입 O(log n) emplace() 생성 후 삽입 O(log n) pop() 최상위 우선순위 삭제 O(log n) top() 최상위 우선순위 확인 O(1) empty() 비었는지 확인 O(1) 3. 사용하기 좋은 때 최소/최대값을 반복해서 꺼낼 때 Dijkstra 우선순위가 있는 작업 처리 연산 예시와 주의사항 priority_queue<int> pq; for (int x : {24,18,15,8,12,10}) pq.push(x); pq.push(32); // 입력값 예시 int greatest = pq.top(); pq.pop(); // 최소 힙: priority_queue<int, vector<int>, greater<int>> minPQ; priority_queue는 힙 기반으로 동작하며, 전체 원소를 순회하거나 정렬된 전체 내용을 얻는 인터페이스는 제공하지 않습니다."
       },
       {
         "title": "string — 문자열 다루기",
@@ -174,15 +172,7 @@ window.TIL_LIBRARY_INDEX = [
       },
       {
         "title": "STL 알고리즘 — sort·find·reverse와 컨테이너별 정렬",
-        "text": "STL 알고리즘 — sort·find·reverse와 컨테이너별 정렬 1. sort sort(vec.begin(), vec.end()); // 기본 오름차순 sort(vec.begin(), vec.end(), greater<>()); // 내림차순 일반적으로 O(n log n)이다. 2. find / reverse find(vec.begin(), vec.end(), value); // O(n) reverse(vec.begin(), vec.end()); // O(n) 3. 컨테이너별 정렬 sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우 lst.sort(); // list는 자체 sort 사용 list 는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 std::sort() 를 사용할 수 없고, 멤버 함수 list::sort() 를 사용한다."
-      },
-      {
-        "title": "그래프 — 정점과 간선",
-        "text": "그래프 — 정점과 간선 DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리"
-      },
-      {
-        "title": "트리 — 부모와 자식 관계",
-        "text": "트리 — 부모와 자식 관계 1. 개념 부모-자식 관계를 가지는 계층적인 자료구조이다. [1] Root / \\ [2] [3] / [4] Leaf 2. 용어 용어 의미 Root 가장 위의 노드 Parent 부모 노드 Child 자식 노드 Leaf 자식이 없는 노드 Edge 노드와 노드를 연결하는 간선 3. 종류 Binary Tree Binary Search Tree Heap"
+        "text": "STL 알고리즘 — sort·find·reverse와 컨테이너별 정렬 1. sort sort(vec.begin(), vec.end()); // 기본 오름차순 sort(vec.begin(), vec.end(), greater<>()); // 내림차순 일반적으로 O(n log n)이다. 2. find / reverse find(vec.begin(), vec.end(), value); // O(n) reverse(vec.begin(), vec.end()); // O(n) 3. 컨테이너별 정렬 sort(vec.begin(), vec.end()); // vector 등 Random Access Iterator가 필요한 경우 lst.sort(); // list는 자체 sort 사용 list 는 임의 접근(Random Access)이 불가능하기 때문에 일반적인 std::sort() 를 사용할 수 없고, 멤버 함수 list::sort() 를 사용한다. 연산 예시와 주의사항 vector<int> v{8, 4, 12, 7}; sort(v.begin(), v.end()); auto it = find(v.begin(), v.end(), 7); reverse(v.begin(), v.end()); sort에는 임의 접근 반복자가 필요하므로 list에서는 list.sort()를 사용해야 합니다."
       },
       {
         "title": "STL이란?",
@@ -193,8 +183,8 @@ window.TIL_LIBRARY_INDEX = [
         "text": "Big-O 표기법 1. 개념 입력 크기 n 이 커질 때 알고리즘의 실행 시간이나 필요한 공간이 어떻게 증가하는지를 나타내는 표기법이다. 표기 의미 예시 O(1) 입력 크기와 관계없이 일정 vector 인덱스 접근, stack top O(log n) 범위를 줄여가며 처리 set/map 탐색 O(n) 데이터 수에 비례 순차 탐색 O(n log n) 효율적인 정렬에서 자주 등장 sort() O(n²) 데이터 수의 제곱에 비례 중첩 반복문 Big-O는 실제 시간이 몇 초인지가 아니라, 입력 크기가 증가할 때 성능이 증가하는 정도를 표현한다."
       },
       {
-        "title": "자료구조 선택 기준",
-        "text": "자료구조 선택 기준 필요한 상황 추천 자료구조 이유 인덱스 접근 vector 임의 접근 O(1) 끝에서 추가/삭제 vector 평균 O(1) 양쪽 끝에서 추가/삭제 deque 양쪽 O(1) 중간 삽입/삭제 + 위치 iterator 보유 list 연결 변경으로 처리 중복 없는 정렬 데이터 set 정렬 + 중복 X 중복 없는 빠른 검색 unordered_set Hash Table 평균 O(1) Key-Value + 정렬 map Key 기준 정렬 Key-Value + 빠른 검색 unordered_map Hash Table 평균 O(1) Key 중복 + 정렬 multimap 같은 Key 여러 개 가능 후입선출 stack LIFO 선입선출 queue FIFO 최소/최대 우선 처리 priority_queue Heap"
+        "title": "STL 컨테이너 선택 기준",
+        "text": "STL 컨테이너 선택 기준 필요한 상황 추천 자료구조 이유 인덱스 접근 vector 임의 접근 O(1) 끝에서 추가/삭제 vector 평균 O(1) 양쪽 끝에서 추가/삭제 deque 양쪽 O(1) 중간 삽입/삭제 + 위치 iterator 보유 list 연결 변경으로 처리 중복 없는 정렬 데이터 set 정렬 + 중복 X 중복 없는 빠른 검색 unordered_set Hash Table 평균 O(1) Key-Value + 정렬 map Key 기준 정렬 Key-Value + 빠른 검색 unordered_map Hash Table 평균 O(1) Key 중복 + 정렬 multimap 같은 Key 여러 개 가능 후입선출 stack LIFO 선입선출 queue FIFO 최소/최대 우선 처리 priority_queue Heap"
       }
     ]
   },
@@ -778,7 +768,7 @@ window.TIL_LIBRARY_INDEX = [
   {
     "id": "unreal-build-flow",
     "title": "C++·Unreal 빌드 과정",
-    "summary": "cpp와 헤더가 컴파일·링크되는 순서, UBT·UHT의 역할, IntelliSense와 실제 빌드 결과의 차이.",
+    "summary": "cpp와 헤더가 컴파일·링크되는 순서, UBT·UHT의 역할, IntelliSense와 실제 빌드 결과의 차이. Development·DebugGame·Shipping과 Editor 대상 구분.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -786,11 +776,12 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "publication": "reference",
     "status": "빌드 과정 참고 · 2026-10-02",
-    "source_name": "10.02.md · 로컬 보관",
+    "source_name": "10.02.md · 로컬 보관 / 10-19.txt",
     "source_url": "",
     "notice": "기본 빌드 흐름을 정리한 자료다. IntelliSense 표시와 빌드 결과가 달랐던 사례는 관련 학습 기록에 남겼다.",
     "related_ids": [
-      "20261002-chatx"
+      "20261002-chatx",
+      "20261019-study"
     ],
     "references": [
       {
@@ -804,6 +795,10 @@ window.TIL_LIBRARY_INDEX = [
       {
         "label": "Unreal C++ AItem 헤더 구조",
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260810-001"
+      },
+      {
+        "label": "Unreal 공식 문서 · 빌드 구성",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/build-configurations-reference-for-unreal-engine?application_version=5.6"
       }
     ],
     "quick_links": [
@@ -833,6 +828,14 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "IntelliSense와 실제 빌드 오류",
         "text": "IntelliSense와 실제 빌드 오류 검색 경로 정보가 서로 다르면 빨간 줄이 있어도 빌드는 성공할 수 있다. 빨간 줄만으로 컴파일 실패를 판단하지 않고 실제 빌드 결과를 함께 확인한다. 구분 무엇을 보는가 IntelliSense 빨간 줄 Visual Studio의 코드 분석 결과 실제 빌드 결과 UBT가 구성한 환경으로 컴파일한 결과"
+      },
+      {
+        "title": "빌드 구성 — Development·DebugGame·Shipping",
+        "text": "빌드 구성 — Development·DebugGame·Shipping 구성 이름만으로 디버깅 가능 여부를 단정하지 않는다. Development와 Shipping도 디버그 심볼이 있으면 디버깅할 수 있지만, 최적화 때문에 코드 흐름을 따라가기 어려울 수 있다. Development: 개발 중 성능과 반복 작업에 맞춘 구성이다. 시간이 많이 드는 일부 최적화를 제외한 최적화를 사용한다. DebugGame: 게임 코드를 최적화하지 않아 게임 모듈을 디버깅하기 편한 구성이다. Shipping: 배포와 성능을 위한 구성이다. 콘솔 명령, 통계, 프로파일링 도구 등을 제한한다."
+      },
+      {
+        "title": "Editor — 빌드 구성과 실행 대상 구분",
+        "text": "Editor — 빌드 구성과 실행 대상 구분 Development와 DebugGame은 빌드 구성이고, Editor는 빌드 대상이다. Development Editor는 Development 구성으로 에디터에서 사용할 코드를 빌드한다. DebugGame Editor는 게임 코드를 디버깅하기 위한 구성과 Editor 대상을 조합한 이름이다."
       }
     ]
   },
@@ -1026,7 +1029,7 @@ window.TIL_LIBRARY_INDEX = [
       },
       {
         "title": "전용 서버 테스트 — PIE 설정",
-        "text": "전용 서버 테스트 — PIE 설정 설정 위치: Editor Preferences → Level Editor → Play 설정 선택 / 용도 Play Net Mode Play as Client — 클라이언트 창과 백그라운드 전용 서버 실행 Run Under One Process 끄기 — 창마다 프로세스를 나눠 테스트 Always On Top 선택 사항. 테스트 창을 다른 창 위에 표시 설정할 때 참고 Run Under One Process를 켜도 멀티플레이 테스트는 가능하다. 빠르게 실행할 수 있지만 실제로 프로세스를 나눈 환경과는 차이가 있다. Play as Client는 전용 서버를 실행하므로 Launch Separate Server를 반드시 켤 필요는 없다. 이 옵션은 현재 모드에서 요구하지 않아도 서버를 따로 실행할 때 사용한다. 10월 6일 남긴 실제 설정 화면. 이미지를 누르면 크게 볼 수 있다. 에디터를 닫아도 빌드가 막힐 때 서버를 별도 프로세스로 실행했다면 에디터 종료 후에도 서버 프로세스가 남아 있는지 확인한다. 메모에 남긴 점검 항목이며, 모든 빌드 오류가 이 원인이라는 뜻은 아니다."
+        "text": "전용 서버 테스트 — PIE 설정 설정 위치: Editor Preferences → Level Editor → Play 설정 선택 / 용도 Play Net Mode Play as Client — 클라이언트 창과 백그라운드 전용 서버 실행 Run Under One Process 끄기 — 창마다 프로세스를 나눠 테스트 Always On Top 선택 사항. 테스트 창을 다른 창 위에 표시 설정할 때 참고 Run Under One Process를 켜도 멀티플레이 테스트는 가능하다. 빠르게 실행할 수 있지만 실제로 프로세스를 나눈 환경과는 차이가 있다. Play as Client는 전용 서버를 실행하므로 Launch Separate Server를 반드시 켤 필요는 없다. 이 옵션은 현재 모드에서 요구하지 않아도 서버를 따로 실행할 때 사용한다. 10월 6일 남긴 실제 설정 화면. 이미지를 누르면 크게 볼 수 있다. 늦은 참가 허용 — Allow Late Joining 언리얼 에디터에서 편집(Edit) → 에디터 개인 설정(Editor Preferences) 을 연다. 검색창에 Late Joining 을 입력한다. Allow Late Joining(늦은 참가 허용) 을 활성화한다. 플레이 버튼 옆 ▼ 에서 멀티플레이 설정을 확인한다. 에디터를 닫아도 빌드가 막힐 때 서버를 별도 프로세스로 실행했다면 에디터 종료 후에도 서버 프로세스가 남아 있는지 확인한다. 메모에 남긴 점검 항목이며, 모든 빌드 오류가 이 원인이라는 뜻은 아니다."
       },
       {
         "title": "내 화면에만 UI 표시 — IsLocalController()",
@@ -1212,6 +1215,236 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "WithValidation — 검증 실패와 일반 거절",
         "text": "WithValidation — 검증 실패와 일반 거절 클라이언트의 Server RPC 요청 → 서버의 _Validate() true → _Implementation() false → 호출 클라이언트 연결 종료 WithValidation 을 지정하면 같은 매개변수를 받는 bool 반환형 _Validate를 구현한다. false는 단순히 동작 한 번을 취소하는 결과가 아니므로 주의한다. 일반적인 게임 조건 불충족을 처리할 때는 이 차이를 고려한다. 서버에서 실행된다고 입력값이 저절로 안전해지는 것은 아니다. 허용 범위와 게임 규칙은 서버 코드에서 검사한다."
+      }
+    ]
+  },
+  {
+    "kind": "note",
+    "topic": "ds",
+    "topics": [
+      "ds"
+    ],
+    "publication": "reference",
+    "status": "개념 참고",
+    "source_url": "data/guides/algorithm-lab.html",
+    "related_ids": [],
+    "id": "algorithm-techniques",
+    "title": "알고리즘 기법 — 탐색·DP·백트래킹",
+    "summary": "선형·이진 탐색, DFS·BFS, 완전 탐색, DP, 그리디, 백트래킹과 재귀의 사용 조건·C++ 예제·복잡도.",
+    "source_name": "algorithm-learning-lab-v3.html",
+    "notice": "아래 코드는 개념을 설명하는 참고 예제다. 실제 제출 코드와 결과는 관련 문제 풀이 기록에서 볼 수 있다.",
+    "references": [
+      {
+        "label": "자료구조 원리",
+        "url": "#material=data-structures"
+      },
+      {
+        "label": "C++ STL 사용법",
+        "url": "#material=stl-foundation"
+      },
+      {
+        "label": "Search Insert Position · 내 풀이",
+        "url": "#algorithm=lc-35"
+      },
+      {
+        "label": "Minesweeper · 내 풀이",
+        "url": "#algorithm=lc-529"
+      },
+      {
+        "label": "Rotting Oranges · 내 풀이",
+        "url": "#algorithm=lc-994"
+      },
+      {
+        "label": "피보나치 수 · 내 풀이",
+        "url": "#algorithm=pg-12945"
+      },
+      {
+        "label": "N-Queens · 내 풀이",
+        "url": "#algorithm=lc-51"
+      },
+      {
+        "label": "Binary Tree Paths · 내 풀이",
+        "url": "#algorithm=lc-257"
+      },
+      {
+        "label": "알고리즘 원본 HTML",
+        "url": "data/guides/algorithm-lab.html"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "DFS·BFS",
+        "section": "깊이 우선 탐색 (DFS)"
+      },
+      {
+        "label": "DP",
+        "section": "동적 계획법 (DP)"
+      },
+      {
+        "label": "백트래킹",
+        "section": "백트래킹 (Backtracking)"
+      }
+    ],
+    "toc_groups": [
+      {
+        "title": "탐색",
+        "start": "선형 탐색 (Linear Search)"
+      },
+      {
+        "title": "문제 해결 전략",
+        "start": "동적 계획법 (DP)"
+      },
+      {
+        "title": "호출 구조",
+        "start": "재귀 함수 (Recursion)"
+      }
+    ],
+    "file": "data/materials/algorithm-techniques.js",
+    "outline": [
+      {
+        "title": "선형 탐색 (Linear Search)",
+        "text": "선형 탐색 (Linear Search) 배열의 각 원소를 앞에서부터 방문하며 조건을 검사합니다. 목표값 이상인 첫 인덱스에 도달하면 반환합니다. 앞에서부터 확인 → 조건 만족 시 반환 → 끝까지 없으면 배열 길이 반환 사용 조건 정렬 여부에 관계없이 처음부터 순서대로 확인 대상이 앞에 있으면 빨리 끝나지만 뒤에 있으면 모두 살펴봄 작은 비정렬 목록에서 ID·이름 검색 정렬된 배열의 첫 조건 충족 위치 확인 C++ 참고 예제 int searchInsert(vector<int>& nums, int target) { for (int i = 0; i < nums.size(); ++i) { if (nums[i] >= target) return i; } return nums.size(); } 비용과 주의사항 구분 비용 조건 최선 O(1) 첫 원소가 조건에 맞는 경우 최악 O(n) 마지막 원소까지 확인 추가 공간 O(1) 인덱스만 유지 여기서는 정렬된 배열의 삽입 위치를 찾는 예시입니다. 일반적인 선형 탐색은 배열 정렬이 필수는 아닙니다."
+      },
+      {
+        "title": "이진 탐색 (Binary Search)",
+        "text": "이진 탐색 (Binary Search) 현재 탐색 범위의 가운데 값을 비교하고, 목표값이 있을 수 없는 절반을 제외합니다. 찾지 못한 경우 lower_bound 형태로 삽입 위치를 얻을 수도 있습니다. 정렬된 배열 → 중간값 비교 → 가능한 절반만 남김 → 삽입 위치 반환 사용 조건 정렬 또는 단조성 조건이 있어야 함 매번 가능한 범위의 절반가량을 버림 정렬된 점수표에서 기준값 이상인 첫 위치 찾기 정렬된 상품 가격 목록에서 검색 범위 좁히기 C++ 참고 예제 int low = 0, high = nums.size(); while (low < high) { int mid = low + (high-low)/2; if (nums[mid] < target) low = mid+1; else high = mid; } return low; // 삽입 위치 비용과 주의사항 구분 비용 조건 일반적인 탐색 O(log n) 범위를 반복해서 절반으로 줄임 추가 공간 O(1) 반복문 구현 기준 사전 정렬 O(n log n) 입력이 정렬돼 있지 않다면 별도 비용 배열이 정렬되어 있어야 합니다. 이 예시는 목표값 이상인 첫 위치를 찾는 lower_bound 방식입니다."
+      },
+      {
+        "title": "깊이 우선 탐색 (DFS)",
+        "text": "깊이 우선 탐색 (DFS) 한 정점을 방문한 뒤 방문하지 않은 인접 정점으로 내려갑니다. 더 갈 곳이 없으면 호출 스택을 따라 돌아옵니다. 방문 표시 → 미방문 이웃으로 재귀 → 갈 곳이 없으면 이전 호출로 반환 사용 조건 현재 갈래를 끝까지 들어간 뒤 돌아옴 그래프의 순환을 만나면 방문 기록이 필요 연결된 섬·영역의 크기 계산 트리 노드를 재귀로 전체 순회 C++ 참고 예제 void dfs(int u) { visited[u] = true; for (int v : graph[u]) { if (!visited[v]) dfs(v); } } 비용과 주의사항 구분 비용 조건 그래프 전체 탐색 O(V+E) 정점 V개·간선 E개 (인접 리스트) 방문 기록 O(V) 방문 배열 재귀 스택 최대 O(V) 최악 깊이 V인 경우 그래프에 순환이 있다면 visited 검사로 무한 재방문을 막아야 합니다. 방문 순서는 인접 정점의 나열 순서에 따라 달라집니다."
+      },
+      {
+        "title": "너비 우선 탐색 (BFS)",
+        "text": "너비 우선 탐색 (BFS) 시작점을 큐에 넣고, 꺼낸 정점에서 새로 발견한 이웃을 큐 뒤에 추가합니다. 선입선출(FIFO)이므로 가까운 단계부터 처리됩니다. 시작점 방문 표시·큐 등록 → 앞에서 꺼냄 → 미방문 이웃 표시·등록 → 반복 사용 조건 큐를 이용해 먼저 발견한 정점부터 처리 간선 비용이 같을 때 단계 수가 최단 거리 격자에서 최소 이동 횟수 구하기 감염·불·물 같은 확산 현상의 단계별 처리 C++ 참고 예제 queue<int> q; q.push(start); visited[start] = true; while (!q.empty()) { int u = q.front(); q.pop(); for (int v : graph[u]) { if (!visited[v]) { visited[v] = true; q.push(v); } } } 비용과 주의사항 구분 비용 조건 그래프 전체 탐색 O(V+E) 정점 V개·간선 E개 (인접 리스트) 큐·방문 기록 O(V) 최악 V개 정점 보관 격자 예제 O(R×C) 행 R·열 C의 각 칸을 최대 한 번 방문 이 예시는 정점을 큐에 넣을 때 방문 표시를 하여 중복 등록을 방지합니다. 최단 거리 성질은 간선 비용이 동일할 때 적용됩니다."
+      },
+      {
+        "title": "완전 탐색 (Brute Force)",
+        "text": "완전 탐색 (Brute Force) 가능한 모든 후보를 차례로 만들어 조건을 검사합니다. 이 예시는 3개 스위치 중 정확히 2개가 켜진 경우를 찾습니다. 후보 생성 → 조건 검사 → 결과 기록 → 다음 후보 사용 조건 가능한 후보를 모두 생성해 검사 정답을 놓치지 않지만 후보 수가 매우 많아질 수 있음 작은 입력에서 정답 기준 구현 만들기 스위치 n개의 모든 ON/OFF 패턴 검사 C++ 참고 예제 for (int mask = 0; mask < (1<<3); ++mask) { int cnt = 0; for (int i = 0; i < 3; ++i) if (mask & (1<<i)) ++cnt; if (cnt == 2) { // 조건 만족 } } 비용과 주의사항 구분 비용 조건 이진 선택 n개 O(n·2ⁿ) 2ⁿ개의 후보마다 n칸 검사 반복 열거의 추가 공간 O(1) 마스크만 유지할 경우 후보 저장 O(2ⁿ) 모든 후보를 보관한다면 별도 비용 후보 수뿐 아니라 후보 하나를 검사하는 비용도 함께 센다. n개의 스위치를 모두 확인하는 아래 방식은 O(n·2ⁿ)이다."
+      },
+      {
+        "title": "동적 계획법 (DP)",
+        "text": "동적 계획법 (DP) 큰 문제의 답이 작은 문제의 답에 의존할 때, 이미 구한 값을 저장해 반복 계산을 줄입니다. 아래는 F(n)=F(n−1)+F(n−2)를 아래에서부터 계산하는 Bottom-Up 방식입니다. 기저값 저장 → 작은 문제부터 계산 → 이전 답 재사용 → 결과 반환 사용 조건 작은 문제의 답을 저장해 반복 계산 감소 메모이제이션(Top-Down) 또는 테이블(Bottom-Up)로 구현 피보나치·계단 오르기 계산 게임 승패·최소 비용·경우의 수 상태 계산 C++ 참고 예제 vector<int> dp(n+1); dp[0] = 0; dp[1] = 1; for (int i = 2; i <= n; ++i) { dp[i] = dp[i-1] + dp[i-2]; } return dp[n]; 비용과 주의사항 구분 비용 조건 피보나치 Bottom-Up O(n) F(0)부터 F(n)까지 계산 테이블 공간 O(n) n+1개 결과 저장 공간 최적화 O(1) 직전 두 값만 필요하다면 가능 문제를 쪼개는 것만으로 DP는 아닙니다. 작은 문제의 정답을 저장해 재사용하는 구조가 중요합니다. 이 코드는 피보나치에 대한 예시입니다. 예제는 n ≥ 1을 전제로 하며, 큰 값에서는 자료형의 범위도 확인해야 한다."
+      },
+      {
+        "title": "그리디 (Greedy)",
+        "text": "그리디 (Greedy) 매 단계에서 현재 기준으로 가장 좋아 보이는 선택을 합니다. 여기서는 4·3·1원 동전으로 목표 금액을 만들 때 가능한 가장 큰 동전을 선택합니다. 현재 최선 선택 → 남은 문제 갱신 → 반복 4·3·1원으로 6원: 4+1+1 (3개) / 최적: 3+3 (2개) 사용 조건 매 순간 가장 유리해 보이는 선택을 즉시 확정 국소 최적이 전체 최적을 보장하는 조건을 검증해야 함 활동 선택(끝나는 시간이 빠른 일정부터) 특정 동전 체계에서 거스름돈 최소 개수 계산 C++ 참고 예제 vector<int> coins = {4,3,1}; for (int c : coins) { while (amount >= c) { amount -= c; chosen.push_back(c); } } 비용과 주의사항 구분 비용 조건 단순 동전 예제 O(k+m) 동전 종류 k와 선택된 동전 수 m 선택 결과 저장 O(m) 선택한 동전을 모두 담을 때 동전 정렬 포함 O(k log k) 필요 시 내림차순 정렬 추가 항상 전체 최적해를 보장하지는 않습니다. 예를 들어 6원에서 그리디는 4+1+1(3개), 최적해는 3+3(2개)입니다. 동전 종류와 구현 방식에 따라 복잡도는 달라집니다."
+      },
+      {
+        "title": "백트래킹 (Backtracking)",
+        "text": "백트래킹 (Backtracking) 가능한 선택을 하나 적용하고 더 깊이 탐색합니다. 조건을 어기거나 탐색을 마치면 선택을 취소하여 다른 후보를 시도합니다. 후보 검사 → 선택 → 다음 단계 재귀 → 선택 취소 → 다음 후보 사용 조건 후보 선택 뒤 재귀 탐색하고 끝나면 원상 복구 가능성이 없는 분기는 더 확장하지 않고 가지치기 N-Queens에서 퀸의 충돌 없는 배치 순열·조합과 제약 충족 문제 풀이 C++ 참고 예제 void solve(int row) { if (row == n) { save(); return; } for (int col = 0; col < n; ++col) { if (!safe(row,col)) continue; place(row,col); solve(row+1); remove(row,col); } } 비용과 주의사항 구분 비용 조건 탐색 시간 문제에 따라 지수·팩토리얼 수준 후보 수와 가지치기에 크게 좌우됨 호출 스택 O(n) 깊이가 n일 때 체스판 저장 O(n²) n×n 보드를 직접 유지한다면 예제의 safe·place·remove·save 함수는 공격 범위 검사, 배치, 복구, 결과 저장을 나타내는 보조 함수다. 시간 복잡도는 문제와 가지치기에 따라 달라진다."
+      },
+      {
+        "title": "재귀 함수 (Recursion)",
+        "text": "재귀 함수 (Recursion) 함수가 자기 자신을 호출하는 방식입니다. 각 호출마다 별도의 실행 문맥이 스택에 쌓이고, 종료 조건에 도달하면 가장 나중에 호출된 함수부터 반환됩니다. fact(3) → fact(2) → fact(1) 6 ← 2 ← 1 사용 조건 자기 자신을 호출하며 문제를 더 작은 입력으로 만듦 종료 조건에 도달하면 호출 역순으로 반환 폴더·트리의 계층 순회 DFS·분할 정복·백트래킹 작성 C++ 참고 예제 int fact(int n) { if (n <= 1) return 1; return n * fact(n-1); } 비용과 주의사항 구분 비용 조건 팩토리얼 예제 시간 O(n) n부터 1까지 한 번씩 호출 팩토리얼 호출 공간 O(n) 호출 스택 깊이 일반 재귀 시간 문제별 상이 중복 호출이 많으면 더 커짐 종료 조건이 없거나 깊이가 너무 깊으면 스택 오버플로가 발생할 수 있습니다. 모든 재귀 알고리즘의 시간 복잡도가 O(n)인 것은 아닙니다."
+      }
+    ]
+  },
+  {
+    "kind": "note",
+    "topic": "ds",
+    "topics": [
+      "ds"
+    ],
+    "publication": "reference",
+    "status": "개념 참고",
+    "source_url": "data/guides/structures-stl-lab.html",
+    "related_ids": [
+      "20260717-001",
+      "20260727-001",
+      "20260728-001"
+    ],
+    "id": "data-structures",
+    "title": "자료구조 원리 — 연결 리스트·트리·힙",
+    "summary": "연속·연결 저장, 노드와 포인터, 이진 트리·BST·힙·해시·그래프의 동작과 탐색.",
+    "source_name": "자료구조.html / data-structures-stl-lab-v3.html",
+    "references": [
+      {
+        "label": "관련 Velog · STL과 vector 기초",
+        "url": "https://velog.io/@jwh4410/7.17"
+      },
+      {
+        "label": "관련 Velog · STL vector와 map 복습",
+        "url": "https://velog.io/@jwh4410/7.27"
+      },
+      {
+        "label": "관련 Velog · map과 auto, range-for",
+        "url": "https://velog.io/@jwh4410/7.28"
+      },
+      {
+        "label": "C++ STL 사용법",
+        "url": "#material=stl-foundation"
+      },
+      {
+        "label": "자료구조·STL 원본 HTML",
+        "url": "data/guides/structures-stl-lab.html"
+      },
+      {
+        "label": "DFS·BFS 등 탐색 기법",
+        "url": "#material=algorithm-techniques"
+      }
+    ],
+    "legacy_sections": {
+      "graph-tree": "그래프 — 정점과 간선"
+    },
+    "quick_links": [
+      {
+        "label": "연결 리스트",
+        "section": "단일 연결 리스트"
+      },
+      {
+        "label": "트리",
+        "section": "트리 — 부모와 자식 관계"
+      },
+      {
+        "label": "힙",
+        "section": "힙"
+      }
+    ],
+    "file": "data/materials/data-structures.js",
+    "outline": [
+      {
+        "title": "자료구조",
+        "text": "자료구조 1. 개념 자료구조는 데이터를 저장, 삽입, 삭제, 접근, 탐색 등 효율적으로 관리하기 위한 방법이다."
+      },
+      {
+        "title": "메모리 — 연속 저장과 연결 저장",
+        "text": "메모리 — 연속 저장과 연결 저장 1. 연속적인 저장 데이터를 서로 붙어 있는 연속된 메모리 공간에 저장한다. [10][20][30][40] 예: 배열, vector 2. 불연속적인 저장 데이터가 메모리상에서 서로 붙어 있지 않아도 되며, 노드와 포인터 등을 이용해 연결한다. [10] → [20] → [30] 예: list , 연결 기반 Tree 연속적인 저장과 인덱스 접근 가능 여부는 같은 개념이 아니다. 저장 방식과 접근 방식을 구분해서 생각한다."
+      },
+      {
+        "title": "배열과 연속 저장",
+        "text": "배열과 연속 저장 원소가 연속된 주소에 놓입니다. 중간 삽입은 뒤 원소들을 옮겨야 합니다. int arr[8] = {4, 8, 12, 16}; int n = 4; // 인덱스 1에 값 7 삽입 for (int i = n; i > 1; --i) { arr[i] = arr[i - 1]; } arr[1] = 7; ++n; 원시 배열은 크기가 고정돼 있어 여유 공간을 미리 확보해야 합니다."
+      },
+      {
+        "title": "단일 연결 리스트",
+        "text": "단일 연결 리스트 각 노드가 값과 다음 노드의 주소(next)를 가집니다. prev → right added.next = right prev.next = added prev → added → right struct Node { int value; Node* next; }; // prev 뒤에 새 노드 삽입 Node* added = new Node{7, nullptr}; added->next = prev->next; prev->next = added; 노드 삽입은 삽입 직전 노드의 포인터를 알고 있을 때 O(1)입니다. 위치 탐색 비용은 별도입니다."
+      },
+      {
+        "title": "이중 연결 리스트",
+        "text": "이중 연결 리스트 각 노드가 이전(prev)과 다음(next) 노드를 가리킵니다. left ⇄ right added.prev = left / added.next = right left.next = added / right.prev = added left ⇄ added ⇄ right struct Node { int value; Node* prev; Node* next; }; // left와 right 사이 새 노드 연결 added->prev = left; added->next = right; left->next = added; right->prev = added; 양방향 이동이 가능하지만 노드마다 포인터 두 개가 필요합니다."
+      },
+      {
+        "title": "트리 — 부모와 자식 관계",
+        "text": "트리 — 부모와 자식 관계 1. 개념 부모-자식 관계를 가지는 계층적인 자료구조이다. [1] Root / \\ [2] [3] / [4] Leaf 2. 용어 용어 의미 Root 가장 위의 노드 Parent 부모 노드 Child 자식 노드 Leaf 자식이 없는 노드 Edge 노드와 노드를 연결하는 간선 3. 종류 Binary Tree Binary Search Tree Heap"
+      },
+      {
+        "title": "이진 트리",
+        "text": "이진 트리 각 노드가 최대 두 자식을 가집니다. 이진 트리 자체가 자동으로 정렬되는 것은 아닙니다. void preorder(TreeNode* root) { if (!root) return; visit(root->val); // 루트 preorder(root->left); // 왼쪽 preorder(root->right); // 오른쪽 } 이진 트리의 중위 순회가 언제나 정렬 결과를 만드는 것은 아닙니다. BST일 때 가능합니다."
+      },
+      {
+        "title": "이진 탐색 트리",
+        "text": "이진 탐색 트리 각 노드의 왼쪽에는 작은 값, 오른쪽에는 큰 값이 위치하는 트리입니다. 현재 노드와 비교 → 작으면 왼쪽 / 크면 오른쪽 → 찾거나 nullptr에서 종료 Node* find(Node* root, int target) { while (root) { if (root->val == target) return root; if (target val) root = root->left; else root = root->right; } return nullptr; } 균형이 잡힌 BST는 탐색이 O(log n)이지만, 한쪽으로 치우치면 O(n)까지 느려질 수 있습니다. map은 순서를 유지하고 로그 시간 연산을 보장합니다."
+      },
+      {
+        "title": "힙",
+        "text": "힙 완전 이진 트리이며 부모·자식 간의 우선순위 관계를 유지합니다. 배열 끝에 추가 → 부모와 비교 → 우선순위가 높으면 교환 → 위로 반복 // 최대 힙 삽입의 핵심 아이디어 heap.push_back(value); int i = heap.size() - 1; while (i > 0 && heap[(i - 1) / 2] < heap[i]) { swap(heap[(i - 1) / 2], heap[i]); i = (i - 1) / 2; } 힙은 전체가 정렬된 배열이 아닙니다. 최대 힙은 가장 큰 원소가 루트에 있다는 규칙만 보장합니다."
+      },
+      {
+        "title": "해시 테이블",
+        "text": "해시 테이블 키를 해시 함수에 넣어 버킷 위치를 계산합니다. 충돌 처리 방법도 중요합니다. // 구조를 이해하기 위한 단순 버킷 예제 int bucket(int key) { return key % 5; } // 같은 버킷의 원소는 연결해 충돌 처리 // 실무에서는 unordered_map 사용 예제는 같은 버킷의 원소를 연결해 충돌을 처리합니다. 실제 STL 해시 함수·버킷 수·구현은 달라질 수 있습니다."
+      },
+      {
+        "title": "그래프 — 정점과 간선",
+        "text": "그래프 — 정점과 간선 DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리 무방향 간선 연결 vector<vector<int>> graph(5); // 무방향 그래프: 양쪽 모두 등록 graph[0].push_back(1); graph[1].push_back(0); 그래프는 자료구조이며 DFS·BFS는 그래프를 탐색하는 알고리즘입니다."
       }
     ]
   }

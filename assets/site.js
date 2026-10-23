@@ -51,7 +51,7 @@
     const content=['#sitePages','#articlePage','#libraryPage','#algorithmPage'].map($).find(el=>!el.hidden);
     if(!content)return;
     const pageTitle=content.querySelector('h1,#detailTitle');if(pageTitle)document.title=pageTitle.textContent+' · 개발·학습 기록';
-    const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.material-section>h2,.section>h3,.related>h3')];
+    const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.material-section>h2,.material-section>.vector-demo-heading>h2,.section>h3,.related>h3')];
     if(headings.length<3)return;
     toc.hidden=false;toc.open=!matchMedia('(max-width:800px)').matches;
     const targets=headings.map((h,i)=>{h.id=content.id+'-heading-'+i;return h;});

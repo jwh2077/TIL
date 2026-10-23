@@ -3,7 +3,7 @@ window.TIL_FILES["data/materials/unreal-build-flow.js"] = [
   {
     "id": "unreal-build-flow",
     "title": "C++·Unreal 빌드 과정",
-    "summary": "cpp와 헤더가 컴파일·링크되는 순서, UBT·UHT의 역할, IntelliSense와 실제 빌드 결과의 차이.",
+    "summary": "cpp와 헤더가 컴파일·링크되는 순서, UBT·UHT의 역할, IntelliSense와 실제 빌드 결과의 차이. Development·DebugGame·Shipping과 Editor 대상 구분.",
     "kind": "note",
     "topic": "unreal",
     "topics": [
@@ -11,7 +11,7 @@ window.TIL_FILES["data/materials/unreal-build-flow.js"] = [
     ],
     "publication": "reference",
     "status": "빌드 과정 참고 · 2026-10-02",
-    "source_name": "10.02.md · 로컬 보관",
+    "source_name": "10.02.md · 로컬 보관 / 10-19.txt",
     "source_url": "",
     "notice": "기본 빌드 흐름을 정리한 자료다. IntelliSense 표시와 빌드 결과가 달랐던 사례는 관련 학습 기록에 남겼다.",
     "sections": [
@@ -35,10 +35,24 @@ window.TIL_FILES["data/materials/unreal-build-flow.js"] = [
         "title": "IntelliSense와 실제 빌드 오류",
         "html": "<table><thead><tr><th scope=\"col\">구분</th><th scope=\"col\">무엇을 보는가</th></tr></thead><tbody><tr><td>IntelliSense 빨간 줄</td><td>Visual Studio의 코드 분석 결과</td></tr><tr><td>실제 빌드 결과</td><td>UBT가 구성한 환경으로 컴파일한 결과</td></tr></tbody></table>",
         "text": "검색 경로 정보가 서로 다르면 빨간 줄이 있어도 빌드는 성공할 수 있다. 빨간 줄만으로 컴파일 실패를 판단하지 않고 실제 빌드 결과를 함께 확인한다."
+      },
+      {
+        "title": "빌드 구성 — Development·DebugGame·Shipping",
+        "items": [
+          "Development: 개발 중 성능과 반복 작업에 맞춘 구성이다. 시간이 많이 드는 일부 최적화를 제외한 최적화를 사용한다.",
+          "DebugGame: 게임 코드를 최적화하지 않아 게임 모듈을 디버깅하기 편한 구성이다.",
+          "Shipping: 배포와 성능을 위한 구성이다. 콘솔 명령, 통계, 프로파일링 도구 등을 제한한다."
+        ],
+        "text": "구성 이름만으로 디버깅 가능 여부를 단정하지 않는다. Development와 Shipping도 디버그 심볼이 있으면 디버깅할 수 있지만, 최적화 때문에 코드 흐름을 따라가기 어려울 수 있다."
+      },
+      {
+        "title": "Editor — 빌드 구성과 실행 대상 구분",
+        "text": "Development와 DebugGame은 빌드 구성이고, Editor는 빌드 대상이다. Development Editor는 Development 구성으로 에디터에서 사용할 코드를 빌드한다. DebugGame Editor는 게임 코드를 디버깅하기 위한 구성과 Editor 대상을 조합한 이름이다."
       }
     ],
     "related_ids": [
-      "20261002-chatx"
+      "20261002-chatx",
+      "20261019-study"
     ],
     "references": [
       {
@@ -52,6 +66,10 @@ window.TIL_FILES["data/materials/unreal-build-flow.js"] = [
       {
         "label": "Unreal C++ AItem 헤더 구조",
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260810-001"
+      },
+      {
+        "label": "Unreal 공식 문서 · 빌드 구성",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/build-configurations-reference-for-unreal-engine?application_version=5.6"
       }
     ],
     "quick_links": [

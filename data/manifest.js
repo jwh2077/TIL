@@ -1248,6 +1248,25 @@ window.TIL_INDEX = {
       "summary": "PlayerController별 채팅 전달에서 GameMode의 숫자 야구 판정으로 연결하고, 플레이어 이름·시도 횟수·알림 문구를 복제하는 코드를 넣었다.",
       "month": "2026-10",
       "file": "data/2026/10/2026-10-12.js"
+    },
+    {
+      "id": "20261019-study",
+      "date": "2026-10-19",
+      "date_end": null,
+      "date_label": "2026-10-19",
+      "title": "Unreal · Config와 빌드 구성 살펴보기",
+      "summary": "Base·Default와 플랫폼별 설정을 보고, Development·DebugGame·Shipping 및 Editor가 붙는 경우를 나눠 적었다. 머티리얼과 HLSL도 참고로 메모했다.",
+      "project": "개인 공부",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "Config",
+        "빌드",
+        "머티리얼"
+      ],
+      "activity": "study",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-19.js"
     }
   ]
 };

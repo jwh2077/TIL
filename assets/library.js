@@ -121,6 +121,11 @@
       const r=(await load(meta.file)).find(r=>r.id===id);if(stamp!==token||!active())return;if(!r)throw new Error('자료를 찾을 수 없습니다.');
       $('#libraryPage').innerHTML=`<button type="button" class="related-button" data-library-back>← 자료 목록으로</button><header><div class="record-meta">${esc(classification(r))}</div><h1 id="materialTitle" style="font-size:clamp(1.7rem,4vw,2.8rem);line-height:1.3">${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>`<section id="material-section-${i}" class="material-section"><h2>${esc(s.title)}</h2>${s.html||''}${s.text?`<p style="white-space:pre-line">${esc(s.text)}</p>`:''}${s.code?`<pre><code>${esc(s.code)}</code></pre>`:''}${s.items?`<ul>${s.items.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:''}</section>`).join('')}${referenceGroups(r)}<section class="related"><h3>관련 학습 기록</h3><div class="related-list">${(r.related_ids||[]).map(id=>window.TIL_INDEX.records.find(x=>x.id===id)).filter(Boolean).slice(0,6).map(x=>`<a class="related-button" href="#record=${encodeURIComponent(x.id)}">${esc(x.title)}</a>`).join('')}</div></section>`;
       $('#materialSections').innerHTML=r.sections.map((s,i)=>`<button type="button" class="project" data-material-section="material-section-${i}">${esc(s.title)}</button>`).join('');
+      const vectorIndex=r.id==='stl-foundation'?r.sections.findIndex(s=>s.title.startsWith('vector —')):-1;
+      window.TIL_VECTOR_DEMO?.mount(vectorIndex>=0?document.getElementById('material-section-'+vectorIndex):null);
+      const binaryIndex=r.id==='algorithm-techniques'?r.sections.findIndex(s=>s.title==='이진 탐색 (Binary Search)'):-1;
+      window.TIL_BINARY_DEMO?.mount(binaryIndex>=0?document.getElementById('material-section-'+binaryIndex):null);
+      window.TIL_LEARNING_DEMOS?.mount(r);
       window.TIL_SITE?.articleReady(); window.scrollTo({top:0});$('#materialTitle').setAttribute('tabindex','-1');$('#materialTitle').focus();
       const destination=requestedSection; requestedSection=null;
       if(destination?.id===id) queueMicrotask(()=>{const section=document.getElementById('material-section-'+destination.index);if(section){section.setAttribute('tabindex','-1');section.scrollIntoView();section.focus({preventScroll:true});}});

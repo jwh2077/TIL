@@ -39,9 +39,11 @@ window.TIL_LIBRARY_NAVIGATION = [
     "topics": [
       {
         "id": "notes",
-        "title": "종합 정리",
+        "title": "자료구조·STL·알고리즘",
         "documents": [
-          "stl-foundation"
+          "data-structures",
+          "stl-foundation",
+          "algorithm-techniques"
         ]
       }
     ]
