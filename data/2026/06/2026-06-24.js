@@ -40,7 +40,8 @@ window.TIL_FILES["data/2026/06/2026-06-24.js"] = [
         "caption": "문 상호작용을 만들던 레벨 화면"
       }
     ],
-    "velog": "https://velog.io/@jwh4410/6.24",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.24",
     "repository": null,
     "source": [
       "Velog"

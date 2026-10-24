@@ -36,7 +36,8 @@ window.TIL_FILES["data/2026/07/2026-07-03.js"] = [
         "caption": "남은 시간을 표시하고 시간·체력 조건에 따라 Game Over를 호출한 부분"
       }
     ],
-    "velog": "https://velog.io/@jwh4410/7.2",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.2",
     "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
       "Velog",
@@ -90,7 +91,8 @@ window.TIL_FILES["data/2026/07/2026-07-03.js"] = [
         "caption": "아이템을 생성하도록 만든 Item Spawner"
       }
     ],
-    "velog": "https://velog.io/@jwh4410/7.3",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.3",
     "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
       "Velog",

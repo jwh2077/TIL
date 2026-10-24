@@ -23,7 +23,8 @@ window.TIL_FILES["data/2026/06/2026-06-22.js"] = [
       "while",
       "break"
     ],
-    "velog": "https://velog.io/@jwh4410/6.22",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.22",
     "repository": null,
     "source": [
       "Velog 학습 기록",

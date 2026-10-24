@@ -24,7 +24,8 @@ window.TIL_FILES["data/2026/07/2026-07-08.js"] = [
       "포인터",
       "참조"
     ],
-    "velog": "https://velog.io/@jwh4410/7.8",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.8",
     "repository": null,
     "source": [
       "Velog"

@@ -3,28 +3,26 @@
   const materials = window.TIL_LIBRARY_INDEX || [];
   const $ = s => document.querySelector(s);
   const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const kinds = {file:'문서 원본',velog:'Velog 원본',note:'메모 원본'};
   const topics = {cpp:'C / C++',unreal:'Unreal',ds:'자료구조',stl:'STL',oop:'객체지향 · 설계',memory:'포인터 · 메모리'};
   const storageKey='til-library-preferences';
   let preferences={};
   try {preferences=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};} catch {}
   const pins=new Set((Array.isArray(preferences.pins)?preferences.pins:[]).filter(id=>materials.some(r=>r.id===id)));
-  const state = {kind:'all',fields:[],publication:'all',query:'',tags:[],sort:'topic',subject:preferences.subject||'unreal',page:0};
+  const state = {fields:[],publication:'all',query:'',tags:[],sort:'topic',subject:preferences.subject||'unreal',page:0};
   function savePreferences(){try{localStorage.setItem(storageKey,JSON.stringify({pins:[...pins],subject:state.subject}));}catch{}}
   const fields = r => r.topics || [r.topic];
   const classification = r => fields(r).map(id=>topics[id]||id).join(' · ');
   const pending=new Map(); let token = 0, requestedSection = null;
   $('aside .brand').insertAdjacentHTML('afterend', `<div class="side-title">보기 방식</div><div id="archiveModes" class="project-list"><a class="project" href="#list">날짜별 기록</a><a class="project" href="#library">정리 자료</a></div>`);
-  $('#sidebarFilters > summary').insertAdjacentHTML('afterend', `<div id="libraryNav" hidden><div class="side-title">원본 종류</div><div id="materialKinds" class="project-list"></div><div class="side-title">학습 분야</div><div id="materialTopics" class="project-list"></div><div id="materialOutline" hidden><div class="side-title">자료 목차</div><div id="materialSections" class="project-list"></div><div class="side-title">같은 분야 자료</div><div id="materialRelated" class="project-list"></div></div></div>`);
+  $('#sidebarFilters > summary').insertAdjacentHTML('afterend', `<div id="libraryNav" hidden><div class="side-title">학습 분야</div><div id="materialTopics" class="project-list"></div><div id="materialOutline" hidden><div class="side-title">자료 목차</div><div id="materialSections" class="project-list"></div><div class="side-title">같은 분야 자료</div><div id="materialRelated" class="project-list"></div></div></div>`);
   $('main').insertAdjacentHTML('beforeend', '<div id="libraryPage" hidden></div>');
   $('#materialTopics').insertAdjacentHTML('beforebegin','<p class="library-notice">복수 선택 가능 · 선택한 분야에 모두 해당하는 자료</p>');
-  $('#materialKinds').insertAdjacentHTML('afterend','<div class="side-title">글 상태</div><div id="publicationFilters" class="project-list"></div>');
+  $('#materialTopics').insertAdjacentHTML('afterend','<div class="side-title">글 상태</div><div id="publicationFilters" class="project-list"></div>');
   const style = document.createElement('style');
   style.textContent = '#archiveModes a {display:block;text-decoration:none} #archiveModes a[aria-current="page"] {background:var(--soft);color:var(--blue);font-weight:800} #libraryPage {max-width:920px} .library-search {width:min(100%,480px);padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;margin:20px 0 5px} .library-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:15px;margin-top:22px} .library-grid .record {margin:0} .library-grid .record:before {display:none} .material-section {margin-top:30px;scroll-margin-top:24px} .material-section h2 {font-size:1.3rem} .material-section h3 {font-size:1rem} .material-section pre {overflow:auto;padding:16px;background:#edf2f8;border-radius:8px;white-space:pre;font-family:Consolas,monospace;font-size:.87rem} .material-section code {font-family:Consolas,monospace;background:#edf2f8} .material-section table {display:block;overflow:auto;max-width:100%;border-collapse:collapse;font-size:.88rem} .material-section td,.material-section th {border:1px solid var(--line);padding:8px 10px;text-align:left} .material-section blockquote {border-left:3px solid var(--blue);padding:10px 16px;margin:16px 0;background:var(--soft)} .library-notice {color:var(--muted);font-size:.86rem} .material-links {display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}';
   document.head.append(style);
   function active() { return location.hash === '#library' || location.hash.startsWith('#material='); }
   function controls() {
-    $('#materialKinds').innerHTML = [['all','모든 자료'],...Object.entries(kinds)].map(([id,label])=>`<button type="button" class="project" data-kind="${id}" aria-pressed="${state.kind===id}">${label}<span class="tab-count">${materials.filter(r=>id==='all'||r.kind===id).length}</span></button>`).join('');
     $('#materialTopics').innerHTML = [['all','모든 분야'],...Object.entries(topics).filter(([id])=>materials.some(r=>fields(r).includes(id)))].map(([id,label])=>`<button type="button" class="project" data-field="${id}" aria-pressed="${id==='all'?state.fields.length===0:state.fields.includes(id)}">${label}</button>`).join('');
     $('#publicationFilters').innerHTML=[['all','모든 상태'],['reference','기존 정리'],['draft','게시 준비 초안']].map(([id,label])=>`<button type="button" class="project" data-publication="${id}" aria-pressed="${state.publication===id}">${label}</button>`).join('');
   }
@@ -46,7 +44,7 @@
   const relevance = (r, query) => !query ? 0 : contains(r.title,query) ? 3 : (r.outline||[]).some(s=>contains(s.title,query)) ? 2 : contains(r.summary,query) ? 1 : 0;
   function results() {
     const query = state.query.trim().toLocaleLowerCase();
-    return materials.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'material'))&&(state.kind==='all'||r.kind===state.kind)&&state.fields.every(id=>fields(r).includes(id))&&(state.publication==='all'||r.publication===state.publication)&&matchesQuery(r,query)).sort((a,b)=>{const ranked=query&&['topic','relevance'].includes(state.sort);return (ranked?relevance(b,query)-relevance(a,query):0)||(state.sort==='desc'?-1:1)*a.title.localeCompare(b.title,'ko');});
+    return materials.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'material'))&&state.fields.every(id=>fields(r).includes(id))&&(state.publication==='all'||r.publication===state.publication)&&matchesQuery(r,query)).sort((a,b)=>{const ranked=query&&['topic','relevance'].includes(state.sort);return (ranked?relevance(b,query)-relevance(a,query):0)||(state.sort==='desc'?-1:1)*a.title.localeCompare(b.title,'ko');});
   }
   function list() {
     controls(); $('#materialOutline').hidden = true;
@@ -87,8 +85,7 @@
   }
   function referenceGroups(r) {
     const internal=[], external=[], seen=new Set();
-    if(r.kind==='file' && r.source_url==='data/guides/stl-reference.html') external.push('<a class="source" href="data/guides/stl-reference.html">원본 자료구조 문서 보기 →</a>');
-    const refs=[...(r.references||[]),...(r.kind==='velog'?[{label:'Velog 원문 보기',url:r.source_url}]:[])];
+    const refs=window.TIL_LINKS.references(r);
     for(const ref of refs) {
       if(!ref.url) continue;
       const target=window.TIL_LINKS.resolve(ref.url);
@@ -153,10 +150,9 @@
     if(page){state.page=Number(page.dataset.libraryPage);cards();$('#libraryCount').scrollIntoView({block:'nearest'});}
   });
   $('#libraryNav').addEventListener('click',e=>{
-    const kind=e.target.closest('[data-kind]'),topic=e.target.closest('[data-field]'),item=e.target.closest('[data-material]'),section=e.target.closest('[data-material-section]');
+    const topic=e.target.closest('[data-field]'),item=e.target.closest('[data-material]'),section=e.target.closest('[data-material-section]');
     const publication=e.target.closest('[data-publication]');
-    if(kind||topic||publication) {
-      if(kind)state.kind=kind.dataset.kind;
+    if(topic||publication) {
       if(publication)state.publication=publication.dataset.publication;
       if(topic) {const id=topic.dataset.field;if(id==='all')state.fields=[];else state.fields=state.fields.includes(id)?state.fields.filter(x=>x!==id):[...state.fields,id];}
       if(location.hash==='#library')list();else location.hash='library';

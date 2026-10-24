@@ -19,7 +19,8 @@ window.TIL_FILES["data/2026/06/2026-06-15.js"] = [
       "Collision",
       "Blueprint"
     ],
-    "velog": "https://velog.io/@jwh4410/6.15",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.15",
     "repository": null,
     "source": [
       "학습 기록",

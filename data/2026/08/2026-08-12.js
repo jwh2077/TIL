@@ -17,7 +17,8 @@ window.TIL_FILES["data/2026/08/2026-08-12.js"] = [
     "summary": "Item이 회전하면서 위아래로 움직이게 했다.",
     "study_content": "Item이 회전하면서 위아래로 움직이게 했다. Tick에서 속도에 DeltaTime을 곱하고 AddActorWorldOffset과 AddActorLocalRotation으로 움직였다.",
     "learning_process": "여러 Item을 배치했는데 플레이하면 같은 위치로 모였다. BeginPlay에서 위치를 강제로 지정한 부분이 원인이어서 배치한 위치를 유지하도록 이 코드를 빼는 방향으로 정리했다. UPROPERTY 옵션도 같이 봤다.",
-    "velog": "https://velog.io/@jwh4410/Unreal-C-jw6fy4zd",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/Unreal-C-jw6fy4zd",
     "source": [
       "Velog: Unreal C++ Item 액터 이동과 매크로 정리 (2026-08-12)"
     ],

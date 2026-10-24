@@ -21,7 +21,8 @@ window.TIL_FILES["data/2026/06/2026-06-16.js"] = [
       "Event",
       "Platform"
     ],
-    "velog": "https://velog.io/@jwh4410/6.16",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.16",
     "repository": null,
     "source": [
       "학습 기록",

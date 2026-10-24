@@ -23,7 +23,8 @@ window.TIL_FILES["data/2026/07/2026-07-28.js"] = [
       "range-for",
       "pair"
     ],
-    "velog": "https://velog.io/@jwh4410/7.28",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.28",
     "repository": "https://github.com/jwh2077/text-rpg",
     "source": [
       "Velog",

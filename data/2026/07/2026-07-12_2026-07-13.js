@@ -22,7 +22,8 @@ window.TIL_FILES["data/2026/07/2026-07-12_2026-07-13.js"] = [
       "implicit conversion",
       "type promotion"
     ],
-    "velog": "https://velog.io/@jwh4410/7.13",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.13",
     "repository": "https://github.com/jwh2077/text-rpg",
     "source": [
       "Velog",

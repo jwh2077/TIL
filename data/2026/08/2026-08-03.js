@@ -26,7 +26,6 @@ window.TIL_FILES["data/2026/08/2026-08-03.js"] = [
       "unique_ptr",
       "리팩터링"
     ],
-    "velog": null,
     "repository": "https://github.com/raimei2000/Ch2_TextRPG_Group5",
     "source": [
       "팀 TextRPG 코드",

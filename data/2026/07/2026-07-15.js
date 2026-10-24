@@ -24,7 +24,8 @@ window.TIL_FILES["data/2026/07/2026-07-15.js"] = [
       "부모 포인터",
       "파생 객체"
     ],
-    "velog": "https://velog.io/@jwh4410/7.15",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.15",
     "repository": "https://github.com/jwh2077/text-rpg",
     "source": [
       "Velog",

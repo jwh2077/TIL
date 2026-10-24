@@ -21,7 +21,8 @@ window.TIL_FILES["data/2026/06/2026-06-23.js"] = [
       "Overlap",
       "Door"
     ],
-    "velog": "https://velog.io/@jwh4410/6.23",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.23",
     "repository": null,
     "source": [
       "Velog 학습 기록",

@@ -25,7 +25,8 @@ window.TIL_FILES["data/2026/07/2026-07-06.js"] = [
       "cout",
       "getline"
     ],
-    "velog": "https://velog.io/@jwh4410/7.6",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.6",
     "repository": null,
     "source": [
       "Velog"

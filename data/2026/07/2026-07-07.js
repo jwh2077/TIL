@@ -23,7 +23,8 @@ window.TIL_FILES["data/2026/07/2026-07-07.js"] = [
       "포인터",
       "입력 검증"
     ],
-    "velog": "https://velog.io/@jwh4410/7.7",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.7",
     "repository": null,
     "source": [
       "Velog"

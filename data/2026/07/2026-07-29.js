@@ -24,7 +24,8 @@ window.TIL_FILES["data/2026/07/2026-07-29.js"] = [
       "Logger",
       "클래스 설계"
     ],
-    "velog": "https://velog.io/@jwh4410/8.5",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/8.5",
     "repository": "https://github.com/raimei2000/Ch2_TextRPG_Group5",
     "source": [
       "팀 TextRPG 프로젝트",

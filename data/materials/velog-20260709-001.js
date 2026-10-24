@@ -4,7 +4,7 @@ window.TIL_FILES["data/materials/velog-20260709-001.js"] = [
     "id": "velog-20260709-001",
     "title": "클래스와 객체지향 기초",
     "summary": "멤버 변수와 함수, 접근 제어, getter/setter와 생성자.",
-    "kind": "velog",
+    "kind": "note",
     "topic": "oop",
     "source_name": "Velog 원문",
     "source_url": "https://velog.io/@jwh4410/7.9",

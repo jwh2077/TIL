@@ -4,7 +4,7 @@ window.TIL_FILES["data/materials/velog-20260712-001.js"] = [
     "id": "velog-20260712-001",
     "title": "함수 오버로딩과 타입 변환",
     "summary": "함수 오버로딩 조건과 승격·표준 변환 예시.",
-    "kind": "velog",
+    "kind": "note",
     "topic": "oop",
     "source_name": "Velog 원문",
     "source_url": "https://velog.io/@jwh4410/7.13",

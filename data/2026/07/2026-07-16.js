@@ -23,7 +23,8 @@ window.TIL_FILES["data/2026/07/2026-07-16.js"] = [
       "auto",
       "generic programming"
     ],
-    "velog": "https://velog.io/@jwh4410/7.16-gndjynps",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.16-gndjynps",
     "repository": "https://github.com/jwh2077/text-rpg",
     "source": [
       "Velog",

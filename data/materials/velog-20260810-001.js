@@ -4,7 +4,7 @@ window.TIL_FILES["data/materials/velog-20260810-001.js"] = [
     "id": "velog-20260810-001",
     "title": "Unreal Actor — 헤더 선언·컴포넌트 연결",
     "summary": "Item.h에 선언한 변수와 함수, SceneRoot와 메시 연결.",
-    "kind": "velog",
+    "kind": "note",
     "topic": "unreal",
     "source_name": "Velog 원문",
     "source_url": "https://velog.io/@jwh4410/Unreal-C",

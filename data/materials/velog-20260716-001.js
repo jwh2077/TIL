@@ -4,7 +4,7 @@ window.TIL_FILES["data/materials/velog-20260716-001.js"] = [
     "id": "velog-20260716-001",
     "title": "함수 템플릿과 템플릿 클래스",
     "summary": "T로 타입을 바꿔 쓰는 함수와 Array 클래스 예제.",
-    "kind": "velog",
+    "kind": "note",
     "topic": "oop",
     "source_name": "Velog 원문",
     "source_url": "https://velog.io/@jwh4410/7.16-gndjynps",

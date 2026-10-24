@@ -21,7 +21,8 @@ window.TIL_FILES["data/2026/07/2026-07-09.js"] = [
       "setter",
       "생성자"
     ],
-    "velog": "https://velog.io/@jwh4410/7.9",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.9",
     "repository": null,
     "source": [
       "Velog"

@@ -16,7 +16,8 @@ window.TIL_FILES["data/2026/06/2026-06-17.js"] = [
       "게임 분석",
       "Actor"
     ],
-    "velog": "https://velog.io/@jwh4410/6.17",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.17",
     "repository": null,
     "source": [
       "학습 기록",

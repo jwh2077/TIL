@@ -27,7 +27,8 @@ window.TIL_FILES["data/2026/08/2026-08-05.js"] = [
       "Code Review",
       "Scrum"
     ],
-    "velog": "https://velog.io/@jwh4410/8.5",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/8.5",
     "repository": "https://github.com/raimei2000/Ch2_TextRPG_Group5",
     "source": [
       "팀 TextRPG 프로젝트",

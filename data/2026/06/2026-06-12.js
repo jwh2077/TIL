@@ -18,7 +18,8 @@ window.TIL_FILES["data/2026/06/2026-06-12.js"] = [
       "데이터",
       "자료형"
     ],
-    "velog": "https://velog.io/@jwh4410/6.12",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.12",
     "repository": null,
     "source": [
       "학습 기록",

@@ -2,6 +2,10 @@
   'use strict';
   // Saved public-site URLs should keep readers in the current preview or site.
   function resolve(value) {
+    // Published source copies also work when index.html is opened as a local file.
+    if (typeof value === 'string' && /^data\/guides\/[a-zA-Z0-9_-]+\.html$/.test(value)) {
+      return { href: value, internal: false };
+    }
     try {
       const url = new URL(value, location.href);
       const base = new URL(location.href);
@@ -16,5 +20,9 @@
       return { href: url.href, internal: false };
     } catch { return null; }
   }
-  window.TIL_LINKS = { resolve };
+  function references(record) {
+    return [...(record.references || []), ...(record.source_url
+      ? [{ label: record.source_name || '원본 자료', url: record.source_url }] : [])];
+  }
+  window.TIL_LINKS = { resolve, references };
 })();

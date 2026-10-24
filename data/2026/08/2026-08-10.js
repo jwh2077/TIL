@@ -16,7 +16,8 @@ window.TIL_FILES["data/2026/08/2026-08-10.js"] = [
     "summary": "AActor를 상속받는 AItem 클래스를 만들고 Item.h에 변수와 함수를 선언했다.",
     "study_content": "AActor를 상속받는 AItem 클래스를 만들고 Item.h에 변수와 함수를 선언했다. SceneRoot를 기준점으로 두고 StaticMeshComp를 연결했다.",
     "learning_process": "UCLASS, GENERATED_BODY와 include를 살펴봤다. BeginPlay 같은 함수는 헤더에 선언하고 cpp에서 내용을 작성한다.",
-    "velog": "https://velog.io/@jwh4410/Unreal-C",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/Unreal-C",
     "source": [
       "Velog: Unreal C++ (2026-08-10)"
     ],

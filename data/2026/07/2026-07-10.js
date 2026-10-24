@@ -25,7 +25,8 @@ window.TIL_FILES["data/2026/07/2026-07-10.js"] = [
       "얕은 복사",
       "깊은 복사"
     ],
-    "velog": "https://velog.io/@jwh4410/7.10",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.10",
     "repository": null,
     "source": [
       "Velog"

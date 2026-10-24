@@ -4,7 +4,7 @@ window.TIL_FILES["data/materials/velog-20260710-001.js"] = [
     "id": "velog-20260710-001",
     "title": "C++ 동적 메모리 — 할당·해제·복사",
     "summary": "new/delete, 댕글링 포인터와 메모리 누수, 얕은 복사와 깊은 복사.",
-    "kind": "velog",
+    "kind": "note",
     "topic": "memory",
     "source_name": "Velog 원문",
     "source_url": "https://velog.io/@jwh4410/7.10",

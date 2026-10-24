@@ -44,7 +44,8 @@ window.TIL_FILES["data/2026/06/2026-06-30.js"] = [
         "caption": "충돌 지점에서 피격 효과를 재생하도록 연결한 부분"
       }
     ],
-    "velog": "https://velog.io/@jwh4410/6.30",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.30",
     "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
       "Velog",

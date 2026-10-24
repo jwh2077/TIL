@@ -42,7 +42,8 @@ window.TIL_FILES["data/2026/07/2026-07-01.js"] = [
         "caption": "적이 이동할 수 있는 범위를 잡기 위해 추가한 Nav Mesh Bounds Volume"
       }
     ],
-    "velog": "https://velog.io/@jwh4410/7.1",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/7.1",
     "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
       "Velog",

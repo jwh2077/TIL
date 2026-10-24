@@ -47,7 +47,8 @@ window.TIL_FILES["data/2026/06/2026-06-29.js"] = [
         "caption": "카메라가 Pawn의 회전을 따르도록 켠 Use Pawn Control Rotation"
       }
     ],
-    "velog": "https://velog.io/@jwh4410/6.29",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.29",
     "repository": "https://github.com/jwh2077/FirstFPS",
     "source": [
       "Velog",

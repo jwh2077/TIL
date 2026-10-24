@@ -34,7 +34,8 @@ window.TIL_FILES["data/2026/06/2026-06-26.js"] = [
         "caption": "캐릭터의 메시와 카메라, 충돌 캡슐을 배치한 화면"
       }
     ],
-    "velog": "https://velog.io/@jwh4410/6.26",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/6.26",
     "repository": null,
     "source": [
       "Velog"

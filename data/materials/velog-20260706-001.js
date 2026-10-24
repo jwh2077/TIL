@@ -4,7 +4,7 @@ window.TIL_FILES["data/materials/velog-20260706-001.js"] = [
     "id": "velog-20260706-001",
     "title": "C 배열과 포인터",
     "summary": "배열 인덱스, 변수의 값과 주소, 포인터로 값 읽기.",
-    "kind": "velog",
+    "kind": "note",
     "topic": "memory",
     "source_name": "Velog 원문",
     "source_url": "https://velog.io/@jwh4410/7.6",

@@ -20,7 +20,8 @@ window.TIL_FILES["data/2026/06/2026-06-19.js"] = [
       "논리 연산자",
       "cin"
     ],
-    "velog": "https://velog.io/@jwh4410/06.19",
+    "source_name": "Velog 원문",
+    "source_url": "https://velog.io/@jwh4410/06.19",
     "repository": null,
     "source": [
       "학습 기록",
