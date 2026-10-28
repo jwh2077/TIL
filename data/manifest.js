@@ -1,6 +1,96 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261019-cx",
+      "date": "2026-10-19",
+      "date_end": null,
+      "date_label": "2026-10-19",
+      "title": "CX · 프로젝트 설정과 엔진 버전 맞추기",
+      "summary": "CX 기본 파일을 Git에 등록하고 엔진 연결을 5.5에서 5.6으로 바꿨다.",
+      "project": "CX",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "프로젝트 설정",
+        "Git"
+      ],
+      "activity": "personal",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-19.js"
+    },
+    {
+      "id": "20261022-study",
+      "date": "2026-10-22",
+      "date_end": null,
+      "date_label": "2026-10-22",
+      "title": "Unreal · 서버 프로세스 디버깅과 DDC 메모",
+      "summary": "PID로 서버 프로세스를 구분해 디버거를 연결하는 방법을 적고, 공유 DDC와 실행 파일 로드에 관한 질문을 남겼다.",
+      "project": "개인 공부",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "디버깅",
+        "프로세스",
+        "DDC"
+      ],
+      "activity": "study",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-22.js"
+    },
+    {
+      "id": "20261026-cx",
+      "date": "2026-10-26",
+      "date_end": null,
+      "date_label": "2026-10-26",
+      "title": "CX · 채팅 입력을 서버로 보내기",
+      "summary": "채팅 위젯의 엔터 입력과 PlayerController의 서버·클라이언트 RPC를 연결했다. 수신 메시지 표시 함수는 아직 비어 있었다.",
+      "project": "CX",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "RPC",
+        "UI"
+      ],
+      "activity": "personal",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-26.js"
+    },
+    {
+      "id": "20261027-cx",
+      "date": "2026-10-27",
+      "date_end": null,
+      "date_label": "2026-10-27",
+      "title": "CX · 채팅 기록을 새 접속자에게 전달하기",
+      "summary": "FChatData와 UChatSubsystem으로 채팅을 보관하고, PostLogin에서 새 플레이어에게 이전 기록을 전달하도록 작성했다.",
+      "project": "CX",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "RPC",
+        "Subsystem"
+      ],
+      "activity": "personal",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-27.js"
+    },
+    {
+      "id": "20261028-cx",
+      "date": "2026-10-28",
+      "date_end": null,
+      "date_label": "2026-10-28",
+      "title": "CX · 서버 실행과 PlayerState 설정 확인",
+      "summary": "서버 실행 모드, PlayerState 클래스 지정과 초기화 시점, 맵의 외부 액터 파일을 구분해서 봤다.",
+      "project": "CX",
+      "primary_topic": "unreal",
+      "tags": ["Unreal", "멀티플레이", "PlayerState", "PIE"],
+      "activity": "personal",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-28.js"
+    },
+    {
       "id": "20260930-priest",
       "date": "2026-09-30",
       "date_end": null,

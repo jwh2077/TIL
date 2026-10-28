@@ -28,5 +28,35 @@ window.TIL_FILES["data/2026/10/2026-10-19.js"] = [
     "source": [
       "10-19.txt"
     ]
+  },
+  {
+    "id": "20261019-cx",
+    "date": "2026-10-19",
+    "title": "CX · 프로젝트 설정과 엔진 버전 맞추기",
+    "project": "CX",
+    "activity": "personal",
+    "tags": [
+      "Unreal",
+      "C++",
+      "프로젝트 설정",
+      "Git"
+    ],
+    "summary": "CX 기본 파일을 Git에 등록하고 엔진 연결을 5.5에서 5.6으로 바꿨다.",
+    "study_content": "CX 프로젝트의 기본 파일을 Git에 등록하고 Visual Studio 개발 설정을 추가했다. 프로젝트의 엔진 연결은 5.5에서 현재 사용하는 5.6으로 바꿨다.\n\n.uproject의 EngineAssociation은 어느 엔진으로 프로젝트를 열지 정하는 정보였다. 강의와 내 환경의 버전이 다르면 코드를 비교하기 전에 엔진 버전부터 맞춰 봐야 했다.\n\nGit에 보관할 파일도 구분했다. Source뿐 아니라 Content, Config, .uproject가 프로젝트를 구성하고, 빌드하면서 만들어지는 파일과 개발 도구의 개인 설정은 따로 봐야 했다.",
+    "references": [
+      {
+        "label": "C++·Unreal 빌드 과정과 빌드 구성",
+        "url": "#material=unreal-build-flow"
+      }
+    ],
+    "source": [
+      "TIL_CX/2026-10-19.md",
+      "TIL_CX/README.md · 초기 등록·설정 관련 커밋 02a4958, 28bad06, fb8b080을 대조한 사용자 제공 정리"
+    ],
+    "date_basis": "사용자가 제공한 TIL_CX/2026-10-19.md의 작업일. 동봉 README의 커밋 날짜는 저장 시점 근거이며 작업 시작일로 확장하지 않음.",
+    "date_start": "2026-10-19",
+    "date_end": null,
+    "date_label": "2026-10-19",
+    "primary_topic": "unreal"
   }
 ];

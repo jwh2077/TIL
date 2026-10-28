@@ -3,9 +3,10 @@
   const $=s=>document.querySelector(s), esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const records=window.TIL_INDEX.records, materials=window.TIL_LIBRARY_INDEX, algorithms=window.TIL_ALGORITHMS, curated=window.TIL_PROJECTS;
   const recordURL=id=>'#record='+encodeURIComponent(id);
-  const projectRecords=p=>records.filter(r=>r.project===p.record_project);
+  const projectNames=p=>p.record_projects||[p.record_project];
+  const projectRecords=p=>records.filter(r=>projectNames(p).includes(r.project));
   const groups=[...new Set(records.filter(r=>['team','personal'].includes(r.activity)&&r.project).map(r=>r.project))];
-  const projects=[...curated.map(p=>{if(!p.archive)return p;const rows=projectRecords(p),dates=rows.map(r=>r.date).filter(Boolean).sort(),ends=rows.map(r=>r.date_end||r.date).filter(Boolean).sort();return {...p,period:dates[0]+'–'+ends.at(-1),period_note:'남아 있는 기록의 범위이며 프로젝트의 정확한 시작·종료일은 아닙니다.'};}),...groups.filter(name=>!curated.some(p=>p.record_project===name)).map((name,i)=>{
+  const projects=[...curated.map(p=>{if(!p.archive)return p;const rows=projectRecords(p),dates=rows.map(r=>r.date).filter(Boolean).sort(),ends=rows.map(r=>r.date_end||r.date).filter(Boolean).sort();return {...p,period:dates[0]+'–'+ends.at(-1),period_note:'남아 있는 기록의 범위이며 프로젝트의 정확한 시작·종료일은 아닙니다.'};}),...groups.filter(name=>!curated.some(p=>projectNames(p).includes(name))).map((name,i)=>{
     const rows=records.filter(r=>r.project===name), dates=rows.filter(r=>r.date).map(r=>r.date).sort(), ends=rows.filter(r=>r.date).map(r=>r.date_end||r.date).sort();
     return {id:'archive-'+Array.from(name).map(c=>c.codePointAt(0).toString(16)).join('-'),record_project:name,title:name,summary:'기존 작업 기록을 모았습니다.',period:dates[0]+'–'+ends.at(-1),period_note:'남아 있는 기록의 범위이며 프로젝트의 정확한 시작·종료일은 아닙니다.',tags:[],archive:true,activity:rows[0].activity};
   })];
@@ -142,7 +143,7 @@
     }else if(!reading){const kind=menu==='library'?'material':menu==='algorithms'?'algorithm':'record';$('#listIntro').hidden=false;$('#listIntro').innerHTML=`<h1>${kind==='record'?'학습 기록':kind==='material'?'자료실':'알고리즘'}</h1><p class="intro">${kind==='record'?'알고리즘과 공부한 날들을 돌아보고, 날짜별 작업 기록을 이어 봅니다.':kind==='material'?'분야를 선택하거나 함수·개념 이름으로 검색하세요.':'풀이 과정과 제출 결과를 남긴 기록입니다. 미완성 문제도 함께 표시합니다.'}</p>`;$('#siteFilters').hidden=false;filters(kind,$('#siteFilters'));}
     if($('#projectTocSlot'))$('#projectTocSlot').append($('#readingToc'));
     if(reading)buildToc();
-    const recordMeta=r.type==='record'?records.find(x=>x.id===r.id):null;const p=recordMeta&&projects.find(p=>p.record_project===recordMeta.project);if(p&&!$('#articlePage .project-return'))$('#backToList').insertAdjacentHTML('afterend',`<a class="source project-return" href="#project=${p.id}">${esc(p.title)}로 →</a>`);else if(!p)$('#articlePage .project-return')?.remove();else if(p){const a=$('#articlePage .project-return');a.href='#project='+p.id;a.textContent=p.title+'로 →';}
+    const recordMeta=r.type==='record'?records.find(x=>x.id===r.id):null;const p=recordMeta&&projects.find(p=>projectNames(p).includes(recordMeta.project));if(p&&!$('#articlePage .project-return'))$('#backToList').insertAdjacentHTML('afterend',`<a class="source project-return" href="#project=${p.id}">${esc(p.title)}로 →</a>`);else if(!p)$('#articlePage .project-return')?.remove();else if(p){const a=$('#articlePage .project-return');a.href='#project='+p.id;a.textContent=p.title+'로 →';}
     document.title=(r.type==='project'||r.type==='reflection'?(r.type==='reflection'?projects.find(p=>p.id===r.id)?.reflection?.title:projects.find(p=>p.id===r.id)?.title)||'프로젝트':{home:'홈',projects:'프로젝트',list:'학습 기록',library:'자료실',algorithms:'알고리즘',search:'전체 검색'}[r.type]||'학습 기록')+' · 개발·학습 기록';
     window.scrollTo({top:0,behavior:'instant'});
   }

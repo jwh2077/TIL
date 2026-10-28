@@ -9,9 +9,10 @@ window.TIL_PROJECTS = [{
   role_summary:'적 AI / 무기 파츠',
   highlights:[{label:'적 AI',summary:'순찰 → 감지 → 추적 → 공격',work:0},{label:'공격 판정',summary:'프레임에 따라 누락되던 판정 수정 과정',work:1},{label:'무기 파츠',summary:'슬롯별 장착과 능력치·UI 데이터 연결',work:2}],
   tags:['적 AI','공격 판정','무기 파츠'],
+  media:{url:'https://youtu.be/K-JEzHUtySc',label:'Project Priest 플레이 영상'},
   links:[{label:'프로젝트 저장소',url:'https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project'},{label:'팀 발표 자료',url:'https://docs.google.com/presentation/d/1b_W1kbDZu-cMUC6ZDLqhuG17Zhep3hMxRE7rCtPCxQI/edit'}],
   result:'일반 전투와 인벤토리, 구역 이동, 보스전이 플레이 영상에 담겨 있다. 발표는 9월 29일에 마쳤다.',
-  result_note:'플레이 영상 원본: Project (1).mp4 · 로컬 보관. 공개 영상 링크는 아직 없습니다. 발표 자료는 팀이 함께 준비한 자료입니다.',
+  result_note:'플레이 영상 원본: Project (1).mp4 · 로컬 보관. 영상은 YouTube 일부 공개로 연결했습니다. 발표 자료는 팀이 함께 준비한 자료입니다.',
   work:[
     {title:'순찰에서 추적, 공격으로 넘어가기',text:'Behavior Tree와 Blackboard로 적의 행동을 나눴다. 플레이어를 놓치면 마지막으로 알고 있던 위치 주변을 최대 세 번 수색하고, 찾지 못하면 순찰로 돌아가도록 했다.',ids:['20260907-priest','20260908-priest','20260909-priest','20260925-priest-ai']},
     {title:'공격 모션은 나오는데 피해가 들어가지 않았다',text:'손에 붙인 Sphere로 시작해 Box로 바꾸고, Overlap에서 플레이어를 저장하는 방식도 시도했다. 프레임이 낮아지면 판정이 빠지는 문제가 있었다.',note:'발표 자료 12–15쪽에는 ApplyAttack Notify 시점에 공격 범위를 직접 검사하는 방식으로 해결한 내용을 담았다. 당시 수정하면서 적어 둔 내용이라, 마지막 코드와는 조금 다를 수 있다. 마지막 범위 설정은 이 메모에 없다.',ids:['20260910-priest','20260921-priest']},
@@ -116,16 +117,50 @@ window.TIL_PROJECTS.push(...[
     ]
   },
   {
-    "id": "archive-43-68-61-74-58",
-    "record_project": "ChatX",
-    "title": "ChatX",
+    "id": "chapter-4",
+    "record_project": "챕터 4 개인 프로젝트",
+    "record_projects": [
+      "ChatX",
+      "CX"
+    ],
+    "title": "챕터 4 개인 프로젝트",
     "archive": true,
     "activity": "personal",
-    "summary": "멀티플레이 과제를 진행하며 Build.cs 설정과 서버·클라이언트 구조를 공부한 기록.",
+    "summary": "ChatX 숫자 야구와 분노의 질주(CX)의 영상·멀티플레이 작업 기록.",
     "tags": [
       "Unreal",
-      "Build.cs",
+      "C++",
       "멀티플레이"
+    ],
+    "parts": [
+      {
+        "title": "ChatX · 숫자 야구",
+        "video": "https://youtu.be/powPv4J4LEI",
+        "ids": [
+          "20261002-chatx",
+          "20261005-chatx",
+          "20261006-chatx",
+          "20261007-chatx",
+          "20261008-chatx",
+          "20261011-chatx",
+          "20261012-chatx"
+        ]
+      },
+      {
+        "title": "분노의 질주 · CX",
+        "video": "https://youtu.be/-iS0zHFAwEs",
+        "ids": [
+          "20261019-cx",
+          "20261026-cx",
+          "20261027-cx",
+          "20261028-cx"
+        ]
+      }
+    ],
+    "aliases": [
+      "archive-43-68-61-74-58",
+      "cx",
+      "archive-43-58"
     ]
   }
 ]);
