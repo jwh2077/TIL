@@ -7,8 +7,8 @@ window.TIL_FILES["data/2026/10/2026-10-29.js"] = [
     "date_end": null,
     "date_label": "2026-10-29",
     "date_basis": "사용자가 제공한 10월 29일 발제·킥오프·프로젝트 기획 메모와 같은 날짜의 회의록.",
-    "title": "챕터4 멀티 팀플 · 발제와 첫 기획 회의",
-    "project": "챕터4 멀티 팀플(임시)",
+    "title": "Don’t Drop · 발제와 첫 기획 회의",
+    "project": "Don’t Drop",
     "primary_topic": "unreal",
     "activity": "team",
     "tags": [

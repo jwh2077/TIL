@@ -31,14 +31,14 @@ window.TIL_PROJECTS = [{
 window.TIL_PROJECTS.push(...[
   {
     id: 'chapter-4-team',
-    record_project: '챕터4 멀티 팀플(임시)',
-    title: '챕터4 멀티 팀플(임시)',
+    record_project: 'Don’t Drop',
+    title: 'Don’t Drop',
     archive: true,
     activity: 'team',
-    summary: '기획 단계 · 리슨 서버 기반으로 상대를 밀어 떨어뜨리는 대전 게임을 준비하고 있다.',
+    summary: '기획·명세 정리 단계 · 리슨 서버 기반으로 상대를 밀어 떨어뜨리는 서바이벌 대전 게임을 준비하고 있다. 캐릭터·조작을 맡았으며, AI가 보완한 기능 명세는 검토할 제안으로 두고 있다.',
     team: '어E가없네 · 5명',
     technology: 'Unreal Engine 5.6',
-    role_summary: '서기 · 개발 파트 분배 전',
+    role_summary: '캐릭터·조작 / 서기 · 10월 30일 개발 파트 배정',
     tags: ['Unreal', '멀티플레이', '기획']
   },
   {

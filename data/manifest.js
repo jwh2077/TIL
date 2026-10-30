@@ -1,13 +1,32 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261030-ch4-team",
+      "date": "2026-10-30",
+      "date_end": null,
+      "date_label": "2026-10-30",
+      "title": "Don’t Drop · 게임 규칙 논의와 캐릭터 담당 분배",
+      "summary": "서바이벌 규칙을 논의하고 캐릭터·조작을 맡게 됐다. AI 도움으로 정리한 기능 명세는 실제 구현과 구분하고, 다른 파트와 맞출 연결 내용을 남겼다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "기획",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-30.js"
+    },
+    {
       "id": "20261029-ch4-team",
       "date": "2026-10-29",
       "date_end": null,
       "date_label": "2026-10-29",
-      "title": "챕터4 멀티 팀플 · 발제와 첫 기획 회의",
+      "title": "Don’t Drop · 발제와 첫 기획 회의",
       "summary": "멀티플레이 팀 과제 발제를 듣고 리슨 서버와 UE 5.6을 선택했다. 협업 방식을 맞추고, 상대를 밀어 떨어뜨리는 대전 게임으로 방향을 정했다.",
-      "project": "챕터4 멀티 팀플(임시)",
+      "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [
         "Unreal",
