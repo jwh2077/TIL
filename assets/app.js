@@ -94,9 +94,13 @@
     if (!Array.isArray(images) || !images.length) return '';
     const items = images.map(item => {
       try {
-        const url = new URL(item.url);
-        if (url.protocol !== 'https:' || url.hostname !== 'velog.velcdn.com') return '';
-        return `<figure class="til-shot"><a href="${esc(url.href)}" target="_blank" rel="noopener noreferrer"><img src="${esc(url.href)}" alt="${esc(item.alt || item.caption || '작업 화면')}" loading="lazy"></a>${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`;
+        let src = item.url;
+        if (!/^assets\/images\/[a-z0-9/_-]+\.(?:png|jpe?g|webp|gif)$/i.test(src)) {
+          const url = new URL(src);
+          if (url.protocol !== 'https:' || url.hostname !== 'velog.velcdn.com') return '';
+          src = url.href;
+        }
+        return `<figure class="til-shot"><a href="${esc(src)}" target="_blank" rel="noopener noreferrer"><img src="${esc(src)}" alt="${esc(item.alt || item.caption || '작업 화면')}" loading="lazy"></a>${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`;
       } catch { return ''; }
     }).join('');
     return items ? `<section class="section"><h3>작업 화면</h3><div class="til-gallery">${items}</div></section>` : '';
