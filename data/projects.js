@@ -30,6 +30,18 @@ window.TIL_PROJECTS = [{
 // Optional project media and grouped entry points; daily records remain unchanged.
 window.TIL_PROJECTS.push(...[
   {
+    id: 'chapter-4-team',
+    record_project: '챕터4 멀티 팀플(임시)',
+    title: '챕터4 멀티 팀플(임시)',
+    archive: true,
+    activity: 'team',
+    summary: '기획 단계 · 리슨 서버 기반으로 상대를 밀어 떨어뜨리는 대전 게임을 준비하고 있다.',
+    team: '어E가없네 · 5명',
+    technology: 'Unreal Engine 5.6',
+    role_summary: '서기 · 개발 파트 분배 전',
+    tags: ['Unreal', '멀티플레이', '기획']
+  },
+  {
     "id": "archive-cc55-d130-20-33-20-ac1c-c778-20-d504-b85c-c81d-d2b8",
     "record_project": "챕터 3 개인 프로젝트",
     "title": "챕터 3 개인 프로젝트",

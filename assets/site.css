@@ -57,3 +57,5 @@
 #algorithmPage .algorithm-code code{font-family:Consolas,"Cascadia Mono",monospace;font-size:15px;line-height:1.7;background:transparent;padding:0;color:inherit}
 .algorithm-code .cpp-keyword{color:#7041a0}.algorithm-code .cpp-string{color:#9b411b}.algorithm-code .cpp-number{color:#125c9b}.algorithm-code .cpp-comment{color:#576b60;font-style:italic}
 @media(max-width:600px){#algorithmPage .algorithm-code{padding:14px}#algorithmPage .algorithm-code code{font-size:14px}}
+
+.note-body>h3{font-size:1.25rem;line-height:1.5;margin:30px 0 12px}.note-body>h3:first-child{margin-top:0}

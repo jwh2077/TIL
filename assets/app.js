@@ -85,7 +85,10 @@
   const list = (label, values) => Array.isArray(values) && values.length ? `<section class="section"><h3>${label}</h3><ul>${values.map(v => `<li>${esc(v)}</li>`).join('')}</ul></section>` : '';
   function noteBody(r) {
     const paragraphs = [r.study_content, r.learning_process].filter(Boolean).flatMap(value => value.split(/\n\s*\n/));
-    return `<section class="note-body">${paragraphs.map(value => `<p>${esc(value)}</p>`).join('')}</section>`;
+    return `<section class="note-body">${paragraphs.map(value => {
+      const heading = value.trim().match(/^##\s+([^\n]+)$/);
+      return heading ? `<h3>${esc(heading[1])}</h3>` : `<p>${esc(value)}</p>`;
+    }).join('')}</section>`;
   }
   function gallery(images) {
     if (!Array.isArray(images) || !images.length) return '';

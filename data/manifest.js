@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261029-ch4-team",
+      "date": "2026-10-29",
+      "date_end": null,
+      "date_label": "2026-10-29",
+      "title": "챕터4 멀티 팀플 · 발제와 첫 기획 회의",
+      "summary": "멀티플레이 팀 과제 발제를 듣고 리슨 서버와 UE 5.6을 선택했다. 협업 방식을 맞추고, 상대를 밀어 떨어뜨리는 대전 게임으로 방향을 정했다.",
+      "project": "챕터4 멀티 팀플(임시)",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "기획",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-10",
+      "file": "data/2026/10/2026-10-29.js"
+    },
+    {
       "id": "20261019-cx",
       "date": "2026-10-19",
       "date_end": null,
