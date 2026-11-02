@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261102-dont-drop",
+      "date": "2026-11-02",
+      "date_end": null,
+      "date_label": "2026-11-02",
+      "title": "Don’t Drop · 캐릭터 이동·점프 다이어그램과 구현 범위",
+      "summary": "캐릭터 이동·점프와 애니메이션 동기화 흐름을 다이어그램으로 정리하고, 공격 입력을 전투 쪽에 전달하는 범위를 적었다. 팀에서는 Advanced Sessions와 그레이박싱으로 MVP를 준비하기로 했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "설계",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-02.js"
+    },
+    {
       "id": "20261030-ch4-team",
       "date": "2026-10-30",
       "date_end": null,
