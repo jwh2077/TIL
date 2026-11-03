@@ -32,6 +32,7 @@ window.TIL_PROJECTS = [{
 window.TIL_PROJECTS.push(...[
   {
     id: 'chapter-4-team',
+    links: [{label: '팀 프로젝트 저장소', url: 'https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project'}],
     record_project: 'Don’t Drop',
     period: "2026.10.29–11.23", period_end: "2026-11-23",
     period_note: "과정 일정표 기준. 현재 진행 중이며 11월 23일은 마감·발표 예정일이다.",

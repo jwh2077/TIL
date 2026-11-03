@@ -80,6 +80,8 @@ window.TIL_LIBRARY_NAVIGATION = [
         "title": "멀티플레이",
         "documents": [
           "unreal-multiplayer-basics",
+          "unreal-play-settings",
+          "unreal-advanced-sessions",
           "unreal-network-testing",
           "unreal-network-roles",
           "unreal-rpc"

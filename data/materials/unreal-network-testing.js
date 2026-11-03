@@ -62,6 +62,10 @@ window.TIL_FILES["data/materials/unreal-network-testing.js"] = [
     ],
     "references": [
       {
+        "label": "시작 맵·Standalone 로그·PIE 설정",
+        "url": "#material=unreal-play-settings"
+      },
+      {
         "label": "클래스 역할·서버·복제 기본 개념",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-multiplayer-basics"
       },

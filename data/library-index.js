@@ -935,6 +935,10 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "references": [
       {
+        "label": "시작 맵·Standalone 로그·PIE 설정",
+        "url": "#material=unreal-play-settings"
+      },
+      {
         "label": "클래스 역할·서버·복제 기본 개념",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-multiplayer-basics"
       },
@@ -1445,6 +1449,132 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "그래프 — 정점과 간선",
         "text": "그래프 — 정점과 간선 DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리 무방향 간선 연결 vector<vector<int>> graph(5); // 무방향 그래프: 양쪽 모두 등록 graph[0].push_back(1); graph[1].push_back(0); 그래프는 자료구조이며 DFS·BFS는 그래프를 탐색하는 알고리즘입니다."
+      }
+    ]
+  },
+  {
+    "id": "unreal-play-settings",
+    "title": "Unreal 프로젝트·에디터 설정 — 시작 맵, 실행 로그, 멀티플레이 테스트",
+    "summary": "Maps & Modes에서 기본 맵과 GameMode 고르기, Standalone 실행 시 -log로 로그 창 열기, PIE에서 서버·클라이언트와 늦은 참가 테스트하기.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "실행·테스트 설정",
+    "source_name": "Test 프로젝트의 DefaultEngine.ini와 EditorPerProjectUserSettings.ini · 기존 PIE 설정 기록",
+    "source_url": "",
+    "related_ids": [
+      "20261103-dont-drop",
+      "20261006-chatx"
+    ],
+    "references": [
+      {
+        "label": "Advanced Sessions · Steam 세션 테스트 (초안)",
+        "url": "#material=unreal-advanced-sessions"
+      },
+      {
+        "label": "전용 서버 테스트와 PIE 설정 화면",
+        "url": "#material=unreal-network-testing"
+      },
+      {
+        "label": "Epic · 프로젝트 설정과 Maps & Modes",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/project-section-of-the-unreal-engine-project-settings"
+      },
+      {
+        "label": "Epic · 추가 실행 인자",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/command-line-arguments-in-unreal-engine"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "시작 맵",
+        "section": "시작 맵과 기본 GameMode 고르기"
+      },
+      {
+        "label": "시작 로그",
+        "section": "Standalone Game을 켤 때 로그 창도 열기"
+      },
+      {
+        "label": "PIE 테스트",
+        "section": "멀티플레이 테스트 모드와 늦은 참가"
+      }
+    ],
+    "file": "data/materials/unreal-play-settings.js",
+    "outline": [
+      {
+        "title": "시작 맵과 기본 GameMode 고르기",
+        "text": "시작 맵과 기본 GameMode 고르기 Edit → Project Settings → Maps & Modes Editor Startup Map — 에디터에서 프로젝트를 열었을 때 처음 띄울 맵. Game Default Map — 맵을 따로 지정하지 않고 게임을 실행했을 때 열 맵. Default GameMode — 프로젝트의 기본 게임 규칙. 특정 맵에서 다른 규칙이 적용되면 그 맵의 World Settings → GameMode Override도 확인한다. 임시 Test 프로젝트에서는 두 시작 맵을 모두 Lvl_ThirdPerson으로 지정했다. 맵 설정값은 Config/DefaultEngine.ini에서 GameDefaultMap과 EditorStartupMap으로 찾을 수 있다."
+      },
+      {
+        "title": "Standalone Game을 켤 때 로그 창도 열기",
+        "text": "Standalone Game을 켤 때 로그 창도 열기 Edit → Editor Preferences → Level Editor → Play 검색창에 Additional Launch Parameters 를 입력한다. Standalone Game의 추가 실행 인자 칸에 -log 를 넣는다. 플레이 버튼 옆 메뉴에서 Standalone Game 을 선택해 새로 실행한다. 게임 창과 함께 뜨는 로그 창에서 시작 시점의 메시지를 볼 수 있다. 임시 프로젝트의 EditorPerProjectUserSettings.ini 에 저장된 값: AdditionalLaunchParameters=-log 이 값은 게임 프로세스를 시작할 때 전달한다. 실행 중인 에디터 안에서 로그만 볼 때는 Output Log 를 연다."
+      },
+      {
+        "title": "멀티플레이 테스트 모드와 늦은 참가",
+        "text": "멀티플레이 테스트 모드와 늦은 참가 서버와 클라이언트 화면을 비교할 때 — 플레이 메뉴에서 플레이어 수를 고르고 Play Net Mode를 Play as Client로 둔다. 전용 서버에 접속한 클라이언트로 시작한다. 서버 프로세스에 디버거를 붙일 때 — Level Editor → Play에서 Run Under One Process를 끄고 연결할 프로세스를 구분한다. PIE 실행 도중 참가를 시험할 때 — Editor Preferences에서 Allow Late Joining을 검색한다. 실제 PIE 설정 화면과 서버·클라이언트의 객체 배치는 관련 문서의 전용 서버 노트에 있다."
+      }
+    ]
+  },
+  {
+    "id": "unreal-advanced-sessions",
+    "title": "Advanced Sessions · Steam 세션 테스트",
+    "summary": "UE 5.6 테스트 프로젝트의 Steam 앱 ID와 친구 초대 노드 정리. 초대를 보내는 위젯과 수락 이벤트를 받는 게임 인스턴스의 연결 위치를 나눴다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "draft",
+    "status": "게시 준비 초안 · 초대 수락과 참가 테스트 전",
+    "source_name": "11-3.txt · Test 프로젝트의 DefaultEngine.ini, AdvancedFriendsLibrary.h, AdvancedFriendsGameInstance.h",
+    "source_url": "",
+    "related_ids": [
+      "20261103-dont-drop",
+      "20261102-dont-drop"
+    ],
+    "references": [
+      {
+        "label": "프로젝트·에디터 설정과 시작 로그",
+        "url": "#material=unreal-play-settings"
+      },
+      {
+        "label": "Advanced Sessions · 엔진 버전별 플러그인",
+        "url": "https://vreue4.com/advanced-sessions-binaries"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "Steam 앱 ID",
+        "section": "Steam에 Spacewar로 표시될 때"
+      },
+      {
+        "label": "친구 초대",
+        "section": "친구 초대 · 로비 위젯에서 초대 보내기"
+      },
+      {
+        "label": "수락·참가",
+        "section": "초대 수락 · 게임 인스턴스에서 세션 참가"
+      }
+    ],
+    "file": "data/materials/unreal-advanced-sessions.js",
+    "outline": [
+      {
+        "title": "Standalone Game으로 실행",
+        "text": "Standalone Game으로 실행 Advanced Sessions 플러그인을 넣은 Test 프로젝트에서 플레이 메뉴의 Standalone Game을 선택한다. 시작부터 로그 창을 열려면 관련 문서의 추가 실행 인자(-log) 설정을 참고한다."
+      },
+      {
+        "title": "Steam에 Spacewar로 표시될 때",
+        "text": "Steam에 Spacewar로 표시될 때 Config/DefaultEngine.ini에서 온라인 서비스와 테스트 앱 ID를 확인한다. 이 프로젝트는 SteamDevAppId에 Spacewar 테스트 앱 ID인 480을 사용한다. [OnlineSubsystem] DefaultPlatformService=Steam [OnlineSubsystemSteam] bEnabled=true SteamDevAppId=480"
+      },
+      {
+        "title": "친구 초대 · 로비 위젯에서 초대 보내기",
+        "text": "친구 초대 · 로비 위젯에서 초대 보내기 예를 들어 로비 위젯 블루프린트의 Event Graph 에서 빈 곳을 우클릭하고 Send Session Invite to Friend 를 검색한다. 초대 버튼의 OnClicked 실행 핀을 이 노드에 연결한다. Player Controller 에는 위젯의 Get Owning Player 를, Friend Unique Net Id 에는 초대할 친구의 고유 ID를 넣는다."
+      },
+      {
+        "title": "초대 수락 · 게임 인스턴스에서 세션 참가",
+        "text": "초대 수락 · 게임 인스턴스에서 세션 참가 AdvancedFriendsGameInstance 를 부모로 쓰는 게임 인스턴스 블루프린트를 연다. 새로 만들 때는 콘텐츠 브라우저에서 Blueprint Class → All Classes 를 열고 이 부모 클래스를 검색한다. 왼쪽 My Blueprint → Functions → Override 목록에서 On Session Invite Accepted 를 선택한다. Event Graph에 수락 이벤트가 생긴다. 이벤트의 실행 핀에서 끌어 Join Session 을 검색한다. 이벤트의 Session to Join 출력을 Search Result 입력에, 참가할 로컬 플레이어의 컨트롤러를 Player Controller 입력에 연결한다. 이벤트가 목록에 없으면 Class Settings → Parent Class 를 확인한다. 실행할 때 이 블루프린트를 쓰려면 Project Settings → Maps & Modes → Game Instance Class 에 지정한다. 다음 테스트에서는 친구가 Steam 초대를 수락했을 때 이벤트가 들어오는지 먼저 보고, 이어서 Join Session의 성공·실패를 확인한다."
       }
     ]
   }

@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261103-dont-drop",
+      "date": "2026-11-03",
+      "date_end": null,
+      "date_label": "2026-11-03",
+      "title": "Don’t Drop · 캐릭터 이동 데이터와 Steam 세션 테스트 준비",
+      "summary": "이동 속도와 방어구 무게에 따른 보정값을 FPlayerDataRow에 묶었다. 오전 회의 뒤에는 임시 프로젝트의 Steam 세션 설정과 친구 초대 수락 흐름을 살펴봤다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "멀티플레이",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-03.js"
+    },
+    {
       "id": "20261102-dont-drop",
       "date": "2026-11-02",
       "date_end": null,
