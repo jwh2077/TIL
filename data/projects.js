@@ -3,10 +3,11 @@ window.TIL_PROJECTS = [{
   id:'priest', record_project:'ProjectPriest', title:'Project Priest', featured:true,
   subtitle:'적 AI와 무기 파츠를 만들면서',
   summary:'마을을 위협하는 몬스터를 물리치고 배후의 악마와 대면하는 Unreal Engine 5 기반 3D 액션 게임.',
-  period:'2026.09.03–09.29', period_note:'팀 발표 자료의 기획부터 발표까지 일정. 개별 작업일은 각 학습 기록에 따로 표시했습니다.',
+  period:'2026.09.03–09.29', period_end:'2026-09-29', period_note:'과정 일정표의 CH3 팀 프로젝트 기간. 팀 발표 자료와 실제 발표일도 일치한다.',
   team:'Two Gether · 4명', technology:'Unreal Engine 5 · C++',
   roles:['근접·원거리 적 AI와 순찰·감지·추적·공격 흐름','무기 파츠 장착, 능력치 적용과 데이터 관리','UI 담당자와 파츠 데이터 연결','공격 판정과 적 사망 시 Mesh·효과·소리 처리'],
   role_summary:'적 AI / 무기 파츠',
+    cover: { src: "assets/images/priest-enemy.webp", alt: "마을 우물 옆에서 플레이어와 마주친 일반 적" },
   highlights:[{label:'적 AI',summary:'순찰 → 감지 → 추적 → 공격',work:0},{label:'공격 판정',summary:'프레임에 따라 누락되던 판정 수정 과정',work:1},{label:'무기 파츠',summary:'슬롯별 장착과 능력치·UI 데이터 연결',work:2}],
   tags:['적 AI','공격 판정','무기 파츠'],
   media:{url:'https://youtu.be/K-JEzHUtySc',label:'Project Priest 플레이 영상'},
@@ -32,6 +33,8 @@ window.TIL_PROJECTS.push(...[
   {
     id: 'chapter-4-team',
     record_project: 'Don’t Drop',
+    period: "2026.10.29–11.23", period_end: "2026-11-23",
+    period_note: "과정 일정표 기준. 현재 진행 중이며 11월 23일은 마감·발표 예정일이다.",
     title: 'Don’t Drop',
     archive: true,
     activity: 'team',
@@ -44,6 +47,8 @@ window.TIL_PROJECTS.push(...[
   {
     "id": "archive-cc55-d130-20-33-20-ac1c-c778-20-d504-b85c-c81d-d2b8",
     "record_project": "챕터 3 개인 프로젝트",
+    period: "2026.08.06–09.02", period_end: "2026-09-02",
+    period_note: "과정 일정표의 CH3 개인 과제 기간. 세 영상은 이 기간 안의 작업으로 함께 묶었다.",
     "title": "챕터 3 개인 프로젝트",
     "archive": true,
     "activity": "personal",
@@ -86,7 +91,10 @@ window.TIL_PROJECTS.push(...[
   {
     "id": "archive-46-69-72-73-74-46-50-53-20-b7-20-ccab-20-c8fc-20-42-6c-75-65-70-72-69-6e-74-20-d504-b85c-c81d-d2b8",
     "record_project": "FirstFPS · 첫 주 Blueprint 프로젝트",
-    "title": "퍼스트 FPS",
+    period: "2026.07.03 마감", period_end: "2026-07-03",
+    period_note: "과정 일정표의 과제 마감·미니 발표일. 시작일은 일정표에 따로 적혀 있지 않다.",
+    "title": "FirstFPS",
+    cover: { src: "assets/images/firstfps-play.webp", alt: "조준점과 탄약, 남은 적 수가 보이는 FirstFPS 플레이 화면" },
     "archive": true,
     "activity": "personal",
     "summary": "Blueprint로 이동·발사, 적 추적, 아이템과 HUD를 연결한 FPS 실습.",
@@ -96,7 +104,7 @@ window.TIL_PROJECTS.push(...[
     ],
     "media": {
       "url": "https://youtu.be/QkZXdj-Wmzo",
-      "label": "퍼스트 FPS 플레이 영상"
+      "label": "FirstFPS 플레이 영상"
     }
   }
 ]);
@@ -105,6 +113,8 @@ window.TIL_PROJECTS.push(...[
   {
     "id": "archive-ac1c-c778-20-54-65-78-74-52-50-47",
     "record_project": "개인 TextRPG",
+    period: "2026.07.13–07.28", period_end: "2026-07-28",
+    period_note: "과정 일정표의 CH2 개인 과제 발제부터 제출 마감까지.",
     "title": "개인 TextRPG",
     "archive": true,
     "activity": "personal",
@@ -118,7 +128,10 @@ window.TIL_PROJECTS.push(...[
   {
     "id": "archive-d300-20-54-65-78-74-52-50-47",
     "record_project": "팀 TextRPG",
+    period: "2026.07.28–08.05", period_end: "2026-08-05",
+    period_note: "과정 일정표의 CH2 팀 프로젝트 발제부터 마감·발표까지.",
     "title": "팀 TextRPG",
+    cover: { src: "assets/images/team-textrpg-shop-stats.png", alt: "제13 던전의 탕비실 자판기 구매 화면, 보급품 회수소 판매 화면, 아이템·골드 집계 화면" },
     "archive": true,
     "activity": "team",
     "summary": "상점의 아이템 구매·판매와 Item 관리, Logger를 통한 게임 데이터 집계 작업.",
@@ -131,11 +144,14 @@ window.TIL_PROJECTS.push(...[
   {
     "id": "chapter-4",
     "record_project": "챕터 4 개인 프로젝트",
+    period: "2026.10.01–10.28", period_end: "2026-10-28",
+    period_note: "과정 일정표 기준. 숫자 야구는 10월 1일 발제·12일 마감, 분노의 질주는 10월 28일 마감이다. 분노의 질주의 별도 시작일은 명시되지 않았다.",
     "record_projects": [
       "ChatX",
       "CX"
     ],
     "title": "챕터 4 개인 프로젝트",
+    cover: { src: "assets/images/cx-cars.webp", alt: "분노의 질주에서 나란히 달리는 코스 위의 차량 두 대" },
     "archive": true,
     "activity": "personal",
     "summary": "ChatX 숫자 야구와 분노의 질주(CX)의 영상·멀티플레이 작업 기록.",
