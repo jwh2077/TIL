@@ -1152,7 +1152,7 @@ window.TIL_INDEX = {
       "project": null,
       "primary_topic": "unreal",
       "tags": [],
-      "file": "data/undated/note-tem-014.js",
+      "file": "data/undated/unreal-build-and-macros.js",
       "activity": "study"
     },
     {
@@ -1166,7 +1166,7 @@ window.TIL_INDEX = {
       "project": "ProjectPriest",
       "primary_topic": "oop",
       "tags": [],
-      "file": "data/undated/note-tem-011.js",
+      "file": "data/undated/inventory-parts-and-weapons.js",
       "activity": "team"
     },
     {
@@ -1255,7 +1255,7 @@ window.TIL_INDEX = {
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/project-period/ch3-1.js",
+      "file": "data/project-period/ch3-moving-platforms.js",
       "project_part": "CH3_1",
       "activity": "personal"
     },
@@ -1274,7 +1274,7 @@ window.TIL_INDEX = {
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/project-period/ch3-2.js",
+      "file": "data/project-period/ch3-pawn-input-and-camera.js",
       "project_part": "CH3_2",
       "activity": "personal"
     },

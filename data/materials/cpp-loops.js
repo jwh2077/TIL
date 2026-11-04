@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/materials/file-continue.js"] = [
+window.TIL_FILES["data/materials/cpp-loops.js"] = [
   {
     "id": "file-continue",
     "title": "C++ 반복문 — for, while, break, continue",

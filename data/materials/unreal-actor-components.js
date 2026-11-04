@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/materials/velog-20260810-001.js"] = [
+window.TIL_FILES["data/materials/unreal-actor-components.js"] = [
   {
     "id": "velog-20260810-001",
     "title": "Unreal Actor — 헤더 선언·컴포넌트 연결",

@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/materials/velog-20260710-001.js"] = [
+window.TIL_FILES["data/materials/cpp-stack-and-heap.js"] = [
   {
     "id": "velog-20260710-001",
     "title": "C++ 스택과 힙 — 메모리 수명·해제·복사",

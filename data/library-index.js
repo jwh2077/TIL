@@ -288,7 +288,7 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260710-001"
       }
     ],
-    "file": "data/materials/velog-20260706-001.js",
+    "file": "data/materials/c-arrays-and-pointers.js",
     "outline": [
       {
         "title": "포인터 — 값과 주소 구분",
@@ -327,7 +327,7 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260716-001"
       }
     ],
-    "file": "data/materials/velog-20260709-001.js",
+    "file": "data/materials/cpp-classes-and-oop.js",
     "outline": [
       {
         "title": "class — 멤버 선언과 접근 제어",
@@ -366,7 +366,7 @@ window.TIL_LIBRARY_INDEX = [
         "url": "#material=velog-20260706-001"
       }
     ],
-    "file": "data/materials/velog-20260710-001.js",
+    "file": "data/materials/cpp-stack-and-heap.js",
     "outline": [
       {
         "title": "스택 메모리 — 범위를 벗어나면 정리되는 지역 변수",
@@ -403,7 +403,7 @@ window.TIL_LIBRARY_INDEX = [
       "oop"
     ],
     "publication": "reference",
-    "file": "data/materials/velog-20260712-001.js",
+    "file": "data/materials/cpp-overloading-and-type-conversion.js",
     "outline": [
       {
         "title": "함수 오버로딩 — 구분할 수 있는 조건",
@@ -438,7 +438,7 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260709-001"
       }
     ],
-    "file": "data/materials/velog-20260716-001.js",
+    "file": "data/materials/cpp-function-and-class-templates.js",
     "outline": [
       {
         "title": "함수 템플릿 — 두 값 교환",
@@ -486,7 +486,7 @@ window.TIL_LIBRARY_INDEX = [
         "section": "SceneRoot·StaticMesh — 생성과 부착"
       }
     ],
-    "file": "data/materials/velog-20260810-001.js",
+    "file": "data/materials/unreal-actor-components.js",
     "outline": [
       {
         "title": "AItem 헤더 — 상속과 generated.h 위치",
@@ -520,7 +520,7 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "publication": "reference",
     "notice": "원본 파일의 주석 표기 메모는 사용 도구와 처리 결과가 확인되지 않아 로컬 검토 메모에 별도로 보관했다.",
-    "file": "data/materials/file-continue.js",
+    "file": "data/materials/cpp-loops.js",
     "outline": [
       {
         "title": "for와 while — 조건을 확인하는 위치",

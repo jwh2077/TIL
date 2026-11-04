@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/project-period/ch3-2.js"] = [
+window.TIL_FILES["data/project-period/ch3-pawn-input-and-camera.js"] = [
   {
     "id": "project-ch3-2",
     "project": "챕터 3 개인 프로젝트",
