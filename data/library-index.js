@@ -341,8 +341,8 @@ window.TIL_LIBRARY_INDEX = [
   },
   {
     "id": "velog-20260710-001",
-    "title": "C++ 동적 메모리 — 할당·해제·복사",
-    "summary": "new/delete, 댕글링 포인터와 메모리 누수, 얕은 복사와 깊은 복사.",
+    "title": "C++ 스택과 힙 — 메모리 수명·해제·복사",
+    "summary": "스택의 지역 변수와 힙에 할당한 객체의 수명, 직접 해제할 때 생기는 문제, 얕은 복사와 깊은 복사.",
     "kind": "note",
     "topic": "memory",
     "source_name": "Velog 원문",
@@ -356,22 +356,33 @@ window.TIL_LIBRARY_INDEX = [
       "memory"
     ],
     "publication": "reference",
-    "notice": "스마트 포인터와 복사 방식에서 헷갈렸던 부분은 7월 10일 학습 기록에 남겼다. 스마트 포인터 사용법은 이 문서에서 다루지 않는다.",
     "references": [
       {
+        "label": "스마트 포인터 — 소유권과 약한 참조",
+        "url": "#material=cpp-smart-pointers"
+      },
+      {
         "label": "C 배열과 포인터",
-        "url": "https://jwh2077.github.io/TIL/#material=velog-20260706-001"
+        "url": "#material=velog-20260706-001"
       }
     ],
     "file": "data/materials/velog-20260710-001.js",
     "outline": [
+      {
+        "title": "스택 메모리 — 범위를 벗어나면 정리되는 지역 변수",
+        "text": "스택 메모리 — 범위를 벗어나면 정리되는 지역 변수 보통 함수 안에서 선언한 지역 변수는 스택에 놓이고, 선언한 범위를 벗어나면 수명이 끝난다. for문의 본문 안에서 만든 변수는 매 반복이 끝날 때, 초기화식에서 만든 변수는 반복문을 빠져나갈 때 정리된다. 직접 해제할 필요가 없지만 스택 크기는 제한되어 있고, 지역 변수를 그 범위가 끝난 뒤까지 쓸 수는 없다."
+      },
+      {
+        "title": "힙 메모리 — 필요한 동안 유지하고 직접 해제하기",
+        "text": "힙 메모리 — 필요한 동안 유지하고 직접 해제하기 new로 만든 객체는 그것을 가리키던 지역 포인터가 범위를 벗어나도 남는다. 함수 밖에서도 계속 쓸 수 있지만, 누가 마지막에 해제할지 정해야 한다. 유일한 주소를 잃어버리면 해제할 길이 없어 메모리가 새고, 반대로 먼저 해제하고 남은 포인터를 사용하면 이미 수명이 끝난 객체에 접근하게 된다."
+      },
       {
         "title": "new·delete — 할당·해제와 메모리 문제",
         "text": "new·delete — 할당·해제와 메모리 문제 항목 의미 new / delete 동적 할당 / 해제 댕글링 포인터 해제된 메모리 주소 등을 계속 가리키는 포인터 메모리 누수 더 이상 쓰지 않는 할당 메모리를 해제하지 못하고 남김"
       },
       {
         "title": "얕은 복사와 깊은 복사",
-        "text": "얕은 복사와 깊은 복사 여기서는 포인터가 가리키는 데이터를 복사하는 경우를 비교한다. 얕은 복사: 원본 포인터 ─┐ ├→ 같은 데이터 복사 포인터 ─┘ 깊은 복사: 원본 포인터 ──→ 원본 데이터 복사 포인터 ──→ 별도 공간의 데이터"
+        "text": "얕은 복사와 깊은 복사 얕은 복사 — 주소를 복사한다. 두 포인터가 같은 데이터를 가리킨다. 깊은 복사 — 데이터를 별도 공간에 복사한다. 두 포인터가 각각 원본과 복사본을 가리킨다."
       }
     ]
   },
@@ -493,8 +504,8 @@ window.TIL_LIBRARY_INDEX = [
   },
   {
     "id": "file-continue",
-    "title": "C++ continue — 반복문 실행 흐름",
-    "summary": "continue가 건너뛰는 범위와 짝수·홀수 분기 예시.",
+    "title": "C++ 반복문 — for, while, break, continue",
+    "summary": "for와 while의 반복 순서, break와 continue를 만난 뒤 어디서 실행을 이어가는지 비교한다.",
     "kind": "note",
     "topic": "cpp",
     "source_name": "26.08.24.txt",
@@ -512,12 +523,16 @@ window.TIL_LIBRARY_INDEX = [
     "file": "data/materials/file-continue.js",
     "outline": [
       {
-        "title": "continue의 동작",
-        "text": "continue의 동작 현재 반복의 남은 문장을 건너뛰고 다음 반복으로 진행한다. 아래 for문에서는 증감식 i++ 이후 조건을 다시 검사한다. 강아지 출력 짝수: 숫자 출력 → continue 다음 반복으로 이동"
+        "title": "for와 while — 조건을 확인하는 위치",
+        "text": "for와 while — 조건을 확인하는 위치 둘 다 본문을 실행하기 전에 조건을 확인한다. for는 시작값·조건·증감식을 한 줄에 모으고, while은 조건만 괄호 안에 쓴다. 아래 두 반복문은 각각 0, 1, 2를 출력한다. for (int i = 0; i < 3; ++i) { std::cout << i << ' '; } int i = 0; while (i < 3) { std::cout << i << ' '; ++i; }"
       },
       {
-        "title": "분기별 출력",
-        "text": "분기별 출력 조건 이번 반복에서 출력 고양이 출력 i가 짝수 강아지, i 값 건너뜀 i가 홀수 강아지, 고양이 실행 int main() { for (int i = 0; i < 10; i++) { std::cout << \"강아지\\n\"; if (i % 2 == 0) { std::cout << i <<std::endl; continue; } std::cout << \"고양이\\n\"; } }"
+        "title": "break와 continue — 끝내기와 건너뛰기",
+        "text": "break와 continue — 끝내기와 건너뛰기 예를 들어 0부터 4까지 출력하는 for문에서 출력 직전에 i == 2를 검사하면, break일 때는 0 1, continue일 때는 0 1 3 4가 출력된다. break — 현재 반복문을 끝내고 반복문 바로 다음 문장으로 간다. 중첩 반복문 안이라면 가장 안쪽 반복문만 끝난다. continue — 이번 반복에서 남은 문장만 건너뛴다. for 에서는 증감식으로 가고, while 에서는 조건을 다시 검사한다. 그래서 while 본문의 증가문 앞에서 계속 건너뛰면 같은 값으로 반복할 수 있다."
+      },
+      {
+        "title": "원본 예제 — 짝수에서 continue를 만나면",
+        "text": "원본 예제 — 짝수에서 continue를 만나면 조건 이번 반복에서 출력 고양이 출력 i가 짝수 강아지, i 값 건너뜀 i가 홀수 강아지, 고양이 실행 int main() { for (int i = 0; i < 10; i++) { std::cout << \"강아지\\n\"; if (i % 2 == 0) { std::cout << i <<std::endl; continue; } std::cout << \"고양이\\n\"; } }"
       }
     ]
   },
@@ -1575,6 +1590,51 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "초대 수락 · 게임 인스턴스에서 세션 참가",
         "text": "초대 수락 · 게임 인스턴스에서 세션 참가 AdvancedFriendsGameInstance 를 부모로 쓰는 게임 인스턴스 블루프린트를 연다. 새로 만들 때는 콘텐츠 브라우저에서 Blueprint Class → All Classes 를 열고 이 부모 클래스를 검색한다. 왼쪽 My Blueprint → Functions → Override 목록에서 On Session Invite Accepted 를 선택한다. Event Graph에 수락 이벤트가 생긴다. 이벤트의 실행 핀에서 끌어 Join Session 을 검색한다. 이벤트의 Session to Join 출력을 Search Result 입력에, 참가할 로컬 플레이어의 컨트롤러를 Player Controller 입력에 연결한다. 이벤트가 목록에 없으면 Class Settings → Parent Class 를 확인한다. 실행할 때 이 블루프린트를 쓰려면 Project Settings → Maps & Modes → Game Instance Class 에 지정한다. 다음 테스트에서는 친구가 Steam 초대를 수락했을 때 이벤트가 들어오는지 먼저 보고, 이어서 Join Session의 성공·실패를 확인한다."
+      }
+    ]
+  },
+  {
+    "id": "cpp-smart-pointers",
+    "title": "C++ 스마트 포인터 — unique_ptr, shared_ptr, weak_ptr",
+    "summary": "객체를 한 곳에서 소유할 때, 소유권을 공유할 때, 소유권 없이 참조할 때의 차이. 팀 TextRPG의 Item 관리 사례.",
+    "kind": "note",
+    "topic": "memory",
+    "topics": [
+      "cpp",
+      "memory"
+    ],
+    "publication": "reference",
+    "status": "소유권과 객체 수명",
+    "source_name": "7월 10일 Velog · 팀 TextRPG 상점 작업 기록",
+    "source_url": "https://velog.io/@jwh4410/7.10",
+    "related_ids": [
+      "20260710-001",
+      "20260731-001",
+      "20260803-001"
+    ],
+    "references": [
+      {
+        "label": "스택과 힙 — 메모리 수명·해제·복사",
+        "url": "#material=velog-20260710-001"
+      },
+      {
+        "label": "팀 TextRPG 원본 저장소",
+        "url": "https://github.com/raimei2000/Ch2_TextRPG_Group5"
+      }
+    ],
+    "file": "data/materials/cpp-smart-pointers.js",
+    "outline": [
+      {
+        "title": "unique_ptr — 한 곳에서 소유",
+        "text": "unique_ptr — 한 곳에서 소유 한 객체의 해제를 한 곳에서 맡는다. unique_ptr는 복사할 수 없고, std::move로 다른 unique_ptr에 소유권을 넘길 수 있다. 넘겨받은 쪽이 객체를 소유하며 기존 포인터는 비게 된다. 팀 TextRPG에서는 상점의 Item을 std::unique_ptr 으로 관리했다."
+      },
+      {
+        "title": "shared_ptr — 마지막 소유자가 놓을 때 해제",
+        "text": "shared_ptr — 마지막 소유자가 놓을 때 해제 여러 곳에서 같은 객체를 소유해야 할 때 쓴다. shared_ptr를 복사하면 소유자가 늘고, 마지막 소유자가 사라지면 객체가 해제된다. 두 객체가 shared_ptr로 서로를 소유하면 바깥에서 더는 사용하지 않아도 소유자 수가 0이 되지 않을 수 있다."
+      },
+      {
+        "title": "weak_ptr — 수명을 늘리지 않고 참조",
+        "text": "weak_ptr — 수명을 늘리지 않고 참조 shared_ptr가 관리하는 객체를 소유하지 않고 가리킨다. 서로를 참조하는 두 객체 중 한쪽이 다른 쪽의 수명을 책임질 필요가 없다면 그 연결에 weak_ptr를 쓸 수 있다. 사용할 때는 lock()으로 shared_ptr를 얻는다. 이미 객체가 해제됐다면 빈 shared_ptr가 돌아온다."
       }
     ]
   }
