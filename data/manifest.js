@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261104-dont-drop",
+      "date": "2026-11-04",
+      "date_end": null,
+      "date_label": "2026-11-04",
+      "title": "Don’t Drop · 이동 데이터 적용과 공격 입력 연결",
+      "summary": "어제 만든 데이터 테이블 행에서 이동 설정을 읽어 CharacterMovement에 적용했다. 공격 입력은 BPAttack 이벤트까지 연결했고, 회의에서는 친구 초대와 접속 시 닉네임 검증을 이야기했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-04.js"
+    },
+    {
       "id": "20261103-dont-drop",
       "date": "2026-11-03",
       "date_end": null,
