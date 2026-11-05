@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261105-dont-drop",
+      "date": "2026-11-05",
+      "date_end": null,
+      "date_label": "2026-11-05",
+      "title": "Don’t Drop · 방어구 무게와 이동 가속, 공격 입력 연결",
+      "summary": "방어구 무게로 최대 보행 속도를 계산하고, 이동 키를 누른 시간에 따라 입력 세기를 조정했다. 공격 입력은 전투 컴포넌트의 RequestAttack()으로 연결했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-05.js"
+    },
+    {
       "id": "20261104-dont-drop",
       "date": "2026-11-04",
       "date_end": null,

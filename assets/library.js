@@ -8,7 +8,9 @@
   let preferences={};
   try {preferences=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};} catch {}
   const pins=new Set((Array.isArray(preferences.pins)?preferences.pins:[]).filter(id=>materials.some(r=>r.id===id)));
-  const state = {fields:[],publication:'all',query:'',tags:[],sort:'topic',subject:preferences.subject||'unreal',page:0};
+  const defaultPublication = 'reference';
+  const matchesPublication = r => state.publication === 'all' || (r.publication || defaultPublication) === state.publication;
+  const state = {fields:[],publication:defaultPublication,query:'',tags:[],sort:'topic',subject:preferences.subject||'unreal',page:0};
   function savePreferences(){try{localStorage.setItem(storageKey,JSON.stringify({pins:[...pins],subject:state.subject}));}catch{}}
   const fields = r => r.topics || [r.topic];
   const classification = r => fields(r).map(id=>topics[id]||id).join(' · ');
@@ -17,14 +19,12 @@
   $('#sidebarFilters > summary').insertAdjacentHTML('afterend', `<div id="libraryNav" hidden><div class="side-title">학습 분야</div><div id="materialTopics" class="project-list"></div><div id="materialOutline" hidden><div class="side-title">자료 목차</div><div id="materialSections" class="project-list"></div><div class="side-title">같은 분야 자료</div><div id="materialRelated" class="project-list"></div></div></div>`);
   $('main').insertAdjacentHTML('beforeend', '<div id="libraryPage" hidden></div>');
   $('#materialTopics').insertAdjacentHTML('beforebegin','<p class="library-notice">복수 선택 가능 · 선택한 분야에 모두 해당하는 자료</p>');
-  $('#materialTopics').insertAdjacentHTML('afterend','<div class="side-title">글 상태</div><div id="publicationFilters" class="project-list"></div>');
   const style = document.createElement('style');
   style.textContent = '#archiveModes a {display:block;text-decoration:none} #archiveModes a[aria-current="page"] {background:var(--soft);color:var(--blue);font-weight:800} #libraryPage {max-width:920px} .library-search {width:min(100%,480px);padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;margin:20px 0 5px} .library-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:15px;margin-top:22px} .library-grid .record {margin:0} .library-grid .record:before {display:none} .material-section {margin-top:30px;scroll-margin-top:24px} .material-section h2 {font-size:1.3rem} .material-section h3 {font-size:1rem} .material-section pre {overflow:auto;padding:16px;background:#edf2f8;border-radius:8px;white-space:pre;font-family:Consolas,monospace;font-size:.87rem} .material-section code {font-family:Consolas,monospace;background:#edf2f8} .material-section table {display:block;overflow:auto;max-width:100%;border-collapse:collapse;font-size:.88rem} .material-section td,.material-section th {border:1px solid var(--line);padding:8px 10px;text-align:left} .material-section blockquote {border-left:3px solid var(--blue);padding:10px 16px;margin:16px 0;background:var(--soft)} .library-notice {color:var(--muted);font-size:.86rem} .material-links {display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}';
   document.head.append(style);
   function active() { return location.hash === '#library' || location.hash.startsWith('#material='); }
   function controls() {
     $('#materialTopics').innerHTML = [['all','모든 분야'],...Object.entries(topics).filter(([id])=>materials.some(r=>fields(r).includes(id)))].map(([id,label])=>`<button type="button" class="project" data-field="${id}" aria-pressed="${id==='all'?state.fields.length===0:state.fields.includes(id)}">${label}</button>`).join('');
-    $('#publicationFilters').innerHTML=[['all','모든 상태'],['reference','기존 정리'],['draft','게시 준비 초안']].map(([id,label])=>`<button type="button" class="project" data-publication="${id}" aria-pressed="${state.publication===id}">${label}</button>`).join('');
   }
   const queryTerms = query => query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
   const contains = (text, query) => queryTerms(query).every(term => String(text).toLocaleLowerCase().includes(term));
@@ -44,7 +44,7 @@
   const relevance = (r, query) => !query ? 0 : contains(r.title,query) ? 3 : (r.outline||[]).some(s=>contains(s.title,query)) ? 2 : contains(r.summary,query) ? 1 : 0;
   function results() {
     const query = state.query.trim().toLocaleLowerCase();
-    return materials.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'material'))&&state.fields.every(id=>fields(r).includes(id))&&(state.publication==='all'||r.publication===state.publication)&&matchesQuery(r,query)).sort((a,b)=>{const ranked=query&&['topic','relevance'].includes(state.sort);return (ranked?relevance(b,query)-relevance(a,query):0)||(state.sort==='desc'?-1:1)*a.title.localeCompare(b.title,'ko');});
+    return materials.filter(r=>(!window.TIL_FILTERS||window.TIL_FILTERS.matches(r,state,'material'))&&state.fields.every(id=>fields(r).includes(id))&&matchesPublication(r)&&matchesQuery(r,query)).sort((a,b)=>{const ranked=query&&['topic','relevance'].includes(state.sort);return (ranked?relevance(b,query)-relevance(a,query):0)||(state.sort==='desc'?-1:1)*a.title.localeCompare(b.title,'ko');});
   }
   function list() {
     controls(); $('#materialOutline').hidden = true;
@@ -72,7 +72,7 @@
     $('#libraryCards').innerHTML=shown.slice(state.page*12,state.page*12+12).map(materialRow).join('')||'<div class="empty">조건에 맞는 자료가 없습니다. 검색어나 선택한 조건을 줄여보세요.</div>';
     $('#libraryPagination').innerHTML=pages>1?`<button type="button" data-library-page="${state.page-1}" ${state.page===0?'disabled':''}>이전</button><span>${state.page+1} / ${pages}</span><button type="button" data-library-page="${state.page+1}" ${state.page===pages-1?'disabled':''}>다음</button>`:'';
   }
-  window.TIL_MATERIAL_VIEW={state,records:materials,results,matchesQuery,groupedSections,update(patch){Object.assign(state,patch,{page:0});controls();cards();}};
+  window.TIL_MATERIAL_VIEW={state,records:materials,results,matchesQuery,defaultPublication,matchesPublication,groupedSections,update(patch){Object.assign(state,patch,{page:0});controls();cards();}};
   function load(file) {
     if(!/^data\/materials\/[a-zA-Z0-9_-]+\.js$/.test(file))return Promise.reject(new Error('잘못된 자료 경로입니다.'));
     if(window.TIL_FILES?.[file]) return Promise.resolve(window.TIL_FILES[file]);
@@ -112,7 +112,7 @@
     if(!meta) {location.hash='library';return;}
     controls();$('#materialOutline').hidden=false;
     $('#materialSections').innerHTML='';
-    $('#materialRelated').innerHTML=materials.filter(r=>r.id!==id&&fields(r).some(id=>fields(meta).includes(id))).sort((a,b)=>fields(b).filter(id=>fields(meta).includes(id)).length-fields(a).filter(id=>fields(meta).includes(id)).length).slice(0,6).map(r=>`<button type="button" class="project" data-material="${esc(r.id)}">${esc(r.title)}</button>`).join('');
+    $('#materialRelated').innerHTML=materials.filter(r=>matchesPublication(r)&&r.id!==id&&fields(r).some(id=>fields(meta).includes(id))).sort((a,b)=>fields(b).filter(id=>fields(meta).includes(id)).length-fields(a).filter(id=>fields(meta).includes(id)).length).slice(0,6).map(r=>`<button type="button" class="project" data-material="${esc(r.id)}">${esc(r.title)}</button>`).join('');
     $('#libraryPage').innerHTML='<p>정리 자료를 여는 중…</p>';
     try {
       const r=(await load(meta.file)).find(r=>r.id===id);if(stamp!==token||!active())return;if(!r)throw new Error('자료를 찾을 수 없습니다.');
@@ -151,10 +151,8 @@
   });
   $('#libraryNav').addEventListener('click',e=>{
     const topic=e.target.closest('[data-field]'),item=e.target.closest('[data-material]'),section=e.target.closest('[data-material-section]');
-    const publication=e.target.closest('[data-publication]');
-    if(topic||publication) {
-      if(publication)state.publication=publication.dataset.publication;
-      if(topic) {const id=topic.dataset.field;if(id==='all')state.fields=[];else state.fields=state.fields.includes(id)?state.fields.filter(x=>x!==id):[...state.fields,id];}
+    if(topic) {
+      const id=topic.dataset.field;if(id==='all')state.fields=[];else state.fields=state.fields.includes(id)?state.fields.filter(x=>x!==id):[...state.fields,id];
       if(location.hash==='#library')list();else location.hash='library';
     }
     if(item)choose(item.dataset.material);
