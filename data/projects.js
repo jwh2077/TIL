@@ -39,11 +39,11 @@ window.TIL_PROJECTS.push(...[
     title: 'Don’t Drop',
     archive: true,
     activity: 'team',
-    summary: '기획·명세 정리 단계 · 리슨 서버 기반으로 상대를 밀어 떨어뜨리는 서바이벌 대전 게임을 준비하고 있다. 캐릭터·조작을 맡았으며, AI가 보완한 기능 명세는 검토할 제안으로 두고 있다.',
+    summary: '리슨 서버에서 상대를 밀어 떨어뜨리는 서바이벌 대전 게임. 캐릭터·조작을 맡아 이동 데이터를 적용하고, 방어구 무게와 입력 유지 시간에 따른 이동 조절, 전투 컴포넌트로의 공격 요청을 연결했다.',
     team: '어E가없네 · 5명',
     technology: 'Unreal Engine 5.6',
     role_summary: '캐릭터·조작 / 서기 · 10월 30일 개발 파트 배정',
-    tags: ['Unreal', '멀티플레이', '기획']
+    tags: ['Unreal', '멀티플레이', '캐릭터 이동']
   },
   {
     "id": "archive-cc55-d130-20-33-20-ac1c-c778-20-d504-b85c-c81d-d2b8",

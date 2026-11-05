@@ -11,11 +11,12 @@ window.TIL_FILES["data/materials/unreal-advanced-sessions.js"] = [
     ],
     "publication": "draft",
     "status": "게시 준비 초안 · 초대 수락과 참가 테스트 전",
-    "source_name": "11-3.txt · Test 프로젝트의 DefaultEngine.ini, AdvancedFriendsLibrary.h, AdvancedFriendsGameInstance.h",
+    "source_name": "11-3.txt · 팀 공통 튜터 피드백 · Test 프로젝트의 DefaultEngine.ini, AdvancedFriendsLibrary.h, AdvancedFriendsGameInstance.h",
     "source_url": "",
     "related_ids": [
       "20261103-dont-drop",
-      "20261102-dont-drop"
+      "20261102-dont-drop",
+      "20261104-dont-drop"
     ],
     "sections": [
       {
@@ -33,7 +34,7 @@ window.TIL_FILES["data/materials/unreal-advanced-sessions.js"] = [
       },
       {
         "title": "초대 수락 · 게임 인스턴스에서 세션 참가",
-        "html": "<ol><li><code>AdvancedFriendsGameInstance</code>를 부모로 쓰는 게임 인스턴스 블루프린트를 연다. 새로 만들 때는 콘텐츠 브라우저에서 <strong>Blueprint Class → All Classes</strong>를 열고 이 부모 클래스를 검색한다.</li><li>왼쪽 <strong>My Blueprint → Functions → Override</strong> 목록에서 <code>On Session Invite Accepted</code>를 선택한다. Event Graph에 수락 이벤트가 생긴다.</li><li>이벤트의 실행 핀에서 끌어 <code>Join Session</code>을 검색한다. 이벤트의 <code>Session to Join</code> 출력을 <code>Search Result</code> 입력에, 참가할 로컬 플레이어의 컨트롤러를 <code>Player Controller</code> 입력에 연결한다.</li></ol><p>이벤트가 목록에 없으면 <strong>Class Settings → Parent Class</strong>를 확인한다. 실행할 때 이 블루프린트를 쓰려면 <strong>Project Settings → Maps &amp; Modes → Game Instance Class</strong>에 지정한다.</p><p>다음 테스트에서는 친구가 Steam 초대를 수락했을 때 이벤트가 들어오는지 먼저 보고, 이어서 Join Session의 성공·실패를 확인한다.</p>"
+        "html": "<ol><li><code>AdvancedFriendsGameInstance</code>를 부모로 쓰는 게임 인스턴스 블루프린트를 연다. 새로 만들 때는 콘텐츠 브라우저에서 <strong>Blueprint Class → All Classes</strong>를 열고 이 부모 클래스를 검색한다.</li><li>왼쪽 <strong>My Blueprint → Functions → Override</strong> 목록에서 <code>On Session Invite Accepted</code>를 선택한다. Event Graph에 수락 이벤트가 생긴다.</li><li>이벤트의 실행 핀에서 끌어 <code>Join Session</code>을 검색한다. 이벤트의 <code>Session to Join</code> 출력을 <code>Search Result</code> 입력에, 참가할 로컬 플레이어의 컨트롤러를 <code>Player Controller</code> 입력에 연결한다.</li></ol><p>이벤트가 목록에 없으면 <strong>Class Settings → Parent Class</strong>를 확인한다. 실행할 때 이 블루프린트를 쓰려면 <strong>Project Settings → Maps &amp; Modes → Game Instance Class</strong>에 지정한다.</p><p>팀에서 다음에 확인할 지점은 두 곳이다. 초대 수락 이벤트가 들어왔는지, 그 뒤 Join Session이 성공했는지를 각각 확인한다.</p>"
       }
     ],
     "references": [
@@ -59,6 +60,7 @@ window.TIL_FILES["data/materials/unreal-advanced-sessions.js"] = [
         "label": "수락·참가",
         "section": "초대 수락 · 게임 인스턴스에서 세션 참가"
       }
-    ]
+    ],
+    "notice": "팀 공통 피드백에서 나온 초대 수락 방법과 임시 Test 프로젝트의 플러그인 선언을 함께 정리했다. 11월 4일 팀 회의에서는 초대를 수락한 뒤 방에 들어가지 못하는 문제가 남아 있었다."
   }
 ];

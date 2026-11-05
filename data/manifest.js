@@ -6,7 +6,7 @@ window.TIL_INDEX = {
       "date_end": null,
       "date_label": "2026-11-05",
       "title": "Don’t Drop · 방어구 무게와 이동 가속, 공격 입력 연결",
-      "summary": "방어구 무게로 최대 보행 속도를 계산하고, 이동 키를 누른 시간에 따라 입력 세기를 조정했다. 공격 입력은 전투 컴포넌트의 RequestAttack()으로 연결했다.",
+      "summary": "방어구 무게로 최대 속도를 계산하고, 입력 경과 시간으로 이동 세기를 조절했다. BP에서 테스트한 공격 요청을 캐릭터 C++ 코드에 연결했다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [
@@ -25,7 +25,7 @@ window.TIL_INDEX = {
       "date_end": null,
       "date_label": "2026-11-04",
       "title": "Don’t Drop · 이동 데이터 적용과 공격 입력 연결",
-      "summary": "어제 만든 데이터 테이블 행에서 이동 설정을 읽어 CharacterMovement에 적용했다. 공격 입력은 BPAttack 이벤트까지 연결했고, 회의에서는 친구 초대와 접속 시 닉네임 검증을 이야기했다.",
+      "summary": "데이터 테이블에서 이동 값을 읽어 적용했다. 컨트롤러 생성과 입력 설정을 살펴보고, 공격 키를 블루프린트 이벤트에 연결했다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [
@@ -82,7 +82,7 @@ window.TIL_INDEX = {
       "date_end": null,
       "date_label": "2026-10-30",
       "title": "Don’t Drop · 게임 규칙 논의와 캐릭터 담당 분배",
-      "summary": "서바이벌 규칙을 논의하고 캐릭터·조작을 맡게 됐다. AI 도움으로 정리한 기능 명세는 실제 구현과 구분하고, 다른 파트와 맞출 연결 내용을 남겼다.",
+      "summary": "팀 회의에서 서바이벌 규칙을 논의하고 캐릭터·조작을 맡았다. 명세 초안에는 전투·장비 담당과 맞춰야 할 값을 적었다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [
