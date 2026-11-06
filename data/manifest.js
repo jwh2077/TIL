@@ -1,6 +1,26 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261106-dont-drop",
+      "date": "2026-11-06",
+      "date_end": null,
+      "date_label": "2026-11-06",
+      "title": "Don’t Drop · 방어구 무게 변화와 캐릭터 이동 설정 연결",
+      "summary": "방어구 상태 변경과 이동 설정을 연결했다. 출발 속도와 가속 설정을 적용해 보니, 출발 속도만 높였을 때 대시처럼 움직였다가 급하게 느려지는 문제가 있었다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "데이터 테이블",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-06.js"
+    },
+    {
       "id": "20261105-dont-drop",
       "date": "2026-11-05",
       "date_end": null,
@@ -199,7 +219,12 @@ window.TIL_INDEX = {
       "summary": "서버 실행 모드, PlayerState 클래스 지정과 초기화 시점, 맵의 외부 액터 파일을 구분해서 봤다.",
       "project": "CX",
       "primary_topic": "unreal",
-      "tags": ["Unreal", "멀티플레이", "PlayerState", "PIE"],
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "PlayerState",
+        "PIE"
+      ],
       "activity": "personal",
       "month": "2026-10",
       "file": "data/2026/10/2026-10-28.js"
