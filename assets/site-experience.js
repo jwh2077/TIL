@@ -22,5 +22,20 @@ const render=type=>type==='print'?'<div class="ex-site ex-book ex-book-print"><d
 const menuFor=r=>r.type==='print'?'print':r.type==='project'?'projects':null;
 const attach=root=>{const button=root.querySelector('[data-print-book]');if(button)button.addEventListener('click',()=>window.print());};
 
-window.TIL_EXPERIENCE={kind:'minimal',navigation,routes,home,projectIndex,render,menuFor,attach};
+
+const allCases=window.TIL_SHOWCASE?.allCases||[];
+const selected=id=>allCases.find(x=>x.id===id);
+const caseParts=c=>[
+['문제 상황',c.challenge],
+['시도 및 적용',c.approach],
+['확인된 결과',c.outcome],
+['남은 검증',c.caution]
+];
+const caseFacts=c=>[['시점',c.period],['형태',c.kind],['기술',c.engine],['담당',c.role]];
+const documentIndex=()=>'<section class="ex-document-index"><h2>지원 문서 · 기술 노트</h2><p>개인정보 없는 문서를 사이트에서 읽고, 각 문서의 PDF 버튼으로 출력할 수 있습니다.</p>'+library()+'</section>';
+
+const careerIndex=()=>'<div class="ex-site ex-book ex-book-archive"><header><span>DOCUMENTS / APPENDIX</span><h1>지원 문서와 기술 노트</h1><p>하이퍼링크보다 문서 자체의 가독성과 A4 출력에 초점을 맞췄습니다.</p></header>'+documentIndex()+sourceNote+'</div>';
+const caseDetail=id=>{const c=selected(id);if(!c)return window.TIL_SHOWCASE.detail(id);return '<div class="ex-site ex-book ex-case-publication"><div class="ex-print-tools"><a href="#projects">← 목차</a><button type="button" data-print-book>이 사례 PDF로 저장 · 인쇄</button></div><article class="ex-print-paper"><div class="ex-book-top"><span>PROJECT CASE STUDY</span><span>'+esc(c.index)+' / '+esc(c.period)+'</span></div><header><h1>'+esc(c.title)+'</h1><p>'+esc(c.lead)+'</p></header><div class="ex-publication-facts">'+caseFacts(c).map(([k,v])=>'<div><span>'+k+'</span><strong>'+esc(v)+'</strong></div>').join('')+'</div><section><h2>담당 업무</h2><ul>'+c.own.map(v=>'<li>'+esc(v)+'</li>').join('')+'</ul></section>'+caseParts(c).map(([k,v],i)=>'<section><h2>'+String(i+1).padStart(2,'0')+'. '+k+'</h2><p>'+esc(v)+'</p></section>').join('')+'<footer>근거: '+esc(c.evidence)+' · 원본 학습 기록을 토대로 작성했습니다.</footer></article></div>';};
+
+window.TIL_EXPERIENCE={kind:'minimal',navigation,routes,home,projectIndex,render,menuFor,attach,careerIndex,caseDetail};
 })();
