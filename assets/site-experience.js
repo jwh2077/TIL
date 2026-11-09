@@ -23,5 +23,20 @@ const render=type=>type==='lab'?lab():'';
 const menuFor=r=>r.type==='lab'?'lab':r.type==='project'?'projects':null;
 const attach=()=>{};
 
-window.TIL_EXPERIENCE={kind:'terminal',navigation,routes,home,projectIndex,render,menuFor,attach};
+
+const allCases=window.TIL_SHOWCASE?.allCases||[];
+const selected=id=>allCases.find(x=>x.id===id);
+const caseParts=c=>[
+['문제 상황',c.challenge],
+['시도 및 적용',c.approach],
+['확인된 결과',c.outcome],
+['남은 검증',c.caution]
+];
+const caseFacts=c=>[['시점',c.period],['형태',c.kind],['기술',c.engine],['담당',c.role]];
+const documentIndex=()=>'<section class="ex-document-index"><h2>지원 문서 · 기술 노트</h2><p>개인정보 없는 문서를 사이트에서 읽고, 각 문서의 PDF 버튼으로 출력할 수 있습니다.</p>'+library()+'</section>';
+
+const careerIndex=()=>'<div class="ex-site ex-devlab"><div class="ex-shell-header"><span>~/portfolio/docs</span><span>MARKDOWN / PRINT</span></div><header class="ex-lab-heading"><span>&gt; find ./docs -type f</span><h1>문서 저장소</h1><p>기술 노트와 지원 자료를 분야별로 정리했습니다.</p></header>'+documentIndex()+sourceNote+'</div>';
+const caseDetail=id=>{const c=selected(id);if(!c)return window.TIL_SHOWCASE.detail(id);return '<div class="ex-site ex-devlab ex-debug-case"><div class="ex-shell-header"><span>./project/'+esc(c.id)+'</span><span>TRACE · PUBLIC</span></div><header class="ex-lab-heading"><span>&gt; cat ./project/summary.md</span><h1>'+esc(c.title)+'</h1><p>'+esc(c.lead)+'</p><a href="#projects">← projects</a></header><div class="ex-debug-meta">'+caseFacts(c).map(([k,v])=>'<div><span>'+k+'</span><strong>'+esc(v)+'</strong></div>').join('')+'</div><section class="ex-debug-ownership"><h2>$ ls ./contribution</h2>'+c.own.map((v,i)=>'<p><span>0'+(i+1)+'</span> '+esc(v)+'</p>').join('')+'</section><section class="ex-debug-timeline"><h2>$ cat ./debug_trace</h2>'+caseParts(c).map(([k,v],i)=>'<article><span>STEP '+String(i+1).padStart(2,'0')+' / '+k+'</span><p>'+esc(v)+'</p></article>').join('')+'</section><footer><span>근거 · '+esc(c.evidence)+'</span><a href="#record='+esc(c.record)+'">원본 기록 열기 ↗</a></footer></div>';};
+
+window.TIL_EXPERIENCE={kind:'terminal',navigation,routes,home,projectIndex,render,menuFor,attach,careerIndex,caseDetail};
 })();
