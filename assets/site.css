@@ -93,3 +93,70 @@
 .career-prose th{background:var(--soft)}.career-related{margin-top:30px}.career-related h2{font-size:20px}
 @media(max-width:800px){.home-career-entry{align-items:flex-start;flex-direction:column}.career-cards{grid-template-columns:1fr}.career-prose{padding:20px 18px}.career-prose h2{font-size:20px}}
 @media print{.site-header,.skip-link,.career-actions,.career-breadcrumb,.career-related,#readingToc,.layout>aside{display:none!important}body,.layout,main{background:white!important;padding:0!important;margin:0!important;max-width:none!important}.career-prose{border:0!important;padding:0!important;max-width:none!important}.career-doc-head{padding:0!important}.career-prose pre,.career-prose table{break-inside:avoid}a{color:inherit!important}}
+
+/* PDF-first career reading: constrained line length, quiet navigation and clean hierarchy. */
+body:has(.career-document){background:#edf1ef}
+body:has(.career-document) main{max-width:1000px;margin:auto;padding-top:24px}
+body.reading:has(.career-document) main{padding-right:28px}
+body:has(.career-document) #readingToc{display:none!important}
+.career-document{max-width:860px;margin:0 auto}
+.career-breadcrumb{display:flex;gap:6px;align-items:center;margin:0 0 14px;font-size:13px}
+.career-doc-head{padding:28px 48px 12px;background:#fff;border:1px solid #d7deda;border-bottom:0;border-radius:8px 8px 0 0}
+.career-doc-head .eyebrow{font-size:11px;letter-spacing:.13em}
+.career-doc-head h1{font-size:clamp(27px,3vw,34px);line-height:1.34;letter-spacing:-.045em;margin:12px 0 10px}
+.career-doc-head .intro{max-width:680px;font-size:14px;line-height:1.75;margin:0}
+.career-doc-head .career-actions{margin:18px 0 8px}
+.career-document .career-prose{max-width:none;padding:6px 48px 52px;border:1px solid #d7deda;border-top:0;border-radius:0 0 8px 8px;box-shadow:0 7px 22px rgba(28,50,43,.05)}
+.career-prose{font-size:15px;line-height:1.8;letter-spacing:-.01em;color:#26352e}
+.career-document .career-prose h2{font-size:19px;line-height:1.4;letter-spacing:-.028em;margin:37px 0 13px;padding:0 0 10px;border-bottom:1px solid #dce5e0;color:#18372f;break-after:avoid}
+.career-document .career-prose h2:first-child{margin-top:14px}
+.career-document .career-prose h3{font-size:16px;line-height:1.5;font-weight:750;margin:24px 0 8px;color:#26372f;break-after:avoid}
+.career-document .career-prose h4{font-size:15px;margin:17px 0 6px;break-after:avoid}
+.career-document .career-prose p,.career-document .career-prose li{font-size:14px;line-height:1.85;color:#293a33;word-break:keep-all;overflow-wrap:break-word}
+.career-document .career-prose p{margin:0 0 13px}
+.career-document .career-prose h2+p,.career-document .career-prose h3+p{margin-top:0}
+.career-document .career-prose ul{margin:7px 0 18px;padding-left:22px}
+.career-document .career-prose li{padding-left:2px;margin:4px 0}
+.career-document .career-prose strong{color:#1b3d33;font-weight:750}
+.career-document .career-prose blockquote{padding:10px 15px;border-left:2px solid #6f9184;background:#f1f5f2;color:#36483f}
+.career-document .career-prose hr{border:0;border-top:1px solid #dce5e0;margin:26px 0}
+.career-document .career-prose code{font-size:.9em;padding:1px 4px}
+.career-document .career-prose pre{font-size:12px;line-height:1.65}
+.career-document .career-prose table{font-size:13px;line-height:1.55;table-layout:auto}
+.career-document .career-prose th,.career-document .career-prose td{padding:10px 11px;min-width:0;border-color:#dfe6e2;word-break:keep-all}
+.career-document .career-prose th{background:#eff4f1;color:#244338}
+.career-intro{padding-bottom:8px}.career-category{margin:24px 0 34px}
+.career-card{padding:20px 22px;box-shadow:none}.career-card .meta{display:block;font-size:11px}
+.career-card h3{font-size:17px;margin:6px 0}.career-card p{font-size:13px;line-height:1.65}
+.career-category>.section-head{border-bottom:1px solid var(--line);padding-bottom:10px}
+.career-category>.section-head h2{font-size:19px}
+@media(max-width:800px){
+ body:has(.career-document) main,body.reading:has(.career-document) main{padding:18px 16px 45px}
+ .career-doc-head{padding:25px 23px 10px}
+ .career-document .career-prose{padding:4px 23px 35px}
+ .career-document .career-prose h2{font-size:18px}
+ .career-document .career-prose p,.career-document .career-prose li{font-size:14px}
+}
+@page{size:A4;margin:17mm 17mm 19mm}
+@media print{
+ html,body{background:#fff!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ body:has(.career-document) main,body.reading:has(.career-document) main{max-width:none!important;width:auto!important;padding:0!important}
+ .career-document{max-width:none!important;margin:0!important}
+ .career-breadcrumb,.site-header,.career-doc-head .career-actions,#readingToc,.career-related{display:none!important}
+ .career-doc-head{padding:0 0 9mm!important;margin:0!important;border:0!important;border-radius:0!important}
+ .career-doc-head h1{font-size:23pt!important;line-height:1.28!important;margin:3mm 0!important}
+ .career-doc-head .eyebrow{font-size:9pt!important}
+ .career-doc-head .intro{font-size:10pt!important;line-height:1.55!important}
+ .career-document .career-prose{padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+ .career-document .career-prose h2{font-size:14pt!important;margin:9mm 0 3mm!important;padding-bottom:2mm!important}
+ .career-document .career-prose h3{font-size:11pt!important;margin:5mm 0 2mm!important}
+ .career-document .career-prose p,.career-document .career-prose li{font-size:10pt!important;line-height:1.58!important}
+ .career-document .career-prose p{margin:0 0 3mm!important}
+ .career-document .career-prose ul{margin:2mm 0 4mm!important}
+ .career-document .career-prose table{font-size:9pt!important;line-height:1.4!important}
+ .career-document .career-prose th,.career-document .career-prose td{padding:2mm!important}
+ .career-document .career-prose tr{break-inside:avoid}
+ .career-document .career-prose h2,.career-document .career-prose h3,.career-document .career-prose h4{break-after:avoid-page;page-break-after:avoid}
+ .career-document .career-prose p,.career-document .career-prose li{orphans:3;widows:3}
+ .career-document .career-prose pre{white-space:pre-wrap!important;overflow-wrap:anywhere!important}
+}
