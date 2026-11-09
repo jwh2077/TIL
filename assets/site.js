@@ -16,6 +16,16 @@
   const route=()=>{const hash=location.hash.slice(1);if(!hash||hash==='home'||hash==='top')return {type:'home'};const at=hash.indexOf('=');return at<0?{type:hash}:{type:hash.slice(0,at),id:decodeURIComponent(hash.slice(at+1))};};
   const page=$('main');
   $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">개발·학습 기록 <span>C++ / Unreal 프로젝트와 학습 기록</span></a><nav aria-label="주 메뉴">'+[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['algorithms','알고리즘'],['library','자료실'],['career','포트폴리오']].map(([id,label])=>`<a href="#${id}" data-menu="${id}">${label}</a>`).join('')+'</nav></div>');
+  const themeLabels={editorial:'에디토리얼',cinematic:'시네마틱',terminal:'터미널',dashboard:'대시보드',minimal:'미니멀'};
+  const themeMenu=document.createElement('details');
+  themeMenu.className='pf-settings';
+  themeMenu.innerHTML='<summary aria-label="사이트 디자인 설정"><span aria-hidden="true">⚙</span> 디자인 <span class="pf-theme-current"></span></summary><div class="pf-settings-panel" role="group" aria-label="사이트 디자인 선택"><p>디자인 스타일</p>'+Object.entries(themeLabels).map(([id,name])=>'<button type="button" data-theme-option="'+id+'" aria-pressed="false">'+name+'</button>').join('')+'<small>선택한 디자인은 이 브라우저에 저장됩니다.</small></div>';
+  document.querySelector('.site-header').append(themeMenu);
+  const syncThemeMenu=()=>{const current=window.TIL_PORTFOLIO?.theme||'editorial';themeMenu.querySelector('.pf-theme-current').textContent=themeLabels[current]||themeLabels.editorial;themeMenu.querySelectorAll('[data-theme-option]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.themeOption===current)));};
+  syncThemeMenu();
+  themeMenu.addEventListener('click',e=>{const button=e.target.closest('[data-theme-option]');if(!button)return;const theme=button.dataset.themeOption;if(!window.TIL_PORTFOLIO?.setTheme(theme))return;syncThemeMenu();themeMenu.open=false;themeMenu.querySelector('summary').focus();const routeNow=route();if(routeNow.type==='home'||routeNow.type==='career'&&!routeNow.id){const target=$('#sitePages');target.innerHTML=routeNow.type==='home'?home():window.TIL_CAREER.render('');if(routeNow.type==='career')window.TIL_CAREER.attach(target);}});
+  document.addEventListener('click',e=>{if(themeMenu.open&&!themeMenu.contains(e.target))themeMenu.open=false;});
+  themeMenu.addEventListener('keydown',e=>{if(e.key==='Escape'){themeMenu.open=false;themeMenu.querySelector('summary').focus();}});
   page.insertAdjacentHTML('afterbegin','<div id="sitePages" hidden></div><header id="listIntro" hidden></header><div id="siteFilters" hidden></div>');
   page.insertAdjacentHTML('beforeend','<details id="readingToc" hidden><summary>이 글의 목차</summary><nav aria-label="본문 목차"></nav></details>');
   const dateBox=$('.date-range'), dateParking=$('aside');
