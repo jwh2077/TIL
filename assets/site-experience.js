@@ -23,5 +23,20 @@ const render=(type)=>type==='screen'?'<div class="ex-site ex-cinema ex-screen">'
 const menuFor=r=>['screen'].includes(r.type)?'screen':r.type==='project'?'projects':null;
 const attach=()=>{};
 
-window.TIL_EXPERIENCE={kind:'cinematic',navigation,routes,home,projectIndex,render,menuFor,attach};
+
+const allCases=window.TIL_SHOWCASE?.allCases||[];
+const selected=id=>allCases.find(x=>x.id===id);
+const caseParts=c=>[
+['문제 상황',c.challenge],
+['시도 및 적용',c.approach],
+['확인된 결과',c.outcome],
+['남은 검증',c.caution]
+];
+const caseFacts=c=>[['시점',c.period],['형태',c.kind],['기술',c.engine],['담당',c.role]];
+const documentIndex=()=>'<section class="ex-document-index"><h2>지원 문서 · 기술 노트</h2><p>개인정보 없는 문서를 사이트에서 읽고, 각 문서의 PDF 버튼으로 출력할 수 있습니다.</p>'+library()+'</section>';
+
+const careerIndex=()=>'<div class="ex-site ex-cinema ex-exhibition-library"><header><span>ARCHIVE / PRINT & READ</span><h1>제작 기록 아카이브</h1><p>게임 장면을 만드는 데 사용한 기술과 프로젝트 문서를 모았습니다.</p></header>'+documentIndex()+sourceNote+'</div>';
+const caseDetail=id=>{const c=selected(id);if(!c)return window.TIL_SHOWCASE.detail(id);const p=projects.find(x=>x.title===c.projectName)||projects.find(x=>x.title===c.title);return '<div class="ex-site ex-cinema ex-exhibit"><nav><a href="#screen">← 작품 전시관</a><span>PROJECT '+esc(c.index)+' / '+esc(c.status)+'</span></nav><div class="ex-exhibit-hero"><div>'+img(p)+'</div><section><small>TECHNICAL SHOWCASE / '+esc(c.period)+'</small><h1>'+esc(c.title)+'</h1><p>'+esc(c.lead)+'</p><dl>'+caseFacts(c).map(([k,v])=>'<div><dt>'+k+'</dt><dd>'+esc(v)+'</dd></div>').join('')+'</dl></section></div><section class="ex-exhibit-role"><h2>구현에 기여한 부분</h2><ul>'+c.own.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></section><div class="ex-exhibit-story">'+caseParts(c).map(([k,v],i)=>'<section><span>SCENE '+String(i+1).padStart(2,'0')+'</span><div><h2>'+k+'</h2><p>'+esc(v)+'</p></div></section>').join('')+'</div><footer><span>근거: '+esc(c.evidence)+'</span><a href="#record='+esc(c.record)+'">관련 작업 기록 ↗</a></footer></div>';};
+
+window.TIL_EXPERIENCE={kind:'cinematic',navigation,routes,home,projectIndex,render,menuFor,attach,careerIndex,caseDetail};
 })();
