@@ -119,5 +119,5 @@
       '<footer class="career-case-footer"><span>근거 · '+esc(item.evidence)+'</span><a href="#record='+encodeURIComponent(item.record)+'">원본 작업 기록 보기 →</a></footer>'+
       '<div class="career-case-next"><span>다음 프로젝트</span><a href="#career='+esc(cases[(cases.indexOf(item)+1)%cases.length].id)+'">'+esc(cases[(cases.indexOf(item)+1)%cases.length].title)+' →</a></div></div>';
   }
-  window.TIL_SHOWCASE={hub,detail,has:id=>cases.some(c=>c.id===id),cases:cases.map(({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder})=>({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder}))};
+  window.TIL_SHOWCASE={hub,detail,has:id=>cases.some(c=>c.id===id),allCases:cases,cases:cases.map(({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder})=>({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder}))};
 })();
