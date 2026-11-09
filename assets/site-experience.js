@@ -3,7 +3,7 @@
 const projects=(window.TIL_PROJECTS||[]);
 const evidence=window.TIL_PORTFOLIO_EVIDENCE;
 if(!evidence||!Array.isArray(evidence.cases))throw Error('Portfolio evidence data is missing');
-const examples=evidence.cases.map(c=>({...c,lead:c.focus,summary:c.intro,status:c.state,engine:c.stack.join(' · '),projectName:projects.find(p=>p.id===c.sourceProject)?.title,own:c.contributions,record:c.records.at(-1)?.id,evidence:c.records.map(r=>r.date+' '+r.label).join(' / ')}));
+const examples=evidence.cases.map((c,i)=>({...c,index:String(i+1).padStart(2,'0'),lead:c.focus,summary:c.intro,status:c.state,engine:c.stack.join(' · '),projectName:projects.find(p=>p.id===c.sourceProject&&p.title===c.title)?.title,own:c.contributions,record:c.records.at(-1)?.id,evidence:c.records.map(r=>r.date+' '+r.label).join(' / ')}));
 const docs=(window.TIL_CAREER_DOCUMENTS||[]).filter(d=>evidence.publicDocs.includes(d.id));
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const caseByTitle=name=>examples.find(x=>x.title===name);
