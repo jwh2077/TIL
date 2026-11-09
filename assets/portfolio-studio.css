@@ -355,3 +355,5 @@ body[data-portfolio-theme=dashboard] .area{border-radius:12px}
 .pf-settings-panel small{font-size:10px;color:var(--pf-dim);line-height:1.6;margin:8px 0 0}
 @media(max-width:800px){.site-header .pf-settings{position:absolute;right:16px;top:10px}.pf-settings>summary{font-size:11px;padding:5px 9px}.pf-theme-current{display:none}.pf-settings-panel{top:calc(100% + 10px)}}
 @media print{.site-header .pf-settings{display:none!important}}
+
+@media(max-width:800px){body[data-portfolio-theme] .site-header .site-brand{max-width:calc(100% - 95px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
