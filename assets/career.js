@@ -66,7 +66,7 @@ function detail(id){
     '</div></div>';
 }
 window.TIL_CAREER={
-  render:id=>window.TIL_SHOWCASE?.has(id)?(window.TIL_EXPERIENCE?.caseDetail?.(id)||window.TIL_SHOWCASE.detail(id)):id?detail(id):(window.TIL_EXPERIENCE?.careerIndex?.()||window.TIL_PORTFOLIO?.hub?.()||hub()),
+  render:id=>window.TIL_PORTFOLIO_EVIDENCE?.cases.some(c=>c.id===id)?window.TIL_EXPERIENCE.caseDetail(id):id?detail(id):window.TIL_EXPERIENCE.careerIndex(),
   attach:root=>{
     const input=root.querySelector('#careerQuery');
     if(input)input.addEventListener('input',()=>{const target=root.querySelector('#careerCatalog');if(target)target.innerHTML=catalog(input.value);});
