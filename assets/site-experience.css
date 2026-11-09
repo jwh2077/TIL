@@ -76,3 +76,91 @@ body[data-portfolio-theme=dashboard]{--pf-back:#eef2f9;--pf-paper:#fff;--pf-ink:
 .ex-evidence-case footer a{color:#315fc0;font-weight:700}
 @media(max-width:690px){.ex-evidence-facts,.ex-evidence-grid{grid-template-columns:1fr 1fr}.ex-evidence-facts>div{padding:12px}.ex-evidence-case footer{display:block}.ex-evidence-case footer a{display:block;margin-top:10px}}
 @media(max-width:500px){.ex-evidence-grid{grid-template-columns:1fr}}
+
+
+/* Shared structural shell for four independent information architectures.
+   Legacy TIL article, filters, algorithm, and library functions remain intact. */
+body[data-portfolio-theme]{
+ --ink:var(--pf-ink);--muted:var(--pf-dim);--blue:var(--pf-accent);
+ --line:var(--pf-line);--paper:var(--pf-back);--soft:var(--pf-soft);
+ background:var(--pf-back);color:var(--pf-ink);
+ font-family:"Segoe UI","Malgun Gothic",system-ui,sans-serif;
+}
+body[data-portfolio-theme] .layout{max-width:1310px;min-height:90vh}
+body[data-portfolio-theme] .site-header{
+ position:sticky;top:0;z-index:11;display:flex;align-items:center;justify-content:space-between;
+ padding:16px max(26px,calc((100vw - 1210px)/2));gap:24px;
+ background:var(--pf-paper);border-bottom:1px solid var(--pf-line);color:var(--pf-ink);
+}
+body[data-portfolio-theme] .site-brand{font-size:19px;letter-spacing:-.045em;font-weight:800;color:var(--pf-ink)}
+body[data-portfolio-theme] .site-brand span{font-size:11px;font-weight:400;color:var(--pf-dim)}
+body[data-portfolio-theme] .site-header nav{display:flex;gap:clamp(9px,1.6vw,23px);align-items:center;overflow-x:auto}
+body[data-portfolio-theme] .site-header nav a{font-size:13px;color:var(--pf-ink);white-space:nowrap}
+body[data-portfolio-theme] .site-header nav a:hover,
+body[data-portfolio-theme] .site-header nav a[aria-current=page]{color:var(--pf-accent);border-color:var(--pf-accent)}
+body[data-portfolio-theme] main{max-width:1250px;margin:0 auto;padding:35px 27px 85px;color:var(--pf-ink)}
+body[data-portfolio-theme].reading main{padding-right:270px}
+body[data-portfolio-theme] #listIntro h1,
+body[data-portfolio-theme] #sitePages>header h1{color:var(--pf-ink);letter-spacing:-.05em}
+body[data-portfolio-theme] #listIntro p,
+body[data-portfolio-theme] #sitePages>header p{color:var(--pf-dim)}
+body[data-portfolio-theme] .area,
+body[data-portfolio-theme] .record,
+body[data-portfolio-theme] .work-block,
+body[data-portfolio-theme] .project-card,
+body[data-portfolio-theme] .featured,
+body[data-portfolio-theme] .library-results{background:var(--pf-paper);border-color:var(--pf-line);color:var(--pf-ink)}
+body[data-portfolio-theme] .area:hover,
+body[data-portfolio-theme] .record:hover,
+body[data-portfolio-theme] .project-card:hover{border-color:var(--pf-accent)}
+body[data-portfolio-theme] .area p,
+body[data-portfolio-theme] .work-block p,
+body[data-portfolio-theme] .project-card p,
+body[data-portfolio-theme] .record p,
+body[data-portfolio-theme] .caption,
+body[data-portfolio-theme] .meta{color:var(--pf-dim)}
+body[data-portfolio-theme] .pill,
+body[data-portfolio-theme] .topic-badge{background:var(--pf-soft);color:var(--pf-accent)}
+body[data-portfolio-theme] .button{background:var(--pf-accent);border-color:var(--pf-accent);color:var(--pf-back)}
+body[data-portfolio-theme] .source,
+body[data-portfolio-theme] .project-return{color:var(--pf-accent)}
+body[data-portfolio-theme] .filter-option summary,
+body[data-portfolio-theme] .filter-bar select,
+body[data-portfolio-theme] #siteQuery,
+body[data-portfolio-theme] #globalQuery,
+body[data-portfolio-theme] .material-open{background:var(--pf-paper);color:var(--pf-ink);border-color:var(--pf-line)}
+body[data-portfolio-theme] .filter-option summary:hover,
+body[data-portfolio-theme] .material-open:hover{background:var(--pf-soft)}
+body[data-portfolio-theme] .material-summary,
+body[data-portfolio-theme] .project-card-period{color:var(--pf-dim)}
+body[data-portfolio-theme].reading:has(.ex-site) main,
+body[data-portfolio-theme].reading:has(.career-document-page) main{padding-right:28px}
+body[data-portfolio-theme].reading:has(.ex-site) #sitePages,
+body[data-portfolio-theme].reading:has(.career-document-page) #sitePages{max-width:none!important}
+body[data-portfolio-theme]:has(.ex-site) #readingToc{display:none!important}
+body[data-portfolio-theme] .career-document-page{max-width:870px;margin:auto}
+body[data-portfolio-theme] .career-doc-head,
+body[data-portfolio-theme] .career-prose{background:#fff!important;color:#26332c!important}
+body[data-portfolio-theme] .career-doc-head h1,
+body[data-portfolio-theme] .career-prose p,
+body[data-portfolio-theme] .career-prose li{color:#26332c!important}
+body[data-portfolio-theme] .career-document .career-prose table{color:#26332c}
+body[data-portfolio-theme] .career-document .career-prose td{color:#26332c}
+body[data-portfolio-theme] .career-toolbar{max-width:870px;margin:0 auto 15px}
+body[data-portfolio-theme] .career-print{background:var(--pf-accent);color:var(--pf-back);border-color:var(--pf-accent)}
+body[data-portfolio-theme] .career-doc-head .eyebrow{color:#527367}
+@media(max-width:900px){
+ body[data-portfolio-theme] .site-header{display:block;padding:12px 18px}
+ body[data-portfolio-theme] .site-brand{display:block;font-size:17px}
+ body[data-portfolio-theme] .site-brand span{display:none}
+ body[data-portfolio-theme] .site-header nav{margin-top:8px;gap:18px;overflow:auto;padding-bottom:4px;white-space:nowrap}
+ body[data-portfolio-theme] .site-header nav a{font-size:12px}
+ body[data-portfolio-theme] main,body[data-portfolio-theme].reading main{padding:22px 18px 65px}
+ body[data-portfolio-theme] .reading #readingToc{position:static;max-height:none;width:100%}
+}
+@media print{
+ body[data-portfolio-theme]{background:#fff!important;color:#222!important;--ink:#222;--muted:#555;--blue:#333;--paper:#fff;--soft:#fff;--line:#ddd}
+ body[data-portfolio-theme] .site-header{display:none!important}
+ body[data-portfolio-theme] main,body[data-portfolio-theme].reading main{padding:0!important;max-width:none!important}
+ body[data-portfolio-theme] .career-document .career-prose{background:#fff!important;box-shadow:none!important}
+}
