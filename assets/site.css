@@ -160,3 +160,13 @@ body:has(.career-document) #readingToc{display:none!important}
  .career-document .career-prose p,.career-document .career-prose li{orphans:3;widows:3}
  .career-document .career-prose pre{white-space:pre-wrap!important;overflow-wrap:anywhere!important}
 }
+
+/* Document controls sit outside the printable paper surface. */
+.career-document-page{max-width:860px;margin:0 auto}
+.career-document-page .career-document{max-width:none;margin:0}
+.career-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 15px;padding:0 2px}
+.career-toolbar .career-back{font-size:13px;color:var(--blue);font-weight:650}
+.career-toolbar .career-print{min-height:39px;background:var(--blue);border-color:var(--blue);color:#fff}
+.career-toolbar .career-print:hover{background:#104c42;border-color:#104c42;color:#fff}
+@media(max-width:800px){.career-toolbar{margin-bottom:12px}}
+@media print{.career-toolbar{display:none!important}.career-document-page{max-width:none!important;margin:0!important}}
