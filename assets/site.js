@@ -15,7 +15,7 @@
   const views={record:window.TIL_RECORD_VIEW,material:window.TIL_MATERIAL_VIEW,algorithm:window.TIL_ALGORITHM_VIEW};
   const route=()=>{const hash=location.hash.slice(1);if(!hash||hash==='home'||hash==='top')return {type:'home'};const at=hash.indexOf('=');return at<0?{type:hash}:{type:hash.slice(0,at),id:decodeURIComponent(hash.slice(at+1))};};
   const page=$('main');
-  $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">개발·학습 기록 <span>C++ / Unreal 프로젝트와 학습 기록</span></a><nav aria-label="주 메뉴">'+(window.TIL_EXPERIENCE?.navigation||[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['algorithms','알고리즘'],['library','자료실'],['career','포트폴리오']]).map(([id,label,href])=>`<a href="${esc(href||'#'+id)}" data-menu="${esc(id)}">${esc(label)}</a>`).join('')+'</nav></div>');
+  $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">'+esc(window.TIL_EXPERIENCE?.brand||'개발·학습 기록')+' <span>'+esc(window.TIL_EXPERIENCE?.tagline||'C++ / Unreal')+'</span></a><nav aria-label="주 메뉴">'+(window.TIL_EXPERIENCE?.navigation||[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['algorithms','알고리즘'],['library','자료실'],['career','포트폴리오']]).map(([id,label,href])=>`<a href="${esc(href||'#'+id)}" data-menu="${esc(id)}">${esc(label)}</a>`).join('')+'</nav></div>');
   page.insertAdjacentHTML('afterbegin','<div id="sitePages" hidden></div><header id="listIntro" hidden></header><div id="siteFilters" hidden></div>');
   page.insertAdjacentHTML('beforeend','<details id="readingToc" hidden><summary>이 글의 목차</summary><nav aria-label="본문 목차"></nav></details>');
   const dateBox=$('.date-range'), dateParking=$('aside');
@@ -138,7 +138,7 @@
     tocObserver?.disconnect();$('#readingToc').hidden=true;page.append($('#readingToc'));
     if(dateBox.parentElement!==dateParking)dateParking.append(dateBox);
     $('#siteFilters').innerHTML='';$('#siteFilters').hidden=true;$('#sitePages').hidden=true;$('#listIntro').hidden=true;currentKind='';
-    document.body.dataset.portfolioTheme=window.TIL_PORTFOLIO?.theme||'editorial';
+    document.body.dataset.portfolioTheme=window.TIL_EXPERIENCE?.kind||'editorial';
     const experienceRoute=Boolean(window.TIL_EXPERIENCE?.routes?.includes(r.type));
     const custom=['home','projects','project','reflection','search','career'].includes(r.type)||experienceRoute;
     const reading=['record','material','algorithm','project','reflection'].includes(r.type)||(r.type==='career'&&Boolean(r.id));
