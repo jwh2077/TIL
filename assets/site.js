@@ -152,7 +152,14 @@
     if($('#projectTocSlot'))$('#projectTocSlot').append($('#readingToc'));
     if(reading)buildToc();
     const recordMeta=r.type==='record'?records.find(x=>x.id===r.id):null;const p=recordMeta&&projects.find(p=>projectNames(p).includes(recordMeta.project));if(p&&!$('#articlePage .project-return'))$('#backToList').insertAdjacentHTML('afterend',`<a class="source project-return" href="#project=${p.id}">${esc(p.title)}로 →</a>`);else if(!p)$('#articlePage .project-return')?.remove();else if(p){const a=$('#articlePage .project-return');a.href='#project='+p.id;a.textContent=p.title+'로 →';}
-    document.title=(r.type==='project'||r.type==='reflection'?(r.type==='reflection'?projects.find(p=>p.id===r.id)?.reflection?.title:projects.find(p=>p.id===r.id)?.title)||'프로젝트':{home:'홈',projects:'프로젝트',list:'학습 기록',library:'자료실',algorithms:'알고리즘',career:'포트폴리오 · 취업 준비',search:'전체 검색'}[r.type]||'학습 기록')+' · 개발·학습 기록';
+    const sectionTitle=window.TIL_EXPERIENCE?.navigation.find(([id])=>id===r.type)?.[1];
+    const contentTitle=r.type==='career'&&r.id?(window.TIL_PORTFOLIO_EVIDENCE?.cases.find(c=>c.id===r.id)?.title||window.TIL_CAREER_DOCUMENTS?.find(d=>d.id===r.id)?.title)
+      :r.type==='project'?projects.find(p=>p.id===r.id)?.title
+      :r.type==='reflection'?projects.find(p=>p.id===r.id)?.reflection?.title
+      :r.type==='record'?records.find(x=>x.id===r.id)?.title
+      :r.type==='material'?materials.find(x=>x.id===r.id)?.title
+      :r.type==='algorithm'?algorithms.find(x=>x.id===r.id)?.title:'';
+    document.title=(contentTitle||sectionTitle||'개발·학습 기록')+' · '+(window.TIL_EXPERIENCE?.brand||'개발·학습 기록');
     window.scrollTo({top:0,behavior:'instant'});
   }
   document.addEventListener('click',e=>{document.querySelectorAll('.filter-option[open]').forEach(d=>{if(!d.contains(e.target))d.open=false;});});
