@@ -1,6 +1,12 @@
 (() => {
 'use strict';
-const theme=window.TIL_PORTFOLIO_THEME||'editorial';
+const availableThemes=['editorial','cinematic','terminal','dashboard','minimal'];
+const storageKey='til-portfolio-theme';
+let theme=availableThemes.includes(window.TIL_PORTFOLIO_THEME)?window.TIL_PORTFOLIO_THEME:'editorial';
+try{
+  const saved=window.localStorage.getItem(storageKey);
+  if(availableThemes.includes(saved))theme=saved;
+}catch{ /* file:// or privacy settings may disable storage */ }
 const projects=window.TIL_SHOWCASE?.cases||[];
 const current=(window.TIL_PROJECTS||[]);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -47,5 +53,14 @@ method()+'<section class="pf-documents"><div class="pf-heading"><small>DOCUMENTS
 const modes={editorial,cinematic,terminal,dashboard,minimal};
 const home=()=>modes[theme]?.()||editorial();
 const hub=()=>home();
-window.TIL_PORTFOLIO={theme,home,hub,detail:id=>window.TIL_SHOWCASE.detail(id)};
+function setTheme(next){
+  if(!availableThemes.includes(next))return false;
+  theme=next;
+  window.TIL_PORTFOLIO_THEME=next;
+  document.body.dataset.portfolioTheme=next;
+  window.TIL_PORTFOLIO.theme=next;
+  try{window.localStorage.setItem(storageKey,next);}catch{/* storage unavailable */}
+  return true;
+}
+window.TIL_PORTFOLIO={theme,availableThemes,home,hub,setTheme,detail:id=>window.TIL_SHOWCASE.detail(id)};
 })();
