@@ -340,3 +340,18 @@ body[data-portfolio-theme=dashboard] .area{border-radius:12px}
 /* Portfolio contact and source disclosure */
 .pf-footer .pf-contact{display:inline-block;margin-top:7px;color:var(--pf-accent);font-size:12px;font-weight:650}
 .pf-footer-notes{display:grid;gap:9px;max-width:480px}.pf-footer-notes p{margin:0}
+
+/* Single-site theme picker: persistent five-style switcher */
+.site-header .pf-settings{position:relative;flex:0 0 auto;margin-left:2px;z-index:15;color:var(--pf-ink)}
+.pf-settings>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid var(--pf-line);border-radius:7px;background:var(--pf-paper);color:var(--pf-ink);font-size:12px;font-weight:700;white-space:nowrap}
+.pf-settings>summary::-webkit-details-marker{display:none}
+.pf-settings>summary:hover,.pf-settings[open]>summary{border-color:var(--pf-accent)}
+.pf-theme-current{font-weight:400;font-size:11px;color:var(--pf-dim)}
+.pf-settings-panel{position:absolute;right:0;top:calc(100% + 8px);width:230px;max-width:calc(100vw - 24px);padding:14px;display:grid;gap:5px;background:var(--pf-paper);color:var(--pf-ink);border:1px solid var(--pf-line);border-radius:9px;box-shadow:0 16px 30px rgba(0,0,0,.16)}
+.pf-settings-panel p{margin:0 0 7px;font-size:12px;font-weight:750;color:var(--pf-ink)}
+.pf-settings-panel button{width:100%;text-align:left;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--pf-ink);padding:10px 12px;font:inherit;font-size:13px;cursor:pointer}
+.pf-settings-panel button:hover,.pf-settings-panel button:focus-visible{background:var(--pf-soft)}
+.pf-settings-panel button[aria-pressed=true]{border-color:var(--pf-accent);color:var(--pf-accent);font-weight:750;background:var(--pf-soft)}
+.pf-settings-panel small{font-size:10px;color:var(--pf-dim);line-height:1.6;margin:8px 0 0}
+@media(max-width:800px){.site-header .pf-settings{position:absolute;right:16px;top:10px}.pf-settings>summary{font-size:11px;padding:5px 9px}.pf-theme-current{display:none}.pf-settings-panel{top:calc(100% + 10px)}}
+@media print{.site-header .pf-settings{display:none!important}}
