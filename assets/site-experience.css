@@ -1,0 +1,66 @@
+/* Standalone information architecture; all legacy TIL routes remain available. */
+.ex-site{max-width:1180px;margin:0 auto;padding:28px 0 90px;min-height:65vh}
+.ex-site *{box-sizing:border-box}.ex-site h1,.ex-site h2,.ex-site h3{letter-spacing:-.048em}
+.ex-site p{line-height:1.8}.ex-site a{color:inherit}
+.ex-site a:focus-visible,.ex-site button:focus-visible{outline:3px solid var(--pf-accent);outline-offset:3px}
+.ex-source-note{font-size:11px;color:var(--pf-dim);line-height:1.7;margin:50px 0 0;padding-top:16px;border-top:1px solid var(--pf-line)}
+.ex-contact{display:inline-block;font-size:13px;font-weight:700;margin-top:23px;color:var(--pf-accent)!important}
+.ex-noimage{display:flex;align-items:end;justify-content:start;padding:28px;font-size:clamp(23px,3vw,43px);font-weight:800;color:#dcece2;background:linear-gradient(135deg,#213f33,#4c7764);height:100%;width:100%;overflow-wrap:anywhere}
+.ex-kicker{font-size:11px;font-weight:800;letter-spacing:.15em;color:var(--pf-accent)}
+.ex-archive{margin-top:55px}.ex-archive>h2{font-size:23px;margin-bottom:20px}
+.ex-archive-row{display:grid;grid-template-columns:37px minmax(0,1fr) 165px 18px;align-items:center;gap:18px;padding:20px 10px;border-top:1px solid var(--pf-line)}
+.ex-archive-row:hover{background:var(--pf-soft)}.ex-archive-row>span{font-size:12px;color:var(--pf-dim)}
+.ex-archive-row>div{display:grid;gap:5px;min-width:0}
+.ex-archive-row strong{font-size:17px}.ex-archive-row small{font-size:12px;color:var(--pf-dim);line-height:1.65}
+.ex-doc-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--pf-line);border:1px solid var(--pf-line)}
+.ex-doc-index a{display:grid;grid-template-columns:29px 1fr auto;align-items:center;gap:10px;padding:17px;background:var(--pf-paper)}
+.ex-doc-index a:hover{background:var(--pf-soft)}.ex-doc-index a span,.ex-doc-index a small{font-size:11px;color:var(--pf-dim)}
+.ex-doc-index a strong{font-size:13px}
+@media(max-width:800px){.ex-site{padding:22px 0 65px}.ex-archive-row{grid-template-columns:29px minmax(0,1fr) 15px;gap:9px}.ex-archive-row>span:nth-last-child(2){display:none}.ex-doc-index{grid-template-columns:1fr}}
+
+body[data-portfolio-theme=minimal]{--pf-back:#fbfaf6;--pf-paper:#fff;--pf-ink:#2e302d;--pf-dim:#73736e;--pf-line:#d7d6ce;--pf-accent:#9b5b39;--pf-soft:#f4ece5}
+.ex-book{max-width:900px;color:#2e302d}
+.ex-book-cover{min-height:720px;background:#fff;border:1px solid #dcd8d0;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,5vw,65px)}
+.ex-book-top,.ex-book-bottom{display:flex;justify-content:space-between;gap:20px;font-size:11px;letter-spacing:.12em;font-weight:700}
+.ex-book-cover-title p:first-child{font-size:11px;letter-spacing:.12em;color:#9b5b39}
+.ex-book-cover-title h1{font:700 clamp(45px,7.4vw,91px)/1.18 Georgia,"Malgun Gothic",serif;letter-spacing:-.075em;margin:25px 0}
+.ex-book-cover-title h1 em{font-style:normal;color:#9b5b39}
+.ex-book-cover-title>p:last-child{max-width:510px;font-size:15px}
+.ex-book-bottom{border-top:1px solid #ddd8d0;padding-top:16px}.ex-book-bottom a{color:#9b5b39}
+.ex-book-preface{border-bottom:1px solid #dcd7d0;padding:90px 0}
+.ex-book-preface>span,.ex-book-archive header>span{font-size:11px;color:#9b5b39;letter-spacing:.15em}
+.ex-book-preface h2{font:700 clamp(29px,4vw,45px)/1.36 Georgia,"Malgun Gothic",serif;letter-spacing:-.045em;margin:15px 0}
+.ex-book-preface p{max-width:630px;font-size:15px}
+.ex-book-chapters{padding:60px 0}
+.ex-book-chapters>h2,.ex-book-publications>h2,.ex-book-archive header h1{font:700 clamp(33px,4.5vw,55px)/1.2 Georgia,"Malgun Gothic",serif}
+.ex-chapter{display:grid;grid-template-columns:52px 1fr 56px;gap:15px;align-items:start;padding:25px 0;border-top:1px solid #d9d6ce}
+.ex-chapter>span{font-size:17px;color:#9b5b39;font-family:Georgia,serif}
+.ex-chapter small{font-size:11px;color:#77746e}
+.ex-chapter h2{font:700 clamp(24px,3vw,34px)/1.3 Georgia,"Malgun Gothic",serif;margin:9px 0}
+.ex-chapter p{font-size:13px;margin:5px 0}
+.ex-chapter>b{font-size:12px;color:#985936;white-space:nowrap}
+.ex-book-publications{padding:35px 0}
+.ex-book-archive>header{margin:50px 0}.ex-book-archive>header p{max-width:620px}
+.ex-print-tools{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 0;font-size:13px}
+.ex-print-tools button{background:#975a37;color:white;border:0;padding:11px 17px;border-radius:4px;cursor:pointer;font:inherit}
+.ex-print-paper{background:#fff;border:1px solid #dbd6cf;padding:clamp(28px,5vw,65px);box-shadow:0 8px 26px #1717170a}
+.ex-print-paper>header{padding:70px 0 55px;border-bottom:1px solid #d9d4ca}
+.ex-print-paper>header h1{font:700 clamp(32px,5vw,56px)/1.2 Georgia,"Malgun Gothic",serif}
+.ex-print-paper>header p{font-size:14px}
+.ex-print-chapter{padding:35px 0;border-bottom:1px solid #dcd8cf}
+.ex-print-chapter>small{color:#9b5b39;letter-spacing:.12em}
+.ex-print-chapter h2{font:700 30px Georgia,"Malgun Gothic",serif}
+.ex-print-chapter h3{font-size:15px;margin:18px 0 4px}
+.ex-print-chapter p{font-size:13px;line-height:1.8}
+.ex-case-ref{color:#9b5b39}.ex-print-paper>footer{font-size:11px;color:#777;padding-top:30px}
+@media(max-width:600px){.ex-book-cover{min-height:570px}.ex-book-cover-title h1{font-size:51px}.ex-chapter{grid-template-columns:30px 1fr}.ex-chapter>b{grid-column:2}}
+@page{size:A4;margin:17mm}
+@media print{
+.ex-print-tools,.site-header{display:none!important}
+.ex-book-print,.ex-print-paper{padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;max-width:none!important}
+.ex-print-chapter{break-inside:auto}
+.ex-print-chapter h2,.ex-print-chapter h3{break-after:avoid-page}
+.ex-print-chapter p{orphans:3;widows:3}
+.ex-book-print .ex-print-chapter{break-before:page}
+.ex-book-print .ex-print-chapter:first-of-type{break-before:auto}
+}
