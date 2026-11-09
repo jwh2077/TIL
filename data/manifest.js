@@ -1,6 +1,26 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261109-dont-drop",
+      "date": "2026-11-09",
+      "date_end": null,
+      "date_label": "2026-11-09",
+      "title": "Don’t Drop · 무게에 따른 이동 조정과 가드·관전 연결",
+      "summary": "무게별 이동 설정과 가드 입력을 연결했다. 관전 테스트에서는 시점 전환과 캐릭터 제거가 되지 않아 원인을 살펴봤다. 엑셀에서 이동 수치를 조절하는 연동 방식은 구상만 했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "데이터 테이블",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-09.js"
+    },
+    {
       "id": "20261106-dont-drop",
       "date": "2026-11-06",
       "date_end": null,
