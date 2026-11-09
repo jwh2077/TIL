@@ -1,15 +1,17 @@
 (() => {
 'use strict';
 const projects=(window.TIL_PROJECTS||[]);
-const examples=window.TIL_SHOWCASE?.cases||[];
-const docs=window.TIL_CAREER_DOCUMENTS||[];
+const evidence=window.TIL_PORTFOLIO_EVIDENCE;
+if(!evidence||!Array.isArray(evidence.cases))throw Error('Portfolio evidence data is missing');
+const examples=evidence.cases.map(c=>({...c,lead:c.focus,summary:c.intro,status:c.state,engine:c.stack.join(' · '),projectName:projects.find(p=>p.id===c.sourceProject)?.title,own:c.contributions,record:c.records.at(-1)?.id,evidence:c.records.map(r=>r.date+' '+r.label).join(' / ')}));
+const docs=(window.TIL_CAREER_DOCUMENTS||[]).filter(d=>evidence.publicDocs.includes(d.id));
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const caseByTitle=name=>examples.find(x=>x.title===name);
 const img=p=>p?.cover?.src?'<img loading="lazy" src="'+esc(p.cover.src)+'" alt="'+esc(p.cover.alt||p.title)+'">':'<div class="ex-noimage" aria-label="프로젝트 이미지 미등록">'+esc(p?.title||'PROJECT')+'</div>';
 const projectUrl=p=>'#project='+encodeURIComponent(p.id);
 const caseUrl=c=>'#career='+encodeURIComponent(c.id);
 const library=()=>'<div class="ex-doc-index">'+docs.map((d,i)=>'<a href="#career='+esc(d.id)+'"><span>'+String(i+1).padStart(2,'0')+'</span><strong>'+esc(d.title)+'</strong><small>'+esc(d.category)+'</small></a>').join('')+'</div>';
-const allProjects=()=>projects.map((p,i)=>'<a class="ex-archive-row" href="'+projectUrl(p)+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><strong>'+esc(p.title)+'</strong><small>'+esc(p.summary)+'</small></div><span>'+esc(p.period||'기록 기간 미확인')+'</span><b>↗</b></a>').join('');
+const allProjects=()=>evidence.other.map((item,i)=>'<a class="ex-archive-row" href="#record='+encodeURIComponent(item.records[0])+'"><span>'+String(i+1).padStart(2,'0')+'</span><div><strong>'+esc(item.title)+'</strong><small>'+esc(item.role)+' · '+esc(item.note)+'</small></div><span>'+esc(item.state)+'</span><b>↗</b></a>').join('');
 const sourceNote='<p class="ex-source-note">기록 기반 공개 포트폴리오입니다. 확인되지 않은 성과나 완료 여부는 표기하지 않았습니다. 화면 구성에 AI의 도움을 받았으며 실제 프로젝트 기록과 구분했습니다.</p>';
 const contact='<a class="ex-contact" href="mailto:jwh2077@gmail.com">연락처 · jwh2077@gmail.com</a>';
 
@@ -24,15 +26,16 @@ const menuFor=r=>r.type==='lab'?'lab':r.type==='project'?'projects':null;
 const attach=()=>{};
 
 
-const allCases=window.TIL_SHOWCASE?.allCases||[];
+const allCases=examples;
 const selected=id=>allCases.find(x=>x.id===id);
 const caseParts=c=>[
 ['문제 상황',c.challenge],
-['시도 및 적용',c.approach],
-['확인된 결과',c.outcome],
-['남은 검증',c.caution]
+['확인·분석',c.diagnosis],
+['실제로 한 작업',c.action],
+['확인된 결과',c.observed],
+['추가 검증',c.limits]
 ];
-const caseFacts=c=>[['시점',c.period],['형태',c.kind],['기술',c.engine],['담당',c.role]];
+const caseFacts=c=>[['기록 범위',c.period],['구분',c.kind],['핵심 기술',c.stack.slice(0,3).join(' · ')],['담당',c.role]];
 const documentIndex=()=>'<section class="ex-document-index"><h2>지원 문서 · 기술 노트</h2><p>개인정보 없는 문서를 사이트에서 읽고, 각 문서의 PDF 버튼으로 출력할 수 있습니다.</p>'+library()+'</section>';
 
 const careerIndex=()=>'<div class="ex-site ex-devlab"><div class="ex-shell-header"><span>~/portfolio/docs</span><span>MARKDOWN / PRINT</span></div><header class="ex-lab-heading"><span>&gt; find ./docs -type f</span><h1>문서 저장소</h1><p>기술 노트와 지원 자료를 분야별로 정리했습니다.</p></header>'+documentIndex()+sourceNote+'</div>';
