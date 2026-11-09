@@ -336,3 +336,7 @@ body[data-portfolio-theme=dashboard] .area{border-radius:12px}
  body[data-portfolio-theme] .site-header{display:none!important}
  body[data-portfolio-theme] .career-document-page .career-prose{color:#222!important;background:#fff!important}
 }
+
+/* Portfolio contact and source disclosure */
+.pf-footer .pf-contact{display:inline-block;margin-top:7px;color:var(--pf-accent);font-size:12px;font-weight:650}
+.pf-footer-notes{display:grid;gap:9px;max-width:480px}.pf-footer-notes p{margin:0}
