@@ -60,10 +60,10 @@ function detail(id){
   const doc=docs.find(d=>d.id===id);
   if(!doc)return '<a class="source" href="#career">← 취업 준비</a><h1>문서를 찾을 수 없습니다</h1>';
   const related=docs.filter(d=>d.id!==id&&d.category===doc.category).slice(0,3);
-  return '<div class="career-document"><nav class="career-breadcrumb" aria-label="현재 위치"><a href="#career">문서 목록</a><span> / '+esc(doc.category)+'</span></nav>'+
-    '<header class="career-doc-head"><div class="eyebrow">'+esc(doc.category)+' / C++ · Unreal Engine</div><h1>'+esc(shortTitle(doc.title))+'</h1><p class="intro">'+esc(doc.summary)+'</p><div class="career-actions"><button type="button" class="career-print">PDF로 저장 · 인쇄</button></div></header>'+
+  return '<div class="career-document-page"><div class="career-toolbar"><a class="career-back" href="#career">← 문서 목록</a><button type="button" class="career-print">PDF로 저장 · 인쇄</button></div><div class="career-document">'+
+    '<header class="career-doc-head"><div class="eyebrow">'+esc(doc.category)+' / C++ · Unreal Engine</div><h1>'+esc(shortTitle(doc.title))+'</h1><p class="intro">'+esc(doc.summary)+'</p></header>'+
     '<article class="career-prose">'+markdown(doc)+'</article>'+
-    '</div>';
+    '</div></div>';
 }
 window.TIL_CAREER={
   render:id=>id?detail(id):hub(),
