@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/materials/velog-20260709-001.js"] = [
+window.TIL_FILES["data/materials/cpp-classes-and-oop.js"] = [
   {
     "id": "velog-20260709-001",
     "title": "클래스와 객체지향 기초",

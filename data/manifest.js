@@ -1,12 +1,128 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261109-dont-drop",
+      "date": "2026-11-09",
+      "date_end": null,
+      "date_label": "2026-11-09",
+      "title": "Don’t Drop · 무게에 따른 이동 조정과 가드·관전 연결",
+      "summary": "무게별 이동 설정과 가드 입력을 연결했다. 관전 기능은 테스트하다가 팀원이 이미 작업한 내용이 있어 내 코드를 지웠다. 엑셀에서 이동 수치를 조절하는 연동 방식은 구상만 했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "데이터 테이블",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-09.js"
+    },
+    {
+      "id": "20261106-dont-drop",
+      "date": "2026-11-06",
+      "date_end": null,
+      "date_label": "2026-11-06",
+      "title": "Don’t Drop · 방어구 무게 변화와 캐릭터 이동 설정 연결",
+      "summary": "방어구 상태 변경과 이동 설정을 연결했다. 출발 속도와 가속 설정을 적용해 보니, 출발 속도만 높였을 때 대시처럼 움직였다가 급하게 느려지는 문제가 있었다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "데이터 테이블",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-06.js"
+    },
+    {
+      "id": "20261105-dont-drop",
+      "date": "2026-11-05",
+      "date_end": null,
+      "date_label": "2026-11-05",
+      "title": "Don’t Drop · 방어구 무게와 이동 가속, 공격 입력 연결",
+      "summary": "방어구 무게로 최대 속도를 계산하고, 입력 경과 시간으로 이동 세기를 조절했다. BP에서 테스트한 공격 요청을 캐릭터 C++ 코드에 연결했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-05.js"
+    },
+    {
+      "id": "20261104-dont-drop",
+      "date": "2026-11-04",
+      "date_end": null,
+      "date_label": "2026-11-04",
+      "title": "Don’t Drop · 이동 데이터 적용과 공격 입력 연결",
+      "summary": "데이터 테이블에서 이동 값을 읽어 적용했다. 컨트롤러 생성과 입력 설정을 살펴보고, 공격 키를 블루프린트 이벤트에 연결했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "입력",
+        "멀티플레이"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-04.js"
+    },
+    {
+      "id": "20261103-dont-drop",
+      "date": "2026-11-03",
+      "date_end": null,
+      "date_label": "2026-11-03",
+      "title": "Don’t Drop · 캐릭터 이동 데이터와 Steam 세션 테스트 준비",
+      "summary": "이동 속도와 방어구 무게에 따른 보정값을 FPlayerDataRow에 묶었다. 오전 회의 뒤에는 임시 프로젝트의 Steam 세션 설정과 친구 초대 수락 흐름을 살펴봤다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "멀티플레이",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-03.js"
+    },
+    {
+      "id": "20261102-dont-drop",
+      "date": "2026-11-02",
+      "date_end": null,
+      "date_label": "2026-11-02",
+      "title": "Don’t Drop · 캐릭터 이동·점프 다이어그램과 구현 범위",
+      "summary": "캐릭터 이동·점프와 애니메이션 동기화 흐름을 다이어그램으로 정리하고, 공격 입력을 전투 쪽에 전달하는 범위를 적었다. 팀에서는 Advanced Sessions와 그레이박싱으로 MVP를 준비하기로 했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "설계",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-02.js"
+    },
+    {
       "id": "20261030-ch4-team",
       "date": "2026-10-30",
       "date_end": null,
       "date_label": "2026-10-30",
       "title": "Don’t Drop · 게임 규칙 논의와 캐릭터 담당 분배",
-      "summary": "서바이벌 규칙을 논의하고 캐릭터·조작을 맡게 됐다. AI 도움으로 정리한 기능 명세는 실제 구현과 구분하고, 다른 파트와 맞출 연결 내용을 남겼다.",
+      "summary": "팀 회의에서 서바이벌 규칙을 논의하고 캐릭터·조작을 맡았다. 명세 초안에는 전투·장비 담당과 맞춰야 할 값을 적었다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [
@@ -123,7 +239,12 @@ window.TIL_INDEX = {
       "summary": "서버 실행 모드, PlayerState 클래스 지정과 초기화 시점, 맵의 외부 액터 파일을 구분해서 봤다.",
       "project": "CX",
       "primary_topic": "unreal",
-      "tags": ["Unreal", "멀티플레이", "PlayerState", "PIE"],
+      "tags": [
+        "Unreal",
+        "멀티플레이",
+        "PlayerState",
+        "PIE"
+      ],
       "activity": "personal",
       "month": "2026-10",
       "file": "data/2026/10/2026-10-28.js"
@@ -1095,7 +1216,7 @@ window.TIL_INDEX = {
       "project": null,
       "primary_topic": "unreal",
       "tags": [],
-      "file": "data/undated/note-tem-014.js",
+      "file": "data/undated/unreal-build-and-macros.js",
       "activity": "study"
     },
     {
@@ -1109,7 +1230,7 @@ window.TIL_INDEX = {
       "project": "ProjectPriest",
       "primary_topic": "oop",
       "tags": [],
-      "file": "data/undated/note-tem-011.js",
+      "file": "data/undated/inventory-parts-and-weapons.js",
       "activity": "team"
     },
     {
@@ -1198,7 +1319,7 @@ window.TIL_INDEX = {
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/project-period/ch3-1.js",
+      "file": "data/project-period/ch3-moving-platforms.js",
       "project_part": "CH3_1",
       "activity": "personal"
     },
@@ -1217,7 +1338,7 @@ window.TIL_INDEX = {
         "C++",
         "개인 프로젝트"
       ],
-      "file": "data/project-period/ch3-2.js",
+      "file": "data/project-period/ch3-pawn-input-and-camera.js",
       "project_part": "CH3_2",
       "activity": "personal"
     },

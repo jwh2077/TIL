@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/undated/note-tem-011.js"] = [
+window.TIL_FILES["data/undated/inventory-parts-and-weapons.js"] = [
   {
     "id": "note-tem-011",
     "date": "2026-09-04",

@@ -19,7 +19,8 @@ window.TIL_LIBRARY_NAVIGATION = [
         "title": "배열·메모리",
         "documents": [
           "velog-20260706-001",
-          "velog-20260710-001"
+          "velog-20260710-001",
+          "cpp-smart-pointers"
         ]
       },
       {
@@ -80,6 +81,8 @@ window.TIL_LIBRARY_NAVIGATION = [
         "title": "멀티플레이",
         "documents": [
           "unreal-multiplayer-basics",
+          "unreal-play-settings",
+          "unreal-advanced-sessions",
           "unreal-network-testing",
           "unreal-network-roles",
           "unreal-rpc"

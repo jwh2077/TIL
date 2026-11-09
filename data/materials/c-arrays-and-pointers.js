@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/materials/velog-20260706-001.js"] = [
+window.TIL_FILES["data/materials/c-arrays-and-pointers.js"] = [
   {
     "id": "velog-20260706-001",
     "title": "C 배열과 포인터",

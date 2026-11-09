@@ -288,7 +288,7 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260710-001"
       }
     ],
-    "file": "data/materials/velog-20260706-001.js",
+    "file": "data/materials/c-arrays-and-pointers.js",
     "outline": [
       {
         "title": "포인터 — 값과 주소 구분",
@@ -327,7 +327,7 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260716-001"
       }
     ],
-    "file": "data/materials/velog-20260709-001.js",
+    "file": "data/materials/cpp-classes-and-oop.js",
     "outline": [
       {
         "title": "class — 멤버 선언과 접근 제어",
@@ -341,8 +341,8 @@ window.TIL_LIBRARY_INDEX = [
   },
   {
     "id": "velog-20260710-001",
-    "title": "C++ 동적 메모리 — 할당·해제·복사",
-    "summary": "new/delete, 댕글링 포인터와 메모리 누수, 얕은 복사와 깊은 복사.",
+    "title": "C++ 스택과 힙 — 메모리 수명·해제·복사",
+    "summary": "스택의 지역 변수와 힙에 할당한 객체의 수명, 직접 해제할 때 생기는 문제, 얕은 복사와 깊은 복사.",
     "kind": "note",
     "topic": "memory",
     "source_name": "Velog 원문",
@@ -356,22 +356,33 @@ window.TIL_LIBRARY_INDEX = [
       "memory"
     ],
     "publication": "reference",
-    "notice": "스마트 포인터와 복사 방식에서 헷갈렸던 부분은 7월 10일 학습 기록에 남겼다. 스마트 포인터 사용법은 이 문서에서 다루지 않는다.",
     "references": [
       {
+        "label": "스마트 포인터 — 소유권과 약한 참조",
+        "url": "#material=cpp-smart-pointers"
+      },
+      {
         "label": "C 배열과 포인터",
-        "url": "https://jwh2077.github.io/TIL/#material=velog-20260706-001"
+        "url": "#material=velog-20260706-001"
       }
     ],
-    "file": "data/materials/velog-20260710-001.js",
+    "file": "data/materials/cpp-stack-and-heap.js",
     "outline": [
+      {
+        "title": "스택 메모리 — 범위를 벗어나면 정리되는 지역 변수",
+        "text": "스택 메모리 — 범위를 벗어나면 정리되는 지역 변수 보통 함수 안에서 선언한 지역 변수는 스택에 놓이고, 선언한 범위를 벗어나면 수명이 끝난다. for문의 본문 안에서 만든 변수는 매 반복이 끝날 때, 초기화식에서 만든 변수는 반복문을 빠져나갈 때 정리된다. 직접 해제할 필요가 없지만 스택 크기는 제한되어 있고, 지역 변수를 그 범위가 끝난 뒤까지 쓸 수는 없다."
+      },
+      {
+        "title": "힙 메모리 — 필요한 동안 유지하고 직접 해제하기",
+        "text": "힙 메모리 — 필요한 동안 유지하고 직접 해제하기 new로 만든 객체는 그것을 가리키던 지역 포인터가 범위를 벗어나도 남는다. 함수 밖에서도 계속 쓸 수 있지만, 누가 마지막에 해제할지 정해야 한다. 유일한 주소를 잃어버리면 해제할 길이 없어 메모리가 새고, 반대로 먼저 해제하고 남은 포인터를 사용하면 이미 수명이 끝난 객체에 접근하게 된다."
+      },
       {
         "title": "new·delete — 할당·해제와 메모리 문제",
         "text": "new·delete — 할당·해제와 메모리 문제 항목 의미 new / delete 동적 할당 / 해제 댕글링 포인터 해제된 메모리 주소 등을 계속 가리키는 포인터 메모리 누수 더 이상 쓰지 않는 할당 메모리를 해제하지 못하고 남김"
       },
       {
         "title": "얕은 복사와 깊은 복사",
-        "text": "얕은 복사와 깊은 복사 여기서는 포인터가 가리키는 데이터를 복사하는 경우를 비교한다. 얕은 복사: 원본 포인터 ─┐ ├→ 같은 데이터 복사 포인터 ─┘ 깊은 복사: 원본 포인터 ──→ 원본 데이터 복사 포인터 ──→ 별도 공간의 데이터"
+        "text": "얕은 복사와 깊은 복사 얕은 복사 — 주소를 복사한다. 두 포인터가 같은 데이터를 가리킨다. 깊은 복사 — 데이터를 별도 공간에 복사한다. 두 포인터가 각각 원본과 복사본을 가리킨다."
       }
     ]
   },
@@ -392,7 +403,7 @@ window.TIL_LIBRARY_INDEX = [
       "oop"
     ],
     "publication": "reference",
-    "file": "data/materials/velog-20260712-001.js",
+    "file": "data/materials/cpp-overloading-and-type-conversion.js",
     "outline": [
       {
         "title": "함수 오버로딩 — 구분할 수 있는 조건",
@@ -427,7 +438,7 @@ window.TIL_LIBRARY_INDEX = [
         "url": "https://jwh2077.github.io/TIL/#material=velog-20260709-001"
       }
     ],
-    "file": "data/materials/velog-20260716-001.js",
+    "file": "data/materials/cpp-function-and-class-templates.js",
     "outline": [
       {
         "title": "함수 템플릿 — 두 값 교환",
@@ -475,7 +486,7 @@ window.TIL_LIBRARY_INDEX = [
         "section": "SceneRoot·StaticMesh — 생성과 부착"
       }
     ],
-    "file": "data/materials/velog-20260810-001.js",
+    "file": "data/materials/unreal-actor-components.js",
     "outline": [
       {
         "title": "AItem 헤더 — 상속과 generated.h 위치",
@@ -493,8 +504,8 @@ window.TIL_LIBRARY_INDEX = [
   },
   {
     "id": "file-continue",
-    "title": "C++ continue — 반복문 실행 흐름",
-    "summary": "continue가 건너뛰는 범위와 짝수·홀수 분기 예시.",
+    "title": "C++ 반복문 — for, while, break, continue",
+    "summary": "for와 while의 반복 순서, break와 continue를 만난 뒤 어디서 실행을 이어가는지 비교한다.",
     "kind": "note",
     "topic": "cpp",
     "source_name": "26.08.24.txt",
@@ -509,15 +520,19 @@ window.TIL_LIBRARY_INDEX = [
     ],
     "publication": "reference",
     "notice": "원본 파일의 주석 표기 메모는 사용 도구와 처리 결과가 확인되지 않아 로컬 검토 메모에 별도로 보관했다.",
-    "file": "data/materials/file-continue.js",
+    "file": "data/materials/cpp-loops.js",
     "outline": [
       {
-        "title": "continue의 동작",
-        "text": "continue의 동작 현재 반복의 남은 문장을 건너뛰고 다음 반복으로 진행한다. 아래 for문에서는 증감식 i++ 이후 조건을 다시 검사한다. 강아지 출력 짝수: 숫자 출력 → continue 다음 반복으로 이동"
+        "title": "for와 while — 조건을 확인하는 위치",
+        "text": "for와 while — 조건을 확인하는 위치 둘 다 본문을 실행하기 전에 조건을 확인한다. for는 시작값·조건·증감식을 한 줄에 모으고, while은 조건만 괄호 안에 쓴다. 아래 두 반복문은 각각 0, 1, 2를 출력한다. for (int i = 0; i < 3; ++i) { std::cout << i << ' '; } int i = 0; while (i < 3) { std::cout << i << ' '; ++i; }"
       },
       {
-        "title": "분기별 출력",
-        "text": "분기별 출력 조건 이번 반복에서 출력 고양이 출력 i가 짝수 강아지, i 값 건너뜀 i가 홀수 강아지, 고양이 실행 int main() { for (int i = 0; i < 10; i++) { std::cout << \"강아지\\n\"; if (i % 2 == 0) { std::cout << i <<std::endl; continue; } std::cout << \"고양이\\n\"; } }"
+        "title": "break와 continue — 끝내기와 건너뛰기",
+        "text": "break와 continue — 끝내기와 건너뛰기 예를 들어 0부터 4까지 출력하는 for문에서 출력 직전에 i == 2를 검사하면, break일 때는 0 1, continue일 때는 0 1 3 4가 출력된다. break — 현재 반복문을 끝내고 반복문 바로 다음 문장으로 간다. 중첩 반복문 안이라면 가장 안쪽 반복문만 끝난다. continue — 이번 반복에서 남은 문장만 건너뛴다. for 에서는 증감식으로 가고, while 에서는 조건을 다시 검사한다. 그래서 while 본문의 증가문 앞에서 계속 건너뛰면 같은 값으로 반복할 수 있다."
+      },
+      {
+        "title": "원본 예제 — 짝수에서 continue를 만나면",
+        "text": "원본 예제 — 짝수에서 continue를 만나면 조건 이번 반복에서 출력 고양이 출력 i가 짝수 강아지, i 값 건너뜀 i가 홀수 강아지, 고양이 실행 int main() { for (int i = 0; i < 10; i++) { std::cout << \"강아지\\n\"; if (i % 2 == 0) { std::cout << i <<std::endl; continue; } std::cout << \"고양이\\n\"; } }"
       }
     ]
   },
@@ -934,6 +949,10 @@ window.TIL_LIBRARY_INDEX = [
       "20261007-chatx"
     ],
     "references": [
+      {
+        "label": "시작 맵·Standalone 로그·PIE 설정",
+        "url": "#material=unreal-play-settings"
+      },
       {
         "label": "클래스 역할·서버·복제 기본 개념",
         "url": "https://jwh2077.github.io/TIL/#material=unreal-multiplayer-basics"
@@ -1445,6 +1464,179 @@ window.TIL_LIBRARY_INDEX = [
       {
         "title": "그래프 — 정점과 간선",
         "text": "그래프 — 정점과 간선 DFS는 한 갈래를 끝까지 살펴본 뒤 돌아와 다른 갈래를 본다. BFS는 시작한 곳에서 가까운 곳부터 차례로 살펴본다. DFS에서는 재귀나 stack으로 돌아갈 위치를 기억하고, BFS에서는 queue에 다음에 볼 위치를 넣는다. 1. 개념 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조이다. 2. Vector를 이용한 인접 리스트 vector<vector<int>> graph(4); graph[0].push_back(1); graph[0].push_back(2); 각 정점에 연결된 다른 정점의 목록을 저장하는 방식이다. 3. 대표 알고리즘 알고리즘 주로 사용하는 자료구조 목적 BFS Queue 너비 우선 탐색 DFS Stack / 재귀 깊이 우선 탐색 Dijkstra Priority Queue 한 시작점에서 최단 거리 무방향 간선 연결 vector<vector<int>> graph(5); // 무방향 그래프: 양쪽 모두 등록 graph[0].push_back(1); graph[1].push_back(0); 그래프는 자료구조이며 DFS·BFS는 그래프를 탐색하는 알고리즘입니다."
+      }
+    ]
+  },
+  {
+    "id": "unreal-play-settings",
+    "title": "Unreal 프로젝트·에디터 설정 — 시작 맵, 실행 로그, 멀티플레이 테스트",
+    "summary": "Maps & Modes에서 기본 맵과 GameMode 고르기, Standalone 실행 시 -log로 로그 창 열기, PIE에서 서버·클라이언트와 늦은 참가 테스트하기.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "reference",
+    "status": "실행·테스트 설정",
+    "source_name": "Test 프로젝트의 DefaultEngine.ini와 EditorPerProjectUserSettings.ini · 기존 PIE 설정 기록",
+    "source_url": "",
+    "related_ids": [
+      "20261103-dont-drop",
+      "20261006-chatx"
+    ],
+    "references": [
+      {
+        "label": "Advanced Sessions · Steam 세션 테스트 (초안)",
+        "url": "#material=unreal-advanced-sessions"
+      },
+      {
+        "label": "전용 서버 테스트와 PIE 설정 화면",
+        "url": "#material=unreal-network-testing"
+      },
+      {
+        "label": "Epic · 프로젝트 설정과 Maps & Modes",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/project-section-of-the-unreal-engine-project-settings"
+      },
+      {
+        "label": "Epic · 추가 실행 인자",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/command-line-arguments-in-unreal-engine"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "시작 맵",
+        "section": "시작 맵과 기본 GameMode 고르기"
+      },
+      {
+        "label": "시작 로그",
+        "section": "Standalone Game을 켤 때 로그 창도 열기"
+      },
+      {
+        "label": "PIE 테스트",
+        "section": "멀티플레이 테스트 모드와 늦은 참가"
+      }
+    ],
+    "file": "data/materials/unreal-play-settings.js",
+    "outline": [
+      {
+        "title": "시작 맵과 기본 GameMode 고르기",
+        "text": "시작 맵과 기본 GameMode 고르기 Edit → Project Settings → Maps & Modes Editor Startup Map — 에디터에서 프로젝트를 열었을 때 처음 띄울 맵. Game Default Map — 맵을 따로 지정하지 않고 게임을 실행했을 때 열 맵. Default GameMode — 프로젝트의 기본 게임 규칙. 특정 맵에서 다른 규칙이 적용되면 그 맵의 World Settings → GameMode Override도 확인한다. 임시 Test 프로젝트에서는 두 시작 맵을 모두 Lvl_ThirdPerson으로 지정했다. 맵 설정값은 Config/DefaultEngine.ini에서 GameDefaultMap과 EditorStartupMap으로 찾을 수 있다."
+      },
+      {
+        "title": "Standalone Game을 켤 때 로그 창도 열기",
+        "text": "Standalone Game을 켤 때 로그 창도 열기 Edit → Editor Preferences → Level Editor → Play 검색창에 Additional Launch Parameters 를 입력한다. Standalone Game의 추가 실행 인자 칸에 -log 를 넣는다. 플레이 버튼 옆 메뉴에서 Standalone Game 을 선택해 새로 실행한다. 게임 창과 함께 뜨는 로그 창에서 시작 시점의 메시지를 볼 수 있다. 임시 프로젝트의 EditorPerProjectUserSettings.ini 에 저장된 값: AdditionalLaunchParameters=-log 이 값은 게임 프로세스를 시작할 때 전달한다. 실행 중인 에디터 안에서 로그만 볼 때는 Output Log 를 연다."
+      },
+      {
+        "title": "멀티플레이 테스트 모드와 늦은 참가",
+        "text": "멀티플레이 테스트 모드와 늦은 참가 서버와 클라이언트 화면을 비교할 때 — 플레이 메뉴에서 플레이어 수를 고르고 Play Net Mode를 Play as Client로 둔다. 전용 서버에 접속한 클라이언트로 시작한다. 서버 프로세스에 디버거를 붙일 때 — Level Editor → Play에서 Run Under One Process를 끄고 연결할 프로세스를 구분한다. PIE 실행 도중 참가를 시험할 때 — Editor Preferences에서 Allow Late Joining을 검색한다. 실제 PIE 설정 화면과 서버·클라이언트의 객체 배치는 관련 문서의 전용 서버 노트에 있다."
+      }
+    ]
+  },
+  {
+    "id": "unreal-advanced-sessions",
+    "title": "Advanced Sessions · Steam 세션 테스트",
+    "summary": "UE 5.6 테스트 프로젝트의 Steam 앱 ID와 친구 초대 노드 정리. 초대를 보내는 위젯과 수락 이벤트를 받는 게임 인스턴스의 연결 위치를 나눴다.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "draft",
+    "status": "게시 준비 초안 · 초대 수락과 참가 테스트 전",
+    "source_name": "11-3.txt · 팀 공통 튜터 피드백 · Test 프로젝트의 DefaultEngine.ini, AdvancedFriendsLibrary.h, AdvancedFriendsGameInstance.h",
+    "source_url": "",
+    "related_ids": [
+      "20261103-dont-drop",
+      "20261102-dont-drop",
+      "20261104-dont-drop"
+    ],
+    "references": [
+      {
+        "label": "프로젝트·에디터 설정과 시작 로그",
+        "url": "#material=unreal-play-settings"
+      },
+      {
+        "label": "Advanced Sessions · 엔진 버전별 플러그인",
+        "url": "https://vreue4.com/advanced-sessions-binaries"
+      }
+    ],
+    "quick_links": [
+      {
+        "label": "Steam 앱 ID",
+        "section": "Steam에 Spacewar로 표시될 때"
+      },
+      {
+        "label": "친구 초대",
+        "section": "친구 초대 · 로비 위젯에서 초대 보내기"
+      },
+      {
+        "label": "수락·참가",
+        "section": "초대 수락 · 게임 인스턴스에서 세션 참가"
+      }
+    ],
+    "notice": "팀 공통 피드백에서 나온 초대 수락 방법과 임시 Test 프로젝트의 플러그인 선언을 함께 정리했다. 11월 4일 팀 회의에서는 초대를 수락한 뒤 방에 들어가지 못하는 문제가 남아 있었다.",
+    "file": "data/materials/unreal-advanced-sessions.js",
+    "outline": [
+      {
+        "title": "Standalone Game으로 실행",
+        "text": "Standalone Game으로 실행 Advanced Sessions 플러그인을 넣은 Test 프로젝트에서 플레이 메뉴의 Standalone Game을 선택한다. 시작부터 로그 창을 열려면 관련 문서의 추가 실행 인자(-log) 설정을 참고한다."
+      },
+      {
+        "title": "Steam에 Spacewar로 표시될 때",
+        "text": "Steam에 Spacewar로 표시될 때 Config/DefaultEngine.ini에서 온라인 서비스와 테스트 앱 ID를 확인한다. 이 프로젝트는 SteamDevAppId에 Spacewar 테스트 앱 ID인 480을 사용한다. [OnlineSubsystem] DefaultPlatformService=Steam [OnlineSubsystemSteam] bEnabled=true SteamDevAppId=480"
+      },
+      {
+        "title": "친구 초대 · 로비 위젯에서 초대 보내기",
+        "text": "친구 초대 · 로비 위젯에서 초대 보내기 예를 들어 로비 위젯 블루프린트의 Event Graph 에서 빈 곳을 우클릭하고 Send Session Invite to Friend 를 검색한다. 초대 버튼의 OnClicked 실행 핀을 이 노드에 연결한다. Player Controller 에는 위젯의 Get Owning Player 를, Friend Unique Net Id 에는 초대할 친구의 고유 ID를 넣는다."
+      },
+      {
+        "title": "초대 수락 · 게임 인스턴스에서 세션 참가",
+        "text": "초대 수락 · 게임 인스턴스에서 세션 참가 AdvancedFriendsGameInstance 를 부모로 쓰는 게임 인스턴스 블루프린트를 연다. 새로 만들 때는 콘텐츠 브라우저에서 Blueprint Class → All Classes 를 열고 이 부모 클래스를 검색한다. 왼쪽 My Blueprint → Functions → Override 목록에서 On Session Invite Accepted 를 선택한다. Event Graph에 수락 이벤트가 생긴다. 이벤트의 실행 핀에서 끌어 Join Session 을 검색한다. 이벤트의 Session to Join 출력을 Search Result 입력에, 참가할 로컬 플레이어의 컨트롤러를 Player Controller 입력에 연결한다. 이벤트가 목록에 없으면 Class Settings → Parent Class 를 확인한다. 실행할 때 이 블루프린트를 쓰려면 Project Settings → Maps & Modes → Game Instance Class 에 지정한다. 팀에서 다음에 확인할 지점은 두 곳이다. 초대 수락 이벤트가 들어왔는지, 그 뒤 Join Session이 성공했는지를 각각 확인한다."
+      }
+    ]
+  },
+  {
+    "id": "cpp-smart-pointers",
+    "title": "C++ 스마트 포인터 — unique_ptr, shared_ptr, weak_ptr",
+    "summary": "객체를 한 곳에서 소유할 때, 소유권을 공유할 때, 소유권 없이 참조할 때의 차이. 팀 TextRPG의 Item 관리 사례.",
+    "kind": "note",
+    "topic": "memory",
+    "topics": [
+      "cpp",
+      "memory"
+    ],
+    "publication": "reference",
+    "status": "소유권과 객체 수명",
+    "source_name": "7월 10일 Velog · 팀 TextRPG 상점 작업 기록",
+    "source_url": "https://velog.io/@jwh4410/7.10",
+    "related_ids": [
+      "20260710-001",
+      "20260731-001",
+      "20260803-001"
+    ],
+    "references": [
+      {
+        "label": "스택과 힙 — 메모리 수명·해제·복사",
+        "url": "#material=velog-20260710-001"
+      },
+      {
+        "label": "팀 TextRPG 원본 저장소",
+        "url": "https://github.com/raimei2000/Ch2_TextRPG_Group5"
+      }
+    ],
+    "file": "data/materials/cpp-smart-pointers.js",
+    "outline": [
+      {
+        "title": "unique_ptr — 한 곳에서 소유",
+        "text": "unique_ptr — 한 곳에서 소유 한 객체의 해제를 한 곳에서 맡는다. unique_ptr는 복사할 수 없고, std::move로 다른 unique_ptr에 소유권을 넘길 수 있다. 넘겨받은 쪽이 객체를 소유하며 기존 포인터는 비게 된다. 팀 TextRPG에서는 상점의 Item을 std::unique_ptr 으로 관리했다."
+      },
+      {
+        "title": "shared_ptr — 마지막 소유자가 놓을 때 해제",
+        "text": "shared_ptr — 마지막 소유자가 놓을 때 해제 여러 곳에서 같은 객체를 소유해야 할 때 쓴다. shared_ptr를 복사하면 소유자가 늘고, 마지막 소유자가 사라지면 객체가 해제된다. 두 객체가 shared_ptr로 서로를 소유하면 바깥에서 더는 사용하지 않아도 소유자 수가 0이 되지 않을 수 있다."
+      },
+      {
+        "title": "weak_ptr — 수명을 늘리지 않고 참조",
+        "text": "weak_ptr — 수명을 늘리지 않고 참조 shared_ptr가 관리하는 객체를 소유하지 않고 가리킨다. 서로를 참조하는 두 객체 중 한쪽이 다른 쪽의 수명을 책임질 필요가 없다면 그 연결에 weak_ptr를 쓸 수 있다. 사용할 때는 lock()으로 shared_ptr를 얻는다. 이미 객체가 해제됐다면 빈 shared_ptr가 돌아온다."
       }
     ]
   }

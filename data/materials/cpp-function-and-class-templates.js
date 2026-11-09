@@ -1,5 +1,5 @@
 window.TIL_FILES = window.TIL_FILES || {};
-window.TIL_FILES["data/materials/velog-20260716-001.js"] = [
+window.TIL_FILES["data/materials/cpp-function-and-class-templates.js"] = [
   {
     "id": "velog-20260716-001",
     "title": "함수 템플릿과 템플릿 클래스",
