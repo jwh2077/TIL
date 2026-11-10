@@ -1,6 +1,27 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261110-dont-drop",
+      "date": "2026-11-10",
+      "date_end": null,
+      "date_label": "2026-11-10",
+      "title": "Don’t Drop · MVP 마무리와 캐릭터 에셋 선정 시작",
+      "summary": "팀에서 예정보다 하루 일찍 MVP 작업을 마무리하고 에셋 선정으로 넘어갔다. 가드 중 이동 설정을 조정하고, 캐릭터 에셋과 애니메이션을 살펴봤다. 방어구 외형을 연결하는 방법도 구상했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "데이터 테이블",
+        "입력",
+        "애니메이션",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-10.js"
+    },
+    {
       "id": "20261109-dont-drop",
       "date": "2026-11-09",
       "date_end": null,
