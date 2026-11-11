@@ -105,7 +105,7 @@
     const item=cases.find(c=>c.id===id);
     if(!item)return '<div class="career-case"><a href="#career">← 포트폴리오</a><h1>프로젝트를 찾을 수 없습니다.</h1></div>';
     const facts=[['형태',item.kind],['기간',item.period],['기술',item.engine],['담당',item.role]];
-    return '<div class="career-case"><nav class="career-case-back"><a href="#career">← 포트폴리오</a><span>'+esc(item.index)+' / '+esc(item.status)+'</span></nav>'+
+    return '<div class="career-case"><nav class="career-case-back"><a href="#career">← 포트폴리오</a><span>'+esc(item.index)+' / '+esc(item.status)+'</span><button type="button" class="career-print">PDF로 저장 · 인쇄</button></nav>'+
       '<header class="career-case-hero"><div class="eyebrow">PROJECT CASE STUDY · '+esc(item.index)+'</div><h1>'+esc(item.title)+'</h1><p>'+esc(item.lead)+'</p>'+
       '<div class="career-case-facts">'+facts.map(([key,value])=>'<div><dt>'+esc(key)+'</dt><dd>'+esc(value)+'</dd></div>').join('')+'</div></header>'+
       '<div class="career-case-visual">'+cover(item)+'</div>'+

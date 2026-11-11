@@ -16,7 +16,7 @@
   const route=()=>{const hash=location.hash.slice(1);if(!hash||hash==='home'||hash==='top'||hash==='career')return {type:'home'};const at=hash.indexOf('=');return at<0?{type:hash}:{type:hash.slice(0,at),id:decodeURIComponent(hash.slice(at+1))};};
   const page=$('main');
   $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">개발·학습 기록 <span>C++ / Unreal 프로젝트와 학습 기록</span></a><nav aria-label="주 메뉴">'+[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['algorithms','알고리즘'],['library','자료실']].map(([id,label])=>`<a href="#${id}" data-menu="${id}">${label}</a>`).join('')+'</nav></div>');
-  const themeLabels={editorial:'에디토리얼',cinematic:'시네마틱',terminal:'터미널',dashboard:'대시보드'};
+  const themeLabels={editorial:'포트폴리오',cinematic:'시네마틱',terminal:'터미널',dashboard:'대시보드'};
   const themeMenu=document.createElement('details');
   themeMenu.className='pf-settings';
   themeMenu.innerHTML='<summary aria-label="사이트 디자인 설정"><span aria-hidden="true">⚙</span> 디자인 <span class="pf-theme-current"></span></summary><div class="pf-settings-panel" role="group" aria-label="사이트 디자인 선택"><p>디자인 스타일</p>'+Object.entries(themeLabels).map(([id,name])=>'<button type="button" data-theme-option="'+id+'" aria-pressed="false">'+name+'</button>').join('')+'<small>선택한 디자인은 이 브라우저에 저장됩니다.</small></div>';
@@ -65,20 +65,35 @@
     const content=['#sitePages','#articlePage','#libraryPage','#algorithmPage'].map($).find(el=>!el.hidden);
     if(!content)return;
     const pageTitle=content.querySelector('h1,#detailTitle');if(pageTitle)document.title=pageTitle.textContent+' · 개발·학습 기록';
-    const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.material-section>h2,.material-section>.vector-demo-heading>h2,.note-body>h3,.section>h3,.related>h3')];
-    if(headings.length<3)return;
+    const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.material-section>h2,.material-section>.vector-demo-heading>h2,.material-section>h3,.note-body>h3,.section>h3,.related>h3')];
+    if(headings.length<(content.id==='libraryPage'?2:3))return;
     toc.hidden=false;toc.open=!matchMedia('(max-width:800px)').matches;
     const targets=headings.map((h,i)=>{h.id=content.id+'-heading-'+i;return h;});
-    const tocButton=h=>`<button type="button" data-scroll="${h.id}">${esc(h.textContent)}</button>`;
+    const tocButton=h=>`<button type="button" ${h.matches('.material-section>h3')?'class="toc-child" ':''}data-scroll="${h.id}">${esc(h.textContent)}</button>`;
     const material=content.id==='libraryPage'&&window.TIL_LIBRARY_INDEX.find(r=>r.title===pageTitle?.textContent);
+    function sectionToc(items,expanded=true) {
+      let html='';
+      for(let i=0;i<items.length;i++){
+        const heading=items[i];
+        const section=heading.closest('.material-section');
+        if(heading.tagName==='H2'&&items[i+1]?.matches('.material-section>h3')&&items[i+1].closest('.material-section')===section){
+          let children='';
+          while(items[i+1]?.matches('.material-section>h3')&&items[i+1].closest('.material-section')===section)children+=tocButton(items[++i]);
+          html+=`<details ${expanded?'open':''}><summary>${tocButton(heading)}</summary>${children}</details>`;
+        }else html+=tocButton(heading);
+      }
+      return html;
+    }
     if(material?.toc_groups?.length){
       const groups=window.TIL_MATERIAL_VIEW.groupedSections(material);
-      toc.querySelector('nav').innerHTML=groups.map((g,i)=>`<details ${i===0?'open':''}><summary>${esc(g.title||'목차')}</summary>${g.sections.map(s=>tocButton(targets[s.index])).join('')}</details>`).join('')+targets.slice(material.outline.length).map(tocButton).join('');
-    }else toc.querySelector('nav').innerHTML=targets.map(tocButton).join('');
-    tocObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){toc.querySelectorAll('button').forEach(b=>{if(b.dataset.scroll===e.target.id){b.setAttribute('aria-current','location');const group=b.closest('nav details');if(group)group.open=true;}else b.removeAttribute('aria-current');});}},{rootMargin:'-12% 0px -65% 0px'});
+      const sections=[...content.querySelectorAll('.material-section')].slice(0,material.outline.length);
+      const sectionTargets=sections.map(section=>targets.filter(h=>section.contains(h)));
+      toc.querySelector('nav').innerHTML=groups.map((g,i)=>`<details ${i===0?'open':''}><summary>${esc(g.title||'목차')}</summary>${g.sections.map(s=>sectionToc(sectionTargets[s.index]||[],false)).join('')}</details>`).join('')+targets.filter(h=>!sections.includes(h.closest('.material-section'))).map(tocButton).join('');
+    }else toc.querySelector('nav').innerHTML=material?sectionToc(targets):targets.map(tocButton).join('');
+    tocObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){toc.querySelectorAll('button').forEach(b=>{if(b.dataset.scroll===e.target.id){b.setAttribute('aria-current','location');let group=b.closest('nav details');while(group){group.open=true;group=group.parentElement.closest('nav details');}}else b.removeAttribute('aria-current');});}},{rootMargin:'-12% 0px -65% 0px'});
     targets.forEach(h=>tocObserver.observe(h));
   }
-  $('#readingToc').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(b){const target=document.getElementById(b.dataset.scroll);target?.scrollIntoView();target?.setAttribute('tabindex','-1');target?.focus({preventScroll:true});}});
+  $('#readingToc').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(b){e.preventDefault();const target=document.getElementById(b.dataset.scroll);target?.scrollIntoView();target?.setAttribute('tabindex','-1');target?.focus({preventScroll:true});}});
   $('#sitePages').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(!b)return;const target=document.getElementById(b.dataset.scroll);target?.setAttribute('tabindex','-1');target?.scrollIntoView();target?.focus({preventScroll:true});});
   window.TIL_SITE={articleReady(){queueMicrotask(buildToc);}};
   function filterState(){return currentKind==='project'?projectFilter:views[currentKind]?.state;}

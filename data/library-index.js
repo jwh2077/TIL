@@ -1639,5 +1639,103 @@ window.TIL_LIBRARY_INDEX = [
         "text": "weak_ptr — 수명을 늘리지 않고 참조 shared_ptr가 관리하는 객체를 소유하지 않고 가리킨다. 서로를 참조하는 두 객체 중 한쪽이 다른 쪽의 수명을 책임질 필요가 없다면 그 연결에 weak_ptr를 쓸 수 있다. 사용할 때는 lock()으로 shared_ptr를 얻는다. 이미 객체가 해제됐다면 빈 shared_ptr가 돌아온다."
       }
     ]
+  },
+  {
+    "id": "unreal-modular-characters",
+    "title": "Unreal 모듈형 캐릭터 — Leader Pose 연결과 숨긴 메시의 본 갱신",
+    "summary": "외형 파츠를 기본 Mesh에 연결하는 방법과 기본 메시를 숨겼을 때 본 자세를 계속 갱신하는 설정.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "draft",
+    "status": "초안",
+    "source_name": "Epic Games 공식 문서 · 11월 11일 Don’t Drop 테스트",
+    "source_url": "https://dev.epicgames.com/documentation/unreal-engine/working-with-modular-characters-in-unreal-engine?lang=ko",
+    "related_ids": [
+      "20261111-dont-drop"
+    ],
+    "quick_links": [
+      {
+        "label": "BP 연결",
+        "section": "블루프린트에서 Leader Pose 연결"
+      },
+      {
+        "label": "숨긴 메시 흔들림",
+        "section": "기본 메시를 숨긴 뒤 흔들릴 때"
+      },
+      {
+        "label": "구성 방식 비교",
+        "section": "Leader Pose·Copy Pose·Mesh Merge 비교"
+      }
+    ],
+    "file": "data/materials/unreal-modular-characters.js",
+    "outline": [
+      {
+        "title": "기준 메시와 외형 파츠",
+        "text": "기준 메시와 외형 파츠 모듈형 캐릭터는 몸통·얼굴·의상처럼 나뉜 스켈레탈 메시를 조합한다. Leader Pose를 쓰면 외형 파츠가 기준 메시의 본 자세를 공유한다. 파츠마다 애니메이션을 따로 계산할 필요는 줄지만 렌더링은 메시별로 이루어진다. 파츠의 본 계층은 기준 메시에서 대응하는 본과 구조가 맞아야 한다."
+      },
+      {
+        "title": "블루프린트에서 Leader Pose 연결",
+        "text": "블루프린트에서 Leader Pose 연결 파츠와 기준 메시 연결 캐릭터 블루프린트의 Construction Script 에서 Set Leader Pose Component 를 추가한다. 자세를 따라갈 외형 파츠를 Target 에 연결한다. 기준이 되는 기본 Mesh 를 New Leader Bone Component 에 연결한다. Don’t Drop 테스트에서 외형 파츠를 기본 Mesh에 연결한 화면."
+      },
+      {
+        "title": "기본 메시를 숨긴 뒤 흔들릴 때",
+        "text": "기본 메시를 숨긴 뒤 흔들릴 때 기준 메시를 Hidden in Game 으로 숨긴 뒤 외형 파츠가 흔들린다면, 기준 메시 컴포넌트의 Visibility Based Anim Tick Option 을 확인한다. 숨긴 메시의 본 갱신 기준 Mesh 선택 → Visibility Based Anim Tick Option → Always Tick Pose and Refresh Bones 이 설정은 기준 메시가 화면에 보이지 않아도 애니메이션과 본 자세를 계속 갱신한다. 11월 11일 테스트에서는 SKM_Default_Sidekick 을 숨긴 채 이 옵션만 바꿔 다시 실행하니 흔들림이 사라졌다."
+      },
+      {
+        "title": "Leader Pose·Copy Pose·Mesh Merge 비교",
+        "text": "Leader Pose·Copy Pose·Mesh Merge 비교 방법 언제 쓰는가 고려할 점 Leader Pose 파츠가 기준 자세를 그대로 따라갈 때 구성이 간단하다. 파츠별 독립 애니메이션과 물리 시뮬레이션에는 제한이 있다. Copy Pose from Mesh 기준 자세에 파츠별 애니메이션이나 물리를 추가할 때 일치하는 본의 자세를 복사한다. 파츠마다 애니메이션 그래프를 평가한다. Skeletal Mesh Merge 파츠를 한 메시로 합쳐 렌더링 비용을 줄일 때 병합 준비와 생성 비용이 든다. 모프 타깃은 기본 병합에서 전달되지 않는다. 구성 방식 비교는 Epic Games 공식 문서를 바탕으로 정리했다."
+      }
+    ]
+  },
+  {
+    "id": "unreal-character-movement",
+    "title": "Unreal Character Movement — 이동 속도·가속·감속·회전",
+    "summary": "최대 속도, 가속, 방향 전환, 입력을 놓은 뒤 감속에 영향을 주는 값을 상황별로 찾는 노트.",
+    "kind": "note",
+    "topic": "unreal",
+    "topics": [
+      "unreal"
+    ],
+    "publication": "draft",
+    "status": "초안",
+    "source_name": "Epic Games 공식 API 문서 · 11월 6일·9일·10일 Don’t Drop 이동 작업 기록",
+    "source_url": "https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Engine/UCharacterMovementComponent",
+    "related_ids": [
+      "20261106-dont-drop",
+      "20261109-dont-drop",
+      "20261110-dont-drop"
+    ],
+    "quick_links": [
+      {
+        "label": "이동 속도·가속",
+        "section": "걷기 속도와 출발 가속"
+      },
+      {
+        "label": "정지·미끄러짐",
+        "section": "입력을 놓은 뒤 감속과 미끄러짐"
+      },
+      {
+        "label": "회전 방향",
+        "section": "이동 방향과 컨트롤러 방향으로 회전"
+      }
+    ],
+    "file": "data/materials/unreal-character-movement.js",
+    "outline": [
+      {
+        "title": "걷기 속도와 출발 가속",
+        "text": "걷기 속도와 출발 가속 캐릭터 블루프린트의 컴포넌트 목록에서 Character Movement 를 선택하고 Details에서 필요한 설정 이름을 검색한다. C++의 ACharacter 에서는 GetCharacterMovement() 로 접근한다. 속도와 가속 설정 확인할 상황 설정 역할 계속 걸을 때 얼마나 빠른가 MaxWalkSpeed 지상 보행 속도의 상한 입력을 넣으면 얼마나 빨리 속도가 붙는가 MaxAcceleration 입력으로 적용할 수 있는 가속도의 상한 움직이는 중 방향을 얼마나 빨리 바꾸는가 GroundFriction 지상에서 방향 전환에 영향을 주는 마찰 입력을 놓으면 얼마나 빨리 멈추는가 BrakingDecelerationWalking 보행 중 가속 입력이 없을 때 적용되는 감속. 정지 거리에는 제동 마찰도 영향을 준다. 출발 속도 조정 Don’t Drop의 StartMoveSpeed 는 프로젝트에서 별도로 추가한 출발 속도다. 이 값만 높였을 때 출발 직후 급하게 느려져 대시처럼 보였다. 출발이 튀는 경우에는 커스텀 출발 속도와 MaxAcceleration 을 따로 확인한다."
+      },
+      {
+        "title": "입력을 놓은 뒤 감속과 미끄러짐",
+        "text": "입력을 놓은 뒤 감속과 미끄러짐 지상에서 입력을 놓으면 BrakingDecelerationWalking 에 의한 감속과 제동 마찰이 함께 속도를 줄인다. 제동에 쓰는 마찰은 Use Separate Braking Friction 설정에 따라 달라진다. 제동 마찰 선택 꺼짐 · 보행 중에는 GroundFriction 을 제동에도 사용한다. 켜짐 · 제동에는 별도로 설정한 BrakingFriction 을 사용한다. 두 경우 모두 제동에 쓰는 마찰 값에는 BrakingFrictionFactor 가 곱해진다. 방향 전환은 유지하면서 멈추는 느낌만 바꾸고 싶다면 제동에 쓰는 값을 따로 조정하고, 같은 속도에서 키를 놓아 멈추는 거리를 비교한다."
+      },
+      {
+        "title": "이동 방향과 컨트롤러 방향으로 회전",
+        "text": "이동 방향과 컨트롤러 방향으로 회전 회전 방향 설정 Orient Rotation to Movement · 이동 입력으로 생기는 가속 방향으로 캐릭터를 돌린다. Use Controller Desired Rotation · 컨트롤러가 바라보려는 방향으로 캐릭터를 돌린다. 두 옵션이 모두 켜져 있으면 Orient Rotation to Movement 가 우선한다. Rotation Rate · 이 회전 방식에서 캐릭터가 돌아가는 속도를 조절한다. Don’t Drop에서는 평소 이동 방향을 향하게 하고, 가드 중에는 컨트롤러 방향을 따르도록 바꿨다. 가드를 풀면 회전과 이동 속도·가속도를 기존 설정으로 되돌렸다."
+      }
+    ]
   }
 ];

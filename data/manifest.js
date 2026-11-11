@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261111-dont-drop",
+      "date": "2026-11-11",
+      "date_end": null,
+      "date_label": "2026-11-11",
+      "title": "Don’t Drop · 캐릭터 외형 연결과 흔들림 수정",
+      "summary": "외형 파츠가 기본 메시의 자세를 따라가게 연결했다. 기본 메시를 숨겼을 때 생긴 흔들림은 본 자세를 계속 갱신하도록 설정을 바꿔 해결했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "Blueprint",
+        "애니메이션",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-11.js"
+    },
+    {
       "id": "20261110-dont-drop",
       "date": "2026-11-10",
       "date_end": null,

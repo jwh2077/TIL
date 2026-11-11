@@ -125,7 +125,7 @@
       window.TIL_LEARNING_DEMOS?.mount(r);
       window.TIL_SITE?.articleReady(); window.scrollTo({top:0});$('#materialTitle').setAttribute('tabindex','-1');$('#materialTitle').focus();
       const destination=requestedSection; requestedSection=null;
-      if(destination?.id===id) queueMicrotask(()=>{const section=document.getElementById('material-section-'+destination.index);if(section){section.setAttribute('tabindex','-1');section.scrollIntoView();section.focus({preventScroll:true});}});
+      if(destination?.id===id) queueMicrotask(()=>{const section=document.getElementById('material-section-'+destination.index);const target=destination.child!==undefined?(section?.querySelectorAll(':scope > h3')[destination.child]||section):section;if(target){target.setAttribute('tabindex','-1');target.scrollIntoView();target.focus({preventScroll:true});}});
     } catch(error) {
       if(stamp!==token||!active())return;
       $('#libraryPage').innerHTML=`<p>${esc(error.message)}</p><button type="button" class="related-button" data-material="${esc(id)}">다시 열기</button><button type="button" class="related-button" data-library-back>목록으로</button>`;
@@ -141,12 +141,54 @@
     if(location.hash.startsWith('#material=')) {try {open(decodeURIComponent(location.hash.slice(10)));}catch {location.hash='library';}}
     else {++token;list();}
   }
+  async function loadOutlineChildren(target,id) {
+    if(target.dataset.childrenLoaded||target.dataset.childrenLoading)return;
+    const meta=materials.find(r=>r.id===id);
+    if(!meta)return;
+    target.dataset.childrenLoading='true';
+    target.setAttribute('aria-busy','true');
+    try {
+      const record=(await load(meta.file)).find(r=>r.id===id);
+      if(!record||!target.isConnected)return;
+      target.querySelectorAll('[data-open-section]').forEach(button=>{
+        const index=Number(button.dataset.openSection);
+        const template=document.createElement('template');
+        template.innerHTML=record.sections[index]?.html||'';
+        const headings=[...template.content.children].filter(node=>node.tagName==='H3');
+        if(!headings.length)return;
+        const group=document.createElement('div');
+        group.className='material-outline-section';
+        const children=document.createElement('div');
+        children.className='material-outline-children';
+        headings.forEach((heading,child)=>{
+          const link=document.createElement('button');
+          link.type='button';
+          link.dataset.material=id;
+          link.dataset.openSection=index;
+          link.dataset.openChild=child;
+          link.textContent=heading.textContent;
+          children.append(link);
+        });
+        button.replaceWith(group);
+        group.append(button,children);
+      });
+      target.dataset.childrenLoaded='true';
+    } catch(error) {
+      // Parent links remain usable; reopening retries the child headings.
+      console.warn('자료 하위 목차를 불러오지 못했습니다.',error);
+    } finally {
+      delete target.dataset.childrenLoading;
+      target.removeAttribute('aria-busy');
+    }
+  }
   function choose(id) {const hash='#material='+encodeURIComponent(id);if(location.hash===hash)open(id);else location.hash=hash;}
   $('#libraryPage').addEventListener('click',e=>{
     const subject=e.target.closest('[data-subject]'),pin=e.target.closest('[data-pin]'),toc=e.target.closest('[data-row-toc]'),page=e.target.closest('[data-library-page]');
     if(subject){state.subject=subject.dataset.subject;state.query='';state.page=0;const query=$('#siteQuery');if(query)query.value='';savePreferences();cards();}
     if(pin){const id=pin.dataset.pin;if(pins.has(id))pins.delete(id);else pins.add(id);savePreferences();cards();}
-    if(toc){const target=document.getElementById('outline-'+toc.dataset.rowToc);target.hidden=!target.hidden;toc.setAttribute('aria-expanded',String(!target.hidden));toc.textContent=target.hidden?'목차 ▾':'접기 ▴';}
+    if(toc){const target=document.getElementById('outline-'+toc.dataset.rowToc);target.hidden=!target.hidden;toc.setAttribute('aria-expanded',String(!target.hidden));toc.textContent=target.hidden?'목차 ▾':'접기 ▴';
+      if(!target.hidden) loadOutlineChildren(target,toc.dataset.rowToc);
+    }
     if(page){state.page=Number(page.dataset.libraryPage);cards();$('#libraryCount').scrollIntoView({block:'nearest'});}
   });
   $('#libraryNav').addEventListener('click',e=>{
@@ -158,6 +200,6 @@
     if(item)choose(item.dataset.material);
     if(section)document.getElementById(section.dataset.materialSection)?.scrollIntoView({behavior:'smooth'});
   });
-  $('#libraryPage').addEventListener('click',e=>{const b=e.target.closest('[data-material]');if(b){requestedSection=b.dataset.openSection!==undefined?{id:b.dataset.material,index:Number(b.dataset.openSection)}:null;choose(b.dataset.material);}if(e.target.closest('[data-library-back]'))location.hash='library';});
+  $('#libraryPage').addEventListener('click',e=>{const b=e.target.closest('[data-material]');if(b){requestedSection=b.dataset.openSection!==undefined?{id:b.dataset.material,index:Number(b.dataset.openSection),...(b.dataset.openChild!==undefined?{child:Number(b.dataset.openChild)}:{})}:null;choose(b.dataset.material);}if(e.target.closest('[data-library-back]'))location.hash='library';});
   window.addEventListener('hashchange',route);route();
 })();

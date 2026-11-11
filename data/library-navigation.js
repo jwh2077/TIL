@@ -66,7 +66,9 @@ window.TIL_LIBRARY_NAVIGATION = [
         "id": "actor",
         "title": "Actor·컴포넌트",
         "documents": [
-          "velog-20260810-001"
+          "velog-20260810-001",
+          "unreal-modular-characters",
+          "unreal-character-movement"
         ]
       },
       {
