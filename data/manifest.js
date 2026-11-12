@@ -1,6 +1,26 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261112-dont-drop",
+      "date": "2026-11-12",
+      "date_end": null,
+      "date_label": "2026-11-12",
+      "title": "Don’t Drop · 외형 테이블 구성과 스틱맨 에셋 검토",
+      "summary": "캐릭터 외형을 데이터 테이블로 구성하고 고정 파츠와 선택 파츠, 좌우 신발을 함께 적용하는 방식을 정리했다. 스틱맨 에셋은 애니메이션 호환과 체형 표현을 살펴보며 계속 검토 중이다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "데이터 테이블",
+        "애니메이션",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-12.js"
+    },
+    {
       "id": "20261111-dont-drop",
       "date": "2026-11-11",
       "date_end": null,
