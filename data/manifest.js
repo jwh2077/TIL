@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261113-dont-drop",
+      "date": "2026-11-13",
+      "date_end": null,
+      "date_label": "2026-11-13",
+      "title": "Don’t Drop · AI에 캐릭터 보정을 맡기고 결과 확인하기",
+      "summary": "임시 프로젝트에서 AI에 캐릭터 외형과 애니메이션 보정을 나눠 맡겨 봤다. 실행 화면을 보며 손목·겨드랑이 변형과 그림자 문제를 전달하고, 수정된 결과와 코드 구조를 다시 살펴봤다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "애니메이션",
+        "AI 활용",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-13.js"
+    },
+    {
       "id": "20261112-dont-drop",
       "date": "2026-11-12",
       "date_end": null,
