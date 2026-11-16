@@ -1,6 +1,26 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261116-dont-drop",
+      "date": "2026-11-16",
+      "date_end": null,
+      "date_label": "2026-11-16",
+      "title": "Don’t Drop · ABP 연결과 협업용 함수 정리",
+      "summary": "ABP에서 방어 시작·유지·종료 상태와 전환 조건을 연결했다. 사용하지 않게 된 C++ 코드는 AI에 맡겨 정리하고, 다른 담당과 연결할 함수와 역할도 함께 정리했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "Blueprint",
+        "애니메이션",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-16.js"
+    },
+    {
       "id": "20261113-dont-drop",
       "date": "2026-11-13",
       "date_end": null,
