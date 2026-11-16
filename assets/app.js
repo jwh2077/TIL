@@ -234,6 +234,8 @@
     }
     if (location.hash.startsWith('#record=')) {
       try { const id = decodeURIComponent(location.hash.slice(8)); if (records.some(r => r.id === id)) { open(id); return; } } catch {}
+      // 없는 글은 주소도 목록으로 맞춰 다른 화면 모듈과 같은 상태를 사용한다.
+      history.replaceState(null, '', '#list');
     }
     ++request; page.hidden = true; $('#listPage').hidden = false; $('#articleNav').hidden = true; render();
   }
