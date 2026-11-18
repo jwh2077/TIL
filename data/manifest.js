@@ -1,6 +1,45 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261118-dont-drop",
+      "date": "2026-11-18",
+      "date_end": null,
+      "date_label": "2026-11-18",
+      "title": "Don’t Drop · 방어구 외형 연결과 장비·애니메이션 문제 점검",
+      "summary": "방어구 상태에 따른 외형 표시를 연결하고, LFS 무기 테이블과 장비 변경 실패를 살펴봤다. 공격 중 멈추는 다리와 회전 모션, 손에서 벗어난 무기의 확인 순서도 정리했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "Blueprint",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-18.js"
+    },
+    {
+      "id": "20261117-dont-drop",
+      "date": "2026-11-17",
+      "date_end": null,
+      "date_label": "2026-11-17",
+      "title": "Don’t Drop · 가드 이동과 상하체 애니메이션 연결",
+      "summary": "가드 상태 변경 이벤트에 맞춰 이동 설정을 갱신하고 방어구 무게와 가드 제한을 함께 계산하도록 정리했다. ABP에서는 상체 가드와 하체 이동을 섞고 짧은 가드 입력의 전환 경로를 점검했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "Blueprint",
+        "애니메이션",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-17.js"
+    },
+    {
       "id": "20261116-dont-drop",
       "date": "2026-11-16",
       "date_end": null,
