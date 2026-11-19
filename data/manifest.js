@@ -1,6 +1,25 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261119-dont-drop",
+      "date": "2026-11-19",
+      "date_end": null,
+      "date_label": "2026-11-19",
+      "title": "Don’t Drop · 공격 애니메이션 블렌딩과 무기 위치 보정",
+      "summary": "ToyHammer의 회전 공격 반복·해제 흐름을 구성하고, 공격 중에도 하체 이동이 이어지도록 애니메이션 블렌딩을 살펴봤다. 점프 시 머리 방향 문제를 수정하고 HandGrip_R 소켓을 기준으로 무기 손잡이 위치도 맞췄다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "Blueprint",
+        "애니메이션",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-19.js"
+    },
+    {
       "id": "20261118-dont-drop",
       "date": "2026-11-18",
       "date_end": null,
