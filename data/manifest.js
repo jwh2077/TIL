@@ -1,6 +1,26 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261120-dont-drop",
+      "date": "2026-11-20",
+      "date_end": null,
+      "date_label": "2026-11-20",
+      "title": "Don’t Drop · 최종 발표용 담당 기능과 문제 해결 과정 정리",
+      "summary": "최종 발표를 준비하며 캐릭터 조작·가드 이동·DataTable 외형·Layered Blend Per Bone·외형 갱신 델리게이트를 정리했다. 조작 가이드에는 패링·카운터 설명을 추가하고 AI 수정 작업과 직접 담당한 범위를 구분했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "C++",
+        "Blueprint",
+        "애니메이션",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-20.js"
+    },
+    {
       "id": "20261119-dont-drop",
       "date": "2026-11-19",
       "date_end": null,
