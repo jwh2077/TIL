@@ -18,7 +18,7 @@
       evidence:'TIL 2026.09.07~09.30 / 팀 발표 및 플레이 기록',record:'20260925-priest-ai'
     },
     {
-      id:'case-dontdrop',index:'02',title:'Don’t Drop',kind:'팀 멀티플레이 게임 · 5명',status:'개발 중',
+      id:'case-dontdrop',index:'02',title:'Don’t Drop',kind:'팀 멀티플레이 게임 · 5명',status:'발표 완료',
       projectName:'Don’t Drop',
       period:'2026.10~11',engine:'Unreal Engine 5.6 · C++',role:'캐릭터 이동 · 입력 · 전투 연결',
       lead:'방어구 무게와 입력 유지 시간에 따라 달라지는 이동감을 데이터로 제어했습니다.',
@@ -29,7 +29,7 @@
       challenge:'출발 속도를 높였더니 처음 빠르게 움직인 뒤 급격히 느려져 대시처럼 보였습니다. 테이블에 있는 값이 실제 이동 컴포넌트에 적용되지 않는 구간도 확인했습니다.',
       approach:'시작 순간의 속도와 입력을 누르는 동안 증가하는 이동 세기를 분리했습니다. CharacterMovementComponent에 값을 적용하고, 무게가 바뀌면 최대 속도 등을 다시 계산하는 흐름을 정리했습니다.',
       outcome:'DataTable 이동값 적용, 방어구 무게와 이동 연동, 공격·가드 요청 연결의 작업 기록이 있습니다. 조작 수치를 직접 테스트하며 이상한 이동감을 관찰했습니다.',
-      caution:'리슨 서버 외부 접속과 모든 클라이언트의 이동 일치가 검증됐다는 의미는 아닙니다. 관전 기능의 개인 테스트 코드는 동작하지 않아 삭제했고, 엑셀 연동은 구상 단계입니다.',
+      caution:'리슨 서버 외부 접속과 모든 클라이언트의 이동 일치가 검증됐다는 의미는 아닙니다. 관전 기능의 개인 테스트 코드는 동작하지 않아 삭제했고, 엑셀 연동은 구상 단계입니다. 캐릭터 외형 선택과 파츠 적용 코드는 일부 구현했습니다. 3D 모델 제작도 처음부터 Codex만으로 시도했으나 원하는 품질의 에셋을 확보하지 못해 커스터마이징 기능은 완성하지 못했습니다.',
       steps:[['기본 이동 구성','FPlayerDataRow와 이동 보정값으로 입력·Movement 설정을 분리했습니다.'],['상태 연결','방어구 무게 변경 알림을 받아 이동 속도 갱신에 연결했습니다.'],['조작 테스트','출발 속도와 누적 입력의 관계를 관찰하고 조정했습니다.']],
       evidence:'2026.11.04~11.11 / 캐릭터 이동·가드·외형 작업 기록',record:'20261109-dont-drop',
       observation:{title:'숨긴 기준 메시의 본 자세 갱신',text:'외형 파츠를 Set Leader Pose Component로 연결한 뒤 기준 메시를 Hidden in Game으로 숨기자 캐릭터가 위아래로 흔들렸습니다. Visibility Based Anim Tick Option을 Always Tick Pose and Refresh Bones로 바꾸고 같은 테스트 맵에서 다시 실행하니 흔들림이 사라졌습니다.',image:'assets/images/dont-drop-leader-pose-20261111.png',alt:'외형 파츠를 기본 Mesh의 본 자세에 연결한 블루프린트',record:'20261111-dont-drop'}
@@ -50,12 +50,12 @@
       evidence:'TIL 2026.10.12 / RPC·숫자 야구 실습 기록',record:'20261012-chatx'
     },
     {
-      id:'case-textrpg',index:'04',title:'팀 TextRPG',kind:'C++ 콘솔 팀 프로젝트',status:'팀 과제 마무리',
+      id:'case-textrpg',index:'04',title:'제13 던전',kind:'C++ 콘솔 팀 프로젝트',status:'팀 과제 마무리',
       period:'2026.07~08',engine:'C++ · STL',role:'상점 · 아이템 · Logger',
       lead:'상점 기능을 구현하고 아이템 소유권과 클래스 책임을 분리했습니다.',
       summary:'아이템 구매·판매와 데이터 기록, unique_ptr을 이용한 Item 관리 구조를 다뤘습니다.',
       tags:['C++','std::unique_ptr','Git 협업'],
-      projectName:'팀 TextRPG',placeholder:'C++ / ITEM',
+      projectName:'제13 던전',placeholder:'C++ / ITEM',
       own:['Shop 구매·판매 기능과 Item 클래스 분리','std::unique_ptr<Item> 기반 관리','Logger 데이터 집계 및 Git 협업'],
       challenge:'아이템 관리와 상점 처리를 한 구조에 계속 추가하면 책임이 섞이기 쉬웠습니다. 팀 작업에서는 병합과 작업 범위 조율도 필요했습니다.',
       approach:'Shop과 Item을 분리하고 unique_ptr을 통해 아이템의 소유권을 관리했습니다. Git 브랜치, PR, 병합·충돌 해결을 경험했습니다.',
@@ -120,7 +120,7 @@
     const item=cases.find(c=>c.id===id);
     if(!item)return '<div class="career-case"><a href="#career">← 포트폴리오</a><h1>프로젝트를 찾을 수 없습니다.</h1></div>';
     const project=projectFor(item);
-    const period=item.id==='case-dontdrop'?'2026.10.29–진행 중 · 11.23 마감 예정':project?.period||item.period;
+    const period=project?.period||item.period;
     const facts=[['형태',item.kind],['기간',period],['기술',item.engine],['담당',item.role]];
     return '<div class="career-case"><nav class="career-case-back"><a href="#career">← 포트폴리오</a><span>'+esc(item.index)+' / '+esc(item.status)+'</span><button type="button" class="career-print">PDF로 저장 · 인쇄</button></nav>'+
       '<header class="career-case-hero"><div class="eyebrow">PROJECT CASE STUDY · '+esc(item.index)+'</div><h1>'+esc(item.title)+'</h1><p>'+esc(item.lead)+'</p>'+

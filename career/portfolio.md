@@ -7,9 +7,9 @@ C++과 Unreal Engine으로 게임플레이 기능을 만들고 있습니다. 팀
 | 프로젝트 | 내 담당 | 살펴볼 내용 |
 | --- | --- | --- |
 | Project Priest · 4인 팀 | 적 AI · 무기 파츠 | 행동 전환, 공격 판정 조사, 파츠와 UI 연결 |
-| Don’t Drop · 5인 팀 · 개발 중 | 캐릭터 이동 · 입력 | 이동 데이터 적용, 무게 연동, 외형 흔들림 수정 |
+| Don’t Drop · 5인 팀 · 발표 완료 | 캐릭터 이동 · 입력 | 이동 데이터 적용, 무게 연동, 외형 흔들림 수정 |
 | ChatX · 개인 실습 | 숫자 야구 · 채팅 | 서버 규칙, RPC와 플레이어 상태 복제 |
-| 팀 TextRPG | 상점 · 아이템 · Logger | 구매·판매, 책임 분리, 데이터 집계 |
+| 제13 던전 | 상점 · 아이템 · Logger | 구매·판매, 책임 분리, 데이터 집계 |
 
 ## Project Priest — 적 AI와 무기 파츠
 
@@ -25,7 +25,7 @@ Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니
 
 ## Don’t Drop — 캐릭터 조작과 외형 연결
 
-**기간** 2026.10.29–진행 중 · 11.23 마감 예정 · **기술** Unreal Engine 5.6 / C++ / Blueprint
+**기간** 2026.10.29–11.23 · 발표 완료 · **기술** Unreal Engine 5.6 / C++ / Blueprint
 
 이동·점프 설정을 DataTable에서 읽어 CharacterMovementComponent에 적용했습니다. 방어구 무게가 바뀌면 이동 속도를 다시 계산하도록 연결하고, 공격·가드 입력을 팀원의 전투 컴포넌트로 전달했습니다.
 
@@ -35,7 +35,9 @@ Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니
 
 **작업 범위** 이동 조정과 외형 테스트까지의 결과입니다. 모든 클라이언트의 이동 일치를 검증한 것은 아니며, 엑셀 연동은 구상만 했습니다.
 
-[기술 사례](../index.html#career=case-dontdrop) · [외형 연결과 테스트](../index.html#record=20261111-dont-drop) · [팀 저장소](https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project)
+캐릭터 외형 선택과 파츠 적용 코드는 일부 구현했습니다. 3D 모델 제작도 처음부터 Codex만으로 시도했으나 원하는 품질의 에셋을 확보하지 못해 커스터마이징 기능은 완성하지 못했습니다.
+
+[제작 시도와 최종 결과](../index.html#record=20261123-dont-drop) · [기술 사례](../index.html#career=case-dontdrop) · [외형 연결과 테스트](../index.html#record=20261111-dont-drop) · [팀 저장소](https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project)
 
 ## ChatX — 서버 규칙과 채팅 전달
 
@@ -47,7 +49,7 @@ Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니
 
 [기술 사례](../index.html#career=case-chatx) · [시연 영상](https://youtu.be/powPv4J4LEI)
 
-## 팀 TextRPG — 상점과 아이템 관리
+## 제13 던전 — 상점과 아이템 관리
 
 **기간** 2026.07.28–08.05 · **기술** C++
 

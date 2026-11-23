@@ -6,7 +6,7 @@ window.TIL_INDEX = {
       "date_end": null,
       "date_label": "2026-11-23",
       "title": "Don’t Drop · 최종 발표와 팀 피드백",
-      "summary": "팀 발표를 마치고 발표 자료에서 잘 보이지 않았던 구현 내용, 망치가 맞는 순간과 방어구가 깨지는 장면에 대한 의견을 적었다.",
+      "summary": "팀 발표를 마치고 발표 자료와 타격 판정·연출에 대한 피드백을 적었다. Codex로 3D 모델 제작을 시도했지만 사용할 에셋을 확보하지 못해 커스터마이징은 일부 코드 구현에 그쳤다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [

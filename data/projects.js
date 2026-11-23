@@ -32,9 +32,11 @@ window.TIL_PROJECTS = [{
 window.TIL_PROJECTS.push(...[
   {
     id: 'chapter-4-team',
+    cover: {src: 'assets/images/dont-drop-demo.webp', alt: '짙은 남색과 청록색 배경에 노란 Don’t Drop 로고가 놓인 타이틀 화면'},
     media: {label: 'Don’t Drop 팀 시연 영상', url: 'https://www.youtube.com/watch?v=Z17FAkNCGB4'},
     links: [{label: '팀 프로젝트 저장소', url: 'https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project'}],
     record_project: 'Don’t Drop',
+    result: '11월 23일 팀 발표를 마쳤으며 회고만 남았다. 캐릭터 커스터마이징은 코드를 일부 구현했지만, Codex로 제작한 3D 에셋의 품질이 목표에 미치지 못해 완성하지 못했다.',
     period: "2026.10.29–11.23", period_end: "2026-11-23",
     period_note: "11월 23일 팀 발표를 끝으로 개발 일정을 마쳤다. 프로젝트 회고만 남았다.",
     title: 'Don’t Drop',
@@ -132,7 +134,7 @@ window.TIL_PROJECTS.push(...[
     "record_project": "팀 TextRPG",
     period: "2026.07.28–08.05", period_end: "2026-08-05",
     period_note: "과정 일정표의 CH2 팀 프로젝트 발제부터 마감·발표까지.",
-    "title": "팀 TextRPG",
+    "title": "제13 던전",
     cover: { src: "assets/images/team-textrpg-shop-stats.png", alt: "제13 던전의 탕비실 자판기 구매 화면, 보급품 회수소 판매 화면, 아이템·골드 집계 화면" },
     "archive": true,
     "activity": "team",
