@@ -5,9 +5,20 @@ const shortTitle=t=>t.replace(/^게임 클라이언트 개발 포트폴리오$/,
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const byPath=new Map(docs.map(d=>[d.path,d]));
 function inline(s,doc){
-  // Printed documents keep citations as readable labels, not embedded navigation.
-  s=String(s).replace(/\[([^\]]+)\]\(([^)]+)\)/g,'$1');
-  return esc(s).replace(/\x60([^\x60]+)\x60/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  const format=text=>esc(text).replace(/\x60([^\x60]+)\x60/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  let end=0,html='';
+  for(const match of String(s).matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)){
+    html+=format(String(s).slice(end,match.index));
+    let href=match[2];
+    if(!/^(?:https?:\/\/|#)/i.test(href)){
+      const url=new URL(href,'https://local.invalid/'+doc.path);
+      const target=byPath.get(url.pathname.slice(1));
+      href=target?'#career='+target.id:url.pathname==='/index.html'&&url.hash?url.hash:'';
+    }
+    html+=href?'<a href="'+esc(href)+'"'+(/^https?:/i.test(href)?' target="_blank" rel="noopener noreferrer"':'')+'>'+format(match[1])+'</a>':format(match[1]);
+    end=match.index+match[0].length;
+  }
+  return html+format(String(s).slice(end));
 }
 function markdown(doc){
   const lines=doc.markdown.replace(/\r\n/g,'\n').split('\n'),out=[];

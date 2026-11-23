@@ -1,12 +1,29 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261123-dont-drop",
+      "date": "2026-11-23",
+      "date_end": null,
+      "date_label": "2026-11-23",
+      "title": "Don’t Drop · 최종 발표와 팀 피드백",
+      "summary": "팀 발표를 마치고 발표 자료에서 잘 보이지 않았던 구현 내용, 망치가 맞는 순간과 방어구가 깨지는 장면에 대한 의견을 적었다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-23.js"
+    },
+    {
       "id": "20261120-dont-drop",
       "date": "2026-11-20",
       "date_end": null,
       "date_label": "2026-11-20",
       "title": "Don’t Drop · 최종 발표용 담당 기능과 문제 해결 과정 정리",
-      "summary": "최종 발표를 준비하며 캐릭터 조작·가드 이동·DataTable 외형·Layered Blend Per Bone·외형 갱신 델리게이트를 정리했다. 조작 가이드에는 패링·카운터 설명을 추가하고 AI 수정 작업과 직접 담당한 범위를 구분했다.",
+      "summary": "발표에서 설명할 캐릭터 조작과 외형 작업을 골랐다. 가드 회전과 공격 중 하체 이동을 사례로 정리하고, 조작 가이드에 들어갈 패링·카운터 문구를 다듬었다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [
@@ -26,7 +43,7 @@ window.TIL_INDEX = {
       "date_end": null,
       "date_label": "2026-11-19",
       "title": "Don’t Drop · 공격 애니메이션 블렌딩과 무기 위치 보정",
-      "summary": "ToyHammer의 회전 공격 반복·해제 흐름을 구성하고, 공격 중에도 하체 이동이 이어지도록 애니메이션 블렌딩을 살펴봤다. 점프 시 머리 방향 문제를 수정하고 HandGrip_R 소켓을 기준으로 무기 손잡이 위치도 맞췄다.",
+      "summary": "공격 중 상체와 하체의 움직임을 나눠 보고, 무기가 손에서 어긋나는 문제를 살펴봤다. 방어구 상태 변경 알림과 무게에 따른 최대 가속도도 이동 설정에 연결하도록 요청했다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",
       "tags": [

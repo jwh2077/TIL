@@ -262,6 +262,12 @@ body:has(.career-case) #readingToc{display:none!important}
 .career-case-results>div{padding:22px 24px;background:#eaf2ed;border-radius:9px}
 .career-case-results>div:last-child{background:#f0f1ee}
 .career-case-results h3{font-size:15px;margin:0 0 9px}.career-case-results p{margin:0}
+.career-evidence-links{display:flex;flex-wrap:wrap;gap:10px 20px;margin:18px 0 24px;font-weight:600}
+.career-evidence-links a,.career-prose a{text-decoration:underline;text-underline-offset:4px}
+.career-test-evidence{margin:24px 0;max-width:720px}
+.career-test-evidence img{display:block;width:100%;height:auto;border-radius:8px}
+.career-test-evidence figcaption{font-size:14px;margin-top:10px}
+@media print{.career-evidence-links a[href^="https"]::after,.career-prose a[href^="https"]::after{content:" (" attr(href) ")";font-size:9pt;overflow-wrap:anywhere}.career-evidence-links{display:block}.career-evidence-links a{display:block}}
 .career-case-footer{display:flex;justify-content:space-between;gap:25px;align-items:center;padding:22px 0;font-size:12px;color:#718479}
 .career-case-footer a{font-weight:750;color:#146558;white-space:nowrap}
 .career-case-next{margin-top:30px;padding:21px 27px;background:#e7f0e9;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:18px}

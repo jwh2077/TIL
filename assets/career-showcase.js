@@ -3,7 +3,7 @@
   const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const cases=[
     {
-      id:'case-priest',index:'01',title:'Project Priest',kind:'팀 액션 게임',status:'발표 기록 확인',
+      id:'case-priest',index:'01',title:'Project Priest',kind:'팀 액션 게임 · 4명',status:'발표 완료',
       period:'2026.09',engine:'Unreal Engine 5 · C++',role:'적 AI · 무기 파츠 · UI 데이터 연동',
       lead:'적의 행동 전환과 공격 판정을 구현하면서, 상태가 연결되는 구간의 문제를 추적했습니다.',
       summary:'순찰부터 추적·공격까지 이어지는 AI와 무기 파츠 정보를 게임 및 UI에 전달하는 기능을 담당했습니다.',
@@ -18,7 +18,8 @@
       evidence:'TIL 2026.09.07~09.30 / 팀 발표 및 플레이 기록',record:'20260925-priest-ai'
     },
     {
-      id:'case-dontdrop',index:'02',title:'Don’t Drop',kind:'팀 멀티플레이 게임',status:'개발 진행 기록',
+      id:'case-dontdrop',index:'02',title:'Don’t Drop',kind:'팀 멀티플레이 게임 · 5명',status:'개발 중',
+      projectName:'Don’t Drop',
       period:'2026.10~11',engine:'Unreal Engine 5.6 · C++',role:'캐릭터 이동 · 입력 · 전투 연결',
       lead:'방어구 무게와 입력 유지 시간에 따라 달라지는 이동감을 데이터로 제어했습니다.',
       summary:'이동 설정을 DataTable에서 읽고, 무게 변화 이벤트와 공격·가드 입력을 캐릭터 코드에 연결했습니다.',
@@ -30,7 +31,8 @@
       outcome:'DataTable 이동값 적용, 방어구 무게와 이동 연동, 공격·가드 요청 연결의 작업 기록이 있습니다. 조작 수치를 직접 테스트하며 이상한 이동감을 관찰했습니다.',
       caution:'리슨 서버 외부 접속과 모든 클라이언트의 이동 일치가 검증됐다는 의미는 아닙니다. 관전 기능의 개인 테스트 코드는 동작하지 않아 삭제했고, 엑셀 연동은 구상 단계입니다.',
       steps:[['기본 이동 구성','FPlayerDataRow와 이동 보정값으로 입력·Movement 설정을 분리했습니다.'],['상태 연결','방어구 무게 변경 알림을 받아 이동 속도 갱신에 연결했습니다.'],['조작 테스트','출발 속도와 누적 입력의 관계를 관찰하고 조정했습니다.']],
-      evidence:'TIL 2026.11.04~11.09 / 캐릭터 이동·가드 작업 기록',record:'20261109-dont-drop'
+      evidence:'2026.11.04~11.11 / 캐릭터 이동·가드·외형 작업 기록',record:'20261109-dont-drop',
+      observation:{title:'숨긴 기준 메시의 본 자세 갱신',text:'외형 파츠를 Set Leader Pose Component로 연결한 뒤 기준 메시를 Hidden in Game으로 숨기자 캐릭터가 위아래로 흔들렸습니다. Visibility Based Anim Tick Option을 Always Tick Pose and Refresh Bones로 바꾸고 같은 테스트 맵에서 다시 실행하니 흔들림이 사라졌습니다.',image:'assets/images/dont-drop-leader-pose-20261111.png',alt:'외형 파츠를 기본 Mesh의 본 자세에 연결한 블루프린트',record:'20261111-dont-drop'}
     },
     {
       id:'case-chatx',index:'03',title:'ChatX · 숫자 야구',kind:'개인 멀티플레이 실습',status:'학습·구현 기록',
@@ -64,6 +66,19 @@
     }
   ];
   const projectFor=item=>(window.TIL_PROJECTS||[]).find(p=>p.title===item.projectName);
+  const resources=item=>{
+    const project=projectFor(item);
+    const links=[...(project?.media?[project.media]:[]),...(project?.links||[])];
+    if(item.id==='case-chatx'){
+      const chapter=(window.TIL_PROJECTS||[]).find(p=>p.parts?.some(part=>part.title==='ChatX · 숫자 야구'));
+      const video=chapter?.parts.find(part=>part.title==='ChatX · 숫자 야구')?.video;
+      if(video)links.push({label:'ChatX 시연 영상',url:video});
+    }
+    return '<nav class="career-evidence-links" aria-label="프로젝트 자료">'+
+      links.map(link=>'<a href="'+esc(link.url)+'" target="_blank" rel="noopener noreferrer">'+esc(link.label)+' ↗</a>').join('')+
+      (project?'<a href="#project='+esc(project.id)+'">프로젝트 전체 기록 →</a>':'')+
+      '<a href="#record='+esc(item.record)+'">개인 작업 기록 →</a></nav>';
+  };
   const cover=item=>{
     const image=projectFor(item)?.cover;
     return image?.src
@@ -104,18 +119,21 @@
   function detail(id){
     const item=cases.find(c=>c.id===id);
     if(!item)return '<div class="career-case"><a href="#career">← 포트폴리오</a><h1>프로젝트를 찾을 수 없습니다.</h1></div>';
-    const facts=[['형태',item.kind],['기간',item.period],['기술',item.engine],['담당',item.role]];
+    const project=projectFor(item);
+    const period=item.id==='case-dontdrop'?'2026.10.29–진행 중 · 11.23 마감 예정':project?.period||item.period;
+    const facts=[['형태',item.kind],['기간',period],['기술',item.engine],['담당',item.role]];
     return '<div class="career-case"><nav class="career-case-back"><a href="#career">← 포트폴리오</a><span>'+esc(item.index)+' / '+esc(item.status)+'</span><button type="button" class="career-print">PDF로 저장 · 인쇄</button></nav>'+
       '<header class="career-case-hero"><div class="eyebrow">PROJECT CASE STUDY · '+esc(item.index)+'</div><h1>'+esc(item.title)+'</h1><p>'+esc(item.lead)+'</p>'+
       '<div class="career-case-facts">'+facts.map(([key,value])=>'<div><dt>'+esc(key)+'</dt><dd>'+esc(value)+'</dd></div>').join('')+'</div></header>'+
-      '<div class="career-case-visual">'+cover(item)+'</div>'+
+      resources(item)+(project?.cover?'<div class="career-case-visual">'+cover(item)+'</div>':'')+
       '<section class="career-case-section career-case-overview"><div><span class="eyebrow">MY CONTRIBUTION</span><h2>내가 맡은 부분</h2><p>'+esc(item.summary)+'</p></div><ul>'+item.own.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></section>'+
       '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">TECHNICAL DECISIONS</span><h2>문제와 해결 과정</h2></div>'+
       '<div class="career-case-decision"><article><span>문제 상황</span><p>'+esc(item.challenge)+'</p></article><article><span>조사 및 적용</span><p>'+esc(item.approach)+'</p></article></div></section>'+
       '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">WORKFLOW</span><h2>작업 흐름</h2></div>'+
       '<ol class="career-case-steps">'+item.steps.map(([title,description],i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><div><h3>'+esc(title)+'</h3><p>'+esc(description)+'</p></div></li>').join('')+'</ol></section>'+
-      '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">OUTCOME & LIMITATIONS</span><h2>확인된 결과와 남은 검증</h2></div>'+
-      '<div class="career-case-results"><div><h3>확인된 내용</h3><p>'+esc(item.outcome)+'</p></div><div><h3>아직 단정하지 않는 내용</h3><p>'+esc(item.caution)+'</p></div></div></section>'+
+      (item.observation?'<section class="career-case-section"><h2>'+esc(item.observation.title)+'</h2><p>'+esc(item.observation.text)+'</p><figure class="career-test-evidence"><img src="'+esc(item.observation.image)+'" alt="'+esc(item.observation.alt)+'" loading="lazy"><figcaption>직접 연결한 블루프린트 · <a href="#record='+esc(item.observation.record)+'">11월 11일 테스트와 결과 화면 →</a></figcaption></figure></section>':'')+
+      '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">RESULT & SCOPE</span><h2>결과와 작업 범위</h2></div>'+
+      '<div class="career-case-results"><div><h3>결과</h3><p>'+esc(item.outcome)+'</p></div><div><h3>덧붙임</h3><p>'+esc(item.caution)+'</p></div></div></section>'+
       '<footer class="career-case-footer"><span>근거 · '+esc(item.evidence)+'</span><a href="#record='+encodeURIComponent(item.record)+'">원본 작업 기록 보기 →</a></footer>'+
       '<div class="career-case-next"><span>다음 프로젝트</span><a href="#career='+esc(cases[(cases.indexOf(item)+1)%cases.length].id)+'">'+esc(cases[(cases.indexOf(item)+1)%cases.length].title)+' →</a></div></div>';
   }
