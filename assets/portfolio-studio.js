@@ -26,14 +26,12 @@ const recent=dated(records).slice(0,3);
 const problems=dated(algorithms).slice(0,2);
 const references=['stl-foundation','unreal-multiplayer-basics','cpp-smart-pointers']
   .map(id=>materials.find(m=>m.id===id&&m.publication==='reference')).filter(Boolean);
-const documents=[['portfolio','문서형 포트폴리오'],['resume','기술 이력서'],['projects','프로젝트별 기술 경험'],['ai-workflow','AI와 함께 개선한 사이트']];
+const documents=[['portfolio','문서형 포트폴리오 · PDF'],['resume','기술 이력서'],['projects','프로젝트별 기술 경험'],['ai-workflow','AI와 함께 개선한 사이트']];
 const link=(url,label,cls='')=>'<a'+(cls?' class="'+cls+'"':'')+' href="'+url+'">'+esc(label)+'</a>';
 const photo=(asset)=>{if(!asset?.src)return '';const img='<img src="'+esc(asset.src)+'" alt="'+esc(asset.alt||'프로젝트 화면')+'" loading="lazy">';return asset.still?'<picture><source media="(prefers-reduced-motion: reduce)" srcset="'+esc(asset.still)+'">'+img+'</picture>':img;};
 const section=(id,title,all,rows)=>'<section class="pf-index-section" aria-labelledby="pf-'+id+'"><div class="pf-index-heading"><h2 id="pf-'+id+'">'+title+'</h2>'+link(all,'전체 보기 →','pf-index-all')+'</div>'+rows+'</section>';
 const search=()=>'<form id="globalSearch"><label class="sr-only" for="globalQuery">전체 자료 검색</label><input id="globalQuery" type="search" placeholder="프로젝트, 글 제목, 태그로 찾기" required><button class="button">검색</button></form>';
 const masthead=()=>'<header class="pf-index-masthead"><div><h1>게임 개발 포트폴리오</h1><p>C++ · Unreal Engine / 프로젝트와 개발 기록</p></div>'+search()+'</header>';
-const jump=()=>'<nav class="pf-index-nav" aria-label="홈 콘텐츠 바로가기">'+
-  [['#career=portfolio','포트폴리오 · PDF'],['#career=resume','기술 이력서']].map(([u,t])=>link(u,t)).join('')+'</nav>';
 const projectRow=(item,mode)=>{
   const asset=projectFor(item)?.cover;
   const visual=(mode==='editorial'||mode==='cinematic')&&asset?.src?'<span class="pf-index-thumb">'+photo(asset)+'</span>':'';
@@ -52,7 +50,7 @@ const caseEvidence=()=>{
 function home(){
   // Every theme exposes the same five kinds of content without opening a detail panel.
   // Images and extended technical examples belong below the index, not in a full-screen hero.
-  return '<div class="pf-site pf-'+theme+' pf-index">'+masthead()+jump()+
+  return '<div class="pf-site pf-'+theme+' pf-index">'+masthead()+
     '<div class="pf-index-main">'+projectList(theme)+recordList()+'</div>'+
     '<div class="pf-index-resources">'+docList()+libraryList()+algorithmList()+'</div>'+
     (theme==='terminal'?'':caseEvidence())+footer()+'</div>';
