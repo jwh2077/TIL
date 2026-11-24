@@ -1,6 +1,23 @@
 window.TIL_INDEX = {
   "records": [
     {
+      "id": "20261125-dont-drop",
+      "date": "2026-11-25",
+      "date_end": null,
+      "date_label": "2026-11-25",
+      "title": "Don’t Drop · 캐릭터 작업을 돌아보며",
+      "summary": "팀 회고 브로셔를 작성하며 공격할 때 걸음이 멈추던 문제와 무기 손잡이가 손에서 어긋나던 문제를 정리했다.",
+      "project": "Don’t Drop",
+      "primary_topic": "unreal",
+      "tags": [
+        "Unreal",
+        "협업"
+      ],
+      "activity": "team",
+      "month": "2026-11",
+      "file": "data/2026/11/2026-11-25.js"
+    },
+    {
       "id": "20261123-dont-drop",
       "date": "2026-11-23",
       "date_end": null,
@@ -199,7 +216,7 @@ window.TIL_INDEX = {
       "date": "2026-11-09",
       "date_end": null,
       "date_label": "2026-11-09",
-      "title": "Don’t Drop · 무게에 따른 이동 조정과 가드·관전 연결",
+      "title": "Don’t Drop · 무게에 따른 이동 조정, 가드 입력 연결과 관전 테스트",
       "summary": "무게별 이동 설정과 가드 입력을 연결했다. 관전 기능은 테스트하다가 팀원이 이미 작업한 내용이 있어 내 코드를 지웠다. 엑셀에서 이동 수치를 조절하는 연동 방식은 구상만 했다.",
       "project": "Don’t Drop",
       "primary_topic": "unreal",

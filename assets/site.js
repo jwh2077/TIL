@@ -50,13 +50,34 @@
   // Only explicitly configured public videos are shown. Local originals stay private.
   const mediaLink=media=>media?.url&&/^https:\/\/(youtu\.be\/|www\.youtube\.com\/watch\?v=)/.test(media.url)?`<a class="project-video" href="${esc(media.url)}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> ${esc(media.label||'플레이 영상 보기')} ↗</a>`:'';
   const relatedRecords=ids=>ids.map(id=>records.find(r=>r.id===id)).filter(Boolean).map(r=>`<a class="related-button" href="${recordURL(r.id)}">${esc(r.title)} →</a>`).join('');
+  function projectWork(items = []){
+    if(!items.length)return '';
+    const figures=work=>window.TIL_SHOWCASE.workFigures(work.figures);
+    const description=work=>`<p>${esc(work.text)}</p>${work.note?`<p class="caption">덧붙임<br>${esc(work.note)}</p>`:''}`;
+    const journals=work=>`<div class="related-list">${relatedRecords(work.ids)}</div>`;
+    if(!items.every(work=>work.topic)){
+      return section('project-work','작업 과정',items.map((work,i)=>`<div class="work-block" id="project-work-${i}"><div class="eyebrow">${String(i+1).padStart(2,'0')}</div><h3>${esc(work.title)}</h3>${description(work)}${figures(work)}${journals(work)}</div>`).join(''));
+    }
+    const topics=[...new Set(items.map(work=>work.topic))];
+    return section('project-work','작업 과정',topics.map(topic=>{
+      const group=items.filter(work=>work.topic===topic);
+      const preview=window.TIL_SHOWCASE.workFigures(group.flatMap(work=>work.figures||[]));
+      const rows=group.map(work=>`<details class="work-entry"><summary>${esc(work.title)}</summary><div class="work-entry-body">${description(work)}${journals(work)}</div></details>`).join('');
+      return `<div class="work-topic"><div class="work-topic-intro"><h3>${esc(topic)}</h3>${preview}</div><div class="work-topic-entries">${rows}</div></div>`;
+    }).join(''));
+  }
   function projectPage(p){
     const title=`<a class="source" href="#projects">← 프로젝트 목록</a><header class="project-intro"><div class="eyebrow">${p.archive?(p.activity==='team'?'팀 프로젝트':'개인 프로젝트·실습'):'팀 프로젝트'}</div><h1>${esc(p.title)}</h1><p class="intro">${esc(p.summary)}</p>${mediaLink(p.media)}<div class="project-facts">${[p.team,p.technology,p.role_summary&&'담당 · '+p.role_summary,p.period].filter(Boolean).map(v=>`<span>${esc(v)}</span>`).join('')}</div></header>`;
     const shortcuts=p.highlights?.length?`<nav class="project-shortcuts" aria-label="대표 작업">${p.highlights.map(h=>`<button type="button" data-scroll="project-work-${h.work}"><strong>${esc(h.label)} <span aria-hidden="true">↓</span></strong><span>${esc(h.summary)}</span></button>`).join('')}</nav>`:'';
     const parts=p.parts?.length?section('project-parts','영상과 연결된 작업 기록',`<div class="project-parts">${p.parts.map(part=>`<div class="project-part"><h3>${esc(part.title)}</h3>${mediaLink({url:part.video})}<div class="related-list">${relatedRecords(part.ids)}</div></div>`).join('')}</div>`):'';
     const history=section('project-history','전체 작업 기록','<div id="projectFilterSlot"></div><div id="projectRows"></div>');
-    if(p.archive)return title+(p.links?.length ? `<div class="material-links">${links(p.links)}</div>` : '')+`<p class="caption">${esc(p.period_note)}</p>`+parts+history;
-    return title+shortcuts+'<div id="projectTocSlot"></div>'+section('project-work','작업 과정',p.work.map((w,i)=>`<div class="work-block" id="project-work-${i}"><div class="eyebrow">${String(i+1).padStart(2,'0')}</div><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p>${w.note?`<p class="caption">덧붙임<br>${esc(w.note)}</p>`:''}<div class="related-list">${relatedRecords(w.ids)}</div></div>`).join(''))+section('project-role','내가 맡은 부분',`<ul>${p.roles.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`)+section('project-result','결과물',`<p>${esc(p.result)}</p><div class="material-links">${links(p.links)}</div><p class="caption">${esc(p.result_note)}</p><p class="caption">${esc(p.period_note)}</p>`)+(p.reflection?section('project-reflection','프로젝트 돌아보기',`<p>${esc(p.reflection.summary)}</p><a class="button" href="#reflection=${p.id}">돌아보기 읽기 →</a>`):'')+history;
+    const work=projectWork(p.work);
+    const projectLinks=p.links?.length?`<div class="material-links">${links(p.links)}</div>`:'';
+    const captions=[p.result_note,p.period_note].filter(Boolean).map(note=>`<p class="caption">${esc(note)}</p>`).join('');
+    const roles=p.roles?.length?section('project-role','내가 맡은 부분',`<ul>${p.roles.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`):'';
+    const result=p.result?section('project-result','결과물',`<p>${esc(p.result)}</p>`+projectLinks+captions):projectLinks+captions;
+    const review=p.reflection?section('project-reflection','프로젝트 돌아보기',`<p>${esc(p.reflection.summary)}</p><a class="button" href="#reflection=${p.id}">돌아보기 읽기 →</a>`):'';
+    return title+shortcuts+(work?'<div id="projectTocSlot"></div>':'')+work+roles+result+review+parts+history;
   }
   function reflection(p){const r=p.reflection;return `<a class="source" href="#project=${p.id}">← ${esc(p.title)} 상세로</a><header><div class="eyebrow">프로젝트 돌아보기</div><h1>${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>section('reflection-'+i,s.title,`<p>${esc(s.text)}</p>`)).join('')}<section class="project-section"><h2>덧붙임과 참고 자료</h2><p class="caption">${esc(r.notice)}</p><ul>${r.sources.map(s=>`<li>${esc(s)}</li>`).join('')}</ul><div class="material-links">${links(p.links)}</div></section>`;}
   function buildToc(){
@@ -67,7 +88,7 @@
     const pageTitle=content.querySelector('h1,#detailTitle');if(pageTitle)document.title=pageTitle.textContent+' · 개발·학습 기록';
     const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.material-section>h2,.material-section>.vector-demo-heading>h2,.material-section>h3,.note-body>h3,.section>h3,.related>h3')];
     if(headings.length<(content.id==='libraryPage'?2:3))return;
-    toc.hidden=false;toc.open=!matchMedia('(max-width:800px)').matches;
+    toc.hidden=false;toc.open=!matchMedia('(max-width:800px)').matches&&!content.querySelector('.work-topic');
     const targets=headings.map((h,i)=>{h.id=content.id+'-heading-'+i;return h;});
     const tocButton=h=>`<button type="button" ${h.matches('.material-section>h3')?'class="toc-child" ':''}data-scroll="${h.id}">${esc(h.textContent)}</button>`;
     const material=content.id==='libraryPage'&&window.TIL_LIBRARY_INDEX.find(r=>r.title===pageTitle?.textContent);

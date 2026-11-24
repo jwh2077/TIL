@@ -28,10 +28,10 @@
       own:['이동·점프·가속·감속 값을 데이터와 연동','방어구 상태 변경 이벤트를 받아 속도 재계산','공격·가드 입력을 전투 컴포넌트에 전달'],
       challenge:'출발 속도를 높였더니 처음 빠르게 움직인 뒤 급격히 느려져 대시처럼 보였습니다. 테이블에 있는 값이 실제 이동 컴포넌트에 적용되지 않는 구간도 확인했습니다.',
       approach:'시작 순간의 속도와 입력을 누르는 동안 증가하는 이동 세기를 분리했습니다. CharacterMovementComponent에 값을 적용하고, 무게가 바뀌면 최대 속도 등을 다시 계산하는 흐름을 정리했습니다.',
-      outcome:'DataTable 이동값 적용, 방어구 무게와 이동 연동, 공격·가드 요청 연결의 작업 기록이 있습니다. 조작 수치를 직접 테스트하며 이상한 이동감을 관찰했습니다.',
+      outcome:'이동 중 일반 공격을 하면 공격 포즈가 하체까지 덮어 다리가 멈춰 보였습니다. AI에 블렌딩 수정을 요청하고 spine_01을 기준으로 상체에 공격, 하체에 이동 포즈가 들어가는 구성을 살펴봤습니다. 무기 손잡이가 어긋나는 문제는 부착 기준과 무기별 위치·회전 오프셋을 조정하는 방식으로 다뤘습니다.',
       caution:'리슨 서버 외부 접속과 모든 클라이언트의 이동 일치가 검증됐다는 의미는 아닙니다. 관전 기능의 개인 테스트 코드는 동작하지 않아 삭제했고, 엑셀 연동은 구상 단계입니다. 캐릭터 외형 선택과 파츠 적용 코드는 일부 구현했습니다. 3D 모델 제작도 처음부터 Codex만으로 시도했으나 원하는 품질의 에셋을 확보하지 못해 커스터마이징 기능은 완성하지 못했습니다.',
       steps:[['기본 이동 구성','FPlayerDataRow와 이동 보정값으로 입력·Movement 설정을 분리했습니다.'],['상태 연결','방어구 무게 변경 알림을 받아 이동 속도 갱신에 연결했습니다.'],['조작 테스트','출발 속도와 누적 입력의 관계를 관찰하고 조정했습니다.']],
-      evidence:'2026.11.04~11.11 / 캐릭터 이동·가드·외형 작업 기록',record:'20261109-dont-drop',
+      evidence:'11월 6~23일 캐릭터 작업·발표 기록',record:'20261119-dont-drop',
       observation:{title:'숨긴 기준 메시의 본 자세 갱신',text:'외형 파츠를 Set Leader Pose Component로 연결한 뒤 기준 메시를 Hidden in Game으로 숨기자 캐릭터가 위아래로 흔들렸습니다. Visibility Based Anim Tick Option을 Always Tick Pose and Refresh Bones로 바꾸고 같은 테스트 맵에서 다시 실행하니 흔들림이 사라졌습니다.',image:'assets/images/dont-drop-leader-pose-20261111.png',alt:'외형 파츠를 기본 Mesh의 본 자세에 연결한 블루프린트',record:'20261111-dont-drop'}
     },
     {
@@ -116,6 +116,14 @@
       '<div id="careerCatalog">'+docList+'</div></section>'+
       '<p class="career-end-note">모든 내용은 공개 가능한 프로젝트·학습 기록을 근거로 작성했습니다. 개인정보와 미확인 경력·성과는 포함하지 않았습니다.</p></div>';
   }
+  function workFigures(figures = []){
+    if(!figures.length)return '';
+    return '<div class="project-work-figures">'+figures.map(f=>{
+      const img='<img loading="lazy" width="960" height="540" src="'+esc(f.src)+'" alt="'+esc(f.alt)+'">';
+      const media=f.still?'<picture><source media="(prefers-reduced-motion: reduce)" srcset="'+esc(f.still)+'">'+img+'</picture>':img;
+      return '<figure><a href="'+esc(f.href||f.src)+'" target="_blank" rel="noopener">'+media+'</a><figcaption>'+esc(f.caption)+'</figcaption></figure>';
+    }).join('')+'</div>';
+  }
   function detail(id){
     const item=cases.find(c=>c.id===id);
     if(!item)return '<div class="career-case"><a href="#career">← 포트폴리오</a><h1>프로젝트를 찾을 수 없습니다.</h1></div>';
@@ -128,7 +136,7 @@
       resources(item)+(project?.cover?'<div class="career-case-visual">'+cover(item)+'</div>':'')+
       '<section class="career-case-section career-case-overview"><div><span class="eyebrow">MY CONTRIBUTION</span><h2>내가 맡은 부분</h2><p>'+esc(item.summary)+'</p></div><ul>'+item.own.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></section>'+
       '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">TECHNICAL DECISIONS</span><h2>문제와 해결 과정</h2></div>'+
-      '<div class="career-case-decision"><article><span>문제 상황</span><p>'+esc(item.challenge)+'</p></article><article><span>조사 및 적용</span><p>'+esc(item.approach)+'</p></article></div></section>'+
+      '<div class="career-case-decision"><article><span>문제 상황</span><p>'+esc(item.challenge)+'</p></article><article><span>조사 및 적용</span><p>'+esc(item.approach)+'</p></article></div>'+workFigures(project?.work?.flatMap(w=>w.figures||[]))+'</section>'+
       '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">WORKFLOW</span><h2>작업 흐름</h2></div>'+
       '<ol class="career-case-steps">'+item.steps.map(([title,description],i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><div><h3>'+esc(title)+'</h3><p>'+esc(description)+'</p></div></li>').join('')+'</ol></section>'+
       (item.observation?'<section class="career-case-section"><h2>'+esc(item.observation.title)+'</h2><p>'+esc(item.observation.text)+'</p><figure class="career-test-evidence"><img src="'+esc(item.observation.image)+'" alt="'+esc(item.observation.alt)+'" loading="lazy"><figcaption>직접 연결한 블루프린트 · <a href="#record='+esc(item.observation.record)+'">11월 11일 테스트와 결과 화면 →</a></figcaption></figure></section>':'')+
@@ -137,5 +145,5 @@
       '<footer class="career-case-footer"><span>근거 · '+esc(item.evidence)+'</span><a href="#record='+encodeURIComponent(item.record)+'">원본 작업 기록 보기 →</a></footer>'+
       '<div class="career-case-next"><span>다음 프로젝트</span><a href="#career='+esc(cases[(cases.indexOf(item)+1)%cases.length].id)+'">'+esc(cases[(cases.indexOf(item)+1)%cases.length].title)+' →</a></div></div>';
   }
-  window.TIL_SHOWCASE={hub,detail,has:id=>cases.some(c=>c.id===id),cases:cases.map(({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder})=>({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder}))};
+  window.TIL_SHOWCASE={hub,detail,workFigures,has:id=>cases.some(c=>c.id===id),cases:cases.map(({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder})=>({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder}))};
 })();

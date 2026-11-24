@@ -37,7 +37,7 @@ Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니
 
 캐릭터 외형 선택과 파츠 적용 코드는 일부 구현했습니다. 3D 모델 제작도 처음부터 Codex만으로 시도했으나 원하는 품질의 에셋을 확보하지 못해 커스터마이징 기능은 완성하지 못했습니다.
 
-[제작 시도와 최종 결과](../index.html#record=20261123-dont-drop) · [기술 사례](../index.html#career=case-dontdrop) · [외형 연결과 테스트](../index.html#record=20261111-dont-drop) · [팀 저장소](https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project)
+[팀 시연 영상](https://www.youtube.com/watch?v=Z17FAkNCGB4) · [프로젝트 돌아보기](../index.html#reflection=chapter-4-team) · [제작 시도와 최종 결과](../index.html#record=20261123-dont-drop) · [기술 사례](../index.html#career=case-dontdrop) · [외형 연결과 테스트](../index.html#record=20261111-dont-drop) · [팀 저장소](https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project)
 
 ## ChatX — 서버 규칙과 채팅 전달
 

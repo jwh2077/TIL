@@ -27,7 +27,7 @@ window.TIL_FILES["data/2026/11/2026-11-10.js"] = [
         "url": "https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project/commit/1abfa5a2dc0e5f135df471737b625d4ac3633f92"
       },
       {
-        "label": "이전 기록 · 무게에 따른 이동 조정과 가드·관전 연결",
+        "label": "이전 기록 · 무게에 따른 이동 조정, 가드 입력 연결과 관전 테스트",
         "url": "#record=20261109-dont-drop"
       }
     ],
