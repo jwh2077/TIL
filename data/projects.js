@@ -1,6 +1,6 @@
 // Project pages connect existing records. They do not replace their original dates or text.
 window.TIL_PROJECTS = [{
-  id:'priest', record_project:'ProjectPriest', title:'Project Priest', featured:true,
+  id:'priest', record_project:'ProjectPriest', title:'Project Priest', activity:'team',
   subtitle:'적 AI와 무기 파츠를 만들면서',
   summary:'마을을 위협하는 몬스터를 물리치고 배후의 악마와 대면하는 Unreal Engine 5 기반 3D 액션 게임.',
   period:'2026.09.03–09.29', period_end:'2026-09-29', period_note:'과정 일정표의 CH3 팀 프로젝트 기간. 팀 발표 자료와 실제 발표일도 일치한다.',
@@ -88,7 +88,7 @@ window.TIL_PROJECTS.push(...[
     result: '팀 시연 영상으로 링 위에서 상대를 밀어내는 플레이를 소개하고 11월 23일 최종 발표를 마쳤다.',
     period: "2026.10.29–11.23", period_end: "2026-11-23",
     period_note: "11월 23일에 개발과 발표를 마치고, 25일에 팀 회고를 정리했다.",
-    title: 'Don’t Drop',
+    title: 'Don’t Drop', featured: true,
     archive: true,
     activity: 'team',
     summary: '점점 좁아지는 링에서 상대를 밀어내고 끝까지 살아남는 멀티플레이 액션 게임이다. 캐릭터 조작을 맡아 방어구 무게에 따른 이동과 공격·가드 입력을 연결했다.',

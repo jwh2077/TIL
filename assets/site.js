@@ -15,11 +15,11 @@
   const views={record:window.TIL_RECORD_VIEW,material:window.TIL_MATERIAL_VIEW,algorithm:window.TIL_ALGORITHM_VIEW};
   const route=()=>{const hash=location.hash.slice(1);if(!hash||hash==='home'||hash==='top'||hash==='career')return {type:'home'};const at=hash.indexOf('=');return at<0?{type:hash}:{type:hash.slice(0,at),id:decodeURIComponent(hash.slice(at+1))};};
   const page=$('main');
-  $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">개발·학습 기록 <span>C++ / Unreal 프로젝트와 학습 기록</span></a><nav aria-label="주 메뉴">'+[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['algorithms','알고리즘'],['library','자료실']].map(([id,label])=>`<a href="#${id}" data-menu="${id}">${label}</a>`).join('')+'</nav></div>');
+  $('body').insertAdjacentHTML('afterbegin','<a class="skip-link" href="#top">본문으로 바로가기</a><div class="site-header"><a class="site-brand" href="#home">개발·학습 기록 <span>C++ / Unreal 프로젝트와 학습 기록</span></a><nav aria-label="주 메뉴">'+[['home','홈'],['projects','프로젝트'],['list','학습 기록'],['library','자료실'],['algorithms','알고리즘']].map(([id,label])=>`<a href="#${id}" data-menu="${id}">${label}</a>`).join('')+'</nav></div>');
   const themeLabels={editorial:'포트폴리오',cinematic:'시네마틱',terminal:'터미널',dashboard:'대시보드'};
   const themeMenu=document.createElement('details');
   themeMenu.className='pf-settings';
-  themeMenu.innerHTML='<summary aria-label="사이트 디자인 설정"><span aria-hidden="true">⚙</span> 디자인 <span class="pf-theme-current"></span></summary><div class="pf-settings-panel" role="group" aria-label="사이트 디자인 선택"><p>디자인 스타일</p>'+Object.entries(themeLabels).map(([id,name])=>'<button type="button" data-theme-option="'+id+'" aria-pressed="false">'+name+'</button>').join('')+'<small>선택한 디자인은 이 브라우저에 저장됩니다.</small></div>';
+  themeMenu.innerHTML='<summary aria-label="사이트 디자인 설정">디자인 <span class="pf-theme-current"></span><span aria-hidden="true">▾</span></summary><div class="pf-settings-panel" role="group" aria-label="사이트 디자인 선택"><p>디자인 스타일</p>'+Object.entries(themeLabels).map(([id,name])=>'<button type="button" data-theme-option="'+id+'" aria-pressed="false">'+name+'</button>').join('')+'<small>선택한 디자인은 이 브라우저에 저장됩니다.</small></div>';
   document.querySelector('.site-header').append(themeMenu);
   const syncThemeMenu=()=>{const current=window.TIL_PORTFOLIO?.theme||'editorial';themeMenu.querySelector('.pf-theme-current').textContent=themeLabels[current]||themeLabels.editorial;themeMenu.querySelectorAll('[data-theme-option]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.themeOption===current)));};
   syncThemeMenu();
@@ -39,12 +39,36 @@
   }
   function feature(p){return `<div class="featured"><div class="feature-art">${projectCover(p)}<div class="eyebrow">팀 프로젝트 · Unreal Engine 5</div><strong>${esc(p.title)}</strong><p>${esc(p.team)}</p></div><div class="feature-copy"><div class="meta">${esc(p.period)} · 기획부터 발표까지</div><h2>${esc(p.subtitle)}</h2><p>${esc(p.summary)}</p><p class="role-summary">담당 · ${esc(p.role_summary)}</p>${chips(p.tags)}<a class="button" href="#project=${p.id}">프로젝트 살펴보기 →</a></div></div>`;}
   function home(){if(window.TIL_PORTFOLIO?.home)return window.TIL_PORTFOLIO.home();return `<header class="home-intro"><h1>C++ · Unreal Engine 게임 개발 기록</h1><p class="intro">게임 개발을 공부하며 직접 구현한 기능과 팀 프로젝트에서 맡은 작업을 기록하고 있습니다.</p><div class="home-tech"><span class="meta">프로젝트·학습 기술</span>${chips(['C++','Unreal Engine 5','Behavior Tree · Blackboard','DataTable','멀티플레이 학습'])}</div><p class="caption home-contact">연락처 · <a class="source" href="mailto:jwh2077@gmail.com">jwh2077@gmail.com</a></p></header><form id="globalSearch"><label class="sr-only" for="globalQuery">전체 자료 검색</label><input id="globalQuery" type="search" placeholder="프로젝트, 글 제목, 태그로 찾기" required><button class="button">검색</button></form><div class="home-career-entry"><div><strong>게임 개발 포트폴리오</strong><p>대표 프로젝트에서 맡은 역할과 문제 해결 과정부터 살펴볼 수 있습니다. 기술 문서와 PDF 지원 자료도 함께 정리했습니다.</p></div><a class="button" href="#career">포트폴리오 보기 →</a></div><div class="section-head"><h2>프로젝트</h2><a href="#projects" class="source">전체 프로젝트 →</a></div>${feature(featured)}<div class="section-head"><h2>다른 공부 기록도 찾아보기</h2></div><div class="areas">${[['list','학습 기록','날짜별 작업과 작은 기능 연습, C++와 Unreal을 공부한 과정.',records.length],['algorithms','알고리즘','문제를 풀 때의 접근과 시행착오, 제출 코드와 풀이 기록.',algorithms.length],['library','자료실','다시 찾아볼 개념과 정리 자료, 관련 원문과 참고 링크.',materials.length]].map(([id,title,text,n])=>`<a class="area" href="#${id}"><span class="meta">${n}개 기록</span><h3>${title}</h3><p>${text}</p><span class="source">찾아보기 →</span></a>`).join('')}</div><div class="section-head"><h2>최근 학습 기록</h2><a class="source" href="#list">전체 보기 →</a></div>${[...records].filter(r=>r.date).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4).map(row).join('')}<p class="caption">학습 날짜 기준입니다. 자료를 추가하거나 수정한 날짜와는 다를 수 있습니다.</p><p class="caption">화면 구성과 글 정리에 AI의 도움을 받았으며, 내용과 코드는 제 실제 학습·작업 기록을 바탕으로 했습니다.</p>`;}
+
   function projectList(){
-    const cards=projects.filter(p=>p!==featured).map(p=>{
-      const rows=projectRecords(p), dates=rows.map(r=>r.date).filter(Boolean).sort(), ends=rows.map(r=>r.date_end||r.date).filter(Boolean).sort();
+    const isTeam=p=>p.activity==='team'||Boolean(p.team);
+    const entries=projects.map(p=>{
+      const rows=projectRecords(p),dates=rows.map(r=>r.date).filter(Boolean).sort(),ends=rows.map(r=>r.date_end||r.date).filter(Boolean).sort();
       return {p,count:rows.length,from:dates[0],to:p.period_end||ends.at(-1)};
     }).sort((a,b)=>(b.to||'').localeCompare(a.to||'')||a.p.title.localeCompare(b.p.title,'ko'));
-    return `<header><h1>프로젝트</h1><p class="intro">만든 결과물과 내가 맡은 작업, 그 과정의 기록입니다.</p></header>${feature(featured)}<div class="section-head"><h2>다른 프로젝트 기록</h2><span class="caption">프로젝트 일정 순</span></div><p class="caption">기간은 과정 일정표 기준이며, 개별 작업일은 각 기록에서 볼 수 있습니다.</p><div class="areas project-cards">${cards.map(({p,count,from,to})=>`<a class="area project-card" href="#project=${p.id}">${projectCover(p)}<div class="meta">${p.activity==='team'?'팀 프로젝트':'개인 프로젝트·실습'}</div><h3>${esc(p.title)}</h3><div class="project-card-period">${p.period?esc(p.period):from?esc(from===to?from:from+' ~ '+to):'날짜 미확인'}</div><p>${esc(p.summary)}</p>${chips(p.tags||[])}<span class="source">${count}개 기록${p.parts?.some(part=>part.video)||p.media?.url?' · 영상 있음':''} · 살펴보기 →</span></a>`).join('')}</div>`;
+    const team=entries.filter(x=>isTeam(x.p)&&x.p!==featured);
+    const personal=entries.filter(x=>!isTeam(x.p));
+    const caseFor=p=>window.TIL_SHOWCASE?.cases.find(c=>c.projectName===p.title);
+    const detailLink=p=>'#project='+encodeURIComponent(p.id);
+    const media=p=>p.cover?'<div class="project-index-image">'+projectCover(p)+'</div>':'';
+    const row=({p,count},representative=false)=>{
+      const item=caseFor(p);
+      const title='<h3><a href="'+detailLink(p)+'">'+esc(p.title)+'</a></h3>';
+      const info='<div class="project-index-info">'+(representative?'<p class="project-index-label">대표 프로젝트</p>':'')+title+
+        '<p class="project-index-meta">'+[p.period,p.team,p.technology].filter(Boolean).map(esc).join(' · ')+'</p>'+
+        (p.role_summary?'<p class="project-index-role">담당 · '+esc(p.role_summary)+'</p>':'')+
+        '<p class="project-index-description">'+esc(p.summary)+'</p>'+
+        '<div class="project-index-actions"><a href="'+detailLink(p)+'">프로젝트 상세 →</a>'+
+        (item?'<a href="#career='+esc(item.id)+'">기술 사례 →</a>':'')+
+        mediaLink(p.media)+'<span class="caption">'+count+'개 작업 기록</span></div></div>';
+      return '<article class="project-index-row'+(representative?' project-index-feature':'')+(p.cover?' has-cover':'')+'">'+media(p)+info+'</article>';
+    };
+    const featuredEntry=entries.find(x=>x.p===featured&&isTeam(x.p));
+    const teamRows=(featuredEntry?row(featuredEntry,true):'')+team.map(x=>row(x)).join('');
+    const personalRows=personal.map(({p,count})=>'<li><a href="'+detailLink(p)+'"><strong>'+esc(p.title)+'</strong><span>'+esc(p.period||'날짜 미확인')+' · '+count+'개 기록</span><span aria-hidden="true">→</span></a></li>').join('');
+    return '<header class="project-index-header"><h1>프로젝트</h1><p class="intro">팀 프로젝트에서 맡은 기능과 결과물, 개인 실습 기록을 함께 정리했습니다.</p></header>'+
+      '<section class="project-index-team" aria-labelledby="team-projects-title"><h2 id="team-projects-title">팀 프로젝트</h2>'+teamRows+'</section>'+
+      '<section class="project-index-personal" aria-labelledby="personal-projects-title"><h2 id="personal-projects-title">개인 프로젝트 · 실습</h2><ul>'+personalRows+'</ul></section>';
   }
   const section=(id,title,body)=>`<section id="${id}" class="project-section"><h2>${esc(title)}</h2>${body}</section>`;
   // Only explicitly configured public videos are shown. Local originals stay private.
@@ -56,7 +80,7 @@
     const description=work=>`<p>${esc(work.text)}</p>${work.note?`<p class="caption">덧붙임<br>${esc(work.note)}</p>`:''}`;
     const journals=work=>`<div class="related-list">${relatedRecords(work.ids)}</div>`;
     if(!items.every(work=>work.topic)){
-      return section('project-work','작업 과정',items.map((work,i)=>`<div class="work-block" id="project-work-${i}"><div class="eyebrow">${String(i+1).padStart(2,'0')}</div><h3>${esc(work.title)}</h3>${description(work)}${figures(work)}${journals(work)}</div>`).join(''));
+      return section('project-work','작업 과정',items.map((work,i)=>`<div class="work-block" id="project-work-${i}"><h3>${esc(work.title)}</h3>${description(work)}${figures(work)}${journals(work)}</div>`).join(''));
     }
     const topics=[...new Set(items.map(work=>work.topic))];
     return section('project-work','작업 과정',topics.map(topic=>{
@@ -77,7 +101,7 @@
     const roles=p.roles?.length?section('project-role','내가 맡은 부분',`<ul>${p.roles.map(r=>`<li>${esc(r)}</li>`).join('')}</ul>`):'';
     const result=p.result?section('project-result','결과물',`<p>${esc(p.result)}</p>`+projectLinks+captions):projectLinks+captions;
     const review=p.reflection?section('project-reflection','프로젝트 돌아보기',`<p>${esc(p.reflection.summary)}</p><a class="button" href="#reflection=${p.id}">돌아보기 읽기 →</a>`):'';
-    return title+shortcuts+(work?'<div id="projectTocSlot"></div>':'')+work+roles+result+review+parts+history;
+    return title+roles+result+shortcuts+(work?'<div id="projectTocSlot"></div>':'')+work+review+parts+history;
   }
   function reflection(p){const r=p.reflection;return `<a class="source" href="#project=${p.id}">← ${esc(p.title)} 상세로</a><header><div class="eyebrow">프로젝트 돌아보기</div><h1>${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>section('reflection-'+i,s.title,`<p>${esc(s.text)}</p>`)).join('')}<section class="project-section"><h2>덧붙임과 참고 자료</h2><p class="caption">${esc(r.notice)}</p><ul>${r.sources.map(s=>`<li>${esc(s)}</li>`).join('')}</ul><div class="material-links">${links(p.links)}</div></section>`;}
   function buildToc(){

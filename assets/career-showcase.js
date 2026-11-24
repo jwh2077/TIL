@@ -3,7 +3,7 @@
   const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
   const cases=[
     {
-      id:'case-priest',index:'01',title:'Project Priest',kind:'팀 액션 게임 · 4명',status:'발표 완료',
+      id:'case-priest',index:'02',title:'Project Priest',kind:'팀 액션 게임 · 4명',status:'발표 완료',
       period:'2026.09',engine:'Unreal Engine 5 · C++',role:'적 AI · 무기 파츠 · UI 데이터 연동',
       lead:'적의 행동 전환과 공격 판정을 구현하면서, 상태가 연결되는 구간의 문제를 추적했습니다.',
       summary:'순찰부터 추적·공격까지 이어지는 AI와 무기 파츠 정보를 게임 및 UI에 전달하는 기능을 담당했습니다.',
@@ -18,7 +18,7 @@
       evidence:'TIL 2026.09.07~09.30 / 팀 발표 및 플레이 기록',record:'20260925-priest-ai'
     },
     {
-      id:'case-dontdrop',index:'02',title:'Don’t Drop',kind:'팀 멀티플레이 게임 · 5명',status:'발표 완료',
+      id:'case-dontdrop',index:'01',title:'Don’t Drop',kind:'팀 멀티플레이 게임 · 5명',status:'발표 완료',
       projectName:'Don’t Drop',
       period:'2026.10~11',engine:'Unreal Engine 5.6 · C++',role:'캐릭터 이동 · 입력 · 전투 연결',
       lead:'방어구 무게와 입력 유지 시간에 따라 달라지는 이동감을 데이터로 제어했습니다.',
@@ -35,7 +35,7 @@
       observation:{title:'숨긴 기준 메시의 본 자세 갱신',text:'외형 파츠를 Set Leader Pose Component로 연결한 뒤 기준 메시를 Hidden in Game으로 숨기자 캐릭터가 위아래로 흔들렸습니다. Visibility Based Anim Tick Option을 Always Tick Pose and Refresh Bones로 바꾸고 같은 테스트 맵에서 다시 실행하니 흔들림이 사라졌습니다.',image:'assets/images/dont-drop-leader-pose-20261111.png',alt:'외형 파츠를 기본 Mesh의 본 자세에 연결한 블루프린트',record:'20261111-dont-drop'}
     },
     {
-      id:'case-chatx',index:'03',title:'ChatX · 숫자 야구',kind:'개인 멀티플레이 실습',status:'학습·구현 기록',
+      id:'case-chatx',index:'04',title:'ChatX · 숫자 야구',kind:'개인 멀티플레이 실습',status:'학습·구현 기록',
       period:'2026.10',engine:'Unreal Engine · C++',role:'게임 규칙 · 채팅 RPC · 상태 복제',
       lead:'서버에서 규칙을 판정하고 클라이언트에 필요한 정보를 전달하는 흐름을 작성했습니다.',
       summary:'GameMode의 숫자 야구 규칙과 PlayerController별 메시지 전달, PlayerState 복제를 다뤘습니다.',
@@ -50,7 +50,7 @@
       evidence:'TIL 2026.10.12 / RPC·숫자 야구 실습 기록',record:'20261012-chatx'
     },
     {
-      id:'case-textrpg',index:'04',title:'제13 던전',kind:'C++ 콘솔 팀 프로젝트',status:'팀 과제 마무리',
+      id:'case-textrpg',index:'03',title:'제13 던전',kind:'C++ 콘솔 팀 프로젝트',status:'팀 과제 마무리',
       period:'2026.07~08',engine:'C++ · STL',role:'상점 · 아이템 · Logger',
       lead:'상점 기능을 구현하고 아이템 소유권과 클래스 책임을 분리했습니다.',
       summary:'아이템 구매·판매와 데이터 기록, unique_ptr을 이용한 Item 관리 구조를 다뤘습니다.',
@@ -64,7 +64,7 @@
       steps:[['기능 구현','상점에서 아이템을 구매하고 판매하는 기능을 다뤘습니다.'],['구조 분리','Shop과 Item을 분리하고 unique_ptr로 관리했습니다.'],['팀 통합','브랜치·PR·병합과 충돌 해결 과정에서 역할 경계를 점검했습니다.']],
       evidence:'TIL 2026.07.29~08.05 / 팀 상점·협업 기록',record:'20260803-001'
     }
-  ];
+  ].sort((a,b)=>a.index.localeCompare(b.index));
   const projectFor=item=>(window.TIL_PROJECTS||[]).find(p=>p.title===item.projectName);
   const resources=item=>{
     const project=projectFor(item);
@@ -98,7 +98,7 @@
       '<header class="career-showcase-hero"><div class="career-showcase-head"><div class="eyebrow">C++ / UNREAL ENGINE · GAMEPLAY PORTFOLIO</div>'+
       '<h1>구현한 기능보다<br><em>어떻게 연결하고 해결했는지</em><br>보여주겠습니다.</h1>'+
       '<p class="intro">C++과 Unreal Engine을 공부하며 적 AI, 캐릭터 이동, 게임 규칙과 멀티플레이 구조를 다뤘습니다. 각 프로젝트에서 맡은 부분과 확인한 문제를 중심으로 정리했습니다.</p>'+
-      '<div class="career-showcase-cta"><a class="button" href="#career=case-priest">대표 작업 살펴보기</a><a class="career-subtle-link" href="#career=portfolio">문서형 포트폴리오</a></div></div>'+
+      '<div class="career-showcase-cta"><a class="button" href="#career=case-dontdrop">대표 작업 살펴보기</a><a class="career-subtle-link" href="#career=portfolio">문서형 포트폴리오</a></div></div>'+
       '<div class="career-showcase-focus" aria-label="주요 경험 분야"><div class="career-focus-kicker">TECHNICAL FOCUS</div>'+
       '<div><span>01 / AI & COMBAT</span><strong>행동 전환 · 공격 판정</strong><small>Project Priest</small></div>'+
       '<div><span>02 / MOVEMENT</span><strong>이동 데이터 · 입력 연동</strong><small>Don’t Drop</small></div>'+

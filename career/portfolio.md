@@ -6,22 +6,10 @@ C++과 Unreal Engine으로 게임플레이 기능을 만들고 있습니다. 팀
 
 | 프로젝트 | 내 담당 | 살펴볼 내용 |
 | --- | --- | --- |
-| Project Priest · 4인 팀 | 적 AI · 무기 파츠 | 행동 전환, 공격 판정 조사, 파츠와 UI 연결 |
 | Don’t Drop · 5인 팀 · 발표 완료 | 캐릭터 이동 · 입력 | 이동 데이터 적용, 무게 연동, 외형 흔들림 수정 |
-| ChatX · 개인 실습 | 숫자 야구 · 채팅 | 서버 규칙, RPC와 플레이어 상태 복제 |
+| Project Priest · 4인 팀 | 적 AI · 무기 파츠 | 행동 전환, 공격 판정 조사, 파츠와 UI 연결 |
 | 제13 던전 | 상점 · 아이템 · Logger | 구매·판매, 책임 분리, 데이터 집계 |
-
-## Project Priest — 적 AI와 무기 파츠
-
-**기간** 2026.09.03–09.29 · **기술** Unreal Engine 5 / C++
-
-Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니다. 대상을 놓치면 마지막 위치 주변을 수색하고 순찰로 돌아가는 흐름도 다뤘습니다. 무기 파츠는 슬롯별 장착과 능력치 적용을 맡아, UI 담당 팀원과 화면에 전달할 데이터를 맞췄습니다.
-
-공격 모션은 나오는데 피해가 적용되지 않는 문제가 있었습니다. Overlap 이벤트, 저장한 대상, 공격 Notify의 실행 시점과 충돌 범위를 나눠 살폈습니다. Box 높이를 조정했을 때 판정이 더 안정적으로 들어오는 것을 관찰했습니다. 팀 발표 자료에는 Notify 시점에 범위를 직접 검사한 과정도 담았습니다.
-
-**덧붙임** 두 방식이 마지막 코드에서 어떻게 결합됐는지는 아직 대조하지 못했습니다. 영상은 팀 전체 결과물이며, 제 담당은 적 AI와 무기 파츠입니다.
-
-[기술 사례](../index.html#career=case-priest) · [플레이 영상](https://youtu.be/K-JEzHUtySc) · [팀 저장소](https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project) · [팀 발표 자료](https://docs.google.com/presentation/d/1b_W1kbDZu-cMUC6ZDLqhuG17Zhep3hMxRE7rCtPCxQI/edit)
+| ChatX · 개인 실습 | 숫자 야구 · 채팅 | 서버 규칙, RPC와 플레이어 상태 복제 |
 
 ## Don’t Drop — 캐릭터 조작과 외형 연결
 
@@ -39,6 +27,26 @@ Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니
 
 [팀 시연 영상](https://www.youtube.com/watch?v=Z17FAkNCGB4) · [프로젝트 돌아보기](../index.html#reflection=chapter-4-team) · [제작 시도와 최종 결과](../index.html#record=20261123-dont-drop) · [기술 사례](../index.html#career=case-dontdrop) · [외형 연결과 테스트](../index.html#record=20261111-dont-drop) · [팀 저장소](https://github.com/NBcampUnrealTrack/10th-Team2-CH4-Project)
 
+## Project Priest — 적 AI와 무기 파츠
+
+**기간** 2026.09.03–09.29 · **기술** Unreal Engine 5 / C++
+
+Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니다. 대상을 놓치면 마지막 위치 주변을 수색하고 순찰로 돌아가는 흐름도 다뤘습니다. 무기 파츠는 슬롯별 장착과 능력치 적용을 맡아, UI 담당 팀원과 화면에 전달할 데이터를 맞췄습니다.
+
+공격 모션은 나오는데 피해가 적용되지 않는 문제가 있었습니다. Overlap 이벤트, 저장한 대상, 공격 Notify의 실행 시점과 충돌 범위를 나눠 살폈습니다. Box 높이를 조정했을 때 판정이 더 안정적으로 들어오는 것을 관찰했습니다. 팀 발표 자료에는 Notify 시점에 범위를 직접 검사한 과정도 담았습니다.
+
+**덧붙임** 두 방식이 마지막 코드에서 어떻게 결합됐는지는 아직 대조하지 못했습니다. 영상은 팀 전체 결과물이며, 제 담당은 적 AI와 무기 파츠입니다.
+
+[기술 사례](../index.html#career=case-priest) · [플레이 영상](https://youtu.be/K-JEzHUtySc) · [팀 저장소](https://github.com/NBcampUnrealTrack/10th-Team2-CH3-Project) · [팀 발표 자료](https://docs.google.com/presentation/d/1b_W1kbDZu-cMUC6ZDLqhuG17Zhep3hMxRE7rCtPCxQI/edit)
+
+## 제13 던전 — 상점과 아이템 관리
+
+**기간** 2026.07.28–08.05 · **기술** C++
+
+구매·판매 기능을 만들고 Shop과 Item의 책임을 나눴습니다. 아이템은 unique_ptr로 관리하고, Logger로 전투·아이템·골드 데이터를 집계했습니다. 팀 작업에서는 브랜치·PR·병합과 충돌 해결을 경험했습니다.
+
+[기술 사례와 결과 화면](../index.html#career=case-textrpg)
+
 ## ChatX — 서버 규칙과 채팅 전달
 
 **형태** Unreal C++ 개인 멀티플레이 실습 · 2026.10
@@ -48,14 +56,6 @@ Behavior Tree와 Blackboard로 순찰·감지·추적·공격을 연결했습니
 외부 접속 환경 전체의 안정성까지 검증한 결과는 아닙니다.
 
 [기술 사례](../index.html#career=case-chatx) · [시연 영상](https://youtu.be/powPv4J4LEI)
-
-## 제13 던전 — 상점과 아이템 관리
-
-**기간** 2026.07.28–08.05 · **기술** C++
-
-구매·판매 기능을 만들고 Shop과 Item의 책임을 나눴습니다. 아이템은 unique_ptr로 관리하고, Logger로 전투·아이템·골드 데이터를 집계했습니다. 팀 작업에서는 브랜치·PR·병합과 충돌 해결을 경험했습니다.
-
-[기술 사례와 결과 화면](../index.html#career=case-textrpg)
 
 ## AI 협업과 기록 관리
 
