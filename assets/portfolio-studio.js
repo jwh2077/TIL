@@ -12,55 +12,52 @@ const projects=window.TIL_SHOWCASE?.cases||[];
 const current=(window.TIL_PROJECTS||[]);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-const projectFor=item=>current.find(p=>p.title===item?.projectName);
+
+const records=window.TIL_INDEX?.records||[];
+const materials=window.TIL_LIBRARY_INDEX||[];
+const algorithms=window.TIL_ALGORITHMS||[];
+const route=(kind,id)=>'#'+kind+'='+encodeURIComponent(id);
+const projectFor=item=>current.find(p=>p.title===item.projectName);
 const featured=projects.find(p=>p.id==='case-priest')||projects[0];
-const others=projects.filter(p=>p!==featured);
-const href=item=>'#career='+encodeURIComponent(item.id);
-const cover=item=>projectFor(item)?.cover;
-const actualImage=(asset,eager=false)=>asset?.src?'<img '+(eager?'fetchpriority="high"':'loading="lazy"')+' src="'+esc(asset.src)+'" alt="'+esc(asset.alt||'프로젝트 화면')+'">':'';
-const facts=item=>'<p class="pf-meta">'+esc(item.kind)+' · '+esc(item.period)+' · '+esc(item.status)+'</p>';
-const role=item=>'<p class="pf-role">'+esc(item.role)+'</p>';
-const tech=item=>'<p class="pf-tech">'+esc(item.tags.join(' · '))+'</p>';
-const card=(item,mode)=>{
-  const picture=actualImage(cover(item));
-  return '<a class="pf-project pf-project-'+mode+(picture?'':' pf-project-text')+'" href="'+href(item)+'">'+
-    (picture&&mode!=='terminal'&&mode!=='dashboard'?'<div class="pf-project-visual">'+picture+'</div>':'')+
-    '<div class="pf-project-information">'+facts(item)+'<h3>'+esc(item.title)+'</h3>'+role(item)+'<p class="pf-lead">'+esc(item.lead)+'</p>'+tech(item)+'</div><span class="pf-row-arrow" aria-hidden="true">→</span></a>';
-};
-const cards=(items,mode)=>items.map(item=>card(item,mode)).join('');
+const dateSort=(a,b)=>b.date.localeCompare(a.date);
+const dated=items=>items.filter(x=>x.date).slice().sort(dateSort);
+const recent=dated(records).slice(0,3);
+const problems=dated(algorithms).slice(0,2);
+const references=['stl-foundation','unreal-multiplayer-basics','cpp-smart-pointers']
+  .map(id=>materials.find(m=>m.id===id&&m.publication==='reference')).filter(Boolean);
+const documents=[['portfolio','문서형 포트폴리오'],['resume','기술 이력서'],['projects','프로젝트별 기술 경험'],['ai-workflow','AI와 함께 개선한 사이트']];
+const link=(url,label,cls='')=>'<a'+(cls?' class="'+cls+'"':'')+' href="'+url+'">'+esc(label)+'</a>';
+const photo=(asset)=>asset?.src?'<img src="'+esc(asset.src)+'" alt="'+esc(asset.alt||'프로젝트 화면')+'" loading="lazy">':'';
+const section=(id,title,all,rows)=>'<section class="pf-index-section" aria-labelledby="pf-'+id+'"><div class="pf-index-heading"><h2 id="pf-'+id+'">'+title+'</h2>'+link(all,'전체 보기 →','pf-index-all')+'</div>'+rows+'</section>';
 const search=()=>'<form id="globalSearch"><label class="sr-only" for="globalQuery">전체 자료 검색</label><input id="globalQuery" type="search" placeholder="프로젝트, 글 제목, 태그로 찾기" required><button class="button">검색</button></form>';
-const docCards=()=>'<div class="pf-doclinks">'+[['portfolio','문서형 포트폴리오','프로젝트와 역할 전체 요약'],['resume','기술 이력서','기술·역할을 한눈에'],['projects','프로젝트별 기술 경험','구현 결정과 테스트 결과'],['ai-workflow','AI와 함께 개선한 사이트','요구사항 · 구현 위임 · 직접 검토']].map(([id,name,subtitle])=>'<a href="#career='+id+'"><div><strong>'+name+'</strong><small>'+subtitle+'</small></div><span aria-hidden="true">→</span></a>').join('')+'</div>';
-const docs=()=>'<details class="pf-documents"><summary>포트폴리오 · 이력서 · 기술 문서</summary>'+docCards()+'</details>';
-const learning=()=>'<section class="pf-learning" id="pf-learning"><div class="pf-section-head"><h2>학습 자료</h2></div><div class="pf-learning-links"><a href="#list"><strong>학습 기록</strong><span>날짜별 작업과 오류 분석</span><b aria-hidden="true">→</b></a><a href="#library"><strong>기술 자료실</strong><span>C++ · Unreal 기술 노트</span><b aria-hidden="true">→</b></a><a href="#algorithms"><strong>알고리즘</strong><span>풀이와 시행착오</span><b aria-hidden="true">→</b></a></div></section>';
-const title=()=>'<header class="pf-home-title"><h1>C++ · Unreal Engine 게임 개발</h1><p>프로젝트에서 맡은 기능과 구현 과정, 학습 기록</p><a class="pf-text-link" href="#career=portfolio">포트폴리오 문서 · PDF →</a></header>';
-const work=(items,mode,label='프로젝트')=>'<section class="pf-work" id="pf-work"><div class="pf-section-head"><h2>'+label+'</h2><a class="pf-text-link" href="#projects">전체 프로젝트 →</a></div><div class="pf-project-grid">'+cards(items,mode)+'</div></section>';
-const caseEvidence=()=>{
-  const task=projectFor(featured)?.work?.find(w=>w.figures?.some(f=>f.src==='assets/images/priest-melee-10fps.png'));
-  if(!task)return '';
-  const figures=task.figures.slice(0,2);
-  return '<section class="pf-evidence" aria-labelledby="pf-evidence-title"><div class="pf-evidence-copy"><p class="pf-meta">'+esc(featured.title)+' · 구현 기록</p><h2 id="pf-evidence-title">'+esc(task.title)+'</h2><p>'+esc(task.text)+'</p><a class="pf-text-link" href="'+href(featured)+'">문제와 해결 과정 →</a></div><div class="pf-evidence-figures">'+figures.map(f=>'<figure><a href="'+href(featured)+'">'+actualImage(f)+'</a><figcaption>'+esc(f.caption)+'</figcaption></figure>').join('')+'</div></section>';
+const masthead=()=>'<header class="pf-index-masthead"><div><h1>게임 개발 포트폴리오</h1><p>C++ · Unreal Engine / 프로젝트와 개발 기록</p></div>'+search()+'</header>';
+const jump=()=>'<nav class="pf-index-nav" aria-label="홈 콘텐츠 바로가기">'+
+  [['#career=portfolio','포트폴리오 · PDF'],['#career=resume','기술 이력서'],['#projects','프로젝트'],['#list','학습 기록'],['#library','자료실'],['#algorithms','알고리즘']].map(([u,t])=>link(u,t)).join('')+'</nav>';
+const projectRow=(item,mode)=>{
+  const asset=projectFor(item)?.cover;
+  const visual=(mode==='editorial'||mode==='cinematic')&&asset?.src?'<span class="pf-index-thumb">'+photo(asset)+'</span>':'';
+  return '<li><a class="pf-index-project'+(visual?' has-thumb':'')+'" href="'+route('career',item.id)+'">'+visual+'<span class="pf-index-project-text"><strong>'+esc(item.title)+'</strong><span>'+esc(item.role)+'</span><small>'+esc(item.period)+' · '+esc(item.kind)+'</small></span><span class="pf-index-arrow" aria-hidden="true">→</span></a></li>';
 };
-function editorial(){
-  const hero=featured?'<section class="pf-feature" aria-label="대표 프로젝트">'+
-    (cover(featured)?.src?'<a class="pf-feature-photo" href="'+href(featured)+'">'+actualImage(cover(featured),true)+'</a>':'')+
-    '<div class="pf-feature-copy">'+facts(featured)+'<h2><a href="'+href(featured)+'">'+esc(featured.title)+'</a></h2>'+role(featured)+'<p class="pf-lead">'+esc(featured.lead)+'</p>'+tech(featured)+'<a class="pf-text-link" href="'+href(featured)+'">'+esc(featured.title)+' 작업 사례 →</a></div></section>':'';
-  return '<div class="pf-site pf-editorial">'+title()+hero+caseEvidence()+search()+work(others,'editorial','다른 프로젝트')+docs()+learning()+footer()+'</div>';
-}
-function cinematic(){
-  const hero=featured?'<section class="pf-reel"><div class="pf-reel-image">'+actualImage(cover(featured),true)+'</div><div class="pf-reel-copy">'+facts(featured)+'<h2>'+esc(featured.title)+'</h2>'+role(featured)+'<p>'+esc(featured.lead)+'</p><a class="pf-text-link" href="'+href(featured)+'">작업 사례 →</a></div></section>':'';
-  return '<div class="pf-site pf-cinematic">'+title()+hero+search()+work(others,'cinema','다른 프로젝트')+caseEvidence()+docs()+learning()+footer()+'</div>';
-}
-function terminal(){
-  return '<div class="pf-site pf-terminal">'+title()+search()+work(projects,'terminal')+docs()+learning()+footer()+'</div>';
-}
-function dashboard(){
-  return '<div class="pf-site pf-dashboard">'+title()+search()+
-    '<div class="pf-dashboard-layout"><div>'+work(projects,'dashboard')+'</div><aside class="pf-dashboard-panel"><h2>문서 열람</h2>'+docCards()+'</aside></div>'+learning()+footer()+'</div>';
+const projectList=mode=>section('projects','프로젝트','#projects','<ul class="pf-index-projects">'+projects.map(item=>projectRow(item,mode)).join('')+'</ul>');
+const recordList=()=>section('recent','최근 학습 기록','#list','<ul class="pf-index-entries">'+recent.map((r,i)=>'<li><a href="'+route('record',r.id)+'"><time datetime="'+esc(r.date)+'">'+esc(r.date_label||r.date)+'</time><strong>'+esc(r.title)+'</strong>'+(i===0&&r.summary?'<span>'+esc(r.summary)+'</span>':'')+'</a></li>').join('')+'</ul>');
+const libraryList=()=>section('library','자료실','#library','<ul class="pf-index-simple">'+references.map(r=>'<li>'+link(route('material',r.id),r.title)+'</li>').join('')+'</ul>');
+const algorithmList=()=>section('algorithms','알고리즘','#algorithms','<ul class="pf-index-simple">'+problems.map(r=>'<li><a href="'+route('algorithm',r.id)+'"><strong>'+esc(r.title)+'</strong><small>'+esc(r.date)+' · '+esc(r.status)+'</small></a></li>').join('')+'</ul>');
+const docList=()=>'<section class="pf-index-section pf-index-documents" aria-labelledby="pf-documents-title"><div class="pf-index-heading"><h2 id="pf-documents-title">포트폴리오 문서</h2></div><ul class="pf-index-simple">'+documents.map(([id,title])=>'<li>'+link(route('career',id),title)+'</li>').join('')+'</ul></section>';
+const caseEvidence=()=>{
+  const task=featured&&projectFor(featured)?.work?.find(w=>w.figures?.some(f=>f.src==='assets/images/priest-melee-10fps.png'));
+  if(!task)return '';
+  return '<section class="pf-index-evidence"><div><p class="pf-index-subtitle">'+esc(featured.title)+' · 구현 기록</p><h2>'+esc(task.title)+'</h2><p>'+esc(task.text)+'</p>'+link(route('career',featured.id),'문제와 해결 과정 →','pf-index-all')+'</div><div class="pf-index-figures">'+task.figures.slice(0,2).map(f=>'<figure><a href="'+route('career',featured.id)+'">'+photo(f)+'</a><figcaption>'+esc(f.caption)+'</figcaption></figure>').join('')+'</div></section>';
+};
+function home(){
+  // Every theme exposes the same five kinds of content without opening a detail panel.
+  // Images and extended technical examples belong below the index, not in a full-screen hero.
+  return '<div class="pf-site pf-'+theme+' pf-index">'+masthead()+jump()+
+    '<div class="pf-index-main">'+projectList(theme)+recordList()+'</div>'+
+    '<div class="pf-index-resources">'+docList()+libraryList()+algorithmList()+'</div>'+
+    (theme==='terminal'?'':caseEvidence())+footer()+'</div>';
 }
 const footer=()=>'<footer class="pf-footer"><div><strong>개발·학습 기록</strong><span>C++ / Unreal Engine · Portfolio</span><a class="pf-contact" href="mailto:jwh2077@gmail.com">연락처 · jwh2077@gmail.com</a></div><div class="pf-footer-notes"><p>화면 구성과 글 정리에 AI의 도움을 받았으며, 내용과 코드는 제 실제 학습·작업 기록을 바탕으로 했습니다.</p></div></footer>';
 
-const modes={editorial,cinematic,terminal,dashboard};
-const home=()=>modes[theme]?.()||editorial();
 const hub=()=>home();
 function setTheme(next){
   if(!availableThemes.includes(next))return false;
