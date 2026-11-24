@@ -90,7 +90,30 @@
       return `<div class="work-topic"><div class="work-topic-intro"><h3>${esc(topic)}</h3>${preview}</div><div class="work-topic-entries">${rows}</div></div>`;
     }).join(''));
   }
+
+  function teamProjectPage(p){
+    const facts=[['기간',p.period],['팀',p.team],['기술',p.technology]].filter(([,v])=>v);
+    const intro='<a class="source" href="#projects">← 프로젝트 목록</a><header class="project-intro team-detail-intro"><p class="team-detail-kind">팀 프로젝트'+(p.featured?' · 대표 프로젝트':'')+'</p><h1>'+esc(p.title)+'</h1><p class="intro">'+esc(p.summary)+'</p><dl class="team-detail-facts">'+facts.map(([label,value])=>'<div><dt>'+label+'</dt><dd>'+esc(value)+'</dd></div>').join('')+'</dl></header>';
+    const roles=section('project-role','내가 맡은 부분','<ul class="team-detail-roles">'+p.roles.map(r=>'<li>'+esc(r)+'</li>').join('')+'</ul>');
+    const media=mediaLink(p.media), refs=p.links?.length?links(p.links):'';
+    const visual=p.cover?'<figure class="team-detail-cover"><img src="'+esc(p.cover.src)+'" alt="'+esc(p.cover.alt)+'" loading="lazy"><figcaption>'+esc(p.cover.alt)+'</figcaption></figure>':'';
+    const result=section('project-result','결과물','<div class="team-detail-result">'+visual+'<div><p>'+esc(p.result)+'</p>'+(media||refs?'<div class="team-detail-links">'+media+refs+'</div>':'')+(p.result_note?'<p class="caption">'+esc(p.result_note)+'</p>':'')+(p.period_note?'<p class="caption">'+esc(p.period_note)+'</p>':'')+'</div></div>');
+    const topics=[...new Set(p.work.map(w=>w.topic))];
+    const work=section('project-work','작업 과정',topics.map((topic,groupIndex)=>{
+      const group=p.work.filter(w=>w.topic===topic);
+      return '<div class="team-work-group"><h3 class="team-work-heading" id="team-work-topic-'+groupIndex+'">'+esc(topic)+'</h3><div class="team-work-entries">'+group.map(w=>{
+        const index=p.work.indexOf(w);
+        const figures=window.TIL_SHOWCASE.workFigures(w.figures);
+        const recordsMarkup=relatedRecords(w.ids);
+        return '<details class="work-entry team-work-entry" id="project-work-'+index+'"><summary>'+esc(w.title)+'</summary><div class="work-entry-body"><p>'+esc(w.text)+'</p>'+figures+(w.note?'<p class="caption">덧붙임<br>'+esc(w.note)+'</p>':'')+(recordsMarkup?'<div class="team-work-records"><h4>관련 작업 기록</h4><div class="related-list">'+recordsMarkup+'</div></div>':'')+'</div></details>';
+      }).join('')+'</div></div>';
+    }).join(''));
+    const review=p.reflection?section('project-reflection','프로젝트 돌아보기','<p>'+esc(p.reflection.summary)+'</p><a class="source" href="#reflection='+esc(p.id)+'">돌아보기 읽기 →</a>'):'';
+    const history=section('project-history','전체 작업 기록','<div id="projectFilterSlot"></div><div id="projectRows"></div>');
+    return '<div class="team-detail">'+intro+'<div id="projectTocSlot"></div>'+roles+result+work+review+history+'</div>';
+  }
   function projectPage(p){
+    if(p.activity==='team'&&p.roles?.length&&p.work?.length)return teamProjectPage(p);
     const title=`<a class="source" href="#projects">← 프로젝트 목록</a><header class="project-intro"><div class="eyebrow">${p.archive?(p.activity==='team'?'팀 프로젝트':'개인 프로젝트·실습'):'팀 프로젝트'}</div><h1>${esc(p.title)}</h1><p class="intro">${esc(p.summary)}</p>${mediaLink(p.media)}<div class="project-facts">${[p.team,p.technology,p.role_summary&&'담당 · '+p.role_summary,p.period].filter(Boolean).map(v=>`<span>${esc(v)}</span>`).join('')}</div></header>`;
     const shortcuts=p.highlights?.length?`<nav class="project-shortcuts" aria-label="대표 작업">${p.highlights.map(h=>`<button type="button" data-scroll="project-work-${h.work}"><strong>${esc(h.label)} <span aria-hidden="true">↓</span></strong><span>${esc(h.summary)}</span></button>`).join('')}</nav>`:'';
     const parts=p.parts?.length?section('project-parts','영상과 연결된 작업 기록',`<div class="project-parts">${p.parts.map(part=>`<div class="project-part"><h3>${esc(part.title)}</h3>${mediaLink({url:part.video})}<div class="related-list">${relatedRecords(part.ids)}</div></div>`).join('')}</div>`):'';
@@ -103,18 +126,18 @@
     const review=p.reflection?section('project-reflection','프로젝트 돌아보기',`<p>${esc(p.reflection.summary)}</p><a class="button" href="#reflection=${p.id}">돌아보기 읽기 →</a>`):'';
     return title+roles+result+shortcuts+(work?'<div id="projectTocSlot"></div>':'')+work+review+parts+history;
   }
-  function reflection(p){const r=p.reflection;return `<a class="source" href="#project=${p.id}">← ${esc(p.title)} 상세로</a><header><div class="eyebrow">프로젝트 돌아보기</div><h1>${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>section('reflection-'+i,s.title,`<p>${esc(s.text)}</p>`)).join('')}<section class="project-section"><h2>덧붙임과 참고 자료</h2><p class="caption">${esc(r.notice)}</p><ul>${r.sources.map(s=>`<li>${esc(s)}</li>`).join('')}</ul><div class="material-links">${links(p.links)}</div></section>`;}
+  function reflection(p){const r=p.reflection;return `<a class="source" href="#project=${p.id}">← ${esc(p.title)} 상세로</a><header><div class="eyebrow">프로젝트 돌아보기</div><h1>${esc(r.title)}</h1><p class="intro">${esc(r.summary)}</p></header>${r.sections.map((s,i)=>section('reflection-'+i,s.title,`<p>${esc(s.text)}</p>`)).join('')}<section class="project-section"><h2>덧붙임과 참고 자료</h2><p class="caption">${esc(r.notice)}</p><ul>${r.sources.map(s=>`<li>${esc(s)}</li>`).join('')}</ul><div class="material-links">${links(p.links||[])}${r.record?`<a class="source" href="${recordURL(r.record)}">원본 회고 일지 →</a>`:''}</div></section>`;}
   function buildToc(){
     tocObserver?.disconnect(); const toc=$('#readingToc');toc.hidden=true;
     if(!document.body.classList.contains('reading'))return;
     const content=['#sitePages','#articlePage','#libraryPage','#algorithmPage'].map($).find(el=>!el.hidden);
     if(!content)return;
     const pageTitle=content.querySelector('h1,#detailTitle');if(pageTitle)document.title=pageTitle.textContent+' · 개발·학습 기록';
-    const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.material-section>h2,.material-section>.vector-demo-heading>h2,.material-section>h3,.note-body>h3,.section>h3,.related>h3')];
+    const headings=[...content.querySelectorAll('.project-section>h2,.work-block>h3,.team-work-heading,.material-section>h2,.material-section>.vector-demo-heading>h2,.material-section>h3,.note-body>h3,.section>h3,.related>h3')];
     if(headings.length<(content.id==='libraryPage'?2:3))return;
-    toc.hidden=false;toc.open=!matchMedia('(max-width:800px)').matches&&!content.querySelector('.work-topic');
-    const targets=headings.map((h,i)=>{h.id=content.id+'-heading-'+i;return h;});
-    const tocButton=h=>`<button type="button" ${h.matches('.material-section>h3')?'class="toc-child" ':''}data-scroll="${h.id}">${esc(h.textContent)}</button>`;
+    toc.hidden=false;toc.open=!matchMedia('(max-width:800px)').matches&&!content.querySelector('.work-topic,.team-work-group');
+    const targets=headings.map((h,i)=>{if(!h.id)h.id=content.id+'-heading-'+i;return h;});
+    const tocButton=h=>`<button type="button" ${h.matches('.material-section>h3,.team-work-heading')?'class="toc-child" ':''}data-scroll="${h.id}">${esc(h.textContent)}</button>`;
     const material=content.id==='libraryPage'&&window.TIL_LIBRARY_INDEX.find(r=>r.title===pageTitle?.textContent);
     function sectionToc(items,expanded=true) {
       let html='';
@@ -139,7 +162,7 @@
     targets.forEach(h=>tocObserver.observe(h));
   }
   $('#readingToc').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(b){e.preventDefault();const target=document.getElementById(b.dataset.scroll);target?.scrollIntoView();target?.setAttribute('tabindex','-1');target?.focus({preventScroll:true});}});
-  $('#sitePages').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(!b)return;const target=document.getElementById(b.dataset.scroll);target?.setAttribute('tabindex','-1');target?.scrollIntoView();target?.focus({preventScroll:true});});
+  $('#sitePages').addEventListener('click',e=>{const b=e.target.closest('[data-scroll]');if(!b)return;const target=document.getElementById(b.dataset.scroll);if(target?.matches('details'))target.open=true;target?.setAttribute('tabindex','-1');target?.scrollIntoView();target?.focus({preventScroll:true});});
   window.TIL_SITE={articleReady(){queueMicrotask(buildToc);}};
   function filterState(){return currentKind==='project'?projectFilter:views[currentKind]?.state;}
   function filterRows(){return currentKind==='project'?projectRecords(projects.find(p=>p.id===lastProject)):views[currentKind].records;}

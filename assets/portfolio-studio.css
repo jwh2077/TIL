@@ -606,3 +606,44 @@ body[data-portfolio-theme] :is(a,button,summary,input,select):focus-visible{outl
  body[data-portfolio-theme] .project-shortcuts{grid-template-columns:1fr}
 }
 @media print{.project-index-row{break-inside:avoid}.project-index-actions{display:none}}
+
+
+/* One detail layout for every team project, regardless of number of work records. */
+.team-detail{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.team-detail .team-detail-kind{font-size:12px;color:var(--pf-accent);font-weight:650;margin:0}
+.team-detail .team-detail-intro{margin:8px 0 14px;padding:12px 0 16px}
+.team-detail .team-detail-intro h1{margin:7px 0 10px}
+.team-detail .team-detail-facts{display:flex;flex-wrap:wrap;gap:12px 24px;margin:15px 0 0}
+.team-detail .team-detail-facts>div{display:grid;gap:2px}
+.team-detail .team-detail-facts dt{font-size:12px;color:var(--pf-dim)}
+.team-detail .team-detail-facts dd{margin:0;font-size:14px;font-weight:600;color:var(--pf-ink)}
+.team-detail .project-section{margin:22px 0;padding:18px 0 0;border-top:1px solid var(--pf-line)}
+.team-detail .project-section>h2{margin:0 0 12px;font-size:22px;line-height:1.4}
+.team-detail .team-detail-roles{padding-left:20px;margin:0;color:var(--pf-ink)}
+.team-detail .team-detail-roles li{margin:5px 0;line-height:1.7}
+.team-detail .team-detail-result{display:grid;grid-template-columns:minmax(180px,40%) minmax(0,1fr);gap:20px;align-items:start}
+.team-detail .team-detail-result p{margin:0 0 9px;line-height:1.7}
+.team-detail .team-detail-cover{margin:0;min-width:0}
+.team-detail .team-detail-cover img{width:100%;height:auto;display:block;background:var(--pf-soft);object-fit:contain;max-height:340px}
+.team-detail .team-detail-cover figcaption{font-size:12px;line-height:1.5;margin-top:5px;color:var(--pf-dim)}
+.team-detail .team-detail-links{display:flex;flex-wrap:wrap;align-items:center;gap:7px 15px;margin:10px 0}
+.team-detail .team-detail-links a{color:var(--pf-accent);font-size:13px;font-weight:650;text-decoration:underline;text-underline-offset:3px;background:transparent;border:0;padding:5px 0;min-height:0}
+.team-detail .team-work-group{display:grid;grid-template-columns:minmax(110px,23%) minmax(0,1fr);gap:20px;border-top:1px solid var(--pf-line);padding:12px 0}
+.team-detail .team-work-heading{font-size:15px;line-height:1.5;color:var(--pf-accent);margin:10px 0;scroll-margin-top:135px}
+.team-detail .team-work-entries{min-width:0}
+.team-detail .team-work-entry{scroll-margin-top:135px}
+.team-detail .team-work-entry summary{color:var(--pf-ink)}
+.team-detail .team-work-entry[open] summary{color:var(--pf-accent)}
+.team-detail .team-work-entry .work-entry-body{max-width:none;padding:4px 2px 14px}
+.team-detail .team-work-entry .project-work-figures{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.team-detail .team-work-entry .project-work-figures img{max-height:420px;object-fit:contain}
+.team-detail .team-work-records h4{font-size:13px;margin:12px 0 6px;color:var(--pf-dim)}
+.team-detail .team-work-records .related-list{gap:5px}
+.team-detail .team-work-records .related-button{min-height:34px;font-size:12px}
+@media(max-width:800px){
+ .team-detail .team-detail-result,.team-detail .team-work-group{grid-template-columns:minmax(0,1fr);gap:8px}
+ .team-detail .team-work-heading{margin:4px 0}
+ .team-detail .team-detail-facts{gap:8px 18px}
+ .team-detail .team-detail-cover img{max-height:260px}
+}
+@media print{.team-detail .team-detail-result,.team-detail .team-work-group{display:block}.team-detail .team-work-entry::details-content{display:block;content-visibility:visible}}
