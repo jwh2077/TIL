@@ -383,6 +383,11 @@ body[data-portfolio-theme] .topic-badge,body[data-portfolio-theme] .pill{border:
 body[data-portfolio-theme] #algorithmPage .algorithm-review button{background:var(--pf-paper);border-color:var(--pf-line);color:var(--pf-ink);border-radius:3px;min-height:40px}
 body[data-portfolio-theme] #algorithmPage .algorithm-review button[aria-pressed=true]{background:var(--pf-accent);color:var(--pf-back);border-color:var(--pf-accent)}
 body[data-portfolio-theme] #algorithmPage .library-grid{grid-template-columns:1fr;gap:0}
+@media screen and (min-width:801px){
+  #algorithmCards > .record:not(:last-child){
+    border-bottom:2px solid var(--pf-dim);
+  }
+}
 body[data-portfolio-theme] #algorithmPage .algorithm-code{background:#f3f1ed;color:#292824;border-radius:3px;border-color:var(--pf-line)}
 body[data-portfolio-theme] #librarySubjects button{border-radius:2px;border-left:3px solid transparent}
 body[data-portfolio-theme] #librarySubjects button[aria-pressed=true]{border-left-color:var(--pf-accent)}
