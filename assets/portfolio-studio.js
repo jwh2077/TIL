@@ -41,18 +41,12 @@ const recordList=()=>section('recent','최근 학습 기록','#list','<ul class=
 const libraryList=()=>section('library','자료실','#library','<ul class="pf-index-simple">'+references.map(r=>'<li>'+link(route('material',r.id),r.title)+'</li>').join('')+'</ul>');
 const algorithmList=()=>section('algorithms','알고리즘','#algorithms','<ul class="pf-index-simple">'+problems.map(r=>'<li><a href="'+route('algorithm',r.id)+'"><strong>'+esc(r.title)+'</strong><small>'+esc(r.date)+' · '+esc(r.status)+'</small></a></li>').join('')+'</ul>');
 const docList=()=>section('documents','문서','#documents','<ul class="pf-index-simple">'+(window.TIL_CAREER?.primaryDocuments()||[]).slice(0,3).map(d=>'<li>'+link(route('career',d.id),d.title)+'</li>').join('')+'</ul>');
-const caseEvidence=()=>{
-  const task=featured&&projectFor(featured)?.work?.find(w=>w.figures?.length);
-  if(!task)return '';
-  return '<section class="pf-index-evidence"><div><p class="pf-index-subtitle">'+esc(featured.title)+' · 구현 기록</p><h2>'+esc(task.title)+'</h2><p>'+esc(task.text)+'</p>'+link(route('career',featured.id),'문제와 해결 과정 →','pf-index-all')+'</div><div class="pf-index-figures">'+task.figures.slice(0,2).map(f=>'<figure><a href="'+route('career',featured.id)+'">'+photo(f)+'</a><figcaption>'+esc(f.caption)+'</figcaption></figure>').join('')+'</div></section>';
-};
 function home(){
   // Every theme exposes the same five kinds of content without opening a detail panel.
-  // Images and extended technical examples belong below the index, not in a full-screen hero.
   return '<div class="pf-site pf-'+theme+' pf-index">'+masthead()+
     '<div class="pf-index-main">'+projectList(theme)+recordList()+'</div>'+
     '<div class="pf-index-resources">'+docList()+libraryList()+algorithmList()+'</div>'+
-    (theme==='terminal'?'':caseEvidence())+footer()+'</div>';
+    footer()+'</div>';
 }
 const footer=()=>'<footer class="pf-footer"><div><strong>개발·학습 기록</strong><span>C++ / Unreal Engine · Portfolio</span><a class="pf-contact" href="mailto:jwh2077@gmail.com">연락처 · jwh2077@gmail.com</a></div><div class="pf-footer-notes"><p>화면 구성과 글 정리에 AI의 도움을 받았으며, 내용과 코드는 제 실제 학습·작업 기록을 바탕으로 했습니다.</p></div></footer>';
 

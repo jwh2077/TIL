@@ -443,14 +443,6 @@ body[data-portfolio-theme] .pf-settings>summary{border-radius:3px}
 .pf-index .pf-index-simple a{display:grid;gap:2px;padding:7px 0;font-size:14px;line-height:1.45}
 .pf-index .pf-index-simple strong{font-weight:600}
 .pf-index .pf-index-documents a{font-weight:650}
-.pf-index .pf-index-evidence{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:26px;align-items:start;margin-top:32px;padding:16px 0;border-top:1px solid var(--pf-line)}
-.pf-index .pf-index-subtitle{font-size:12px;margin:0}
-.pf-index .pf-index-evidence h2{font-size:23px;line-height:1.35;margin:7px 0}
-.pf-index .pf-index-evidence p:not(.pf-index-subtitle){font-size:14px;margin:0 0 9px}
-.pf-index .pf-index-figures{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.pf-index .pf-index-figures figure{margin:0;min-width:0}
-.pf-index .pf-index-figures img{display:block;width:100%;height:auto}
-.pf-index .pf-index-figures figcaption{color:var(--pf-dim);font-size:12px;line-height:1.5;margin-top:5px}
 .pf-index .pf-footer{margin-top:24px}
 .pf-index.pf-cinematic .pf-index-thumb{aspect-ratio:16/9}
 .pf-index.pf-cinematic .pf-index-project.has-thumb{grid-template-columns:112px minmax(0,1fr) 14px}
@@ -464,13 +456,11 @@ body[data-portfolio-theme] .pf-settings>summary{border-radius:3px}
  .pf-index .pf-index-main,.pf-index.pf-dashboard .pf-index-main{grid-template-columns:1fr;gap:18px;margin-top:16px}
  .pf-index .pf-index-main>section+section,.pf-index .pf-index-resources>section+section{padding:14px 0 0;border-left:0;border-top:1px solid var(--pf-line)}
  .pf-index .pf-index-resources{grid-template-columns:1fr;gap:12px}
- .pf-index .pf-index-evidence{grid-template-columns:1fr;gap:12px}
 }
 @media(max-width:440px){
  .pf-index.pf-cinematic .pf-index-project.has-thumb,.pf-index .pf-index-project.has-thumb{grid-template-columns:72px minmax(0,1fr) 14px}
- .pf-index .pf-index-figures{grid-template-columns:1fr}
 }
-@media print{.pf-index #globalSearch{display:none!important}.pf-index .pf-index-main,.pf-index .pf-index-resources{display:block}.pf-index .pf-index-section{break-inside:avoid}.pf-index .pf-index-evidence{display:block}}
+@media print{.pf-index #globalSearch{display:none!important}.pf-index .pf-index-main,.pf-index .pf-index-resources{display:block}.pf-index .pf-index-section{break-inside:avoid}}
 
 
 /* Shared navigation, project index and reading controls.
