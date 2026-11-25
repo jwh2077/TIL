@@ -668,5 +668,4 @@ body[data-portfolio-theme] .document-hub #careerQuery::placeholder{color:var(--p
 .document-hub .document-list strong{font-size:16px;font-weight:650;line-height:1.5;overflow-wrap:anywhere}
 .document-hub .document-list small{font-size:13px;color:var(--pf-dim);line-height:1.5;overflow-wrap:anywhere}
 .document-hub .document-open{font-size:12px;font-weight:650;color:var(--pf-accent);white-space:nowrap}
-.pf-index .pf-document-entry{font-size:14px;line-height:1.7;margin:9px 0 0}
 @media(max-width:380px){body[data-portfolio-theme] .site-header nav a{font-size:11px;padding-inline:0}.document-hub .document-list a{grid-template-columns:1fr;gap:2px}.document-hub .document-open{justify-self:start}}

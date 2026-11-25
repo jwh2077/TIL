@@ -87,6 +87,7 @@ function detail(id){
 window.TIL_CAREER={
   render:id=>window.TIL_SHOWCASE?.has(id)?window.TIL_PORTFOLIO?.detail(id)||window.TIL_SHOWCASE.detail(id):id?detail(id):hub(),
   matchingDocuments,
+  primaryDocuments:()=>groups[0].items.slice(),
   attach:root=>{
     const input=root.querySelector('#careerQuery');
     if(input)input.addEventListener('input',()=>{const target=root.querySelector('#careerCatalog');if(target)target.innerHTML=catalog(input.value);});

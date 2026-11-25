@@ -40,7 +40,7 @@ const projectList=mode=>section('projects','팀 프로젝트','#projects','<ul c
 const recordList=()=>section('recent','최근 학습 기록','#list','<ul class="pf-index-entries">'+recent.map((r,i)=>'<li><a href="'+route('record',r.id)+'"><time datetime="'+esc(r.date)+'">'+esc(r.date_label||r.date)+'</time><strong>'+esc(r.title)+'</strong>'+(i===0&&r.summary?'<span>'+esc(r.summary)+'</span>':'')+'</a></li>').join('')+'</ul>');
 const libraryList=()=>section('library','자료실','#library','<ul class="pf-index-simple">'+references.map(r=>'<li>'+link(route('material',r.id),r.title)+'</li>').join('')+'</ul>');
 const algorithmList=()=>section('algorithms','알고리즘','#algorithms','<ul class="pf-index-simple">'+problems.map(r=>'<li><a href="'+route('algorithm',r.id)+'"><strong>'+esc(r.title)+'</strong><small>'+esc(r.date)+' · '+esc(r.status)+'</small></a></li>').join('')+'</ul>');
-const docList=()=>'<section class="pf-index-section pf-index-documents" aria-labelledby="pf-documents-title"><div class="pf-index-heading"><h2 id="pf-documents-title">문서</h2>'+link('#documents','전체 보기 →','pf-index-all')+'</div><p class="pf-document-entry">포트폴리오 · 이력서 · 기술 경험 · 지원 준비 자료</p></section>';
+const docList=()=>section('documents','문서','#documents','<ul class="pf-index-simple">'+(window.TIL_CAREER?.primaryDocuments()||[]).slice(0,3).map(d=>'<li>'+link(route('career',d.id),d.title)+'</li>').join('')+'</ul>');
 const caseEvidence=()=>{
   const task=featured&&projectFor(featured)?.work?.find(w=>w.figures?.length);
   if(!task)return '';
