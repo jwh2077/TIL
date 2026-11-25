@@ -1,7 +1,6 @@
 (() => {
 'use strict';
 const docs=window.TIL_CAREER_DOCUMENTS||[];
-const shortTitle=t=>t.replace(/^게임 클라이언트 개발 포트폴리오$/,'게임 클라이언트 개발 포트폴리오');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const byPath=new Map(docs.map(d=>[d.path,d]));
 function inline(s,doc){
@@ -78,9 +77,8 @@ function hub(){
 function detail(id){
   const doc=docs.find(d=>d.id===id);
   if(!doc)return '<a class="source" href="#documents">← 문서 목록</a><h1>문서를 찾을 수 없습니다</h1>';
-  const related=docs.filter(d=>d.id!==id&&d.category===doc.category).slice(0,3);
   return '<div class="career-document-page"><div class="career-toolbar"><a class="career-back" href="#documents">← 문서 목록</a><button type="button" class="career-print">PDF로 저장 · 인쇄</button></div><div class="career-document">'+
-    '<header class="career-doc-head"><div class="eyebrow">'+esc(doc.category)+' / C++ · Unreal Engine</div><h1>'+esc(shortTitle(doc.title))+'</h1><p class="intro">'+esc(doc.summary)+'</p></header>'+
+    '<header class="career-doc-head"><div class="eyebrow">'+esc(doc.category)+' / C++ · Unreal Engine</div><h1>'+esc(doc.title)+'</h1><p class="intro">'+esc(doc.summary)+'</p></header>'+
     '<article class="career-prose">'+markdown(doc)+'</article>'+
     '</div></div>';
 }

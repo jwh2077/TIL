@@ -31,7 +31,7 @@
 - [기존 프로젝트 소개 데이터](../data/projects.js)
 - [저장소 안내](../README.md)
 
-GitHub에서 Markdown 파일을 직접 열어 읽을 수 있습니다. 기존 사이트의 탐색 메뉴·학습 기록 데이터는 변경하지 않습니다.
+GitHub에서 Markdown 파일을 직접 열어 읽을 수 있습니다. 사이트의 [문서 탭](../index.html#documents)에서도 같은 문서를 찾아 열거나 PDF로 저장할 수 있습니다. 원본 Markdown과 사이트 표시용 데이터는 함께 유지합니다.
 
 ## AI 협업 사례
 

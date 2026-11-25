@@ -8,7 +8,7 @@
       lead:'적의 행동 전환과 공격 판정을 구현하면서, 상태가 연결되는 구간의 문제를 추적했습니다.',
       summary:'순찰부터 추적·공격까지 이어지는 AI와 무기 파츠 정보를 게임 및 UI에 전달하는 기능을 담당했습니다.',
       tags:['Behavior Tree','Blackboard','DataTable'],
-      projectName:'Project Priest',placeholder:'AI / COMBAT',
+      projectName:'Project Priest',
       own:['근접·원거리 적의 순찰, 감지, 추적, 공격 조건 연결','파츠 장착과 능력치 데이터·UI 연동','공격 판정 및 사망 Mesh 처리 점검'],
       challenge:'공격 애니메이션은 실행되지만 조건에 따라 피해가 적용되지 않았습니다. AI는 플레이어를 놓친 순간 대상 정보를 비우면 전투 흐름이 갑자기 끊기는 문제도 있었습니다.',
       approach:'Behavior Tree와 Blackboard의 조건을 나눠 확인하고, 공격에서는 Box Overlap, 저장된 대상, Anim Notify 실행 시점을 순서대로 점검했습니다. 충돌 Box의 높이를 조정했을 때 판정이 더 안정적으로 들어오는 현상을 확인했습니다.',
@@ -24,7 +24,6 @@
       lead:'방어구 무게와 입력 유지 시간에 따라 달라지는 이동감을 데이터로 제어했습니다.',
       summary:'이동 설정을 DataTable에서 읽고, 무게 변화 이벤트와 공격·가드 입력을 캐릭터 코드에 연결했습니다.',
       tags:['CharacterMovement','Enhanced Input','DataTable'],
-      placeholder:'MOVEMENT / INPUT',
       own:['이동·점프·가속·감속 값을 데이터와 연동','방어구 상태 변경 이벤트를 받아 속도 재계산','공격·가드 입력을 전투 컴포넌트에 전달'],
       challenge:'출발 속도를 높였더니 처음 빠르게 움직인 뒤 급격히 느려져 대시처럼 보였습니다. 테이블에 있는 값이 실제 이동 컴포넌트에 적용되지 않는 구간도 확인했습니다.',
       approach:'시작 순간의 속도와 입력을 누르는 동안 증가하는 이동 세기를 분리했습니다. CharacterMovementComponent에 값을 적용하고, 무게가 바뀌면 최대 속도 등을 다시 계산하는 흐름을 정리했습니다.',
@@ -40,7 +39,6 @@
       lead:'서버에서 규칙을 판정하고 클라이언트에 필요한 정보를 전달하는 흐름을 작성했습니다.',
       summary:'GameMode의 숫자 야구 규칙과 PlayerController별 메시지 전달, PlayerState 복제를 다뤘습니다.',
       tags:['GameMode','RPC','Replication'],
-      placeholder:'SERVER / RPC',
       own:['중복 없는 세 숫자 생성 및 입력·Strike·Ball 판정','PlayerController별 채팅 전달 경로 작성','PlayerState 이름·시도 횟수 복제 설정'],
       challenge:'PlayerController는 모든 클라이언트에서 동일하게 존재하지 않으므로, 한 대상에 NetMulticast를 호출하는 것만으로 메시지 전달을 해결하기 어렵다는 점을 학습했습니다.',
       approach:'서버에서 PlayerController를 순회해 필요한 Client RPC를 호출하는 흐름을 작성했습니다. 숫자 야구 규칙은 GameMode에, 플레이어별 공유 값은 PlayerState에 배치했습니다.',
@@ -55,7 +53,7 @@
       lead:'상점 기능을 구현하고 아이템 소유권과 클래스 책임을 분리했습니다.',
       summary:'아이템 구매·판매와 데이터 기록, unique_ptr을 이용한 Item 관리 구조를 다뤘습니다.',
       tags:['C++','std::unique_ptr','Git 협업'],
-      projectName:'제13 던전',placeholder:'C++ / ITEM',
+      projectName:'제13 던전',
       own:['Shop 구매·판매 기능과 Item 클래스 분리','std::unique_ptr<Item> 기반 관리','Logger 데이터 집계 및 Git 협업'],
       challenge:'아이템 관리와 상점 처리를 한 구조에 계속 추가하면 책임이 섞이기 쉬웠습니다. 팀 작업에서는 병합과 작업 범위 조율도 필요했습니다.',
       approach:'Shop과 Item을 분리하고 unique_ptr을 통해 아이템의 소유권을 관리했습니다. Git 브랜치, PR, 병합·충돌 해결을 경험했습니다.',
@@ -83,39 +81,8 @@
     const image=projectFor(item)?.cover;
     return image?.src
       ?'<div class="career-project-image"><img src="'+esc(image.src)+'" alt="'+esc(image.alt||item.title+' 프로젝트 화면')+'" loading="lazy"></div>'
-      :'<div class="career-project-image career-project-fallback" aria-hidden="true"><span>'+esc(item.placeholder)+'</span><strong>'+esc(item.title)+'</strong></div>';
+      :'';
   };
-  const tags=item=>'<div class="career-showcase-tags">'+item.tags.map(tag=>'<span>'+esc(tag)+'</span>').join('')+'</div>';
-  function card(item,primary){
-    return '<a href="#career='+esc(item.id)+'" class="career-project-card'+(primary?' career-project-primary':'')+'">'+
-      cover(item)+'<div class="career-project-copy"><div class="career-project-meta"><span>'+esc(item.index)+' / '+esc(item.kind)+'</span><span>'+esc(item.status)+'</span></div>'+
-      '<h3>'+esc(item.title)+'</h3><p class="career-project-lead">'+esc(item.lead)+'</p>'+
-      '<div class="career-project-role"><span>담당</span><strong>'+esc(item.role)+'</strong></div>'+tags(item)+
-      '<span class="career-project-more">문제 해결 과정 보기 <span aria-hidden="true">→</span></span></div></a>';
-  }
-  function hub(docList){
-    return '<div class="career-overview">'+
-      '<header class="career-showcase-hero"><div class="career-showcase-head"><div class="eyebrow">C++ / UNREAL ENGINE · GAMEPLAY PORTFOLIO</div>'+
-      '<h1>구현한 기능보다<br><em>어떻게 연결하고 해결했는지</em><br>보여주겠습니다.</h1>'+
-      '<p class="intro">C++과 Unreal Engine을 공부하며 적 AI, 캐릭터 이동, 게임 규칙과 멀티플레이 구조를 다뤘습니다. 각 프로젝트에서 맡은 부분과 확인한 문제를 중심으로 정리했습니다.</p>'+
-      '<div class="career-showcase-cta"><a class="button" href="#career=case-dontdrop">대표 작업 살펴보기</a><a class="career-subtle-link" href="#career=portfolio">문서형 포트폴리오</a></div></div>'+
-      '<div class="career-showcase-focus" aria-label="주요 경험 분야"><div class="career-focus-kicker">TECHNICAL FOCUS</div>'+
-      '<div><span>01 / AI & COMBAT</span><strong>행동 전환 · 공격 판정</strong><small>Project Priest</small></div>'+
-      '<div><span>02 / MOVEMENT</span><strong>이동 데이터 · 입력 연동</strong><small>Don’t Drop</small></div>'+
-      '<div><span>03 / NETWORKING</span><strong>RPC · 서버 규칙</strong><small>ChatX</small></div></div></header>'+
-      '<section class="career-selected-work"><div class="career-showcase-section-head"><div><span class="eyebrow">SELECTED WORK</span><h2>대표 프로젝트</h2></div><p>팀 작업에서는 실제 담당한 기능을, 개인 실습에서는 직접 작성한 로직을 구분했습니다.</p></div>'+
-      '<div class="career-selected-grid">'+cases.map((item,i)=>card(item,i===0)).join('')+'</div></section>'+
-      '<section class="career-practice"><div class="career-showcase-section-head"><div><span class="eyebrow">HOW I WORK</span><h2>문제를 다루는 방식</h2></div><p>과장된 성과 수치보다 실제 기록에서 확인되는 과정을 중심으로 정리했습니다.</p></div>'+
-      '<div class="career-practice-grid">'+[
-        ['01','역할과 실행 위치','서버·클라이언트, Actor·Component 사이의 책임을 먼저 나눕니다.'],
-        ['02','재현 조건과 데이터','입력 시점, 상태 변화, 충돌 범위와 로그를 나누어 점검합니다.'],
-        ['03','확인한 결과만 기록','시도·작업 완료·최종 검증을 구분하고 남은 문제를 명시합니다.']
-      ].map(a=>'<div class="career-practice-item"><span>'+a[0]+'</span><h3>'+a[1]+'</h3><p>'+a[2]+'</p></div>').join('')+'</div></section>'+
-      '<section class="career-resources"><div class="career-showcase-section-head"><div><span class="eyebrow">DOCUMENTS & NOTES</span><h2>기술 문서와 지원 자료</h2></div><p>필요한 문서를 사이트 안에서 읽거나 A4/PDF로 출력할 수 있습니다.</p></div>'+
-      '<label class="career-search-label" for="careerQuery">문서 검색</label><input id="careerQuery" type="search" placeholder="예: C++, 이동, 면접" aria-label="포트폴리오 문서 검색">'+
-      '<div id="careerCatalog">'+docList+'</div></section>'+
-      '<p class="career-end-note">모든 내용은 공개 가능한 프로젝트·학습 기록을 근거로 작성했습니다. 개인정보와 미확인 경력·성과는 포함하지 않았습니다.</p></div>';
-  }
   function workFigures(figures = []){
     if(!figures.length)return '';
     return '<div class="project-work-figures">'+figures.map(f=>{
@@ -145,5 +112,5 @@
       '<footer class="career-case-footer"><span>근거 · '+esc(item.evidence)+'</span><a href="#record='+encodeURIComponent(item.record)+'">원본 작업 기록 보기 →</a></footer>'+
       '<div class="career-case-next"><span>다음 프로젝트</span><a href="#career='+esc(cases[(cases.indexOf(item)+1)%cases.length].id)+'">'+esc(cases[(cases.indexOf(item)+1)%cases.length].title)+' →</a></div></div>';
   }
-  window.TIL_SHOWCASE={hub,detail,workFigures,has:id=>cases.some(c=>c.id===id),cases:cases.map(({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder})=>({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName,placeholder}))};
+  window.TIL_SHOWCASE={detail,workFigures,has:id=>cases.some(c=>c.id===id),cases:cases.map(({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName})=>({id,index,title,kind,status,period,engine,role,lead,summary,tags,projectName}))};
 })();

@@ -50,7 +50,6 @@ function home(){
 }
 const footer=()=>'<footer class="pf-footer"><div><strong>개발·학습 기록</strong><span>C++ / Unreal Engine · Portfolio</span><a class="pf-contact" href="mailto:jwh2077@gmail.com">연락처 · jwh2077@gmail.com</a></div><div class="pf-footer-notes"><p>화면 구성과 글 정리에 AI의 도움을 받았으며, 내용과 코드는 제 실제 학습·작업 기록을 바탕으로 했습니다.</p></div></footer>';
 
-const hub=()=>home();
 function setTheme(next){
   if(!availableThemes.includes(next))return false;
   theme=next;
@@ -60,5 +59,5 @@ function setTheme(next){
   try{window.localStorage.setItem(storageKey,next);}catch{/* storage unavailable */}
   return true;
 }
-window.TIL_PORTFOLIO={theme,availableThemes,home,hub,setTheme,detail:id=>window.TIL_SHOWCASE.detail(id)};
+window.TIL_PORTFOLIO={theme,availableThemes,home,setTheme,detail:id=>window.TIL_SHOWCASE.detail(id)};
 })();
