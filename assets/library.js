@@ -110,7 +110,7 @@
       id=legacy.id;
       requestedSection={id,index:legacy.outline.findIndex(s=>s.title===heading)};
     }
-    const stamp=++token; const meta=materials.find(r=>r.id===id);
+    const stamp=++token; window.TIL_SITE?.articleLoading(); const meta=materials.find(r=>r.id===id);
     if(!meta) {location.hash='library';return;}
     controls();$('#materialOutline').hidden=false;
     $('#materialSections').innerHTML='';

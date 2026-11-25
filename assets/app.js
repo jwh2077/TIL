@@ -146,6 +146,7 @@
   async function open(id) {
     const meta = records.find(r => r.id === id); if (!meta) return;
     const token = ++request;
+    window.TIL_SITE?.articleLoading();
     $('#detailContent').innerHTML = `<div class="detail-top"><h2 id="detailTitle">기록을 여는 중…</h2></div>`;
     $('#listPage').hidden = true; page.hidden = false; sidebar(meta);
     

@@ -49,6 +49,7 @@
   }
   async function open(id) {
     const token=++request;
+    window.TIL_SITE?.articleLoading();
     const meta=records.find(r=>r.id===id);if(!meta){$('#algorithmPage').innerHTML='<p class="empty">문제를 찾을 수 없습니다.</p><a class="related-button" href="#algorithms">문제 목록으로</a>';$('#algorithmOutline').hidden=true;return;}
     $('#algorithmOutline').hidden=true;
     $('#algorithmPage').innerHTML='<p role="status">풀이를 불러오는 중입니다.</p>';

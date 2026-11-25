@@ -499,3 +499,15 @@ body[data-portfolio-theme] .document-hub #careerQuery::placeholder{color:var(--p
 .document-hub .document-list small{font-size:13px;color:var(--pf-dim);line-height:1.5;overflow-wrap:anywhere}
 .document-hub .document-open{font-size:12px;font-weight:650;color:var(--pf-accent);white-space:nowrap}
 @media(max-width:380px){body[data-portfolio-theme] .site-header nav a{font-size:11px;padding-inline:0}.document-hub .document-list a{grid-template-columns:1fr;gap:2px}.document-hub .document-open{justify-self:start}}
+
+
+/* PC reading layout: keep work evidence and source links near their explanation. */
+@media screen and (min-width:801px){
+ .career-case-journals{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px}
+ body[data-portfolio-theme] .career-case-section h3{color:var(--pf-ink);font-size:17px;margin:18px 0 6px}
+ body[data-portfolio-theme] #algorithmCards>.record:not(:last-child){
+  border-bottom:1px solid color-mix(in srgb,var(--pf-ink) 28%,var(--pf-back));
+ }
+ body[data-portfolio-theme] #algorithmCards>.record:hover,
+ body[data-portfolio-theme] #algorithmCards>.record:focus-within{box-shadow:none}
+}

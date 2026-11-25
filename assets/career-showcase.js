@@ -27,7 +27,7 @@
       own:['이동·점프·가속·감속 값을 데이터와 연동','방어구 상태 변경 이벤트를 받아 속도 재계산','공격·가드 입력을 전투 컴포넌트에 전달'],
       challenge:'출발 속도를 높였더니 처음 빠르게 움직인 뒤 급격히 느려져 대시처럼 보였습니다. 테이블에 있는 값이 실제 이동 컴포넌트에 적용되지 않는 구간도 확인했습니다.',
       approach:'시작 순간의 속도와 입력을 누르는 동안 증가하는 이동 세기를 분리했습니다. CharacterMovementComponent에 값을 적용하고, 무게가 바뀌면 최대 속도 등을 다시 계산하는 흐름을 정리했습니다.',
-      outcome:'이동 중 일반 공격을 하면 공격 포즈가 하체까지 덮어 다리가 멈춰 보였습니다. AI에 블렌딩 수정을 요청하고 spine_01을 기준으로 상체에 공격, 하체에 이동 포즈가 들어가는 구성을 살펴봤습니다. 무기 손잡이가 어긋나는 문제는 부착 기준과 무기별 위치·회전 오프셋을 조정하는 방식으로 다뤘습니다.',
+      outcome:'11월 6일에는 출발 속도와 입력 세기를 분리하고 무게에 따른 속도 갱신을 연결했습니다. 11월 9일에는 감속·마찰·중력 설정을 조정하고 병합 후 빌드가 통과했다는 보고를 받았습니다. 11월 11일 같은 맵에서 기준 메시의 본 갱신 설정을 변경한 뒤 흔들림이 사라졌습니다.',
       caution:'리슨 서버 외부 접속과 모든 클라이언트의 이동 일치가 검증됐다는 의미는 아닙니다. 관전 기능의 개인 테스트 코드는 동작하지 않아 삭제했고, 엑셀 연동은 구상 단계입니다. 캐릭터 외형 선택과 파츠 적용 코드는 일부 구현했습니다. 3D 모델 제작도 처음부터 Codex만으로 시도했으나 원하는 품질의 에셋을 확보하지 못해 커스터마이징 기능은 완성하지 못했습니다.',
       steps:[['기본 이동 구성','FPlayerDataRow와 이동 보정값으로 입력·Movement 설정을 분리했습니다.'],['상태 연결','방어구 무게 변경 알림을 받아 이동 속도 갱신에 연결했습니다.'],['조작 테스트','출발 속도와 누적 입력의 관계를 관찰하고 조정했습니다.']],
       evidence:'11월 6~23일 캐릭터 작업·발표 기록',record:'20261119-dont-drop',
@@ -91,24 +91,39 @@
       return '<figure><a href="'+esc(f.href||f.src)+'" target="_blank" rel="noopener">'+media+'</a><figcaption>'+esc(f.caption)+'</figcaption></figure>';
     }).join('')+'</div>';
   }
+  const journalLinks=ids=>(ids||[]).map(id=>window.TIL_INDEX?.records.find(r=>r.id===id)).filter(Boolean).map(r=>'<a class="source" href="#record='+encodeURIComponent(r.id)+'">'+esc(r.title)+' →</a>').join('');
+  const paragraph=text=>'<p>'+esc(text)+'</p>';
+  const workSection=(title,body,figures,ids)=>'<section class="career-case-section"><h2>'+esc(title)+'</h2>'+body+workFigures(figures)+(ids?.length?'<div class="career-case-journals">'+journalLinks(ids)+'</div>':'')+'</section>';
+  function caseWork(item,project){
+    if(!project?.work?.length)return workSection('서버 규칙과 메시지 전달',paragraph(item.challenge)+paragraph(item.approach)+item.steps.map(([title,description])=>'<h3>'+esc(title)+'</h3>'+paragraph(description)).join(''),[],[item.record]);
+    return project.work.map(w=>{
+      let body=paragraph(w.text)+(w.note?paragraph(w.note):'');
+      let figures=w.figures;
+      if(item.id==='case-dontdrop'&&w.ids.includes('20261106-dont-drop')){
+        body='<h3>문제</h3>'+paragraph(item.challenge)+'<h3>조정 방법</h3>'+paragraph('StartMoving은 지상에서 거의 멈춘 상태일 때만 입력 방향으로 출발 속도를 적용합니다. 방향을 정규화하고 현재 최대 보행 속도를 넘지 않게 제한했습니다. 입력 유지 시간으로 계산한 Alpha를 제한한 뒤 Alpha × Alpha를 입력 세기에 곱하도록 연결했습니다. 출발 속도, 가속 시간, 최소 Alpha는 설정값에서 읽고 방어구 상태가 바뀌면 이동 속도를 다시 계산하도록 했습니다.')+'<h3>확인된 결과</h3>'+paragraph('11월 6일 직접 테스트에서 출발 속도만 높이면 대시처럼 움직였다가 급하게 느려졌습니다. 이를 바탕으로 출발 속도와 입력 세기를 별도로 조절하는 작업을 진행했습니다. 기존 발판 위 이동 시연 자료가 남아 있으나 최종 가속 수치나 해당 문제의 완전한 해결 여부까지 입증하지는 않습니다.');
+      }
+      if(item.id==='case-priest'&&w.ids.includes('20260910-priest'))body+=paragraph('충돌 Box 높이를 조정했을 때 판정이 더 안정적으로 들어오는 현상을 확인했습니다. 최종 코드에서 범위 검사 방식과 어떻게 결합되었는지는 추가 검증이 필요합니다.');
+      if(item.id==='case-dontdrop'&&w.ids.includes('20261119-dont-drop'))body+=paragraph('ToyHammer 회전 공격은 일반 공격과 달리 전신 회전이 필요합니다. 블렌딩 구성은 수정했지만 이동·공격 동시 실행과 전신 회전이 자연스러운지는 PIE에서 더 확인해야 합니다.');
+      if(item.id==='case-dontdrop'&&w.ids.includes('20261111-dont-drop')&&item.observation)figures=[...(figures||[]),{src:item.observation.image,alt:item.observation.alt,caption:'외형 파츠를 기준 메시의 본 자세에 연결한 블루프린트'}];
+      const section=workSection(w.title,body,figures,w.ids);
+      if(item.id==='case-dontdrop'&&w.ids.includes('20261119-dont-drop'))return section+workSection('무기가 손과 따로 움직일 때',paragraph('HandGrip_R 소켓을 옮긴 뒤에도 무기가 손과 따로 움직여 AI에 보정을 요청했습니다. lowerarm_r을 부착 기준으로 잡고 무기별 Weapon Grip Offsets에서 위치와 회전값을 조정했습니다.')+paragraph('회전 공격 중에도 손잡이가 손에 붙어 있는지는 당시 기록에서 확인되지 않습니다.'),[],['20261119-dont-drop','20261120-dont-drop']);
+      return section;
+    }).join('');
+  }
   function detail(id){
     const item=cases.find(c=>c.id===id);
     if(!item)return '<div class="career-case"><a href="#projects">← 프로젝트 목록</a><h1>프로젝트를 찾을 수 없습니다.</h1></div>';
     const project=projectFor(item);
     const period=project?.period||item.period;
     const facts=[['형태',item.kind],['기간',period],['기술',item.engine],['담당',item.role]];
-    return '<div class="career-case"><nav class="career-case-back"><a href="#projects">← 프로젝트 목록</a><span>'+esc(item.index)+' / '+esc(item.status)+'</span><button type="button" class="career-print">PDF로 저장 · 인쇄</button></nav>'+
-      '<header class="career-case-hero"><div class="eyebrow">PROJECT CASE STUDY · '+esc(item.index)+'</div><h1>'+esc(item.title)+'</h1><p>'+esc(item.lead)+'</p>'+
+    return '<div class="career-case"><nav class="career-case-back"><a href="'+(project?'#project='+encodeURIComponent(project.id):'#projects')+'">'+(project?'← 프로젝트 상세':'← 프로젝트 목록')+'</a><span>'+esc(item.status)+'</span><button type="button" class="career-print">PDF로 저장 · 인쇄</button></nav>'+
+      '<header class="career-case-hero"><h1>'+esc(item.title)+'</h1><p>'+esc(item.lead)+'</p>'+
       '<div class="career-case-facts">'+facts.map(([key,value])=>'<div><dt>'+esc(key)+'</dt><dd>'+esc(value)+'</dd></div>').join('')+'</div></header>'+
       resources(item)+(project?.cover?'<div class="career-case-visual">'+cover(item)+'</div>':'')+
-      '<section class="career-case-section career-case-overview"><div><span class="eyebrow">MY CONTRIBUTION</span><h2>내가 맡은 부분</h2><p>'+esc(item.summary)+'</p></div><ul>'+item.own.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></section>'+
-      '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">TECHNICAL DECISIONS</span><h2>문제와 해결 과정</h2></div>'+
-      '<div class="career-case-decision"><article><span>문제 상황</span><p>'+esc(item.challenge)+'</p></article><article><span>조사 및 적용</span><p>'+esc(item.approach)+'</p></article></div>'+workFigures(project?.work?.flatMap(w=>w.figures||[]))+'</section>'+
-      '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">WORKFLOW</span><h2>작업 흐름</h2></div>'+
-      '<ol class="career-case-steps">'+item.steps.map(([title,description],i)=>'<li><span>'+String(i+1).padStart(2,'0')+'</span><div><h3>'+esc(title)+'</h3><p>'+esc(description)+'</p></div></li>').join('')+'</ol></section>'+
-      (item.observation?'<section class="career-case-section"><h2>'+esc(item.observation.title)+'</h2><p>'+esc(item.observation.text)+'</p><figure class="career-test-evidence"><img src="'+esc(item.observation.image)+'" alt="'+esc(item.observation.alt)+'" loading="lazy"><figcaption>직접 연결한 블루프린트 · <a href="#record='+esc(item.observation.record)+'">11월 11일 테스트와 결과 화면 →</a></figcaption></figure></section>':'')+
-      '<section class="career-case-section"><div class="career-case-section-title"><span class="eyebrow">RESULT & SCOPE</span><h2>결과와 작업 범위</h2></div>'+
-      '<div class="career-case-results"><div><h3>결과</h3><p>'+esc(item.outcome)+'</p></div><div><h3>덧붙임</h3><p>'+esc(item.caution)+'</p></div></div></section>'+
+      '<section class="career-case-section career-case-overview"><div><h2>내가 맡은 부분</h2><p>'+esc(item.summary)+'</p></div><ul>'+item.own.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></section>'+
+      caseWork(item,project)+
+      '<section class="career-case-section"><h2>결과와 확인 범위</h2>'+
+      '<div class="career-case-results"><div><h3>결과</h3><p>'+esc(item.outcome)+'</p></div><div><h3>확인 범위와 남은 문제</h3><p>'+esc(item.caution)+'</p></div></div></section>'+
       '<footer class="career-case-footer"><span>근거 · '+esc(item.evidence)+'</span><a href="#record='+encodeURIComponent(item.record)+'">원본 작업 기록 보기 →</a></footer>'+
       '<div class="career-case-next"><span>다음 프로젝트</span><a href="#career='+esc(cases[(cases.indexOf(item)+1)%cases.length].id)+'">'+esc(cases[(cases.indexOf(item)+1)%cases.length].title)+' →</a></div></div>';
   }

@@ -30,11 +30,11 @@ const link=(url,label,cls='')=>'<a'+(cls?' class="'+cls+'"':'')+' href="'+url+'"
 const photo=(asset)=>{if(!asset?.src)return '';const img='<img src="'+esc(asset.src)+'" alt="'+esc(asset.alt||'프로젝트 화면')+'" loading="lazy">';return asset.still?'<picture><source media="(prefers-reduced-motion: reduce)" srcset="'+esc(asset.still)+'">'+img+'</picture>':img;};
 const section=(id,title,all,rows)=>'<section class="pf-index-section" aria-labelledby="pf-'+id+'"><div class="pf-index-heading"><h2 id="pf-'+id+'">'+title+'</h2>'+link(all,'전체 보기 →','pf-index-all')+'</div>'+rows+'</section>';
 const search=()=>'<form id="globalSearch"><label class="sr-only" for="globalQuery">전체 자료 검색</label><input id="globalQuery" type="search" placeholder="프로젝트, 글 제목, 태그로 찾기" required><button class="button">검색</button></form>';
-const masthead=()=>'<header class="pf-index-masthead"><div><h1>게임 개발 포트폴리오</h1><p>C++ · Unreal Engine / 프로젝트와 개발 기록</p></div>'+search()+'</header>';
+const masthead=()=>'<header class="pf-index-masthead"><div><h1>프로젝트와 개발 기록</h1></div>'+search()+'</header>';
 const projectRow=(item,mode)=>{
   const asset=projectFor(item)?.cover;
   const visual=(mode==='editorial'||mode==='cinematic')&&asset?.src?'<span class="pf-index-thumb">'+photo(asset)+'</span>':'';
-  return '<li><a class="pf-index-project'+(visual?' has-thumb':'')+'" href="'+route('career',item.id)+'">'+visual+'<span class="pf-index-project-text"><strong>'+esc(item.title)+(item===featured?' <small class="pf-index-feature-label">대표</small>':'')+'</strong><span>'+esc(item.role)+'</span><small>'+esc(item.period)+' · '+esc(item.kind)+'</small></span><span class="pf-index-arrow" aria-hidden="true">→</span></a></li>';
+  return '<li><a class="pf-index-project'+(visual?' has-thumb':'')+'" href="'+route('project',projectFor(item).id)+'">'+visual+'<span class="pf-index-project-text"><strong>'+esc(item.title)+(item===featured?' <small class="pf-index-feature-label">대표</small>':'')+'</strong><span>담당 · '+esc(projectFor(item).role_summary||item.role)+'</span><small>'+esc(item.period)+' · '+esc(item.kind)+'</small></span><span class="pf-index-arrow" aria-hidden="true">→</span></a></li>';
 };
 const projectList=mode=>section('projects','팀 프로젝트','#projects','<ul class="pf-index-projects">'+projects.map(item=>projectRow(item,mode)).join('')+'</ul>');
 const recordList=()=>section('recent','최근 학습 기록','#list','<ul class="pf-index-entries">'+recent.map((r,i)=>'<li><a href="'+route('record',r.id)+'"><time datetime="'+esc(r.date)+'">'+esc(r.date_label||r.date)+'</time><strong>'+esc(r.title)+'</strong>'+(i===0&&r.summary?'<span>'+esc(r.summary)+'</span>':'')+'</a></li>').join('')+'</ul>');
