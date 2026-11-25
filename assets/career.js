@@ -51,33 +51,42 @@ function markdown(doc){
   flush();if(fenced)out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
   return out.join('');
 }
-const groups=['대표 문서','지원 자료','기술 노트'];
+
+const primaryIds=['portfolio','resume','projects','ai-workflow'];
+const groups=[
+  {title:'포트폴리오',items:primaryIds.map(id=>docs.find(d=>d.id===id)).filter(Boolean)},
+  {title:'지원 준비',items:docs.filter(d=>d.category==='지원 자료'&&!primaryIds.includes(d.id))},
+  {title:'기술 노트',items:docs.filter(d=>d.category==='기술 노트'&&!primaryIds.includes(d.id))}
+];
+const remaining=docs.filter(d=>!groups.some(g=>g.items.includes(d)));
+if(remaining.length)groups.push({title:'기타 문서',items:remaining});
+const matches=(d,q)=>[d.title,d.summary,d.markdown].join(' ').toLocaleLowerCase().includes(q.trim().toLocaleLowerCase());
+const matchingDocuments=q=>docs.filter(d=>matches(d,q));
 function catalog(q){
-  q=q.trim().toLocaleLowerCase();
   const html=groups.map(group=>{
-    const found=docs.filter(d=>d.category===group&&[d.title,d.summary,d.markdown].join(' ').toLocaleLowerCase().includes(q));
+    const found=group.items.filter(d=>matches(d,q));
     if(!found.length)return '';
-    return '<section class="career-category"><div class="section-head"><h2>'+esc(group)+'</h2><span class="caption">'+found.length+'개 문서</span></div><div class="career-cards">'+found.map(d=>'<a class="career-card" href="#career='+d.id+'"><span class="meta">'+esc(d.category)+'</span><h3>'+esc(d.title)+'</h3><p>'+esc(d.summary)+'</p><span class="source">읽어보기 →</span></a>').join('')+'</div></section>';
+    return '<section class="document-group"><div class="document-group-heading"><h2>'+esc(group.title)+'</h2><span class="caption">'+found.length+'개 문서</span></div><ul class="document-list">'+found.map(d=>'<li><a href="#career='+encodeURIComponent(d.id)+'"><span><strong>'+esc(d.title)+'</strong><small>'+esc(d.summary)+'</small></span><span class="document-open">문서 열기 →</span></a></li>').join('')+'</ul></section>';
   }).join('');
-  return html||'<p class="empty">일치하는 문서가 없습니다.</p>';
+  return '<p class="document-count caption" role="status">'+matchingDocuments(q).length+'개 문서</p>'+(html||'<p class="empty">일치하는 문서가 없습니다.</p>');
 }
 function hub(){
-  return '<header class="career-intro"><div class="eyebrow">Career / C++ · Unreal Engine</div><h1>포트폴리오 · 취업 준비</h1><p class="intro">프로젝트에서 맡은 작업과 문제 해결 과정, 기술 학습 내용을 정리했습니다. 기존 학습 기록과 연결되는 공개용 자료입니다.</p></header>'+
-    '<div class="career-actions"><a class="button" href="#career=portfolio">대표 포트폴리오 보기</a></div>'+
-    '<label class="career-search-label" for="careerQuery">문서 찾기</label><input id="careerQuery" type="search" placeholder="문서 이름·기술·내용 검색" aria-label="취업 준비 문서 검색">'+
-    '<div id="careerCatalog">'+catalog('')+'</div><p class="caption">개인 신상정보는 포함하지 않았습니다. 기술·프로젝트의 최종 구현 상태는 원본 기록과 함께 확인해 주세요.</p>';
+  return '<div class="document-hub"><header class="document-hub-header"><h1>문서</h1><p class="intro">포트폴리오, 지원 준비 자료와 기술 노트. 문서를 열어 읽거나 PDF로 저장할 수 있습니다.</p></header>'+
+    '<label class="sr-only" for="careerQuery">문서 검색</label><input id="careerQuery" type="search" placeholder="문서 제목·기술·본문 검색" aria-label="문서 검색">'+
+    '<div id="careerCatalog">'+catalog('')+'</div></div>';
 }
 function detail(id){
   const doc=docs.find(d=>d.id===id);
-  if(!doc)return '<a class="source" href="#career">← 홈으로</a><h1>문서를 찾을 수 없습니다</h1>';
+  if(!doc)return '<a class="source" href="#documents">← 문서 목록</a><h1>문서를 찾을 수 없습니다</h1>';
   const related=docs.filter(d=>d.id!==id&&d.category===doc.category).slice(0,3);
-  return '<div class="career-document-page"><div class="career-toolbar"><a class="career-back" href="#career">← 홈으로</a><button type="button" class="career-print">PDF로 저장 · 인쇄</button></div><div class="career-document">'+
+  return '<div class="career-document-page"><div class="career-toolbar"><a class="career-back" href="#documents">← 문서 목록</a><button type="button" class="career-print">PDF로 저장 · 인쇄</button></div><div class="career-document">'+
     '<header class="career-doc-head"><div class="eyebrow">'+esc(doc.category)+' / C++ · Unreal Engine</div><h1>'+esc(shortTitle(doc.title))+'</h1><p class="intro">'+esc(doc.summary)+'</p></header>'+
     '<article class="career-prose">'+markdown(doc)+'</article>'+
     '</div></div>';
 }
 window.TIL_CAREER={
-  render:id=>window.TIL_SHOWCASE?.has(id)?window.TIL_PORTFOLIO?.detail(id)||window.TIL_SHOWCASE.detail(id):id?detail(id):(window.TIL_PORTFOLIO?.hub?.()||window.TIL_SHOWCASE?.hub(catalog(''))||hub()),
+  render:id=>window.TIL_SHOWCASE?.has(id)?window.TIL_PORTFOLIO?.detail(id)||window.TIL_SHOWCASE.detail(id):id?detail(id):hub(),
+  matchingDocuments,
   attach:root=>{
     const input=root.querySelector('#careerQuery');
     if(input)input.addEventListener('input',()=>{const target=root.querySelector('#careerCatalog');if(target)target.innerHTML=catalog(input.value);});
